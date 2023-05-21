@@ -1,0 +1,1 @@
+export const exerciseDBUrl = 'https://exercisedb.p.rapidapi.com/exercises/';
