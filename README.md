@@ -63,7 +63,7 @@ Start the server
 - [Color Hunt ](https://colorhunt.co/) for picking a palette
 - [Canva Color Wheel](https://www.canva.com/colors/color-wheel/) for Accent Color
 
-##Authors
+## Authors
 
 - [@coding.Ves](https://gitlab.com/coding.Ves)
 - [@bilyana-mancheva](https://gitlab.com/bilyana-mancheva)
