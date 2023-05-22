@@ -5,19 +5,14 @@ import '@fontsource/roboto/700.css';
 import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import AppRouter from './components/AppRouter/AppRouter';
-<<<<<<< HEAD
 import { lightTheme, darkTheme } from '../theme/theme';
 import { ThemeProvider } from '@mui/material';
 import { Button, CssBaseline } from '@mui/material';
-=======
 import AuthContext from './contexts/AuthContext';
 import { auth } from './firebase/firebase-config';
 import { getUserData } from './firebase/services/users.service';
-
-const App = () => {
->>>>>>> 277a321 (Add .env with api key to exercises.service and to .gitignore; make App an arrow func)
 import NavBar from './components/NavBar/NavBar';
-
+const App = () => {
     const [user, isLoading] = useAuthState(auth);
     const [theme, setTheme] = useState(lightTheme);
 
