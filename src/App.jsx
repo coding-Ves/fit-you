@@ -60,9 +60,6 @@ const App = () => {
             >
                 <ThemeProvider theme={theme}>
                     <CssBaseline />
-                    <Button variant='contained' onClick={toggleTheme}>
-                        Toggle Theme
-                    </Button>
                     <AppRouter />
                 </ThemeProvider>
             </AuthContext.Provider>
