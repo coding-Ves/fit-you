@@ -1,19 +1,22 @@
-import { useEffect, useState } from 'react';
-
-import { auth } from './firebase/firebase-config';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import AuthContext from './contexts/AuthContext';
-import { getUserData } from './firebase/services/users.service';
+import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import AppRouter from './components/AppRouter/AppRouter';
+<<<<<<< HEAD
 import { lightTheme, darkTheme } from '../theme/theme';
 import { ThemeProvider } from '@mui/material';
 import { Button, CssBaseline } from '@mui/material';
+=======
+import AuthContext from './contexts/AuthContext';
+import { auth } from './firebase/firebase-config';
+import { getUserData } from './firebase/services/users.service';
 
-function App() {
+const App = () => {
+>>>>>>> 277a321 (Add .env with api key to exercises.service and to .gitignore; make App an arrow func)
+
     const [user, isLoading] = useAuthState(auth);
     const [theme, setTheme] = useState(lightTheme);
 
@@ -65,6 +68,6 @@ function App() {
             </AuthContext.Provider>
         </>
     );
-}
+};
 
 export default App;

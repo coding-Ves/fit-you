@@ -1,19 +1,10 @@
-const exerciseDB_API_Key = '2fa2c42ed3mshbd49a3c180b1ae9p13f62djsnb4575c19e372';
-
 export const exerciseOptions = {
     method: 'GET',
     headers: {
-        'X-RapidAPI-Key': exerciseDB_API_Key,
+        'X-RapidAPI-Key': import.meta.env.VITE_EXERCISEDB_API_Key,
         'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'
     }
 };
-
-// export const fetchData = async (url, options) => {
-//     const response = await fetch(url, options);
-//     const data = await response.json();
-
-//     return data;
-// };
 
 export const fetchDataFromExerciseDB = (url, options) => {
     return fetch(url, options)
