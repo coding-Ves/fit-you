@@ -28,3 +28,25 @@ export const createUserHandle = (handle, uid, email, phoneNumber) => {
         role: userRoles.user,
     });
 };
+
+export const updateUserDetails = (handle, firstName, lastName, phoneNumber) => {
+    const userDetails = {};
+    userDetails[`/users/${handle}/firstName`] = firstName;
+    userDetails[`/users/${handle}/lastName`] = lastName;
+    userDetails[`/users/${handle}/phoneNumber`] = phoneNumber;
+    return update(ref(db), userDetails);
+};
+
+export const updateUserBmiDetails = (handle, height, weight, age, gender) => {
+    const userBmiDetails = {};
+    userBmiDetails[`/users/${handle}/height`] = height;
+    userBmiDetails[`/users/${handle}/weight`] = weight;
+    userBmiDetails[`/users/${handle}/age`] = age;
+    userBmiDetails[`/users/${handle}/gender`] = gender;
+
+    // calculate BMI
+    const bmi = (weight / ((height / 100) * (height / 100))).toFixed(2);
+    userBmiDetails[`/users/${handle}/bmi`] = bmi;
+
+    return update(ref(db), userBmiDetails);
+};
