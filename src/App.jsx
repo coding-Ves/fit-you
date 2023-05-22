@@ -11,48 +11,42 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import AppRouter from './components/AppRouter/AppRouter';
 
 function App() {
-    const [user, isLoading] = useAuthState(auth);
+  const [user, isLoading] = useAuthState(auth);
 
-    const [appState, setAppState] = useState({
-        user,
-        userData: null,
-    });
+  const [appState, setAppState] = useState({
+    user,
+    userData: null,
+  });
 
-    if (appState.user !== user) {
-        setAppState({ user });
-    }
+  if (appState.user !== user) {
+    setAppState({ user });
+  }
 
-    useEffect(() => {
-        if (user === null) return;
+  useEffect(() => {
+    if (user === null) return;
 
-        getUserData(user.uid)
-            .then((snapshot) => {
-                if (!snapshot.exists()) {
-                    throw new Error('Something went wrong!');
-                }
-                setAppState({
-                    ...appState,
-                    userData: snapshot.val()[Object.keys(snapshot.val())[0]],
-                });
-            })
-            .catch((e) => alert(e.message));
+    getUserData(user.uid)
+      .then((snapshot) => {
+        if (!snapshot.exists()) {
+          throw new Error('Something went wrong!');
+        }
+        setAppState({
+          ...appState,
+          userData: snapshot.val()[Object.keys(snapshot.val())[0]],
+        });
+      })
+      .catch((e) => alert(e.message));
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [user]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
-    return (
-        <>
-            <AuthContext.Provider
-                value={{ ...appState, setContext: setAppState }}
-            >
-                <img
-                    src='/src/assets/logo.gif'
-                    style={{ padding: '10px', width: '150px', height: 'auto' }}
-                />
-                <AppRouter />
-            </AuthContext.Provider>
-        </>
-    );
+  return (
+    <>
+      <AuthContext.Provider value={{ ...appState, setContext: setAppState }}>
+        <AppRouter />
+      </AuthContext.Provider>
+    </>
+  );
 }
 
 export default App;
