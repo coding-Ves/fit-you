@@ -16,9 +16,16 @@ import { getUserData } from './firebase/services/users.service';
 
 const App = () => {
 >>>>>>> 277a321 (Add .env with api key to exercises.service and to .gitignore; make App an arrow func)
+import NavBar from './components/NavBar/NavBar';
 
     const [user, isLoading] = useAuthState(auth);
     const [theme, setTheme] = useState(lightTheme);
+
+    const handleThemeChange = () => {
+        setTheme((prevTheme) =>
+            prevTheme === lightTheme ? darkTheme : lightTheme
+        );
+    };
 
     const [appState, setAppState] = useState({
         user,
@@ -28,12 +35,6 @@ const App = () => {
     if (appState.user !== user) {
         setAppState({ user });
     }
-
-    const toggleTheme = () => {
-        setTheme((prevTheme) =>
-            prevTheme === lightTheme ? darkTheme : lightTheme
-        );
-    };
 
     useEffect(() => {
         if (user === null) return;
@@ -60,6 +61,7 @@ const App = () => {
             >
                 <ThemeProvider theme={theme}>
                     <CssBaseline />
+                    <NavBar onThemeChange={handleThemeChange} />
                     <AppRouter />
                 </ThemeProvider>
             </AuthContext.Provider>
