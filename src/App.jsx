@@ -9,44 +9,62 @@ import AuthContext from './contexts/AuthContext';
 import { getUserData } from './firebase/services/users.service';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import AppRouter from './components/AppRouter/AppRouter';
+import { lightTheme, darkTheme } from '../theme/theme';
+import { ThemeProvider } from '@mui/material';
+import { Button, CssBaseline } from '@mui/material';
 
 function App() {
-  const [user, isLoading] = useAuthState(auth);
+    const [user, isLoading] = useAuthState(auth);
+    const [theme, setTheme] = useState(lightTheme);
 
-  const [appState, setAppState] = useState({
-    user,
-    userData: null,
-  });
+    const [appState, setAppState] = useState({
+        user,
+        userData: null,
+    });
 
-  if (appState.user !== user) {
-    setAppState({ user });
-  }
+    if (appState.user !== user) {
+        setAppState({ user });
+    }
 
-  useEffect(() => {
-    if (user === null) return;
+    const toggleTheme = () => {
+        setTheme((prevTheme) =>
+            prevTheme === lightTheme ? darkTheme : lightTheme
+        );
+    };
 
-    getUserData(user.uid)
-      .then((snapshot) => {
-        if (!snapshot.exists()) {
-          throw new Error('Something went wrong!');
-        }
-        setAppState({
-          ...appState,
-          userData: snapshot.val()[Object.keys(snapshot.val())[0]],
-        });
-      })
-      .catch((e) => alert(e.message));
+    useEffect(() => {
+        if (user === null) return;
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
+        getUserData(user.uid)
+            .then((snapshot) => {
+                if (!snapshot.exists()) {
+                    throw new Error('Something went wrong!');
+                }
+                setAppState({
+                    ...appState,
+                    userData: snapshot.val()[Object.keys(snapshot.val())[0]],
+                });
+            })
+            .catch((e) => alert(e.message));
 
-  return (
-    <>
-      <AuthContext.Provider value={{ ...appState, setContext: setAppState }}>
-        <AppRouter />
-      </AuthContext.Provider>
-    </>
-  );
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user]);
+
+    return (
+        <>
+            <AuthContext.Provider
+                value={{ ...appState, setContext: setAppState }}
+            >
+                <ThemeProvider theme={theme}>
+                    <CssBaseline />
+                    <Button variant='contained' onClick={toggleTheme}>
+                        Toggle Theme
+                    </Button>
+                    <AppRouter />
+                </ThemeProvider>
+            </AuthContext.Provider>
+        </>
+    );
 }
 
 export default App;
