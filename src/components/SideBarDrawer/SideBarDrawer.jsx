@@ -5,9 +5,9 @@ import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import Toolbar from '@mui/material/Toolbar';
 import { styled } from '@mui/material/styles';
-import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { drawerWidth } from '../../common/Constants';
+import { drawerWidth } from '../../common/constants';
+import { mainListItems, secondaryListItems } from './ListItems';
 
 const StyledDrawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
@@ -35,7 +35,7 @@ const StyledDrawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== '
     }),
 );
 
-const SideBarDrawer = ({ variant, mainListItems, secondaryListItems }) => {
+const SideBarDrawer = () => {
     const [open, setOpen] = useState(true);
 
     const toggleDrawer = () => {
@@ -43,7 +43,7 @@ const SideBarDrawer = ({ variant, mainListItems, secondaryListItems }) => {
     };
 
     return (
-        <StyledDrawer variant={variant} open={open}>
+        <StyledDrawer variant='permanent' open={open}>
             <Toolbar
                 sx={{
                     display: 'flex',
@@ -64,14 +64,6 @@ const SideBarDrawer = ({ variant, mainListItems, secondaryListItems }) => {
             </List>
         </StyledDrawer>
     );
-};
-
-SideBarDrawer.propTypes = {
-    variant: PropTypes.string.isRequired,
-    open: PropTypes.bool.isRequired,
-    toggleDrawer: PropTypes.func.isRequired,
-    mainListItems: PropTypes.node.isRequired,
-    secondaryListItems: PropTypes.node.isRequired,
 };
 
 export default SideBarDrawer;

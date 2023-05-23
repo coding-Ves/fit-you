@@ -1,22 +1,15 @@
 import { Grid, Paper } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-// import Toolbar from '@mui/material/Toolbar';
-import { useState } from 'react';
 import Chart from '../../components/Dashboard/Chart/Chart';
 import RecentActivity from '../../components/Dashboard/RecentActivity/RecentActivity';
-import { mainListItems, secondaryListItems } from '../../components/SideBarDrawer/ListItems';
 import SideBarDrawer from '../../components/SideBarDrawer/SideBarDrawer';
 
 const Dashboard = () => {
 
     return (
         <Box sx={{ display: 'flex' }}>
-            <SideBarDrawer
-                variant='permanent'
-                mainListItems={mainListItems}
-                secondaryListItems={secondaryListItems}
-            />
+            <SideBarDrawer />
             <Box
                 component="main"
                 sx={{
