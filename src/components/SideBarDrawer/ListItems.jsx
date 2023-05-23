@@ -3,6 +3,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import FitnessCenterRoundedIcon from '@mui/icons-material/FitnessCenterRounded';
 import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
 import KitchenRoundedIcon from '@mui/icons-material/KitchenRounded';
+import QueryStatsRoundedIcon from '@mui/icons-material/QueryStatsRounded';
 import TrackChangesRoundedIcon from '@mui/icons-material/TrackChangesRounded';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -21,7 +22,7 @@ export const mainListItems = (
         </ListItemButton>
         <ListItemButton component={Link} to="/my-activity">
             <ListItemIcon>
-                <FitnessCenterRoundedIcon />
+                <QueryStatsRoundedIcon />
             </ListItemIcon>
             <ListItemText primary="My Activity" />
         </ListItemButton>
@@ -37,6 +38,14 @@ export const mainListItems = (
             </ListItemIcon>
             <ListItemText primary="Diet" />
         </ListItemButton>
+
+        <ListItemButton component={Link} to="/exercises">
+            <ListItemIcon>
+                <FitnessCenterRoundedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Exercises" />
+        </ListItemButton>
+
         <ListItemButton>
             <ListItemIcon>
                 <BarChartIcon />

@@ -9,3 +9,5 @@ export const userRoles = {
 };
 
 export const drawerWidth = 240;
+
+export const exercisesPerPage = 6;

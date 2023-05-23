@@ -1,12 +1,12 @@
-import { Box, Button, Stack, TextField, Typography, Container, InputAdornment, } from '@mui/material';
-import { useEffect, useState, useContext } from 'react';
-import { exerciseOptions, fetchDataFromExerciseDB } from '../../../services/exercises.service';
-import { ExercisesContext } from '../../../contexts/ExercisesContext';
-import { exerciseDBUrl } from '../../../common/constants'; // 'https://exercisedb.p.rapidapi.com/exercises/'
-import SearchIcon from "@mui/icons-material/Search";
-import Exercises from './Exercises';
+import SearchIcon from '@mui/icons-material/Search';
+import { Button, Container, InputAdornment, TextField } from '@mui/material';
+import { useContext, useState } from 'react';
+import { exerciseDBUrl } from '../../common/constants'; // 'https://exercisedb.p.rapidapi.com/exercises/'
+import { ExercisesContext } from '../../contexts/ExercisesContext';
+import { exerciseOptions, fetchDataFromExerciseDB } from '../../services/exercises.service';
 
 const SearchExercises = () => {
+
     const [search, setSearch] = useState('');
     const { setExercises } = useContext(ExercisesContext);
 
@@ -45,29 +45,8 @@ const SearchExercises = () => {
                     ),
                 }}
             />
-            {search && <Exercises />}
         </Container>
     );
 };
 
 export default SearchExercises;
-
-
-{/* <Stack alignContent="center" mt="37px" justifyContent="center" p="20px">
-<Box position="relative" mb="72px">
-    <TextField
-        height="76px"
-        sx={{ input: { fontWeight: '700', border: 'none', borderRadius: '4px' }, width: { lg: '1170px', xs: '350px' }, backgroundColor: '#fff', borderRadius: "40px" }}
-        value={search}
-        onChange={(e) => setSearch(e.target.value.toLowerCase())}
-        placeholder="Search for exercises to add to your activities"
-        type="text"
-    />
-    <Button className="search-btn"
-        sx={{ mr: 2, textDecoration: 'none', }}
-        variant='contained'
-        onClick={handleSearch}>
-        Search
-    </Button>
-</Box>
-</Stack> */}
