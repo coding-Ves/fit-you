@@ -7,3 +7,5 @@ export const userRoles = {
     admin: 2,
     banned: 3,
 };
+
+export const drawerWidth = 240;
