@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { ThemeProvider, useTheme } from '@emotion/react';
 import { Link as ReactRouterLink } from 'react-router-dom';
+import { loginImage } from '../../common/constants';
 
 const LogIn = () => {
     const theme = useTheme();
@@ -35,8 +36,7 @@ const LogIn = () => {
                     sm={4}
                     md={7}
                     sx={{
-                        backgroundImage:
-                            'url(https://source.unsplash.com/random?health)',
+                        backgroundImage: `url(${loginImage})`,
                         backgroundRepeat: 'no-repeat',
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
@@ -69,7 +69,7 @@ const LogIn = () => {
                             <LockOutlinedIcon />
                         </Avatar>
                         <Typography component='h1' variant='h5'>
-                            Sign in
+                            Login
                         </Typography>
                         <Box
                             component='form'
@@ -124,7 +124,7 @@ const LogIn = () => {
                                 <Grid item>
                                     <Link
                                         as={ReactRouterLink}
-                                        to={`/`}
+                                        to={`/register`}
                                         sx={{
                                             color: 'primary.main',
                                         }}
