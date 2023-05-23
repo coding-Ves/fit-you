@@ -11,3 +11,5 @@ export const userRoles = {
 export const drawerWidth = 240;
 
 export const exercisesPerPage = 6;
+
+export const loginImage = 'https://source.unsplash.com/random?monkey';
