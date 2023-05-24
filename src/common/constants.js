@@ -10,6 +10,8 @@ export const userRoles = {
 
 export const drawerWidth = 240;
 
-export const exercisesPerPage = 6;
+export const exercisesPerPage = 9;
 
-export const loginImage = 'https://source.unsplash.com/random?monkey';
+export const loginImage = 'https://source.unsplash.com/random?boobs';
+
+export const exerciseNameMaxLength = 25;
