@@ -1,6 +1,8 @@
 import { useTheme } from '@emotion/react';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { IconButton, InputAdornment } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -13,16 +15,21 @@ import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { ThemeProvider } from '@mui/material/styles';
-import { useForm } from 'react-hook-form';
+import { useContext, useState } from 'react';
+import { set, useForm } from 'react-hook-form';
+import { getUserByUsername } from '../../firebase/services/users.service';
+import { registerUser } from './../../firebase/services/auth.service';
+import { createUsername } from './../../firebase/services/users.service';
 import { formValidationSchema } from './../../services/formValidationSchema';
-import { useState } from 'react';
-import { IconButton, InputAdornment } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { auth } from '../../firebase/firebase-config';
+import AuthContext from './../../contexts/AuthContext';
 
 const RegistrationForm = () => {
     const theme = useTheme();
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const { setContext } = useContext(AuthContext);
+    const [isLoading, setIsLoading] = useState(false);
 
     // Use React Hook Form with Yup for validation
     const {
@@ -33,9 +40,47 @@ const RegistrationForm = () => {
         resolver: yupResolver(formValidationSchema),
     });
 
+    const today = new Date().getTime();
+
     const onSubmit = (data) => {
+        setIsLoading(true);
         console.log(data);
+        getUserByUsername(data.username)
+            .then((snapshot) => {
+                if (snapshot.exists()) {
+                    throw new Error(
+                        `Username ${data.username} has already been taken!`
+                    );
+                }
+                return registerUser(data.email, data.password);
+            })
+            .then((credential) => {
+                console.log(data.username);
+                console.log(data.phoneNumber);
+                console.log(credential.user.uid, credential.user.email);
+                return createUsername(
+                    data.username,
+                    credential.user.uid,
+                    credential.user.email,
+                    data.phoneNumber
+                ).then(() => {
+                    console.log('IT REACHED HERE');
+                    setContext({
+                        user: credential.user,
+                    });
+                });
+            })
+            .then(() => {
+                setIsLoading(false);
+                alert('Registration successful!');
+            })
+            .then(() => navigate('/dashboard'))
+            .catch((e) => {
+                setIsLoading(false);
+                alert(e.code, e.message);
+            });
     };
+
     return (
         <ThemeProvider theme={theme}>
             <Container component='main' maxWidth='xs'>
