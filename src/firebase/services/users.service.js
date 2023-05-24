@@ -10,43 +10,43 @@ import {
 import { db } from '../firebase-config';
 import { userRoles } from '../../common/constants';
 
-export const getUserByHandle = (handle) => {
-    return get(ref(db, `users/${handle}`));
+export const getUserByUsername = (username) => {
+    return get(ref(db, `users/${username}`));
 };
 
 export const getUserData = (uid) => {
     return get(query(ref(db, 'users'), orderByChild('uid'), equalTo(uid)));
 };
 
-export const createUserHandle = (handle, uid, email, phoneNumber) => {
-    return set(ref(db, `users/${handle}`), {
-        handle,
-        uid,
-        email,
-        phoneNumber,
+export const createUsername = (username, uid, email, phoneNumber) => {
+    return set(ref(db, `users/${username}`), {
+        username: username,
+        uid: uid,
+        email: email,
+        phoneNumber: phoneNumber,
         createdOn: Date.now(),
-        role: userRoles.user,
+        role: 1,
     });
 };
 
-export const updateUserDetails = (handle, firstName, lastName, phoneNumber) => {
+export const updateUserDetails = (username, phoneNumber) => {
     const userDetails = {};
-    userDetails[`/users/${handle}/firstName`] = firstName;
-    userDetails[`/users/${handle}/lastName`] = lastName;
-    userDetails[`/users/${handle}/phoneNumber`] = phoneNumber;
+    userDetails[`/users/${username}/username`] = username;
+    userDetails[`/users/${username}/email`] = email;
+    userDetails[`/users/${username}/phoneNumber`] = phoneNumber;
     return update(ref(db), userDetails);
 };
 
-export const updateUserBmiDetails = (handle, height, weight, age, gender) => {
+export const updateUserHealthInfo = (username, height, weight, age, gender) => {
     const userBmiDetails = {};
-    userBmiDetails[`/users/${handle}/height`] = height;
-    userBmiDetails[`/users/${handle}/weight`] = weight;
-    userBmiDetails[`/users/${handle}/age`] = age;
-    userBmiDetails[`/users/${handle}/gender`] = gender;
+    userBmiDetails[`/users/${username}/height`] = height;
+    userBmiDetails[`/users/${username}/weight`] = weight;
+    userBmiDetails[`/users/${username}/age`] = age;
+    userBmiDetails[`/users/${username}/gender`] = gender;
 
     // calculate BMI
     const bmi = (weight / ((height / 100) * (height / 100))).toFixed(2);
-    userBmiDetails[`/users/${handle}/bmi`] = bmi;
+    userBmiDetails[`/users/${username}/bmi`] = bmi;
 
     return update(ref(db), userBmiDetails);
 };

@@ -3,10 +3,10 @@ import { getAuth } from 'firebase/auth';
 import { getDatabase } from 'firebase/database';
 
 const firebaseConfig = {
-
     apiKey: 'AIzaSyCWe4LqyUMysQ7U5jNExnyO8LSIgSoeSfk',
     authDomain: 'fit-you-49487.firebaseapp.com',
-    databaseURL: 'https://fit-you-49487-default-rtdb.europe-west1.firebasedatabase.app',
+    databaseURL:
+        'https://fit-you-49487-default-rtdb.europe-west1.firebasedatabase.app',
     projectId: 'fit-you-49487',
     storageBucket: 'fit-you-49487.appspot.com',
     messagingSenderId: '585570833921',

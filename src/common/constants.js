@@ -12,6 +12,6 @@ export const drawerWidth = 240;
 
 export const exercisesPerPage = 9;
 
-export const loginImage = 'https://source.unsplash.com/random?boobs';
+export const loginImage = 'https://source.unsplash.com/random?otter';
 
 export const exerciseNameMaxLength = 25;
