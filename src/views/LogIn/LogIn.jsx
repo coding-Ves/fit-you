@@ -1,33 +1,54 @@
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import CssBaseline from '@mui/material/CssBaseline';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { ThemeProvider, useTheme } from '@emotion/react';
-import { Link as ReactRouterLink } from 'react-router-dom';
+import { useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useForm } from 'react-hook-form';
+import { Link as ReactRouterLink, useNavigate } from 'react-router-dom';
 import { loginImage } from '../../common/constants';
+import AuthContext from '../../contexts/AuthContext';
+import { auth } from '../../firebase/firebase-config';
+import { useContext } from 'react';
+import { loginUser } from '../../firebase/services/auth.service';
 
 const LogIn = () => {
-    const theme = useTheme();
+    const { handleSubmit, register } = useForm();
+    const navigate = useNavigate();
+    // eslint-disable-next-line no-unused-vars
+    const [user] = useAuthState(auth);
+    const [isLoading, setIsLoading] = useState(false);
+    const { setContext } = useContext(AuthContext);
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+    const onSubmit = (data) => {
+        setIsLoading(true);
+        loginUser(data.email, data.password)
+            .then((credential) => {
+                setContext({
+                    user: credential.user,
+                });
+            })
+            .then(() => {
+                setIsLoading('false');
+                console.log('User logged in successfully');
+            })
+            .then(() => navigate('/dashboard'))
+            .catch((e) => {
+                setIsLoading(false);
+                console.log(e.code, e.message);
+            });
     };
 
     return (
-        <ThemeProvider theme={theme}>
+        <>
             <Grid container component='main' sx={{ height: '100vh' }}>
                 <CssBaseline />
                 <Grid
@@ -74,7 +95,7 @@ const LogIn = () => {
                         <Box
                             component='form'
                             noValidate
-                            onSubmit={handleSubmit}
+                            onSubmit={handleSubmit(onSubmit)}
                             sx={{ mt: 1 }}
                         >
                             <TextField
@@ -86,6 +107,7 @@ const LogIn = () => {
                                 name='email'
                                 autoComplete='email'
                                 autoFocus
+                                {...register('email')}
                             />
                             <TextField
                                 margin='normal'
@@ -96,6 +118,7 @@ const LogIn = () => {
                                 type='password'
                                 id='password'
                                 autoComplete='current-password'
+                                {...register('password')}
                             />
                             <FormControlLabel
                                 control={
@@ -137,7 +160,7 @@ const LogIn = () => {
                     </Box>
                 </Grid>
             </Grid>
-        </ThemeProvider>
+        </>
     );
 };
 
