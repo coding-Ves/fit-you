@@ -23,6 +23,8 @@ import { createUsername } from './../../firebase/services/users.service';
 import { formValidationSchema } from './../../services/formValidationSchema';
 import { auth } from '../../firebase/firebase-config';
 import AuthContext from './../../contexts/AuthContext';
+import { Snackbar, Alert } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const RegistrationForm = () => {
     const theme = useTheme();
@@ -30,6 +32,16 @@ const RegistrationForm = () => {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const { setContext } = useContext(AuthContext);
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
+
+    // Responsible for Snackbar and Alert - Showing error  and success messages
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
+    };
 
     // Use React Hook Form with Yup for validation
     const {
@@ -39,8 +51,6 @@ const RegistrationForm = () => {
     } = useForm({
         resolver: yupResolver(formValidationSchema),
     });
-
-    const today = new Date().getTime();
 
     const onSubmit = (data) => {
         setIsLoading(true);
@@ -55,36 +65,53 @@ const RegistrationForm = () => {
                 return registerUser(data.email, data.password);
             })
             .then((credential) => {
-                console.log(data.username);
-                console.log(data.phoneNumber);
-                console.log(credential.user.uid, credential.user.email);
                 return createUsername(
                     data.username,
                     credential.user.uid,
                     credential.user.email,
                     data.phoneNumber
                 ).then(() => {
-                    console.log('IT REACHED HERE');
                     setContext({
                         user: credential.user,
                     });
                 });
             })
             .then(() => {
-                setIsLoading(false);
-                alert('Registration successful!');
+                setSnackbarMessage('Registration successful!');
+                setSnackbarSeverity('success');
+                setSnackbarOpen(true);
             })
-            .then(() => navigate('/dashboard'))
+            .then(() => {
+                setIsLoading(false);
+                // navigate('/dashboard');
+            })
             .catch((e) => {
                 setIsLoading(false);
-                alert(e.code, e.message);
+                setSnackbarMessage(e.code + ': ' + e.message);
+                setSnackbarSeverity('error');
+                setSnackbarOpen(true);
             });
     };
 
     return (
-        <ThemeProvider theme={theme}>
+        <>
             <Container component='main' maxWidth='xs'>
                 <CssBaseline />
+                <Snackbar
+                    open={snackbarOpen}
+                    autoHideDuration={3000}
+                    onClose={handleSnackbarClose}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                >
+                    <Alert
+                        onClose={handleSnackbarClose}
+                        severity={snackbarSeverity}
+                        sx={{ width: '100%' }}
+                    >
+                        {snackbarMessage}
+                    </Alert>
+                </Snackbar>
+
                 <Box
                     sx={{
                         marginTop: 8,
@@ -248,7 +275,7 @@ const RegistrationForm = () => {
                     </Box>
                 </Box>
             </Container>
-        </ThemeProvider>
+        </>
     );
 };
 

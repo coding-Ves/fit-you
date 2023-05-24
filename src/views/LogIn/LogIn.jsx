@@ -19,6 +19,7 @@ import AuthContext from '../../contexts/AuthContext';
 import { auth } from '../../firebase/firebase-config';
 import { useContext } from 'react';
 import { loginUser } from '../../firebase/services/auth.service';
+import { Snackbar, Alert } from '@mui/material';
 
 const LogIn = () => {
     const { handleSubmit, register } = useForm();
@@ -27,6 +28,15 @@ const LogIn = () => {
     const [user] = useAuthState(auth);
     const [isLoading, setIsLoading] = useState(false);
     const { setContext } = useContext(AuthContext);
+
+    // Responsible for Snackbar and Alert - Showing error  and success messages
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
+    };
 
     const onSubmit = (data) => {
         setIsLoading(true);
@@ -38,12 +48,17 @@ const LogIn = () => {
             })
             .then(() => {
                 setIsLoading('false');
-                console.log('User logged in successfully');
             })
-            .then(() => navigate('/dashboard'))
+            .then(() => {
+                setSnackbarMessage(`Login successful!`);
+                setSnackbarSeverity('success');
+                setSnackbarOpen(true);
+            })
             .catch((e) => {
                 setIsLoading(false);
-                console.log(e.code, e.message);
+                setSnackbarMessage(e.code + ': ' + e.message);
+                setSnackbarSeverity('error');
+                setSnackbarOpen(true);
             });
     };
 
@@ -51,6 +66,20 @@ const LogIn = () => {
         <>
             <Grid container component='main' sx={{ height: '100vh' }}>
                 <CssBaseline />
+                <Snackbar
+                    open={snackbarOpen}
+                    autoHideDuration={3000}
+                    onClose={handleSnackbarClose}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                >
+                    <Alert
+                        onClose={handleSnackbarClose}
+                        severity={snackbarSeverity}
+                        sx={{ width: '100%' }}
+                    >
+                        {snackbarMessage}
+                    </Alert>
+                </Snackbar>
                 <Grid
                     item
                     xs={false}
