@@ -12,6 +12,7 @@ import Tooltip from '@mui/material/Tooltip';
 import * as React from 'react';
 import { Link as ReactRouterLink, useNavigate } from 'react-router-dom';
 import { logoutUser } from '../../firebase/services/auth.service';
+import { TrackChangesOutlined } from '@mui/icons-material';
 
 const MyAccountMenu = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -116,6 +117,17 @@ const MyAccountMenu = () => {
                         <MonitorHeart fontSize='small' />
                     </ListItemIcon>
                     My Activity
+                </MenuItem>
+                <MenuItem
+                    onClick={handleClose}
+                    as={ReactRouterLink}
+                    to={'/my-goals'}
+                    style={{ color: 'inherit' }}
+                >
+                    <ListItemIcon>
+                        <TrackChangesOutlined fontSize='small' />
+                    </ListItemIcon>
+                    My Goals
                 </MenuItem>
                 <Divider />
                 <MenuItem
