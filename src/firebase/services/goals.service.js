@@ -1,10 +1,17 @@
 import { get, push, ref, update } from 'firebase/database';
 import { db } from '../firebase-config';
 
-export const addGoal = (userHandle, goalName, targetValue, targetDate) => {
+export const addGoal = (
+    username,
+    goalName,
+    goalDescription,
+    targetValue,
+    targetDate
+) => {
     return push(ref(db, 'goals'), {
-        userHandle,
+        username: username,
         goalName,
+        goalDescription,
         targetValue,
         targetDate,
         createdOn: Date.now(),
@@ -13,7 +20,7 @@ export const addGoal = (userHandle, goalName, targetValue, targetDate) => {
         const goalId = result.key;
         const updateGoal = {};
         updateGoal[`/goals/${goalId}/goalId`] = goalId;
-        updateGoal[`/users/${userHandle}/goals/${goalId}`] = true;
+        updateGoal[`/users/${username}/goals/${goalId}`] = true;
         return update(ref(db), updateGoal);
     });
 };
