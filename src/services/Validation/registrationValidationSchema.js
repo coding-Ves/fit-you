@@ -2,7 +2,7 @@ import * as yup from 'yup';
 
 // Validation schema for registration form
 
-export const formValidationSchema = yup.object({
+export const registrationValidationSchema = yup.object({
     username: yup.string().min(2).max(20).required('Username is required'),
     email: yup
         .string()
@@ -41,7 +41,7 @@ const validatePassword = (value) => {
     );
 };
 
-export default formValidationSchema;
+export default registrationValidationSchema;
 
 // If we want username to be only letters
 
