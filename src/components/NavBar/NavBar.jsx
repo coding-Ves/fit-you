@@ -1,15 +1,19 @@
+import { DarkMode, Home, WbSunny } from '@mui/icons-material';
+import { Switch } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import { Home } from '@mui/icons-material';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link as ReactRouterLink } from 'react-router-dom';
-import { Switch } from '@mui/material';
-import { WbSunny, DarkMode } from '@mui/icons-material';
+import { auth } from '../../firebase/firebase-config';
+import MyAccountMenu from './../Menus/MyAccountMenu';
 
 const NavBar = ({ onThemeChange }) => {
+    const [user] = useAuthState(auth);
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar sx={{ background: '#284A67' }} position='static'>
@@ -25,7 +29,6 @@ const NavBar = ({ onThemeChange }) => {
                     >
                         <Home />
                     </IconButton>
-
                     <Typography
                         variant='h6'
                         component='div'
@@ -45,22 +48,31 @@ const NavBar = ({ onThemeChange }) => {
                         }
                         sx={{ pb: 1 }}
                     />
-                    <Button
-                        as={ReactRouterLink}
-                        to={`/login`}
-                        sx={{ mr: 2, textDecoration: 'none' }}
-                        variant='contained'
-                    >
-                        Login
-                    </Button>
-                    <Button
-                        as={ReactRouterLink}
-                        to={`/register`}
-                        sx={{ mr: 2, textDecoration: 'none' }}
-                        variant='contained'
-                    >
-                        Register
-                    </Button>
+
+                    {user ? (
+                        <Box>
+                            <MyAccountMenu />
+                        </Box>
+                    ) : (
+                        <Box>
+                            <Button
+                                as={ReactRouterLink}
+                                to={`/login`}
+                                sx={{ mr: 2, textDecoration: 'none' }}
+                                variant='contained'
+                            >
+                                Login
+                            </Button>
+                            <Button
+                                as={ReactRouterLink}
+                                to={`/register`}
+                                sx={{ mr: 2, textDecoration: 'none' }}
+                                variant='contained'
+                            >
+                                Register
+                            </Button>
+                        </Box>
+                    )}
                 </Toolbar>
             </AppBar>
         </Box>
