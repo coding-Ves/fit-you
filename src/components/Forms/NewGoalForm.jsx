@@ -1,30 +1,25 @@
-import { useTheme } from '@emotion/react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { Alert, IconButton, InputAdornment, Snackbar } from '@mui/material';
+import FlagIcon from '@mui/icons-material/Flag';
+import { Alert, Snackbar } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { auth } from '../../firebase/firebase-config';
 import { getUserByUsername } from '../../firebase/services/users.service';
-import AuthContext from './../../contexts/AuthContext';
-import { registerUser } from './../../firebase/services/auth.service';
-import { createUsername } from './../../firebase/services/users.service';
 import goalValidationSchema from '../../services/Validation/goalValidationSchema';
-import FlagIcon from '@mui/icons-material/Flag';
+import AuthContext from './../../contexts/AuthContext';
+import { addGoal } from '../../firebase/services/goals.service';
 
 const NewGoalForm = () => {
+    const { userData } = useContext(AuthContext);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -48,16 +43,22 @@ const NewGoalForm = () => {
 
     const onSubmit = (data) => {
         setIsLoading(true);
-        console.log(data);
-        getUserByUsername(data.username)
-            .then((snapshot) => {
-                // Add activity uid to user profile
-            })
-            .then((credential) => {
-                //  add activity to activity sectiong
-            })
+        console.log(
+            userData.username,
+            data.goalName,
+            data.description,
+            data.targetValue,
+            data.date
+        );
+        addGoal(
+            userData.username,
+            data.goalName,
+            data.description,
+            data.targetValue,
+            data.date
+        )
             .then(() => {
-                setSnackbarMessage('Registration successful!');
+                setSnackbarMessage('Goal added successfully!');
                 setSnackbarSeverity('success');
                 setSnackbarOpen(true);
             })
@@ -127,18 +128,7 @@ const NewGoalForm = () => {
                                     helperText={errors.goalName?.message}
                                 />
                             </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id='date'
-                                    label='Target Date'
-                                    name='date'
-                                    {...register('date')}
-                                    error={!!errors.date}
-                                    helperText={errors.date?.message}
-                                />
-                            </Grid>
+
                             <Grid item xs={12}>
                                 <TextField
                                     required
@@ -150,6 +140,8 @@ const NewGoalForm = () => {
                                     error={!!errors.description}
                                     helperText={errors.description?.message}
                                 />
+                            </Grid>
+                            <Grid item xs={12}>
                                 <TextField
                                     required
                                     fullWidth
@@ -159,6 +151,18 @@ const NewGoalForm = () => {
                                     {...register('targetValue')}
                                     error={!!errors.targetValue}
                                     helperText={errors.targetValue?.message}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    required
+                                    fullWidth
+                                    id='date'
+                                    label='Target Date'
+                                    name='date'
+                                    {...register('date')}
+                                    error={!!errors.date}
+                                    helperText={errors.date?.message}
                                 />
                             </Grid>
                         </Grid>
