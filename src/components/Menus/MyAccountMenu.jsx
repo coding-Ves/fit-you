@@ -89,7 +89,7 @@ const MyAccountMenu = () => {
                 <MenuItem
                     onClick={handleClose}
                     as={ReactRouterLink}
-                    to={'/profile'}
+                    to={'/my-profile'}
                     style={{ color: 'inherit' }}
                 >
                     <Avatar /> My account
@@ -109,7 +109,7 @@ const MyAccountMenu = () => {
                 <MenuItem
                     onClick={handleClose}
                     as={ReactRouterLink}
-                    to={'/myactivity'}
+                    to={'/my-activity'}
                     style={{ color: 'inherit' }}
                 >
                     <ListItemIcon>
