@@ -1,5 +1,5 @@
 import { DarkMode, Home, WbSunny } from '@mui/icons-material';
-import { Switch } from '@mui/material';
+import { Switch, Link } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -18,17 +18,14 @@ const NavBar = ({ onThemeChange }) => {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar sx={{ background: '#284A67' }} position='static'>
                 <Toolbar>
-                    <IconButton
-                        size='large'
-                        edge='start'
-                        color='inherit'
-                        aria-label='home'
+                    <Link
                         as={ReactRouterLink}
                         to={`/`}
+                        focusRipple='none'
                         sx={{ mr: 2 }}
                     >
                         <Home />
-                    </IconButton>
+                    </Link>
                     <Typography
                         variant='h6'
                         component='div'
@@ -37,16 +34,14 @@ const NavBar = ({ onThemeChange }) => {
                         Fit You
                     </Typography>
                     <Switch
+                        sx={{
+                            color: '#fff',
+                            p: 0,
+                            borderRadius: 10,
+                        }}
                         onChange={onThemeChange}
                         icon={<WbSunny />}
-                        checkedIcon={
-                            <DarkMode
-                                sx={{
-                                    color: '#fff',
-                                }}
-                            />
-                        }
-                        sx={{ pb: 1 }}
+                        checkedIcon={<DarkMode />}
                     />
 
                     {user ? (
@@ -58,7 +53,7 @@ const NavBar = ({ onThemeChange }) => {
                             <Button
                                 as={ReactRouterLink}
                                 to={`/login`}
-                                sx={{ mr: 2, textDecoration: 'none' }}
+                                sx={{ mr: 1, textDecoration: 'none' }}
                                 variant='contained'
                             >
                                 Login
@@ -66,7 +61,7 @@ const NavBar = ({ onThemeChange }) => {
                             <Button
                                 as={ReactRouterLink}
                                 to={`/register`}
-                                sx={{ mr: 2, textDecoration: 'none' }}
+                                sx={{ mr: 1, textDecoration: 'none' }}
                                 variant='contained'
                             >
                                 Register
