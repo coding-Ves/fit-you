@@ -2,7 +2,7 @@ import { useTheme } from '@emotion/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { IconButton, InputAdornment } from '@mui/material';
+import { Alert, IconButton, InputAdornment, Snackbar } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -14,17 +14,14 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { ThemeProvider } from '@mui/material/styles';
 import { useContext, useState } from 'react';
-import { set, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { getUserByUsername } from '../../firebase/services/users.service';
+import AuthContext from './../../contexts/AuthContext';
 import { registerUser } from './../../firebase/services/auth.service';
 import { createUsername } from './../../firebase/services/users.service';
-import { formValidationSchema } from './../../services/formValidationSchema';
-import { auth } from '../../firebase/firebase-config';
-import AuthContext from './../../contexts/AuthContext';
-import { Snackbar, Alert } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { registrationValidationSchema } from '../../services/Validation/registrationValidationSchema';
 
 const RegistrationForm = () => {
     const theme = useTheme();
@@ -49,7 +46,7 @@ const RegistrationForm = () => {
         handleSubmit,
         formState: { errors },
     } = useForm({
-        resolver: yupResolver(formValidationSchema),
+        resolver: yupResolver(registrationValidationSchema),
     });
 
     const onSubmit = (data) => {
