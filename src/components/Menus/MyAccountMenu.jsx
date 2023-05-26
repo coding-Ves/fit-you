@@ -13,9 +13,13 @@ import * as React from 'react';
 import { Link as ReactRouterLink, useNavigate } from 'react-router-dom';
 import { logoutUser } from '../../firebase/services/auth.service';
 import { TrackChangesOutlined } from '@mui/icons-material';
+import { useContext } from 'react';
+import AuthContext from '../../contexts/AuthContext';
 
 const MyAccountMenu = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const { userData } = useContext(AuthContext);
+
     const open = Boolean(anchorEl);
     const navigate = useNavigate();
 
@@ -90,7 +94,7 @@ const MyAccountMenu = () => {
                 <MenuItem
                     onClick={handleClose}
                     as={ReactRouterLink}
-                    to={'/my-profile'}
+                    to={`/profile/${userData?.username}`}
                     style={{ color: 'inherit' }}
                 >
                     <Avatar /> My account

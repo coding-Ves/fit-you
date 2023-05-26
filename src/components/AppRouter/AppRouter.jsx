@@ -9,7 +9,6 @@ import MyGoals from '../../views/MyGoals/MyGoals';
 import NotFound from '../../views/NotFound/NotFound';
 import Profile from '../../views/Profile/Profile';
 import Register from '../../views/Register/Register';
-import MyProfile from '../../views/MyProfile/MyProfile';
 
 export const AppRouter = () => {
     return (
@@ -18,8 +17,7 @@ export const AppRouter = () => {
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             {/* <Route path='/register/:step' element={<Register />} />  */}
-            <Route path='/profile/:userId' element={<Profile />} />
-            <Route path='/my-profile' element={<MyProfile />} />
+            <Route path='/profile/:username' element={<Profile />} />
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/my-activity' element={<MyActivity />} />
             <Route path='/my-goals' element={<MyGoals />} />
