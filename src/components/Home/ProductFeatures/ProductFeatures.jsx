@@ -23,7 +23,7 @@ const item = {
 const ProductFeatures = () => {
     return (
         <Box>
-            <Typography variant='h6'>To improve your health</Typography>
+            <Typography variant='h4'>Product Features</Typography>
 
             <Box
                 component='section'
@@ -75,10 +75,10 @@ const ProductFeatures = () => {
                                     <BatteryCharging20TwoTone mt='30px' />
                                 </Avatar>
                                 <Typography variant='h5' sx={{ my: 5 }}>
-                                    Become/Stay/Get Fit
+                                    Connect to Friends
                                 </Typography>
                                 <Typography variant='h6'>
-                                    To be the best you can be
+                                    To stay motivated
                                 </Typography>
                             </Card>
                         </Grid>
