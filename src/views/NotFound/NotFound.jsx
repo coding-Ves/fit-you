@@ -1,5 +1,6 @@
 import { ArrowLeft } from '@mui/icons-material';
-import { Box, Container, Button, Typography } from '@mui/material';
+import { Box, Container, Button, Typography, Avatar } from '@mui/material';
+import { notFoundImage } from '../../common/constants';
 
 const NotFound = () => {
     return (
@@ -24,15 +25,22 @@ const NotFound = () => {
                         <Box
                             sx={{
                                 mb: 3,
+                                mt: 3,
                                 textAlign: 'center',
                             }}
                         >
                             {/* 'https://www.freepik.com/free-vector/404-error-with-landscape-concept-illustration_20602801.htm#query=404%20page&position=9&from_view=keyword&track=ais' */}
-                            <img src='https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7888.jpg'></img>
+
+                            <Avatar
+                                alt='404 Image'
+                                src={notFoundImage}
+                                mt={3}
+                                style={{
+                                    width: '300px',
+                                    height: '300px',
+                                }}
+                            />
                         </Box>
-                        {/* <Typography align='center' sx={{ mb: 3 }} variant='h3'>
-                            404: Where are we?
-                        </Typography> */}
                         <Typography
                             align='center'
                             color='text.secondary'
