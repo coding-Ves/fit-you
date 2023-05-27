@@ -39,7 +39,7 @@ const SearchExercises = () => {
     return (
         <Stack alignItems="center" mt="37px" justifyContent="center" p="20px">
             <Typography fontWeight={700} sx={{ fontSize: '44px', '@media (max-width: 600px)': { fontSize: '30px' } }} mb="49px" textAlign="center">
-                Browse our list of extensive exercises <br /> and add them to your activities!
+                Browse our extensive list of exercises <br /> and add them to your activities!
             </Typography>
             <Box position="relative" sx={{
                 width: '100%',
