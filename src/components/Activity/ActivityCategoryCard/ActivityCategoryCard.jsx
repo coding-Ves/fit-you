@@ -29,8 +29,9 @@ const ActivityCategoryCard = ({ categoryName }) => {
                 />
             </Box>
 
-            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 'auto'}}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 'auto' }}>
                 <Fab
+                    href={`/search/${categoryName}`}
                     variant="contained"
                     size="sm"
                     backgroundColor="secondary"
