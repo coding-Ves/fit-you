@@ -1,22 +1,27 @@
 import SearchIcon from '@mui/icons-material/Search';
 import { Box, Button, InputAdornment, Stack, TextField, Typography } from '@mui/material';
 import { useContext, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ExercisesContext } from '../../contexts/ExercisesContext';
 import { searchFitness } from './helpers/searchBarHelpers';
 
-const SearchBar = () => {
+const SearchBar = ({ category }) => {
 
     const [search, setSearch] = useState('');
-    const { category } = useParams();
     const { setExercises } = useContext(ExercisesContext);
+    const navigate = useNavigate();
 
     const handleSearch = () => {
         if (search) {
+            //this handles special characters that could be in the search input
+            const encodedSearch = encodeURIComponent(search);
+            const searchQueryUrl = `/search/${category}?query=${encodedSearch}`;
+
             if (category === 'fitness') {
                 searchFitness(search)
                     .then((result) => {
                         setExercises(result);
+                        navigate(searchQueryUrl);
                     });
             }
 
@@ -24,7 +29,6 @@ const SearchBar = () => {
             setSearch('');
         }
     };
-
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {

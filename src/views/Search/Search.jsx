@@ -3,9 +3,11 @@ import ListOfResults from '../../components/SearchBar/ListOfResults';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import SideBarDrawer from '../../components/SideBarDrawer/SideBarDrawer';
 import { ExercisesProvider } from '../../contexts/ExercisesContext';
+import { useParams } from 'react-router-dom';
 
-// refactor to Search view
 const Search = () => {
+    const { category } = useParams();
+
     return (
         <ExercisesProvider>
             <Box sx={{ display: 'flex', height: '100vh', width: '100vw' }}>
@@ -25,7 +27,7 @@ const Search = () => {
                         // margin={ lg: '80px', xs: '40px' }
                     }}
                 >
-                    <SearchBar />
+                    <SearchBar category={category} />
                     <ListOfResults />
                 </Box>
             </Box>
