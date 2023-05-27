@@ -12,6 +12,8 @@ export const drawerWidth = 240;
 
 export const exercisesPerPage = 9;
 
+export const unsplashRandomUrl = 'https://source.unsplash.com/random?';
+
 export const loginImage = 'https://source.unsplash.com/random?fitness';
 
 export const notFoundImage =

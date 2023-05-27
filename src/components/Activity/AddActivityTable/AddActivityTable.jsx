@@ -9,7 +9,7 @@ const AddActivityTable = () => {
                 <Typography fontWeight={700} sx={{ fontSize: '44px', '@media (max-width: 600px)': { fontSize: '30px' } }} mb="49px" textAlign="center">
                     Add a new activity!
                 </Typography>
-                <Grid container spacing={4}>
+                <Grid container spacing={4} justifyContent='center'>
                     {activityCategories.map((category, index) => (
                         <Grid item key={index}>
                             <ActivityCategoryCard key={index} categoryName={category} />
