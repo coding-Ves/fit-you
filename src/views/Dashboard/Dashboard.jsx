@@ -2,7 +2,7 @@ import { Grid, Paper } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Chart from '../../components/Dashboard/Chart/Chart';
-import RecentActivity from '../../components/Dashboard/RecentActivity/RecentActivity';
+import ActivitiesTable from '../../components/Activity/ActivitiesTable/ActivitiesTable';
 import SideBarDrawer from '../../components/SideBarDrawer/SideBarDrawer';
 
 const Dashboard = () => {
@@ -38,16 +38,10 @@ const Dashboard = () => {
                             </Paper>
                         </Grid>
 
-                        {/* Recent Activity */}
+                        {/* Activities Table */}
                         <Grid item xs={12}>
-                            <Paper
-                                sx={{
-                                    p: 2,
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                }}
-                            >
-                                <RecentActivity />
+                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                                <ActivitiesTable />
                             </Paper>
                         </Grid>
                     </Grid>
