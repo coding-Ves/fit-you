@@ -8,32 +8,34 @@ import { styled } from '@mui/material/styles';
 import { useState } from 'react';
 import { drawerWidth } from '../../common/constants';
 import { mainListItems, secondaryListItems } from './ListItems';
+import { Box } from '@mui/material';
 
-const StyledDrawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-    ({ theme, open }) => ({
-        '& .MuiDrawer-paper': {
-            position: 'relative',
-            whiteSpace: 'nowrap',
-            width: drawerWidth,
+const StyledDrawer = styled(MuiDrawer, {
+    shouldForwardProp: (prop) => prop !== 'open',
+})(({ theme, open }) => ({
+    '& .MuiDrawer-paper': {
+        position: 'fixed',
+        top: 'auto',
+        whiteSpace: 'nowrap',
+        width: drawerWidth,
+        transition: theme.transitions.create('width', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+        boxSizing: 'border-box',
+        ...(!open && {
+            overflowX: 'hidden',
             transition: theme.transitions.create('width', {
                 easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.enteringScreen,
+                duration: theme.transitions.duration.leavingScreen,
             }),
-            boxSizing: 'border-box',
-            ...(!open && {
-                overflowX: 'hidden',
-                transition: theme.transitions.create('width', {
-                    easing: theme.transitions.easing.sharp,
-                    duration: theme.transitions.duration.leavingScreen,
-                }),
-                width: theme.spacing(7),
-                [theme.breakpoints.up('sm')]: {
-                    width: theme.spacing(9),
-                },
-            }),
-        },
-    }),
-);
+            width: theme.spacing(7),
+            [theme.breakpoints.up('sm')]: {
+                width: theme.spacing(9),
+            },
+        }),
+    },
+}));
 
 const SideBarDrawer = () => {
     const [open, setOpen] = useState(true);
@@ -49,7 +51,6 @@ const SideBarDrawer = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'flex-end',
-                    px: [1],
                 }}
             >
                 <IconButton onClick={toggleDrawer}>
@@ -57,7 +58,7 @@ const SideBarDrawer = () => {
                 </IconButton>
             </Toolbar>
             <Divider />
-            <List component="nav">
+            <List component='nav'>
                 {mainListItems}
                 <Divider sx={{ my: 1 }} />
                 {secondaryListItems}
