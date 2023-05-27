@@ -6,7 +6,7 @@ import ProfileDescription from '../../components/Profile/ProfileDescription/Prof
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getUserByUsername } from '../../firebase/services/users.service';
-import Achievements from '../../components/Achievements/Achievements';
+import Achievements from '../../components/Profile/Achievements/Achievements';
 
 const Profile = () => {
     const [userData, setUserData] = useState({});
