@@ -6,12 +6,11 @@ import RecentActivity from '../../components/Dashboard/RecentActivity/RecentActi
 import SideBarDrawer from '../../components/SideBarDrawer/SideBarDrawer';
 
 const Dashboard = () => {
-
     return (
         <Box sx={{ display: 'flex' }}>
             <SideBarDrawer />
             <Box
-                component="main"
+                component='main'
                 sx={{
                     backgroundColor: (theme) =>
                         theme.palette.mode === 'light'
@@ -23,7 +22,7 @@ const Dashboard = () => {
                 }}
             >
                 {/* <Toolbar /> */}
-                <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+                <Container maxWidth='lg' sx={{ mt: 4, mb: 4 }}>
                     <Grid container spacing={3}>
                         {/* Chart */}
                         <Grid item xs={12} md={8} lg={9}>
@@ -41,7 +40,13 @@ const Dashboard = () => {
 
                         {/* Recent Activity */}
                         <Grid item xs={12}>
-                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                            <Paper
+                                sx={{
+                                    p: 2,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                }}
+                            >
                                 <RecentActivity />
                             </Paper>
                         </Grid>
