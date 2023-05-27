@@ -39,13 +39,6 @@ export const mainListItems = (
             <ListItemText primary="Diet" />
         </ListItemButton>
 
-        <ListItemButton component={Link} to="/exercises">
-            <ListItemIcon>
-                <FitnessCenterRoundedIcon />
-            </ListItemIcon>
-            <ListItemText primary="Exercises" />
-        </ListItemButton>
-
         <ListItemButton>
             <ListItemIcon>
                 <BarChartIcon />
