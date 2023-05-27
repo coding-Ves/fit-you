@@ -21,5 +21,8 @@ export const notFoundImage =
 
 export const homeHeroImage =
     'https://img.freepik.com/free-photo/healthy-lunch-go-packed-lunch-box_1220-4541.jpg?w=1380';
-
 export const exerciseNameMaxLength = 25;
+
+export const loginImage = 'https://source.unsplash.com/random?otter';
+
+export const activityCategories = ['fitness', 'sports', 'cardio'];
