@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { exerciseNameMaxLength } from '../../common/constants';
-import AddExerciseModal from './AddExerciseModal';
+// import AddExerciseModal from './AddExerciseModal';
 
 const ExerciseCard = ({ exercise }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -99,12 +99,12 @@ const ExerciseCard = ({ exercise }) => {
                 {shortenedExerciseName}
             </Typography>
 
-            {isModalOpen && (
+            {/* {isModalOpen && (
                 <AddExerciseModal
                     isModalOpen={isModalOpen}
                     onClose={() => setIsModalOpen(false)}
                 />
-            )}
+            )} */}
         </>
     );
 };
