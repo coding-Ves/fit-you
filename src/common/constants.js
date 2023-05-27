@@ -10,7 +10,7 @@ export const userRoles = {
 
 export const drawerWidth = 240;
 
-export const exercisesPerPage = 9;
+export const resultsPerPage = 9;
 
 export const unsplashRandomUrl = 'https://source.unsplash.com/random?';
 

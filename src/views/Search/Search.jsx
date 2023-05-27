@@ -1,10 +1,11 @@
 import Box from '@mui/material/Box';
-import ListOfExercises from '../../components/Exercises/ListOfExercises';
-import SearchExercises from '../../components/Exercises/SearchExercises';
+import ListOfResults from '../../components/SearchBar/ListOfResults';
+import SearchBar from '../../components/SearchBar/SearchBar';
 import SideBarDrawer from '../../components/SideBarDrawer/SideBarDrawer';
 import { ExercisesProvider } from '../../contexts/ExercisesContext';
 
-const Exercises = () => {
+// refactor to Search view
+const Search = () => {
     return (
         <ExercisesProvider>
             <Box sx={{ display: 'flex', height: '100vh', width: '100vw' }}>
@@ -24,12 +25,12 @@ const Exercises = () => {
                         // margin={ lg: '80px', xs: '40px' }
                     }}
                 >
-                    <SearchExercises />
-                    <ListOfExercises />
+                    <SearchBar />
+                    <ListOfResults />
                 </Box>
             </Box>
         </ExercisesProvider>
     );
 };
 
-export default Exercises;
+export default Search;
