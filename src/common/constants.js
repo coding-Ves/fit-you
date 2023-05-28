@@ -29,3 +29,5 @@ export const HOME_HERO_IMAGE =
 export const EXERCISE_NAME_MAX_LENGTH = 25;
 
 export const ACTIVITY_CATEGORIES = ['fitness', 'sports', 'cardio'];
+
+export const REGISTRATION_STEPS = ['Basic Information', 'Health Information'];

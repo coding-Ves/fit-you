@@ -22,16 +22,20 @@ import {
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import AuthContext from '../../../contexts/AuthContext';
-import { registerUser } from '../../../firebase/services/auth.service';
+
+import { registrationValidationSchema } from './registrationValidationSchema';
+
+import AuthContext from './../../../../contexts/AuthContext';
+
+import { registerUser } from './../../../../firebase/services/auth.service';
+
+import errorHandler from './../../ErrorHandling/errors.services';
 import {
     createUsername,
     getUserByUsername,
-} from '../../../firebase/services/users.service';
-import { registrationValidationSchema } from './registrationValidationSchema';
-import errorHandler from '../ErrorHandling/errors.services';
+} from './../../../../firebase/services/users.service';
 
-const RegistrationForm = () => {
+export const RegistrationForm = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -269,7 +273,7 @@ const RegistrationForm = () => {
                             variant='contained'
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            Sign Up
+                            Register
                         </Button>
                         <Grid container justifyContent='flex-end'>
                             <Grid item>

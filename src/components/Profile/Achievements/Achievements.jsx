@@ -1,5 +1,4 @@
 import { Grid, Card, CardContent, Typography } from '@mui/material';
-import { StreetviewTwoTone } from '@mui/icons-material';
 import { DonutLargeTwoTone } from '@mui/icons-material';
 
 // When properly implemented this object will hold the icon of the achievement, we'll do a check against the userData object and render
