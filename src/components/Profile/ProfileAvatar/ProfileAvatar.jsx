@@ -7,29 +7,33 @@ import {
     CardContent,
     Divider,
     Typography,
+    Paper,
 } from '@mui/material';
 
 export const ProfileAvatar = ({ userData }) => {
     return (
-        <Card
-            sx={{
-                m: 3,
-                p: 1,
-            }}
-        >
-            <CardContent>
-                <Box
+        <>
+            <Box
+                sx={{
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                }}
+            >
+                <Paper
                     sx={{
-                        alignItems: 'center',
-                        display: 'flex',
-                        flexDirection: 'column',
+                        p: 2,
+
+                        width: '100%',
+                        height: '100%',
                     }}
                 >
                     <Avatar
                         sx={{
-                            height: 80,
+                            width: '150px',
+                            height: '150px',
                             mb: 2,
-                            width: 80,
                         }}
                     >
                         {userData.username}
@@ -37,15 +41,9 @@ export const ProfileAvatar = ({ userData }) => {
                     <Typography gutterBottom variant='h5'>
                         {userData.username}
                     </Typography>
-                </Box>
-            </CardContent>
-            <Divider />
-            <CardActions>
-                <Button fullWidth variant='text'>
-                    Upload picture
-                </Button>
-            </CardActions>
-        </Card>
+                </Paper>
+            </Box>
+        </>
     );
 };
 

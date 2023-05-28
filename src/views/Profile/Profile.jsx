@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getUserByUsername } from '../../firebase/services/users.service';
 import Achievements from '../../components/Profile/Achievements/Achievements';
+import ProfileInformation from '../../components/Profile/ProfileInformation/ProfileInformation';
 
 const Profile = () => {
     const [userData, setUserData] = useState({});
@@ -37,14 +38,7 @@ const Profile = () => {
                 <CircularProgress />
             ) : (
                 <Grid align='center' spacing={2}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6}>
-                            <ProfileAvatar userData={userData} />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <ProfileDescription userData={userData} />
-                        </Grid>
-                    </Grid>
+                    <ProfileInformation userData={userData} />
                     <Achievements />
                 </Grid>
             )}

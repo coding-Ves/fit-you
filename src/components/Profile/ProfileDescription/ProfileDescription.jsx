@@ -1,70 +1,81 @@
-import { Box, Card, CardContent, Grid, TextField } from '@mui/material';
 import * as React from 'react';
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import AccountInfo from './AccountInfo/AccountInfo';
+import { Card } from '@mui/material';
+import { HealthInfo } from './HealthInfo/HealthInfo';
 
-export const ProfileDescription = ({ userData }) => {
-    const date = userData.createdOn;
-    const formattedDate = new Date(userData.createdOn);
-    const displayDate = formattedDate.toDateString();
+function TabPanel(props) {
+    const { children, value, index, ...other } = props;
 
     return (
-        <Card
-            sx={{
-                m: 3,
-                p: 1,
-            }}
+        <div
+            role='tabpanel'
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
         >
-            <CardContent>
-                <Box>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                        }}
-                    >
-                        <Box component='form' noValidate sx={{ mt: 3 }}>
-                            <Grid container spacing={2}>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        fullWidth
-                                        id='username'
-                                        label='Username'
-                                        defaultValue={userData.username}
-                                        InputProps={{
-                                            readOnly: true,
-                                        }}
-                                    />
-                                </Grid>
-
-                                <Grid item xs={12}>
-                                    <TextField
-                                        fullWidth
-                                        id='phoneNumber'
-                                        label='Phone Number'
-                                        defaultValue={userData.phoneNumber}
-                                        InputProps={{
-                                            readOnly: true,
-                                        }}
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        fullWidth
-                                        id='registrationDate'
-                                        label='Registered on:'
-                                        defaultValue={displayDate}
-                                        InputProps={{
-                                            readOnly: true,
-                                        }}
-                                    />
-                                </Grid>
-                            </Grid>
-                        </Box>
-                    </Box>
+            {value === index && (
+                <Box sx={{ p: 3 }}>
+                    <Typography>{children}</Typography>
                 </Box>
-            </CardContent>
+            )}
+        </div>
+    );
+}
+
+TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+    };
+}
+
+export const ProfileDescription = ({ userData }) => {
+    const [value, setValue] = React.useState(0);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
+    return (
+        <Card sx={{ p: 2, width: '100%' }}>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    aria-label='account information tabs'
+                    variant='scrollable'
+                    scrollButtons
+                    allowScrollButtonsMobile
+                >
+                    <Tab label='Account' {...a11yProps(0)} />
+                    <Tab label='Health' {...a11yProps(1)} />
+                    {/* <Tab label='Item Three' {...a11yProps(2)} /> */}
+                </Tabs>
+            </Box>
+            <TabPanel value={value} index={0}>
+                <AccountInfo userData={userData} />
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+                <HealthInfo userData={userData} />
+            </TabPanel>
+            {/* <TabPanel value={value} index={2}>
+                Item Three
+            </TabPanel> */}
         </Card>
     );
 };
 
 export default ProfileDescription;
+//  <AccountInfo userData={userData} />
