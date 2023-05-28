@@ -1,7 +1,14 @@
 /* eslint-disable react/prop-types */
-import { Card, CardMedia, CardContent, Typography, Box, Fab } from '@mui/material';
+import {
+    Card,
+    CardMedia,
+    CardContent,
+    Typography,
+    Box,
+    Fab,
+} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import { unsplashRandomUrl } from '../../../common/constants';
+import { UNSPLASH_RANDOM_URL } from '../../../common/constants';
 
 const ActivityCategoryCard = ({ categoryName }) => {
     return (
@@ -12,12 +19,19 @@ const ActivityCategoryCard = ({ categoryName }) => {
                 </Typography>
             </CardContent>
 
-            <Box sx={{ position: 'relative', height: 0, paddingTop: '150%', '@media (max-width: 600px)': { paddingTop: '100%' } }}>
+            <Box
+                sx={{
+                    position: 'relative',
+                    height: 0,
+                    paddingTop: '150%',
+                    '@media (max-width: 600px)': { paddingTop: '100%' },
+                }}
+            >
                 <CardMedia
-                    component="img"
-                    src={unsplashRandomUrl + categoryName}
+                    component='img'
+                    src={UNSPLASH_RANDOM_URL + categoryName}
                     alt={`${categoryName} image`}
-                    loading="lazy"
+                    loading='lazy'
                     sx={{
                         position: 'absolute',
                         top: 0,
@@ -32,12 +46,12 @@ const ActivityCategoryCard = ({ categoryName }) => {
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 'auto' }}>
                 <Fab
                     href={`/search/${categoryName}`}
-                    variant="contained"
-                    size="sm"
-                    backgroundColor="secondary"
+                    variant='contained'
+                    size='sm'
+                    backgroundColor='secondary'
                     sx={{ fontWeight: 600 }}
-                    color="primary"
-                    aria-label="add"
+                    color='primary'
+                    aria-label='add'
                 >
                     <AddIcon />
                 </Fab>

@@ -8,7 +8,7 @@ import {
     update,
 } from 'firebase/database';
 import { db } from '../firebase-config';
-import { userRoles } from '../../common/constants';
+import { USER_ROLES } from '../../common/constants';
 
 export const getUserByUsername = (username) => {
     return get(ref(db, `users/${username}`));

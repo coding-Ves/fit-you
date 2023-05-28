@@ -1,13 +1,13 @@
 import { Box, Typography, Button, IconButton } from '@mui/material';
 import React from 'react';
-import { homeHeroImage } from '../../../common/constants';
+import { HOME_HERO_IMAGE } from '../../../common/constants';
 import { ArrowDownward } from '@mui/icons-material';
 
 const HeroBanner = () => {
     return (
         <Box
             sx={{
-                backgroundImage: `url(${homeHeroImage})`,
+                backgroundImage: `url(${HOME_HERO_IMAGE})`,
                 backgroundPosition: 'center',
                 backgroundSize: 'cover',
                 width: '100%',

@@ -14,7 +14,7 @@ import { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link as ReactRouterLink, useNavigate } from 'react-router-dom';
-import { loginImage } from '../../common/constants';
+import { LOGIN_IMAGE } from '../../common/constants.js';
 import AuthContext from '../../contexts/AuthContext';
 import { auth } from '../../firebase/firebase-config';
 import { useContext } from 'react';
@@ -86,7 +86,7 @@ const LogIn = () => {
                     sm={4}
                     md={7}
                     sx={{
-                        backgroundImage: `url(${loginImage})`,
+                        backgroundImage: `url(${LOGIN_IMAGE})`,
                         backgroundRepeat: 'no-repeat',
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',

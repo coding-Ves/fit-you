@@ -6,7 +6,7 @@ import List from '@mui/material/List';
 import Toolbar from '@mui/material/Toolbar';
 import { styled } from '@mui/material/styles';
 import { useState } from 'react';
-import { drawerWidth } from '../../common/constants';
+import { DRAWER_WIDTH } from '../../common/constants';
 import { mainListItems, secondaryListItems } from './ListItems';
 import { Box } from '@mui/material';
 
@@ -17,7 +17,7 @@ const StyledDrawer = styled(MuiDrawer, {
         position: 'fixed',
         top: 'auto',
         whiteSpace: 'nowrap',
-        width: drawerWidth,
+        width: DRAWER_WIDTH,
         transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,

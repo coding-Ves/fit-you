@@ -3,32 +3,37 @@ import { Button, Stack, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { exerciseNameMaxLength } from '../../common/constants';
+import { EXERCISE_NAME_MAX_LENGTH } from '../../common/constants';
 // import AddExerciseModal from './AddExerciseModal';
 
 const ExerciseCard = ({ exercise }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const shortenedExerciseName =
-        exercise.name.length > exerciseNameMaxLength
-            ? exercise.name.substring(0, exerciseNameMaxLength) + '...'
+        exercise.name.length > EXERCISE_NAME_MAX_LENGTH
+            ? exercise.name.substring(0, EXERCISE_NAME_MAX_LENGTH) + '...'
             : exercise.name;
 
     return (
         <>
             <Link
-                className="exercise-card"
+                className='exercise-card'
                 to={`/exercise/${exercise.id}`}
-                style={{ textDecoration: 'none', maxWidth: '300px', margin: '0 auto', marginRight: '20px' }} // Adjusted maxWidth and margin properties
+                style={{
+                    textDecoration: 'none',
+                    maxWidth: '300px',
+                    margin: '0 auto',
+                    marginRight: '20px',
+                }} // Adjusted maxWidth and margin properties
             >
                 <img
                     src={exercise.gifUrl}
                     alt={exercise.name}
-                    loading="lazy"
+                    loading='lazy'
                     style={{ width: '70%', borderRadius: '50%' }}
                 />
             </Link>
-            <Stack direction="row">
+            <Stack direction='row'>
                 <Button
                     sx={{
                         color: '#fff',
@@ -63,7 +68,12 @@ const ExerciseCard = ({ exercise }) => {
                 <Button
                     onClick={() => setIsModalOpen(true)}
                     sx={{
-                        ml: { xs: '0.5rem', sm: '1rem', lg: '5rem', xl: '7rem' },
+                        ml: {
+                            xs: '0.5rem',
+                            sm: '1rem',
+                            lg: '5rem',
+                            xl: '7rem',
+                        },
                         color: '#fff',
                         background: '#398aa0',
                         fontSize: '1rem',
@@ -77,11 +87,10 @@ const ExerciseCard = ({ exercise }) => {
                 >
                     Add!
                 </Button>
-
             </Stack>
             <Typography
-                color="#000"
-                fontWeight="bold"
+                color='#000'
+                fontWeight='bold'
                 sx={{
                     fontSize: '1.5rem',
                     '@media (max-width: 600px)': {

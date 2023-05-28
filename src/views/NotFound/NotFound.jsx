@@ -1,6 +1,6 @@
 import { ArrowLeft } from '@mui/icons-material';
 import { Box, Container, Button, Typography, Avatar } from '@mui/material';
-import { notFoundImage } from '../../common/constants';
+import { NOT_FOUND_IMAGE } from '../../common/constants';
 
 const NotFound = () => {
     return (
@@ -33,7 +33,7 @@ const NotFound = () => {
 
                             <Avatar
                                 alt='404 Image'
-                                src={notFoundImage}
+                                src={NOT_FOUND_IMAGE}
                                 mt={3}
                                 style={{
                                     width: '300px',

@@ -1,28 +1,29 @@
-export const exerciseDBUrl = 'https://exercisedb.p.rapidapi.com/exercises/';
+export const EXERCISE_DB_URL = 'https://exercisedb.p.rapidapi.com/exercises/';
 
-export const today = new Date().getTime();
+export const TODAY = new Date().getTime();
 
-export const userRoles = {
+export const USER_ROLES = {
     user: 1,
     admin: 2,
     banned: 3,
 };
 
-export const drawerWidth = 240;
+export const DRAWER_WIDTH = 240;
 
-export const resultsPerPage = 9;
+export const RESULTS_PER_PAGE = 9;
 
-export const unsplashRandomUrl = 'https://source.unsplash.com/random?';
+export const UNSPLASH_RANDOM_URL = 'https://source.unsplash.com/random?';
 
-export const loginImage = 'https://source.unsplash.com/random?fitness';
+export const LOGIN_IMAGE = 'https://source.unsplash.com/random?fitness';
 
-export const notFoundImage =
+export const NOT_FOUND_IMAGE =
     'https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7888.jpg';
 
 // <a href="https://www.freepik.com/free-photo/healthy-lunch-go-packed-lunch-box_5009132.htm#query=healthy&position=44&from_view=search&track=sph">Image by valeria_aksakova</a> on Freepik
 
-export const homeHeroImage =
+export const HOME_HERO_IMAGE =
     'https://img.freepik.com/free-photo/healthy-lunch-go-packed-lunch-box_1220-4541.jpg?w=1380';
-export const exerciseNameMaxLength = 25;
 
-export const activityCategories = ['fitness', 'sports', 'cardio'];
+export const EXERCISE_NAME_MAX_LENGTH = 25;
+
+export const ACTIVITY_CATEGORIES = ['fitness', 'sports', 'cardio'];
