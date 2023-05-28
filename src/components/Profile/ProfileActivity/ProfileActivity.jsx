@@ -2,8 +2,8 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Tab, Typography, Box, Card } from '@mui/material';
 
-import AccountInfo from './AccountInfo/AccountInfo';
-import HealthInfo from './HealthInfo/HealthInfo';
+import Achievements from '../Achievements/Achievements';
+import ActivitiesTable from '../../Activity/ActivitiesTable/ActivitiesTable';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -38,7 +38,7 @@ function a11yProps(index) {
     };
 }
 
-export const ProfileDescription = ({ userData }) => {
+export const ProfileActivity = ({ userData }) => {
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
@@ -47,32 +47,38 @@ export const ProfileDescription = ({ userData }) => {
 
     return (
         <Card sx={{ p: 2, width: '100%' }}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <Box
+                sx={{
+                    borderBottom: 1,
+                    borderColor: 'divider',
+                }}
+            >
                 <Tabs
                     value={value}
                     onChange={handleChange}
                     aria-label='account information tabs'
-                    variant='scrollable'
+                    variant='fullWidth'
                     scrollButtons
                     allowScrollButtonsMobile
                 >
-                    <Tab label='Account' {...a11yProps(0)} />
-                    <Tab label='Health' {...a11yProps(1)} />
-                    {/* <Tab label='Item Three' {...a11yProps(2)} /> */}
+                    <Tab label='Goals' {...a11yProps(0)} />
+                    <Tab label='Activity' {...a11yProps(1)} />
+                    <Tab label='Achievements' {...a11yProps(2)} />
+                    <Tab label='Friends' {...a11yProps(3)} />
                 </Tabs>
             </Box>
-            <TabPanel value={value} index={0}>
-                <AccountInfo userData={userData} />
-            </TabPanel>
+            <TabPanel value={value} index={0}></TabPanel>
             <TabPanel value={value} index={1}>
-                <HealthInfo userData={userData} />
+                <ActivitiesTable userData={userData} />
             </TabPanel>
-            {/* <TabPanel value={value} index={2}>
-                Item Three
-            </TabPanel> */}
+            <TabPanel value={value} index={2}>
+                <Achievements userData={userData} />
+            </TabPanel>
+            <TabPanel value={value} index={3}>
+                Activity
+            </TabPanel>
         </Card>
     );
 };
 
-export default ProfileDescription;
-//  <AccountInfo userData={userData} />
+export default ProfileActivity;

@@ -7,52 +7,52 @@ import { DonutLargeTwoTone } from '@mui/icons-material';
 
 const cardsData = [
     {
-        title: 'Start your journey',
-        description: 'You created your account!',
+        title: 'Achievement',
+        description: 'Achievement description',
     },
     {
-        title: 'Set a goal',
-        description: 'Yours first of many!',
+        title: 'Achievement',
+        description: 'Achievement description',
     },
     {
-        title: 'Finish an activity',
-        description: 'You go girl!',
+        title: 'Achievement',
+        description: 'Achievement description',
     },
     {
-        title: 'Make a friend',
-        description: 'If only it were that easy',
+        title: 'Achievement',
+        description: 'Achievement description',
     },
     {
-        title: 'Discover fire',
-        description: 'Advance humanity!',
+        title: 'Achievement',
+        description: 'Achievement description',
     },
     {
-        title: 'Finish Telerik Academy',
-        description: 'Almost there!',
+        title: 'Achievement',
+        description: 'Achievement description',
     },
     {
-        title: 'Compliment Imad',
-        description: 'He a good man!',
+        title: 'Achievement',
+        description: 'Achievement description',
     },
     {
-        title: 'Compliment Bibi',
-        description: 'She a fancy lady!',
+        title: 'Achievement',
+        description: 'Achievement description',
     },
     {
-        title: 'Grow a three',
-        description: 'It took so long!',
+        title: 'Achievement',
+        description: 'Achievement description',
     },
     {
-        title: 'Find a job',
-        description: 'Okay, mom!',
+        title: 'Achievement',
+        description: 'Achievement description',
     },
     {
-        title: 'Write code',
-        description: 'I already am!',
+        title: 'Achievement',
+        description: 'Achievement description',
     },
     {
-        title: 'Build a house',
-        description: 'How?!',
+        title: 'Achievement',
+        description: 'Achievement description',
     },
 ];
 

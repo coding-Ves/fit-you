@@ -8,6 +8,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getUserByUsername } from '../../firebase/services/users.service';
 import Achievements from '../../components/Profile/Achievements/Achievements';
 import ProfileInformation from '../../components/Profile/ProfileInformation/ProfileInformation';
+import ProfileActivity from '../../components/Profile/ProfileActivity/ProfileActivity';
 
 const Profile = () => {
     const [userData, setUserData] = useState({});
@@ -39,7 +40,7 @@ const Profile = () => {
             ) : (
                 <Grid align='center' spacing={2}>
                     <ProfileInformation userData={userData} />
-                    <Achievements />
+                    <ProfileActivity userData={userData} />
                 </Grid>
             )}
         </>
