@@ -43,9 +43,8 @@ const ListOfResults = () => {
                     display='block'
                 >
                     <Grid container spacing={2} ml={0}>
-                        {currentExercisesOnPage.map((exercise, index) => (
-                            <Grid item xs={12} sm={6} md={4} key={index}>
-                                {/* this needs refactoring!!! */}
+                        {currentExercisesOnPage.map((exercise) => (
+                            <Grid item xs={12} sm={6} md={4} key={exercise.id}>
                                 <SearchResultCard exercise={exercise} /> 
                             </Grid>
                         ))}
