@@ -21,14 +21,15 @@ import { useForm } from 'react-hook-form';
 import { auth } from '../../../firebase/firebase-config';
 import { loginUser } from '../../../firebase/services/auth.service';
 import AuthContext from './../../../contexts/AuthContext';
+import errorHandler from '../ErrorHandling/errors.services';
 
 const LoginForm = () => {
     const { handleSubmit, register } = useForm();
+    const { setContext } = useContext(AuthContext);
     const navigate = useNavigate();
     // eslint-disable-next-line no-unused-vars
     const [user] = useAuthState(auth);
     const [isLoading, setIsLoading] = useState(false);
-    const { setContext } = useContext(AuthContext);
 
     // Responsible for Snackbar and Alert - Showing error  and success messages
     const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -57,7 +58,8 @@ const LoginForm = () => {
             })
             .catch((e) => {
                 setIsLoading(false);
-                setSnackbarMessage(e.code + ': ' + e.message);
+                const message = errorHandler(e);
+                setSnackbarMessage(message);
                 setSnackbarSeverity('error');
                 setSnackbarOpen(true);
             });

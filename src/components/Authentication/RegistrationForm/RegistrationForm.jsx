@@ -1,4 +1,3 @@
-import { useTheme } from '@emotion/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LockOutlined, Visibility, VisibilityOff } from '@mui/icons-material';
 
@@ -30,13 +29,14 @@ import {
     getUserByUsername,
 } from '../../../firebase/services/users.service';
 import { registrationValidationSchema } from './registrationValidationSchema';
+import errorHandler from '../ErrorHandling/errors.services';
 
 const RegistrationForm = () => {
-    const theme = useTheme();
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-    const { setContext } = useContext(AuthContext);
     const [isLoading, setIsLoading] = useState(false);
+    const { setContext } = useContext(AuthContext);
+
     const navigate = useNavigate();
 
     // Responsible for Snackbar and Alert - Showing error  and success messages
@@ -59,13 +59,13 @@ const RegistrationForm = () => {
 
     const onSubmit = (data) => {
         setIsLoading(true);
-        console.log(data);
+
         getUserByUsername(data.username)
             .then((snapshot) => {
                 if (snapshot.exists()) {
-                    throw new Error(
-                        `Username ${data.username} has already been taken!`
-                    );
+                    const error = new Error(`Username has already been taken!`);
+                    error.code = 'auth/username-already-exists';
+                    throw error;
                 }
                 return registerUser(data.email, data.password);
             })
@@ -92,7 +92,8 @@ const RegistrationForm = () => {
             })
             .catch((e) => {
                 setIsLoading(false);
-                setSnackbarMessage(e.code + ': ' + e.message);
+                const message = errorHandler(e);
+                setSnackbarMessage(message);
                 setSnackbarSeverity('error');
                 setSnackbarOpen(true);
             });
