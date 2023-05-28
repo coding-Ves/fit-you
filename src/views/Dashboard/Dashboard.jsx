@@ -9,6 +9,7 @@ const Dashboard = () => {
     return (
         <Box sx={{ display: 'flex' }}>
             <SideBarDrawer />
+
             <Box
                 component='main'
                 sx={{
@@ -40,7 +41,13 @@ const Dashboard = () => {
 
                         {/* Activities Table */}
                         <Grid item xs={12}>
-                            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                            <Paper
+                                sx={{
+                                    p: 2,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                }}
+                            >
                                 <ActivitiesTable />
                             </Paper>
                         </Grid>

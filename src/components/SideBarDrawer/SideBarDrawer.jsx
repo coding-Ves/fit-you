@@ -6,7 +6,7 @@ import List from '@mui/material/List';
 import Toolbar from '@mui/material/Toolbar';
 import { styled } from '@mui/material/styles';
 import { useState } from 'react';
-import { DRAWER_WIDTH } from '../../common/constants';
+import { DRAWER_WIDTH_OPEN, DRAWER_WIDTH_CLOSED } from '../../common/constants';
 import { mainListItems, secondaryListItems } from './ListItems';
 import { Box } from '@mui/material';
 
@@ -17,7 +17,7 @@ const StyledDrawer = styled(MuiDrawer, {
         position: 'fixed',
         top: 'auto',
         whiteSpace: 'nowrap',
-        width: DRAWER_WIDTH,
+        width: DRAWER_WIDTH_OPEN,
         transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
@@ -39,13 +39,18 @@ const StyledDrawer = styled(MuiDrawer, {
 
 const SideBarDrawer = () => {
     const [open, setOpen] = useState(true);
+    const marginLeft = open ? DRAWER_WIDTH_OPEN : DRAWER_WIDTH_CLOSED;
 
     const toggleDrawer = () => {
         setOpen(!open);
     };
 
     return (
-        <StyledDrawer variant='permanent' open={open}>
+        <StyledDrawer
+            variant='permanent'
+            open={open}
+            sx={{ ml: { marginLeft } }}
+        >
             <Toolbar
                 sx={{
                     display: 'flex',

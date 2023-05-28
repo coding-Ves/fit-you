@@ -1,17 +1,16 @@
-import React from 'react';
 import { DarkMode, Home, WbSunny } from '@mui/icons-material';
-import { Switch, Link } from '@mui/material';
+import { Link, Switch } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
+import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link as ReactRouterLink } from 'react-router-dom';
 import { auth } from '../../firebase/firebase-config';
 import MyAccountMenu from './../Menus/MyAccountMenu';
-import useScrollTrigger from '@mui/material/useScrollTrigger';
 
 function ElevationScroll({ children }) {
     const trigger = useScrollTrigger({

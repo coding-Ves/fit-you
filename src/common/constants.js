@@ -8,7 +8,9 @@ export const USER_ROLES = {
     banned: 3,
 };
 
-export const DRAWER_WIDTH = 240;
+export const DRAWER_WIDTH_OPEN = 240;
+
+export const DRAWER_WIDTH_CLOSED = 70;
 
 export const RESULTS_PER_PAGE = 9;
 
