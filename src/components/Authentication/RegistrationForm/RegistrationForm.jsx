@@ -1,27 +1,35 @@
 import { useTheme } from '@emotion/react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { Alert, IconButton, InputAdornment, Snackbar } from '@mui/material';
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
-import Container from '@mui/material/Container';
-import CssBaseline from '@mui/material/CssBaseline';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
+import { LockOutlined, Visibility, VisibilityOff } from '@mui/icons-material';
+
+import {
+    Alert,
+    Avatar,
+    Box,
+    Button,
+    Checkbox,
+    Container,
+    CssBaseline,
+    FormControlLabel,
+    Grid,
+    IconButton,
+    InputAdornment,
+    Link,
+    Snackbar,
+    TextField,
+    Typography,
+} from '@mui/material';
+
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { getUserByUsername } from '../../firebase/services/users.service';
-import AuthContext from './../../contexts/AuthContext';
-import { registerUser } from './../../firebase/services/auth.service';
-import { createUsername } from './../../firebase/services/users.service';
-import { registrationValidationSchema } from '../../services/Validation/registrationValidationSchema';
+import AuthContext from '../../../contexts/AuthContext';
+import { registerUser } from '../../../firebase/services/auth.service';
+import {
+    createUsername,
+    getUserByUsername,
+} from '../../../firebase/services/users.service';
+import { registrationValidationSchema } from './registrationValidationSchema';
 
 const RegistrationForm = () => {
     const theme = useTheme();
@@ -118,7 +126,7 @@ const RegistrationForm = () => {
                     }}
                 >
                     <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                        <LockOutlinedIcon />
+                        <LockOutlined />
                     </Avatar>
                     <Typography component='h1' variant='h5'>
                         Register

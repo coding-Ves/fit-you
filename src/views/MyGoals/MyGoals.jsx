@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import SideBarDrawer from '../../components/SideBarDrawer/SideBarDrawer';
-import NewGoalForm from '../../components/Forms/NewGoalForm';
+import NewGoalForm from './../../components/Goals/CreateGoal/NewGoalForm';
 
 const MyGoals = () => {
     return (

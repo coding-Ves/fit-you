@@ -1,22 +1,24 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import FlagIcon from '@mui/icons-material/Flag';
-import { Alert, Snackbar } from '@mui/material';
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import CssBaseline from '@mui/material/CssBaseline';
-import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
+import {
+    Alert,
+    Snackbar,
+    Avatar,
+    Box,
+    Button,
+    Container,
+    CssBaseline,
+    Grid,
+    TextField,
+    Typography,
+} from '@mui/material';
+
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../../firebase/firebase-config';
-import { getUserByUsername } from '../../firebase/services/users.service';
-import goalValidationSchema from '../../services/Validation/goalValidationSchema';
-import AuthContext from './../../contexts/AuthContext';
-import { addGoal } from '../../firebase/services/goals.service';
+import { addGoal } from '../../../firebase/services/goals.service';
+import goalValidationSchema from './goalValidationSchema';
+import AuthContext from '../../../contexts/AuthContext';
 
 const NewGoalForm = () => {
     const { userData } = useContext(AuthContext);

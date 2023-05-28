@@ -1,15 +1,11 @@
 import * as yup from 'yup';
 
-// Validation schema for registration form
-
 export const registrationValidationSchema = yup.object({
     username: yup.string().min(2).max(20).required('Username is required'),
     email: yup
         .string()
         .email('Please enter a valid email')
         .required('Email is required'),
-    // .test('Email', 'accents not allowed', (value) =>
-    //     validateInputEmail(value),
     password: yup
         .string()
         .min(6, 'Password must be at least 6 characters')
