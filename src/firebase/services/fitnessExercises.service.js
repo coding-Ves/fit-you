@@ -19,7 +19,15 @@ import { db } from '../firebase-config';
 //     }
 // }
 
-export const addFitnessExercise = (username, fitnessExerciseName, sets) => {
+// modified with formInputs
+export const addFitnessExercise = (username, fitnessExerciseName, formInputs) => {
+    const sets = formInputs.map((input) => ({
+        reps: input.reps,
+        exercisesUnits: input.exercisesUnits,
+        weight: input.weight,
+        weightUnit: input.weightUnit,
+    }));
+
     return push(ref(db, 'fitnessExercises'), {
         username,
         fitnessExerciseName,
@@ -35,6 +43,7 @@ export const addFitnessExercise = (username, fitnessExerciseName, sets) => {
         return update(ref(db), updateFitnessExercise);
     });
 };
+
 
 export const getFitnessExerciseById = (fitnessExerciseId) => {
     return get(ref(db, `fitnessExercises/${fitnessExerciseId}`)).then((result) => {
