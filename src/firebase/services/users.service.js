@@ -49,3 +49,10 @@ export const updateUserHealthInfo = (username, height, weight, age) => {
 
     return update(ref(db), userBmiDetails);
 };
+
+// upload user profile picture/avatar
+export const uploadUserAvatar = (username, file) => {
+    return update(ref(db), {
+        [`/users/${username}/avatarURL`]: url,
+    });
+};
