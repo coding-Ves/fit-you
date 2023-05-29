@@ -9,6 +9,7 @@ import NotFound from '../../views/NotFound/NotFound';
 import Profile from '../../views/Profile/Profile';
 import Register from '../../views/Register/Register';
 import Search from '../../views/Search/Search';
+import RegisterHealth from '../../views/Register/RegisterHealth';
 
 export const AppRouter = () => {
     return (
@@ -16,6 +17,7 @@ export const AppRouter = () => {
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
+            <Route path='/health-info' element={<RegisterHealth />} />
             {/* <Route path='/register/:step' element={<Register />} />  */}
             <Route path='/profile/:username' element={<Profile />} />
             <Route path='/dashboard' element={<Dashboard />} />

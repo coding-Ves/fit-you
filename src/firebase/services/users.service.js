@@ -37,12 +37,11 @@ export const updateUserDetails = (username, phoneNumber) => {
     return update(ref(db), userDetails);
 };
 
-export const updateUserHealthInfo = (username, height, weight, age, gender) => {
+export const updateUserHealthInfo = (username, height, weight, age) => {
     const userBmiDetails = {};
     userBmiDetails[`/users/${username}/height`] = height;
     userBmiDetails[`/users/${username}/weight`] = weight;
     userBmiDetails[`/users/${username}/age`] = age;
-    userBmiDetails[`/users/${username}/gender`] = gender;
 
     // calculate BMI
     const bmi = (weight / ((height / 100) * (height / 100))).toFixed(2);

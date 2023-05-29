@@ -281,6 +281,11 @@ export const RegistrationForm = () => {
                                     Already have an account? Sign in
                                 </Link>
                             </Grid>
+                            <Grid item>
+                                <Link href='/health-info' variant='body2'>
+                                    Set up your Health Info by clicking here.
+                                </Link>
+                            </Grid>
                         </Grid>
                     </Box>
                 </Box>
