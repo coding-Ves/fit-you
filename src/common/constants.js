@@ -31,3 +31,7 @@ export const EXERCISE_NAME_MAX_LENGTH = 25;
 export const ACTIVITY_CATEGORIES = ['fitness', 'sports', 'cardio'];
 
 export const REGISTRATION_STEPS = ['Basic Information', 'Health Information'];
+
+export const EXERCISES_UNITS = ['Minutes', 'Seconds', 'Repetitions', 'Until Failure'];
+
+export const WEIGHT_UNIT = ['kg', 'lb', 'Body Weight'];

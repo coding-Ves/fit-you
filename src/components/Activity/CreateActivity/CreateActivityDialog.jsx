@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import CreateActivityForm from './CreateActivityForm';
 
 const CreateActivityDialog = ({ open, handleClose, exercise }) => {
 
-    // conditionally render different forms based on the url?? useParams currently gets undefined
+    // conditionally render different forms based on the url?? useParams currently gets undefined... meh, future me problem :D
 
     // placeholder for now
     return (
@@ -12,11 +12,11 @@ const CreateActivityDialog = ({ open, handleClose, exercise }) => {
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>{exercise.name.toUpperCase()}</DialogTitle>
                 <DialogContent>
-                    <CreateActivityForm />
+                    <CreateActivityForm exercise={exercise} />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleClose}>Subscribe</Button>
+                    {/* <Button onClick={handleClose}>Cancel</Button> */}
+                    {/* <Button onClick={handleClose}>Placeholder</Button> */}
                 </DialogActions>
             </Dialog>
         </>
@@ -25,6 +25,8 @@ const CreateActivityDialog = ({ open, handleClose, exercise }) => {
 
 export default CreateActivityDialog;
 
+
+// example from MUI docs
 // return (
 //     <>
 //         <Dialog open={open} onClose={handleClose}>

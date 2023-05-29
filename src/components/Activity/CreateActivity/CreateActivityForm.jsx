@@ -1,31 +1,60 @@
-import { Box, FormControl, InputLabel, MenuItem, Select, Slider, Stack, TextField } from '@mui/material';
-import { useState } from 'react';
+/* eslint-disable react/prop-types */
+import { Alert, Box, Button, FormControl, InputLabel, MenuItem, Select, Slider, Snackbar, Stack, TextField, Typography } from '@mui/material';
+import { useContext, useState } from 'react';
+import { EXERCISES_UNITS, WEIGHT_UNIT } from '../../../common/constants';
+import AuthContext from '../../../contexts/AuthContext';
+import { addFitnessExercise } from '../../../firebase/services/fitnessExercises.service';
 
-const CreateActivityForm = () => {
+const CreateActivityForm = ({ exercise }) => {
+
+    const { userData } = useContext(AuthContext);
+    // console.log(userData);
+    // object
+    // createdOn: 1685176545989
+    // email: "test@test.bg"
+    // goals: { -NWRLlakIrX - KErHO561: true }
+    // phoneNumber: "0887566588"
+    // role: 1
+    // uid: "eW9i2ZPoA7cSjgc3xlpWRApDdaw2"
+    // username: "brymbazyk"
+
+    // eslint-disable-next-line no-unused-vars
+    const [isLoading, setIsLoading] = useState(false);
+
     const [numOfSets, setNumOfSets] = useState(3);
     const [formInputs, setFormInputs] = useState(Array(numOfSets).fill({
         reps: '',
-        units: 'Repetitions',
+        exercisesUnits: '',
         weight: '',
-        unit: 'kg',
+        weightUnit: '',
     }));
+
+    // Responsible for Snackbar and Alert - Showing error  and success messages
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [snackbarSeverity, setSnackbarSeverity] = useState('success');
 
     const handleNumOfSetsChange = (event, value) => {
         setNumOfSets(value);
         setFormInputs((prevInputs) => {
-            const newInputs = [...prevInputs];
-            if (value > newInputs.length) {
+            // map so that we create new objects and not just reference the old ones - fixed bug
+            const newInputs = prevInputs.map((input, index) => {
+                if (index >= value) {
+                    return null;
+                }
+                return input;
+            }).filter((input) => input !== null);
+
+            if (newInputs.length < value) {
                 const diff = value - newInputs.length;
                 for (let i = 0; i < diff; i++) {
                     newInputs.push({
                         reps: '',
-                        units: 'Repetitions',
+                        exercisesUnits: '',
                         weight: '',
-                        unit: 'kg',
+                        weightUnit: '',
                     });
                 }
-            } else if (value < newInputs.length) {
-                newInputs.splice(value);
             }
             return newInputs;
         });
@@ -33,76 +62,120 @@ const CreateActivityForm = () => {
 
     const handleInputChange = (index, field, value) => {
         setFormInputs((prevInputs) => {
-            const newInputs = [...prevInputs];
-            newInputs[index][field] = value;
+            const newInputs = prevInputs.map((input, i) => {
+                //not the set(i.e. index) we're modifying
+                if (i !== index) {
+                    return input;
+                }
+                // new obj
+                return {
+                    ...input,
+                    [field]: value,
+                };
+            });
             return newInputs;
         });
     };
 
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
+    };
+
+    const handleSubmit = () => {
+        setIsLoading(true);
+        addFitnessExercise(userData.username, exercise.name, formInputs)
+            .then(() => {
+                setIsLoading(false);
+            })
+            .then(() => {
+                setSnackbarMessage('Activity added successfully!');
+                setSnackbarSeverity('success');
+                setSnackbarOpen(true);
+            })
+            .catch((error) => {
+                setIsLoading(false);
+                setSnackbarMessage(error.message);
+                setSnackbarSeverity('error');
+                setSnackbarOpen(true);
+            });
+    };
+
     return (
         <>
-            <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
-                {`Number of sets: ${numOfSets}`}
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={3000}
+                onClose={handleSnackbarClose}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+            >
+                <Alert
+                    onClose={handleSnackbarClose}
+                    severity={snackbarSeverity}
+                    sx={{ width: '100%' }}
+                >
+                    {snackbarMessage}
+                </Alert>
+            </Snackbar>
+            <Stack spacing={2} direction='row' sx={{ mb: 1 }} alignItems='center'>
+                <Typography>{`Number of sets: ${numOfSets}`}</Typography>
                 <Slider
                     value={numOfSets}
                     min={0}
                     max={10}
                     defaultValue={3}
                     onChange={handleNumOfSetsChange}
-                    aria-label="num-of-sets-slider"
                 />
             </Stack>
             <Box mt={2}>
                 {Array.from({ length: numOfSets }).map((_, index) => (
-                    <div key={index}>
+                    <Stack key={index} direction='row'>
+                        <Typography>{`Set ${index + 1}`}</Typography>
                         <TextField
-                            label="Reps"
+                            label='value'
                             value={formInputs[index].reps}
                             onChange={(e) => handleInputChange(index, 'reps', e.target.value)}
                             fullWidth
-                            margin="normal"
+                            margin='normal'
                         />
-                        <FormControl fullWidth margin="normal">
-                            <InputLabel id={`units-label-${index}`}>Units</InputLabel>
+                        <FormControl fullWidth margin='normal'>
+                            <InputLabel>Exercises Units</InputLabel>
                             <Select
-                                labelId={`units-label-${index}`}
-                                id={`units-select-${index}`}
-                                value={formInputs[index].units}
-                                onChange={(e) => handleInputChange(index, 'units', e.target.value)}
+                                value={formInputs[index].exercisesUnits}
+                                onChange={(e) => handleInputChange(index, 'exercisesUnits', e.target.value)}
                             >
-                                <MenuItem value="Kilometers">Kilometers</MenuItem>
-                                <MenuItem value="Miles">Miles</MenuItem>
-                                <MenuItem value="Minutes">Minutes</MenuItem>
-                                <MenuItem value="Seconds">Seconds</MenuItem>
-                                <MenuItem value="Repetitions">Repetitions</MenuItem>
-                                <MenuItem value="Until Failure">Until Failure</MenuItem>
+                                <MenuItem value=''>
+                                    <em>None</em>
+                                </MenuItem>
+                                {EXERCISES_UNITS.map((unit) =>
+                                    <MenuItem key={unit} value={unit}>{unit}</MenuItem>
+                                )}
                             </Select>
                         </FormControl>
                         <TextField
-                            label="Weight"
+                            label='Weight'
                             value={formInputs[index].weight}
                             onChange={(e) => handleInputChange(index, 'weight', e.target.value)}
                             fullWidth
-                            margin="normal"
+                            margin='normal'
                         />
-                        <FormControl fullWidth margin="normal">
-                            <InputLabel id={`unit-label-${index}`}>Unit</InputLabel>
+                        <FormControl fullWidth margin='normal'>
+                            <InputLabel id={`unit-label-${index}`}>Weight Unit</InputLabel>
                             <Select
-                                labelId={`unit-label-${index}`}
-                                id={`unit-select-${index}`}
-                                value={formInputs[index].unit}
-                                onChange={(e) => handleInputChange(index, 'unit', e.target.value)}
+                                value={formInputs[index].weightUnit}
+                                onChange={(e) => handleInputChange(index, 'weightUnit', e.target.value)}
                             >
-                                <MenuItem value="kg">kg</MenuItem>
-                                <MenuItem value="lb">lb</MenuItem>
-                                <MenuItem value="Body Weight">Body Weight</MenuItem>
-                                <MenuItem value="km/h">km/h</MenuItem>
-                                <MenuItem value="m/h">m/h</MenuItem>
+                                <MenuItem value=''>
+                                    <em>None</em>
+                                </MenuItem>
+                                {WEIGHT_UNIT.map((unit) =>
+                                    <MenuItem key={unit} value={unit}>{unit}</MenuItem>
+                                )}
                             </Select>
                         </FormControl>
-                    </div>
+                    </Stack>
                 ))}
             </Box>
+            <Button onClick={handleSubmit}>Submit</Button>
         </>
     );
 };
