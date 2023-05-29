@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
 import { Alert, Box, Button, FormControl, InputLabel, MenuItem, Select, Slider, Snackbar, Stack, TextField, Typography } from '@mui/material';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { EXERCISES_UNITS, WEIGHT_UNIT } from '../../../common/constants';
 import AuthContext from '../../../contexts/AuthContext';
 import { addFitnessExercise } from '../../../firebase/services/fitnessExercises.service';
+import { getGoalsByUsername } from '../../../firebase/services/goals.service';
+
 
 const CreateActivityForm = ({ exercise }) => {
 
@@ -80,6 +82,11 @@ const CreateActivityForm = ({ exercise }) => {
     const handleSnackbarClose = () => {
         setSnackbarOpen(false);
     };
+
+    // useEffect(() => {
+    //     getGoalsByUsername(userData.username)
+    //         .then((snapshot) => console.log(snapshot));
+    // }, [userData.username]);
 
     const handleSubmit = () => {
         setIsLoading(true);
