@@ -85,11 +85,11 @@ const CreateActivityForm = ({ exercise }) => {
         setIsLoading(true);
 
         addFitnessExercise(userData.username, exercise.name, formInputs)
-            .then((fitnessExerciseId) => {
+            .then((id) => {
                 setIsLoading(false);
 
                 if (selectedGoal) {
-                    return addFitnessExerciseToGoal(selectedGoal, fitnessExerciseId);
+                    return addFitnessExerciseToGoal(selectedGoal, id);
                 }
             })
             .then(() => {

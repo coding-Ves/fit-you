@@ -1,6 +1,4 @@
-import { Grid, Paper } from '@mui/material';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
+import { Box, Container, Grid, Paper, } from '@mui/material';
 import ActivitiesTable from '../../components/Activity/ActivitiesTable/ActivitiesTable';
 import AddActivityTable from '../../components/Activity/AddActivityTable/AddActivityTable';
 import SideBarDrawer from '../../components/SideBarDrawer/SideBarDrawer';
@@ -18,7 +16,7 @@ const MyActivity = () => {
                 }}
             >
                 <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                    <Grid container spacing={3} sx={{ display: 'flex', flexDirection: 'column'}}>
+                    <Grid container spacing={3} sx={{ display: 'flex', flexDirection: 'column' }}>
 
                         {/* AddActivityTable */}
                         <Grid item xs={12} md={8} lg={9}>
