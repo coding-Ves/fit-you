@@ -1,15 +1,10 @@
-import {
-    get,
-    set,
-    ref,
-    query,
-    equalTo,
-    orderByChild,
-    update,
-} from 'firebase/database';
+import { equalTo, get, orderByChild, query, ref, set, update, } from 'firebase/database';
 import { db } from '../firebase-config';
 import { USER_ROLES } from '../../common/constants';
 import { RANDOM_AVATAR_STYLE } from '../../common/constants';
+import { getCardioSessionsByUsername } from './cardioSessions.service';
+import { getFitnessExercisesByUsername } from './fitnessExercises.service';
+import { getSportSessionsByUsername } from './sportSessions.service';
 
 export const getUserByUsername = (username) => {
     return get(ref(db, `users/${username}`));
@@ -56,5 +51,15 @@ export const updateUserHealthInfo = (username, height, weight, age) => {
 export const updateUserAvatar = (username, url) => {
     return update(ref(db), {
         [`/users/${username}/avatarURL`]: url,
+    });
+};
+
+export const getUserActivities = (username) => {
+    return Promise.all([
+        getFitnessExercisesByUsername(username),
+        getCardioSessionsByUsername(username),
+        getSportSessionsByUsername(username)
+    ]).then(([fitnessExercises, cardioSessions, sportSessions]) => {
+        return [...fitnessExercises, ...cardioSessions, ...sportSessions];
     });
 };
