@@ -11,18 +11,18 @@ export const addCardioSession = (username, cardioName, distance, durationInMinut
         createdOn: Date.now(),
     }).then((result) => {
         // add the cardio session id to the cardio session object and the user's cardioSession objects
-        const cardioSessionId = result.key;
+        const id = result.key;
         const updateCardioSession = {};
-        updateCardioSession[`/cardioSessions/${cardioSessionId}/cardioSessionId`] = cardioSessionId;
-        updateCardioSession[`/users/${username}/cardioSessions/${cardioSessionId}`] = true;
+        updateCardioSession[`/cardioSessions/${id}/id`] = id;
+        updateCardioSession[`/users/${username}/cardioSessions/${id}`] = true;
         return update(ref(db), updateCardioSession);
     });
 };
 
-export const getCardioSessionById = (cardioSessionId) => {
-    return get(ref(db, `cardioSessions/${cardioSessionId}`)).then((result) => {
+export const getCardioSessionById = (id) => {
+    return get(ref(db, `cardioSessions/${id}`)).then((result) => {
         if (!result.exists()) {
-            throw new Error(`Cardio session with id ${cardioSessionId} does not exist!`);
+            throw new Error(`Cardio session with id ${id} does not exist!`);
         }
         const cardioSession = result.val();
         cardioSession.createdOn = new Date(cardioSession.createdOn).toLocaleString();

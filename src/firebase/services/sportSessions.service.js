@@ -9,18 +9,18 @@ export const addSportSession = (username, sportName, durationInMinutes) => {
         createdOn: Date.now(),
     }).then((result) => {
         // add the sport session id to the sport session object and the user's sportsSession objects,
-        const sportSessionId = result.key;
+        const id = result.key;
         const updateSportSession = {};
-        updateSportSession[`/sportSessions/${sportSessionId}/sportSessionId`] = sportSessionId;
-        updateSportSession[`/users/${username}/sportSessions/${sportSessionId}`] = true;
+        updateSportSession[`/sportSessions/${id}/id`] = id;
+        updateSportSession[`/users/${username}/sportSessions/${id}`] = true;
         return update(ref(db), updateSportSession);
     });
 };
 
-export const getSportSessionById = (sportSessionId) => {
-    return get(ref(db, `sportSessions/${sportSessionId}`)).then((result) => {
+export const getSportSessionById = (id) => {
+    return get(ref(db, `sportSessions/${id}`)).then((result) => {
         if (!result.exists()) {
-            throw new Error(`Sport session with id ${sportSessionId} does not exist!`);
+            throw new Error(`Sport session with id ${id} does not exist!`);
         }
         const sportSession = result.val();
         sportSession.createdOn = new Date(sportSession.createdOn).toLocaleString();

@@ -16,21 +16,21 @@ export const addFitnessExercise = (username, fitnessExerciseName, formInputs) =>
         createdOn: Date.now(),
     });
 
-    const fitnessExerciseId = newFitnessExerciseRef.key;
+    const id = newFitnessExerciseRef.key;
 
     const updateFitnessExercise = {};
-    updateFitnessExercise[`/fitnessExercises/${fitnessExerciseId}/fitnessExerciseId`] = fitnessExerciseId;
-    updateFitnessExercise[`/users/${username}/fitnessExercises/${fitnessExerciseId}`] = true;
+    updateFitnessExercise[`/fitnessExercises/${id}/id`] = id;
+    updateFitnessExercise[`/users/${username}/fitnessExercises/${id}`] = true;
 
     return update(ref(db), updateFitnessExercise)
-        .then(() => fitnessExerciseId);
+        .then(() => id);
 };
 
 
-export const getFitnessExerciseById = (fitnessExerciseId) => {
-    return get(ref(db, `fitnessExercises/${fitnessExerciseId}`)).then((result) => {
+export const getFitnessExerciseById = (id) => {
+    return get(ref(db, `fitnessExercises/${id}`)).then((result) => {
         if (!result.exists()) {
-            throw new Error(`Fitness exercise with id ${fitnessExerciseId} does not exist!`);
+            throw new Error(`Fitness exercise with id ${id} does not exist!`);
         }
         const fitnessExercise = result.val();
         fitnessExercise.createdOn = new Date(fitnessExercise.createdOn).toLocaleString();
@@ -53,14 +53,10 @@ export const getFitnessExercisesByUsername = (username) => {
     });
 };
 
-export const addFitnessExerciseToGoal = (goalId, fitnessExerciseId) => {
+export const addFitnessExerciseToGoal = (goalId, id) => {
     const updateData = {};
-
-    // Adds the fitnessExerciseId to the goal's activities
-    updateData[`/goals/${goalId}/activities/${fitnessExerciseId}`] = true;
-
-    // Adds the goalId to the fitness exercise's goals
-    updateData[`/fitnessExercises/${fitnessExerciseId}/goals/${goalId}`] = true;
+    updateData[`/goals/${goalId}/activities/${id}`] = true;
+    updateData[`/fitnessExercises/${id}/goals/${goalId}`] = true;
 
     return update(ref(db), updateData);
 };
