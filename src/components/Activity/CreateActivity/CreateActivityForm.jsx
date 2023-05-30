@@ -3,22 +3,12 @@ import { Alert, Box, Button, FormControl, InputLabel, MenuItem, Select, Slider, 
 import { useContext, useEffect, useState } from 'react';
 import { EXERCISES_UNITS, WEIGHT_UNIT } from '../../../common/constants';
 import AuthContext from '../../../contexts/AuthContext';
-import { addFitnessExercise } from '../../../firebase/services/fitnessExercises.service';
+import { addFitnessExercise, addFitnessExerciseToGoal } from '../../../firebase/services/fitnessExercises.service';
 import { getGoalsByUsername } from '../../../firebase/services/goals.service';
-
 
 const CreateActivityForm = ({ exercise }) => {
 
     const { userData } = useContext(AuthContext);
-    // console.log(userData);
-    // object
-    // createdOn: 1685176545989
-    // email: "test@test.bg"
-    // goals: { -NWRLlakIrX - KErHO561: true }
-    // phoneNumber: "0887566588"
-    // role: 1
-    // uid: "eW9i2ZPoA7cSjgc3xlpWRApDdaw2"
-    // username: "brymbazyk"
 
     // eslint-disable-next-line no-unused-vars
     const [isLoading, setIsLoading] = useState(false);
@@ -31,10 +21,17 @@ const CreateActivityForm = ({ exercise }) => {
         weightUnit: '',
     }));
 
-    // Responsible for Snackbar and Alert - Showing error  and success messages
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
     const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+
+    const [goals, setGoals] = useState({});
+    const [selectedGoal, setSelectedGoal] = useState('');
+
+    useEffect(() => {
+        getGoalsByUsername(userData.username)
+            .then((snapshot) => setGoals(snapshot));
+    }, [userData.username]);
 
     const handleNumOfSetsChange = (event, value) => {
         setNumOfSets(value);
@@ -81,18 +78,19 @@ const CreateActivityForm = ({ exercise }) => {
 
     const handleSnackbarClose = () => {
         setSnackbarOpen(false);
+        setSelectedGoal('');
     };
-
-    // useEffect(() => {
-    //     getGoalsByUsername(userData.username)
-    //         .then((snapshot) => console.log(snapshot));
-    // }, [userData.username]);
 
     const handleSubmit = () => {
         setIsLoading(true);
+
         addFitnessExercise(userData.username, exercise.name, formInputs)
-            .then(() => {
+            .then((fitnessExerciseId) => {
                 setIsLoading(false);
+
+                if (selectedGoal) {
+                    return addFitnessExerciseToGoal(selectedGoal, fitnessExerciseId);
+                }
             })
             .then(() => {
                 setSnackbarMessage('Activity added successfully!');
@@ -182,7 +180,23 @@ const CreateActivityForm = ({ exercise }) => {
                     </Stack>
                 ))}
             </Box>
-            <Button onClick={handleSubmit}>Submit</Button>
+            <Box>
+                <FormControl fullWidth margin='normal'>
+                    <InputLabel>Add to goals?</InputLabel>
+                    <Select
+                        value={selectedGoal}
+                        onChange={(e) => setSelectedGoal(e.target.value)}
+                    >
+                        <MenuItem value=''>
+                            <em>No, thanks</em>
+                        </MenuItem>
+                        {Object.values(goals).map((goal) =>
+                            <MenuItem key={goal.goalId} value={goal.goalId}>{goal.goalName}</MenuItem>
+                        )}
+                    </Select>
+                </FormControl>
+                <Button onClick={handleSubmit}>Submit</Button>
+            </Box>
         </>
     );
 };
