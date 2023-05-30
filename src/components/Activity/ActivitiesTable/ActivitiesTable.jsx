@@ -1,83 +1,77 @@
-import * as React from 'react';
-import Link from '@mui/material/Link';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import { Pagination, Stack, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import { useContext, useEffect, useState } from 'react';
+import { ACTIVITIES_PER_PAGE } from '../../../common/constants';
+import AuthContext from '../../../contexts/AuthContext';
+import { getUserActivities } from '../../../firebase/services/users.service';
 import Title from '../../Dashboard/Title/Title';
 
-// Generate Order Data
-// function createData(id, date, name, shipTo, paymentMethod, amount) {
-//     return { id, date, name, shipTo, paymentMethod, amount };
-// }
-
-// const rows = [
-//     createData(
-//         0,
-//         '16 Mar, 2019',
-//         'Elvis Presley',
-//         'Tupelo, MS',
-//         'VISA ⠀•••• 3719',
-//         312.44,
-//     ),
-//     createData(
-//         1,
-//         '16 Mar, 2019',
-//         'Paul McCartney',
-//         'London, UK',
-//         'VISA ⠀•••• 2574',
-//         866.99,
-//     ),
-//     createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
-//     createData(
-//         3,
-//         '16 Mar, 2019',
-//         'Michael Jackson',
-//         'Gary, IN',
-//         'AMEX ⠀•••• 2000',
-//         654.39,
-//     ),
-//     createData(
-//         4,
-//         '15 Mar, 2019',
-//         'Bruce Springsteen',
-//         'Long Branch, NJ',
-//         'VISA ⠀•••• 5919',
-//         212.79,
-//     ),
-// ];
-
-// function preventDefault(event) {
-//     event.preventDefault();
-// }
-
 const ActivitiesTable = () => {
+
+    const { userData } = useContext(AuthContext);
+    const [activities, setActivities] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const indexOfLastActivityOnPage = currentPage * ACTIVITIES_PER_PAGE;
+    const indexOfFirstActivityOnPage = indexOfLastActivityOnPage - ACTIVITIES_PER_PAGE;
+    const currentActivitiesOnPage = activities.slice(indexOfFirstActivityOnPage, indexOfLastActivityOnPage);
+
+    useEffect(() => {
+        // без if-a гърмеше с "Cannot read properties of null (reading 'username')"
+        if (userData && userData.username) {
+            getUserActivities(userData.username)
+                .then((result) => {
+                    setActivities(result);
+                })
+                .catch((error) => console.log(error));
+        }
+    }, [userData]);
+
     return (
-        <React.Fragment>
+        <>
             <Title>Your Activities</Title>
             <Table size="small">
                 <TableHead>
                     <TableRow>
                         <TableCell>Date</TableCell>
                         <TableCell>Name</TableCell>
-                        <TableCell align="right">Value</TableCell>
+                        {/* <TableCell>Type</TableCell> ??*/}
+                        <TableCell align="right"></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {/* {rows.map((row) => (
-                        <TableRow key={row.id}>
-                            <TableCell>{row.date}</TableCell>
-                            <TableCell>{row.name}</TableCell>
-                            <TableCell align="right">{`$${row.amount}`}</TableCell>
+                    {currentActivitiesOnPage.map((activity) => (
+                        <TableRow key={activity.id}>
+                            <TableCell>{activity.createdOn}</TableCell>
+                            {/* fitnessExerciseName -> also change it in all service files to just 'name' */}
+                            <TableCell>{activity.fitnessExerciseName}</TableCell>
+                            {activity.sets ?
+                                <TableCell align="right">Sets: {activity.sets.length}</TableCell>
+                                :
+                                <TableCell align="right">Duration: {activity.reps} mins</TableCell>
+                            }
                         </TableRow>
-                    ))} */}
+                    ))}
                 </TableBody>
             </Table>
-            <Link color="primary" href="#" onClick={(e) => e.preventDefault} sx={{ mt: 3 }}>
-                More activities
-            </Link>
-        </React.Fragment>
+
+            <Stack
+                sx={{ mt: { lg: '25px', xs: '5px' } }}
+                alignItems='center'
+            >
+                {activities.length > ACTIVITIES_PER_PAGE && (
+                    <Pagination
+                        color='secondary'
+                        shape='rounded'
+                        size='small'
+                        count={Math.ceil(
+                            activities.length / ACTIVITIES_PER_PAGE
+                        )}
+                        page={currentPage}
+                        onChange={(event, value) => setCurrentPage(value)}
+                    />
+                )}
+            </Stack>
+        </>
     );
 };
 

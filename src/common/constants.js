@@ -41,4 +41,6 @@ export const EXERCISES_UNITS = [
 
 export const WEIGHT_UNIT = ['kg', 'lb', 'Body Weight'];
 
+export const ACTIVITIES_PER_PAGE = 5;
+
 export const RANDOM_AVATAR_STYLE = `https://api.dicebear.com/6.x/thumbs/svg?seed=`;
