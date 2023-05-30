@@ -104,11 +104,11 @@ export const ProfileAvatar = ({ userData }) => {
             // Get the download URL from the reference
             .then((snapshot) => getDownloadURL(snapshot.ref))
             // Update the user's avatarURL in the database
-            .then((url) => updateUserAvatar(userData.username, url))
-            // Update the user's avatarURL in the context
-            .then(() => {
+            .then((url) => {
+                updateUserAvatar(userData.username, url);
                 setContext({ avatarURL: url });
             })
+            // Update the user's avatarURL in the context
 
             .then(() => {
                 setIsLoading(false);
@@ -169,6 +169,7 @@ export const ProfileAvatar = ({ userData }) => {
                         }}
                         src={userData?.avatarURL}
                         alt={userData?.username}
+                        variant='rounded'
                     >
                         {userData.username}
                     </Avatar>
