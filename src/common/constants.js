@@ -32,6 +32,13 @@ export const ACTIVITY_CATEGORIES = ['fitness', 'sports', 'cardio'];
 
 export const REGISTRATION_STEPS = ['Basic Information', 'Health Information'];
 
-export const EXERCISES_UNITS = ['Minutes', 'Seconds', 'Repetitions', 'Until Failure'];
+export const EXERCISES_UNITS = [
+    'Minutes',
+    'Seconds',
+    'Repetitions',
+    'Until Failure',
+];
 
 export const WEIGHT_UNIT = ['kg', 'lb', 'Body Weight'];
+
+export const RANDOM_AVATAR_STYLE = `https://api.dicebear.com/6.x/thumbs/svg?seed=`;

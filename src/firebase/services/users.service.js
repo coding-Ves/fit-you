@@ -9,6 +9,7 @@ import {
 } from 'firebase/database';
 import { db } from '../firebase-config';
 import { USER_ROLES } from '../../common/constants';
+import { RANDOM_AVATAR_STYLE } from '../../common/constants';
 
 export const getUserByUsername = (username) => {
     return get(ref(db, `users/${username}`));
@@ -26,6 +27,7 @@ export const createUsername = (username, uid, email, phoneNumber) => {
         phoneNumber: phoneNumber,
         createdOn: Date.now(),
         role: 1,
+        avatarURL: RANDOM_AVATAR_STYLE + username,
     });
 };
 

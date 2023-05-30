@@ -53,6 +53,7 @@ const MyAccountMenu = () => {
                         aria-expanded={open ? 'true' : undefined}
                     >
                         <Avatar
+                            variant='rounded'
                             sx={{ width: 32, height: 32 }}
                             src={userData?.avatarURL}
                         ></Avatar>
