@@ -51,7 +51,7 @@ export const updateUserHealthInfo = (username, height, weight, age) => {
 };
 
 // upload user profile picture/avatar
-export const uploadUserAvatar = (username, file) => {
+export const updateUserAvatar = (username, url) => {
     return update(ref(db), {
         [`/users/${username}/avatarURL`]: url,
     });
