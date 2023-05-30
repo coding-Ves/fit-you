@@ -1,25 +1,6 @@
 import { equalTo, get, orderByChild, push, query, ref, update } from 'firebase/database';
 import { db } from '../firebase-config';
 
-// fitnessExercise maybe? idk
-
-// the sets parameter is an array of objects, where each object has a weight and reps property:
-// {
-//     1: {
-//         reps: 5,
-//         weight: 50
-//     },
-//     2: {
-//         reps: 5,
-//         weight: 50
-//     },
-//     3: {
-//         reps: 5,
-//         weight: 50
-//     }
-// }
-
-// modified with formInputs
 export const addFitnessExercise = (username, fitnessExerciseName, formInputs) => {
     const sets = formInputs.map((input) => ({
         reps: input.reps,
@@ -28,20 +9,21 @@ export const addFitnessExercise = (username, fitnessExerciseName, formInputs) =>
         weightUnit: input.weightUnit,
     }));
 
-    return push(ref(db, 'fitnessExercises'), {
+    const newFitnessExerciseRef = push(ref(db, 'fitnessExercises'), {
         username,
         fitnessExerciseName,
         sets,
         createdOn: Date.now(),
-    }).then((result) => {
-        // add the fitness exercise id to the fitness exercise object and the user's fitnessExercise objects
-        const fitnessExerciseId = result.key;
-        const updateFitnessExercise = {};
-        updateFitnessExercise[`/fitnessExercises/${fitnessExerciseId}/fitnessExerciseId`] =
-            fitnessExerciseId;
-        updateFitnessExercise[`/users/${username}/fitnessExercises/${fitnessExerciseId}`] = true;
-        return update(ref(db), updateFitnessExercise);
     });
+
+    const fitnessExerciseId = newFitnessExerciseRef.key;
+
+    const updateFitnessExercise = {};
+    updateFitnessExercise[`/fitnessExercises/${fitnessExerciseId}/fitnessExerciseId`] = fitnessExerciseId;
+    updateFitnessExercise[`/users/${username}/fitnessExercises/${fitnessExerciseId}`] = true;
+
+    return update(ref(db), updateFitnessExercise)
+        .then(() => fitnessExerciseId);
 };
 
 
@@ -70,3 +52,16 @@ export const getFitnessExercisesByUsername = (username) => {
         return fitnessExercises;
     });
 };
+
+export const addFitnessExerciseToGoal = (goalId, fitnessExerciseId) => {
+    const updateData = {};
+
+    // Adds the fitnessExerciseId to the goal's activities
+    updateData[`/goals/${goalId}/activities/${fitnessExerciseId}`] = true;
+
+    // Adds the goalId to the fitness exercise's goals
+    updateData[`/fitnessExercises/${fitnessExerciseId}/goals/${goalId}`] = true;
+
+    return update(ref(db), updateData);
+};
+
