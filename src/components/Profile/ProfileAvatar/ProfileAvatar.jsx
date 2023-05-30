@@ -22,8 +22,8 @@ import { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { validateImage } from './imageFileValidation';
-import { ref } from 'firebase/database';
-import { uploadBytes } from 'firebase/storage';
+
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { updateUserAvatar } from '../../../firebase/services/users.service';
 import errorHandler from './../../Authentication/ErrorHandling/errors.services';
 import { storage } from '../../../firebase/firebase-config';
@@ -97,9 +97,10 @@ export const ProfileAvatar = ({ userData }) => {
         //     })
 
         // First create a reference to the file in storage
-        ref(storage, `images/${userData.username}/avatarURL`)
-            // Upload the file to that reference
-            .then((result) => uploadBytes(result.ref, file))
+        const reference = ref(storage, `images/${userData.username}/avatarURL`);
+
+        // Upload the file to that reference
+        uploadBytes(reference, file)
             // Get the download URL from the reference
             .then((snapshot) => getDownloadURL(snapshot.ref))
             // Update the user's avatarURL in the database
@@ -166,6 +167,7 @@ export const ProfileAvatar = ({ userData }) => {
                             height: '150px',
                             mb: 2,
                         }}
+                        src={userData?.avatarURL}
                         alt={userData?.username}
                     >
                         {userData.username}

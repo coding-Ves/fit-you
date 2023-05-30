@@ -52,7 +52,10 @@ const MyAccountMenu = () => {
                         aria-haspopup='true'
                         aria-expanded={open ? 'true' : undefined}
                     >
-                        <Avatar sx={{ width: 32, height: 32 }}></Avatar>
+                        <Avatar
+                            sx={{ width: 32, height: 32 }}
+                            src={userData?.avatarURL}
+                        ></Avatar>
                     </IconButton>
                 </Tooltip>
             </Box>
