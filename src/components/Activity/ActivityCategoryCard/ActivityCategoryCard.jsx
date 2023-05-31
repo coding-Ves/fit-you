@@ -1,13 +1,6 @@
 /* eslint-disable react/prop-types */
-import {
-    Card,
-    CardMedia,
-    CardContent,
-    Typography,
-    Box,
-    Fab,
-} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import { Box, Card, CardContent, CardMedia, Fab, Typography, } from '@mui/material';
 import { UNSPLASH_RANDOM_URL } from '../../../common/constants';
 
 const ActivityCategoryCard = ({ categoryName }) => {

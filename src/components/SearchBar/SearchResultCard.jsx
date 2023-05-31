@@ -7,6 +7,7 @@ import CreateActivityDialog from '../Activity/CreateActivity/CreateActivityDialo
 
 const SearchResultCard = ({ exercise }) => {
 
+    // when I try to reuse it in ActivityDetails context doesn't work, need to check why
     const { category } = useContext(ExercisesContext);
     const [open, setOpen] = useState(false);
 
