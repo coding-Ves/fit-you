@@ -8,7 +8,7 @@ import { searchFitness } from './helpers/searchBarHelpers';
 const SearchBar = ({ category }) => {
 
     const [search, setSearch] = useState('');
-    const { setExercises } = useContext(ExercisesContext);
+    const { setExercises, setCategory } = useContext(ExercisesContext);
     const navigate = useNavigate();
 
     const handleSearch = () => {
@@ -21,6 +21,7 @@ const SearchBar = ({ category }) => {
                 searchFitness(search)
                     .then((result) => {
                         setExercises(result);
+                        setCategory(category);
                         navigate(searchQueryUrl);
                     });
             }

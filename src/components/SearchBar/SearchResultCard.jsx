@@ -1,16 +1,15 @@
 /* eslint-disable react/prop-types */
-import { Button, Card, CardActions, CardContent, CardMedia, Divider, Typography, } from '@mui/material';
-import { useState } from 'react';
+import { Button, Card, CardActions, CardContent, CardMedia, Divider, Typography } from '@mui/material';
+import { useContext, useState } from 'react';
 import { EXERCISE_NAME_MAX_LENGTH } from '../../common/constants';
+import { ExercisesContext } from '../../contexts/ExercisesContext';
 import CreateActivityDialog from '../Activity/CreateActivity/CreateActivityDialog';
 
 const SearchResultCard = ({ exercise }) => {
 
+    const { category } = useContext(ExercisesContext);
     const [open, setOpen] = useState(false);
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
 
     const handleClose = () => {
         setOpen(false);
@@ -42,12 +41,20 @@ const SearchResultCard = ({ exercise }) => {
                     Target: {exercise.target}
                 </Typography>
             </CardContent>
-            <CardActions>
-                <Button size='medium' onClick={handleClickOpen}>
-                    Add!
-                </Button>
+            <CardActions sx={{ justifyContent: 'space-between' }}>
+                <div>
+                    <Button size='medium' onClick={() => setOpen(true)}>
+                        Add!
+                    </Button>
+                </div>
 
-                <CreateActivityDialog open={open} handleClose={handleClose} exercise={exercise}/>
+                <div>
+                    <Button href={`/search/${category}/${exercise.id}`}>
+                        Details
+                    </Button>
+                </div>
+
+                <CreateActivityDialog open={open} handleClose={handleClose} exercise={exercise} />
             </CardActions>
         </Card>
     );

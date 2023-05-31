@@ -1,9 +1,9 @@
 import Box from '@mui/material/Box';
+import { useParams } from 'react-router-dom';
 import ListOfResults from '../../components/SearchBar/ListOfResults';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import SideBarDrawer from '../../components/SideBarDrawer/SideBarDrawer';
 import { ExercisesProvider } from '../../contexts/ExercisesContext';
-import { useParams } from 'react-router-dom';
 
 const Search = () => {
     const { category } = useParams();
