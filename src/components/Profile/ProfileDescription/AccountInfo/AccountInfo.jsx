@@ -1,45 +1,105 @@
 import {
     Box,
-    Card,
-    CardContent,
     Grid,
     TextField,
-    Paper,
     Button,
     InputAdornment,
     Icon,
+    Snackbar,
+    Alert,
 } from '@mui/material';
 import { useState } from 'react';
 import Edit from '@mui/icons-material/Edit';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import phoneValidationSchema from './registrationValidationSchema';
+import { updateUserDetails } from '../../../../firebase/services/users.service';
 
 export const AccountInfo = ({ userData }) => {
-    const [editable, setEditable] = useState(false); // State to track if fields are editable or not
+    const formattedDate = new Date(userData.createdOn);
+    const displayDate = formattedDate.toDateString();
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [editable, setEditable] = useState(false);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
+    };
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        getValues,
+    } = useForm({
+        resolver: yupResolver(phoneValidationSchema),
+    });
 
     const handleEdit = () => {
         setEditable(true);
     };
 
-    const handleSave = () => {
-        setEditable(false);
-        // Perform save/update action here if needed
-    };
-
     const handleCancel = () => {
         setEditable(false);
-        // Perform cancel action here if needed
     };
 
-    const formattedDate = new Date(userData.createdOn);
-    const displayDate = formattedDate.toDateString();
+    const onSubmit = (data) => {
+        setIsLoading(true);
+
+        updateUserDetails(userData.username, data.phoneNumber)
+            .then(() => {
+                setSnackbarMessage('Account Info Updated!');
+                setSnackbarSeverity('success');
+                setSnackbarOpen(true);
+            })
+            .then(() => {
+                setIsLoading(false);
+                // navigate('/dashboard');
+            })
+            .then(() => setEditable(false))
+            .catch((e) => {
+                setIsLoading(false);
+                const message = errorHandler(e);
+                setSnackbarMessage(message);
+                setSnackbarSeverity('error');
+                setSnackbarOpen(true);
+            });
+    };
 
     return (
-        <Box component='form' noValidate sx={{ mt: 3 }}>
+        <Box
+            component='form'
+            sx={{ mt: 3 }}
+            noValidate
+            onSubmit={handleSubmit(onSubmit)}
+        >
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={3000}
+                onClose={handleSnackbarClose}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+            >
+                <Alert
+                    onClose={handleSnackbarClose}
+                    severity={snackbarSeverity}
+                    sx={{ width: '100%' }}
+                >
+                    {snackbarMessage}
+                </Alert>
+            </Snackbar>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <TextField
                         fullWidth
                         id='username'
                         label='Username'
+                        {...register('username')}
+                        error={!!errors.username}
+                        helperText={errors.username?.message}
                         defaultValue={userData.username}
                         InputProps={{
                             readOnly: true,
@@ -52,10 +112,12 @@ export const AccountInfo = ({ userData }) => {
                         fullWidth
                         id='phoneNumber'
                         label='Phone Number'
-                        // variant={editable ? 'outlined' : 'standard'} // Set variant based on editable state
                         defaultValue={userData.phoneNumber}
+                        {...register('phoneNumber')}
+                        error={!!errors.phoneNumber}
+                        helperText={errors.phoneNumber?.message}
                         InputProps={{
-                            readOnly: !editable, // Set readOnly based on editable state
+                            readOnly: !editable,
                             endAdornment: editable && (
                                 <InputAdornment position='end'>
                                     <Icon>
@@ -72,6 +134,9 @@ export const AccountInfo = ({ userData }) => {
                         id='registrationDate'
                         label='Registered on:'
                         defaultValue={displayDate}
+                        {...register('registrationDate')}
+                        error={!!errors.registrationDate}
+                        helperText={errors.registrationDate?.message}
                         InputProps={{
                             readOnly: true,
                         }}
@@ -87,7 +152,7 @@ export const AccountInfo = ({ userData }) => {
                             <Button
                                 sx={{ mr: 2 }}
                                 variant='contained'
-                                onClick={handleSave}
+                                type='submit'
                             >
                                 Save
                             </Button>

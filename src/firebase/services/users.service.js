@@ -1,4 +1,12 @@
-import { equalTo, get, orderByChild, query, ref, set, update, } from 'firebase/database';
+import {
+    equalTo,
+    get,
+    orderByChild,
+    query,
+    ref,
+    set,
+    update,
+} from 'firebase/database';
 import { db } from '../firebase-config';
 import { USER_ROLES } from '../../common/constants';
 import { RANDOM_AVATAR_STYLE } from '../../common/constants';
@@ -29,7 +37,6 @@ export const createUsername = (username, uid, email, phoneNumber) => {
 export const updateUserDetails = (username, phoneNumber) => {
     const userDetails = {};
     userDetails[`/users/${username}/username`] = username;
-    userDetails[`/users/${username}/email`] = email;
     userDetails[`/users/${username}/phoneNumber`] = phoneNumber;
     return update(ref(db), userDetails);
 };
@@ -58,7 +65,7 @@ export const getUserActivities = (username) => {
     return Promise.all([
         getFitnessExercisesByUsername(username),
         getCardioSessionsByUsername(username),
-        getSportSessionsByUsername(username)
+        getSportSessionsByUsername(username),
     ]).then(([fitnessExercises, cardioSessions, sportSessions]) => {
         return [...fitnessExercises, ...cardioSessions, ...sportSessions];
     });

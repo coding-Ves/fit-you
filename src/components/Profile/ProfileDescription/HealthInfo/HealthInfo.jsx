@@ -45,8 +45,6 @@ export const HealthInfo = ({ userData }) => {
     const handleSave = (data) => {
         setIsLoading(true);
 
-        setIsLoading(true);
-
         updateUserHealthInfo(
             userData.username,
             data.height,
