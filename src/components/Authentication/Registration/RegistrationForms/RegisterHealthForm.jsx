@@ -6,14 +6,9 @@ import {
     Avatar,
     Box,
     Button,
-    Checkbox,
     Container,
     CssBaseline,
-    FormControlLabel,
     Grid,
-    IconButton,
-    InputAdornment,
-    Link,
     Snackbar,
     TextField,
     Typography,
@@ -21,24 +16,19 @@ import {
 
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 
 import { registrationHealthValidationSchema } from './registrationHealthValidationSchema';
 
 import AuthContext from './../../../../contexts/AuthContext';
 
-import { registerUser } from './../../../../firebase/services/auth.service';
-
-import errorHandler from './../../ErrorHandling/errors.services';
 import { updateUserHealthInfo } from './../../../../firebase/services/users.service';
+import errorHandler from './../../ErrorHandling/errors.services';
 
 export const RegistrationHealthForm = () => {
-    const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const { userData } = useContext(AuthContext);
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     // Responsible for Snackbar and Alert - Showing error  and success messages
     const [snackbarOpen, setSnackbarOpen] = useState(false);
