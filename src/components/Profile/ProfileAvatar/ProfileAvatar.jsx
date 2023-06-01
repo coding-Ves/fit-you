@@ -1,32 +1,25 @@
 import {
+    Alert,
     Avatar,
     Box,
     Button,
-    Card,
-    CardActions,
-    CardContent,
-    Divider,
-    Typography,
-    Paper,
     FormControl,
-    Input,
     FormHelperText,
+    Input,
+    Paper,
     Snackbar,
-    Alert,
-    Grid,
+    Typography,
 } from '@mui/material';
+import { useContext, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../../../firebase/firebase-config';
-import AuthContext from '../../../contexts/AuthContext';
-import { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { validateImage } from './imageFileValidation';
+import AuthContext from '../../../contexts/AuthContext';
+import { auth } from '../../../firebase/firebase-config';
 
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { storage } from '../../../firebase/firebase-config';
 import { updateUserAvatar } from '../../../firebase/services/users.service';
 import errorHandler from './../../Authentication/ErrorHandling/errors.services';
-import { storage } from '../../../firebase/firebase-config';
 
 export const ProfileAvatar = ({ userData }) => {
     // Context and State
@@ -90,11 +83,6 @@ export const ProfileAvatar = ({ userData }) => {
             setSnackbarOpen(true);
             throw new Error('File is too big. Max size is 100kb');
         }
-
-        // uploadBytes(ref(storage, `images/${userData.username}/avatarURL`), file)
-        //     .then((snapshot) => {
-        //         return getDownloadURL(snapshot.ref);
-        //     })
 
         // First create a reference to the file in storage
         const reference = ref(storage, `images/${userData.username}/avatarURL`);

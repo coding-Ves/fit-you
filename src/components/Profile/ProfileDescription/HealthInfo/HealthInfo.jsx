@@ -1,10 +1,33 @@
-import { Box, Card, CardContent, Grid, TextField, Paper } from '@mui/material';
-import * as React from 'react';
+import {
+    Box,
+    Card,
+    CardContent,
+    Grid,
+    TextField,
+    Paper,
+    Button,
+    Icon,
+    InputAdornment,
+} from '@mui/material';
+import { useState } from 'react';
+import { Edit } from '@mui/icons-material';
 
 export const HealthInfo = ({ userData }) => {
-    const date = userData.createdOn;
-    const formattedDate = new Date(userData.createdOn);
-    const displayDate = formattedDate.toDateString();
+    const [editable, setEditable] = useState(false); // State to track if fields are editable or not
+
+    const handleEdit = () => {
+        setEditable(true);
+    };
+
+    const handleSave = () => {
+        setEditable(false);
+        // Perform save/update action here if needed
+    };
+
+    const handleCancel = () => {
+        setEditable(false);
+        // Perform cancel action here if needed
+    };
 
     return (
         <Box component='form' noValidate sx={{ mt: 3 }}>
@@ -15,8 +38,16 @@ export const HealthInfo = ({ userData }) => {
                         id='height'
                         label='Height'
                         defaultValue={userData?.height}
+                        // variant={editable ? 'outlined' : 'standard'}
                         InputProps={{
-                            readOnly: true,
+                            readOnly: !editable, // Set readOnly based on editable state
+                            endAdornment: editable && (
+                                <InputAdornment position='end'>
+                                    <Icon>
+                                        <Edit />
+                                    </Icon>
+                                </InputAdornment>
+                            ),
                         }}
                     />
                 </Grid>
@@ -27,8 +58,16 @@ export const HealthInfo = ({ userData }) => {
                         id='weight'
                         label='Weight'
                         defaultValue={userData?.weight}
+                        // variant={editable ? 'outlined' : 'standard'}
                         InputProps={{
-                            readOnly: true,
+                            readOnly: !editable, // Set readOnly based on editable state
+                            endAdornment: editable && (
+                                <InputAdornment position='end'>
+                                    <Icon>
+                                        <Edit />
+                                    </Icon>
+                                </InputAdornment>
+                            ),
                         }}
                     />
                 </Grid>
@@ -38,10 +77,38 @@ export const HealthInfo = ({ userData }) => {
                         id='age'
                         label='Age'
                         defaultValue={userData?.age}
+                        // variant={editable ? 'outlined' : 'standard'}
                         InputProps={{
-                            readOnly: true,
+                            readOnly: !editable, // Set readOnly based on editable state
+                            endAdornment: editable && (
+                                <InputAdornment position='end'>
+                                    <Icon>
+                                        <Edit />
+                                    </Icon>
+                                </InputAdornment>
+                            ),
                         }}
                     />
+                </Grid>
+                <Grid item xs={12}>
+                    {!editable ? (
+                        <Button variant='outlined' onClick={handleEdit}>
+                            Edit
+                        </Button>
+                    ) : (
+                        <Box>
+                            <Button
+                                variant='contained'
+                                onClick={handleSave}
+                                sx={{ mr: 2 }}
+                            >
+                                Save
+                            </Button>
+                            <Button variant='outlined' onClick={handleCancel}>
+                                Cancel
+                            </Button>
+                        </Box>
+                    )}
                 </Grid>
             </Grid>
         </Box>

@@ -1,8 +1,34 @@
-import { Box, Card, CardContent, Grid, TextField, Paper } from '@mui/material';
-import * as React from 'react';
+import {
+    Box,
+    Card,
+    CardContent,
+    Grid,
+    TextField,
+    Paper,
+    Button,
+    InputAdornment,
+    Icon,
+} from '@mui/material';
+import { useState } from 'react';
+import Edit from '@mui/icons-material/Edit';
 
 export const AccountInfo = ({ userData }) => {
-    const date = userData.createdOn;
+    const [editable, setEditable] = useState(false); // State to track if fields are editable or not
+
+    const handleEdit = () => {
+        setEditable(true);
+    };
+
+    const handleSave = () => {
+        setEditable(false);
+        // Perform save/update action here if needed
+    };
+
+    const handleCancel = () => {
+        setEditable(false);
+        // Perform cancel action here if needed
+    };
+
     const formattedDate = new Date(userData.createdOn);
     const displayDate = formattedDate.toDateString();
 
@@ -26,9 +52,17 @@ export const AccountInfo = ({ userData }) => {
                         fullWidth
                         id='phoneNumber'
                         label='Phone Number'
+                        // variant={editable ? 'outlined' : 'standard'} // Set variant based on editable state
                         defaultValue={userData.phoneNumber}
                         InputProps={{
-                            readOnly: true,
+                            readOnly: !editable, // Set readOnly based on editable state
+                            endAdornment: editable && (
+                                <InputAdornment position='end'>
+                                    <Icon>
+                                        <Edit />
+                                    </Icon>
+                                </InputAdornment>
+                            ),
                         }}
                     />
                 </Grid>
@@ -42,6 +76,26 @@ export const AccountInfo = ({ userData }) => {
                             readOnly: true,
                         }}
                     />
+                </Grid>
+                <Grid item xs={12}>
+                    {!editable ? (
+                        <Button variant='outlined' onClick={handleEdit}>
+                            Edit
+                        </Button>
+                    ) : (
+                        <Box>
+                            <Button
+                                sx={{ mr: 2 }}
+                                variant='contained'
+                                onClick={handleSave}
+                            >
+                                Save
+                            </Button>
+                            <Button variant='outlined' onClick={handleCancel}>
+                                Cancel
+                            </Button>
+                        </Box>
+                    )}
                 </Grid>
             </Grid>
         </Box>
