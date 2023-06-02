@@ -6,7 +6,7 @@ import AuthContext from '../../../contexts/AuthContext';
 import { addFitnessExercise, addFitnessExerciseToGoal } from '../../../firebase/services/fitnessExercises.service';
 import { getGoalsByUsername } from '../../../firebase/services/goals.service';
 
-const CreateActivityForm = ({ exercise }) => {
+const CreateFitnessExerciseForm = ({ exercise }) => {
 
     const { userData } = useContext(AuthContext);
 
@@ -201,4 +201,4 @@ const CreateActivityForm = ({ exercise }) => {
     );
 };
 
-export default CreateActivityForm;
+export default CreateFitnessExerciseForm;

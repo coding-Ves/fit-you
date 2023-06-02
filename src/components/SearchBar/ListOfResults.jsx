@@ -1,29 +1,32 @@
 import { Box, Grid, Pagination, Stack } from '@mui/material';
-import { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
+import { useContext, useEffect, useState } from 'react';
 import { RESULTS_PER_PAGE } from '../../common/constants';
-import { ExercisesContext } from '../../contexts/ExercisesContext';
+import { ActivitiesContext } from '../../contexts/ActivitiesContext';
 import SearchResultCard from './SearchResultCard';
 
-const ListOfResults = () => {
-    const { exercises } = useContext(ExercisesContext);
+const ListOfResults = ({ category }) => {
+    const { exercises, sports } = useContext(ActivitiesContext);
     const [currentPage, setCurrentPage] = useState(1);
+    const [currentActivitiesOnPage, setCurrentActivitiesOnPage] = useState([]);
 
-    // exercises: масив с обекти
-    // bodyPart:"waist"
-    // equipment:"medicine ball"
-    // gifUrl:"http://d205bpvrqc9yn1.cloudfront.net/0014.gif"
-    // id: "0014"
-    // name: "assisted motion russian twist"
-    // target: "abs"
+    useEffect(() => {
+        let activities;
+        if (category === 'fitness') {
+            activities = exercises;
+        } else if (category === 'sports') {
+            activities = sports;
+        }
+        // else if (category === 'cardio') {
+        //     activities = cardio;
+        // }
+        setCurrentActivitiesOnPage(activities);
+    }, [category, exercises, sports]);
 
     // For the pagination
-    const indexOfLastExerciseOnPage = currentPage * RESULTS_PER_PAGE;
-    const indexOfFirstExerciseOnPage =
-        indexOfLastExerciseOnPage - RESULTS_PER_PAGE;
-    const currentExercisesOnPage = exercises.slice(
-        indexOfFirstExerciseOnPage,
-        indexOfLastExerciseOnPage
-    );
+    const indexOfLastActivityOnPage = currentPage * RESULTS_PER_PAGE;
+    const indexOfFirstActivityOnPage = indexOfLastActivityOnPage - RESULTS_PER_PAGE;
+    const activitiesToShow = currentActivitiesOnPage.slice(indexOfFirstActivityOnPage, indexOfLastActivityOnPage);
 
     const handlePageChange = (event, value) => {
         setCurrentPage(value);
@@ -35,17 +38,17 @@ const ListOfResults = () => {
 
     return (
         <>
-            {exercises && (
+            {currentActivitiesOnPage && (
                 <Box
-                    id='exercises'
+                    id='activities'
                     margin={{ lg: '80px', xs: '40px' }}
                     p='20px'
                     display='block'
                 >
                     <Grid container spacing={2} ml={0}>
-                        {currentExercisesOnPage.map((exercise) => (
-                            <Grid item xs={12} sm={6} md={4} key={exercise.id}>
-                                <SearchResultCard exercise={exercise} /> 
+                        {activitiesToShow.map((activity) => (
+                            <Grid item xs={12} sm={6} md={4} key={activity.id}>
+                                <SearchResultCard activity={activity} />
                             </Grid>
                         ))}
                     </Grid>
@@ -71,6 +74,10 @@ const ListOfResults = () => {
             )}
         </>
     );
+};
+
+ListOfResults.propTypes = {
+    category: PropTypes.string.isRequired,
 };
 
 export default ListOfResults;

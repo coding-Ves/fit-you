@@ -3,13 +3,13 @@ import { useParams } from 'react-router-dom';
 import ListOfResults from '../../components/SearchBar/ListOfResults';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import SideBarDrawer from '../../components/SideBarDrawer/SideBarDrawer';
-import { ExercisesProvider } from '../../contexts/ExercisesContext';
+import { ActivitiesProvider } from '../../contexts/ActivitiesContext';
 
 const Search = () => {
     const { category } = useParams();
 
     return (
-        <ExercisesProvider>
+        <ActivitiesProvider>
             <Box sx={{ display: 'flex', height: '100vh', width: '100vw' }}>
                 <SideBarDrawer />
                 <Box
@@ -28,11 +28,13 @@ const Search = () => {
                     }}
                 >
                     <SearchBar category={category} />
-                    <ListOfResults />
+                    <ListOfResults category={category}/>
                 </Box>
             </Box>
-        </ExercisesProvider>
+        </ActivitiesProvider>
     );
 };
 
 export default Search;
+
+// idea - ListOfResults can directly take category as props if need be 

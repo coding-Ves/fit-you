@@ -1,22 +1,22 @@
 /* eslint-disable react/prop-types */
-import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import CreateActivityForm from './CreateActivityForm';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { useContext } from 'react';
+import { ActivitiesContext } from '../../../contexts/ActivitiesContext';
+import CreateFitnessExerciseForm from './CreateFitnessExerciseForm';
 
-const CreateActivityDialog = ({ open, handleClose, exercise }) => {
+const CreateActivityDialog = ({ open, handleClose, activity }) => {
 
-    // conditionally render different forms based on the url?? useParams currently gets undefined... meh, future me problem :D
+    const { category } = useContext(ActivitiesContext);
 
-    // placeholder for now
     return (
         <>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>{exercise.name.toUpperCase()}</DialogTitle>
+                <DialogTitle>{activity.name.toUpperCase()}</DialogTitle>
                 <DialogContent>
-                    <CreateActivityForm exercise={exercise} />
+                    {category === 'fitness' && <CreateFitnessExerciseForm exercise={activity} />}
                 </DialogContent>
                 <DialogActions>
-                    {/* <Button onClick={handleClose}>Cancel</Button> */}
-                    {/* <Button onClick={handleClose}>Placeholder</Button> */}
+                    <Button onClick={handleClose}>Close</Button>
                 </DialogActions>
             </Dialog>
         </>

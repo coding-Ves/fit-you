@@ -1,19 +1,30 @@
 import SearchIcon from '@mui/icons-material/Search';
 import { Box, Button, InputAdornment, Stack, TextField, Typography } from '@mui/material';
-import { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ExercisesContext } from '../../contexts/ExercisesContext';
-import { searchFitness } from './helpers/searchBarHelpers';
+import { ActivitiesContext } from '../../contexts/ActivitiesContext';
+import { searchFitness, searchSports } from './helpers/searchBarHelpers';
 
 const SearchBar = ({ category }) => {
 
     const [search, setSearch] = useState('');
-    const { setExercises, setCategory } = useContext(ExercisesContext);
+    const [placeholder, setPlaceholder] = useState('Search');
+    const { setExercises, setCategory, setSports } = useContext(ActivitiesContext);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (category === 'fitness') {
+            setPlaceholder('Search by name, target muscle, body part or equipment');
+        } else if (category === 'sports') {
+            setPlaceholder('Search by sports name or category');
+        }
+    }, [category]);
 
     const handleSearch = () => {
         if (search) {
             //this handles special characters that could be in the search input
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
             const encodedSearch = encodeURIComponent(search);
             const searchQueryUrl = `/search/${category}?query=${encodedSearch}`;
 
@@ -24,6 +35,11 @@ const SearchBar = ({ category }) => {
                         setCategory(category);
                         navigate(searchQueryUrl);
                     });
+            } else if (category === 'sports') {
+                const result = searchSports(search);
+                setSports(result);
+                setCategory(category);
+                navigate(searchQueryUrl);
             }
 
             window.scrollTo({ top: 1800, left: 100, behavior: 'smooth' });
@@ -51,7 +67,7 @@ const SearchBar = ({ category }) => {
                     value={search}
                     onChange={(e) => setSearch(e.target.value.toLowerCase())}
                     onKeyDown={handleKeyDown}
-                    placeholder="Search by name, target muscle, body part or equipment"
+                    placeholder={placeholder}
                     type="text"
                     sx={{
                         width: '100%', // Updated width to take up the full width of the container
@@ -70,6 +86,10 @@ const SearchBar = ({ category }) => {
             </Box>
         </Stack>
     );
+};
+
+SearchBar.propTypes = {
+    category: PropTypes.string.isRequired,
 };
 
 export default SearchBar;
