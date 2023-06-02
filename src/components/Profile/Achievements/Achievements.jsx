@@ -55,7 +55,7 @@ const cardsData = [
     },
 ];
 
-export const Achievements = () => {
+export const Achievements = ({ userData }) => {
     return (
         <Card align='center'>
             <Typography mb={3} variant='h4'>

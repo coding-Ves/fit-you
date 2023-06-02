@@ -10,6 +10,7 @@ import Profile from '../../views/Profile/Profile';
 import Register from '../../views/Register/Register';
 import RegisterHealth from '../../views/Register/RegisterHealth';
 import Search from '../../views/Search/Search';
+import FindFriends from '../../views/FindFriends/FindFriends';
 
 export const AppRouter = () => {
     return (
@@ -21,6 +22,7 @@ export const AppRouter = () => {
             {/* <Route path='/register/:step' element={<Register />} />  */}
             <Route path='/profile/:username' element={<Profile />} />
             <Route path='/dashboard' element={<Dashboard />} />
+            <Route path='/friends' element={<FindFriends />} />
             <Route path='/my-activity' element={<MyActivity />} />
             <Route path='/my-goals' element={<MyGoals />} />
             <Route path='/search/:category' element={<Search />} />
