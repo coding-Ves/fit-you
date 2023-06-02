@@ -10,7 +10,7 @@ import {
     Typography,
 } from '@mui/material';
 import { useState } from 'react';
-import { EXERCISE_NAME_MAX_LENGTH } from '../../common/constants';
+import { USER_NAME_MAX_LENGTH } from '../../common/constants';
 
 const UserSearchCard = ({ user }) => {
     const [open, setOpen] = useState(false);
@@ -20,8 +20,8 @@ const UserSearchCard = ({ user }) => {
     };
 
     const shortenedUserName =
-        user.username.length > EXERCISE_NAME_MAX_LENGTH
-            ? user.username.substring(0, EXERCISE_NAME_MAX_LENGTH) + '...'
+        user.username.length > USER_NAME_MAX_LENGTH
+            ? user.username.substring(0, USER_NAME_MAX_LENGTH) + '...'
             : user.username;
 
     return (

@@ -32,6 +32,8 @@ export const ACTIVITY_CATEGORIES = ['fitness', 'sports', 'cardio'];
 
 export const REGISTRATION_STEPS = ['Basic Information', 'Health Information'];
 
+export const USER_NAME_MAX_LENGTH = 20;
+
 export const EXERCISES_UNITS = [
     'Minutes',
     'Seconds',
@@ -43,7 +45,8 @@ export const WEIGHT_UNIT = ['kg', 'lb', 'Body Weight'];
 
 export const ACTIVITIES_PER_PAGE = 5;
 
-export const RANDOM_AVATAR_STYLE = 'https://api.dicebear.com/6.x/thumbs/svg?seed=';
+export const RANDOM_AVATAR_STYLE =
+    'https://api.dicebear.com/6.x/thumbs/svg?seed=';
 
 // no sports involving animals are welcome in our app
 export const SPORTS_CATEGORIES = {
