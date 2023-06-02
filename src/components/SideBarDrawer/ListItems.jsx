@@ -14,62 +14,62 @@ import { Link } from 'react-router-dom';
 
 export const mainListItems = (
     <React.Fragment>
-        <ListItemButton component={Link} to="/dashboard">
+        <ListItemButton component={Link} to='/dashboard'>
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary="Dashboard" />
+            <ListItemText primary='Dashboard' />
         </ListItemButton>
-        <ListItemButton component={Link} to="/my-activity">
+        <ListItemButton component={Link} to='/my-activity'>
             <ListItemIcon>
                 <QueryStatsRoundedIcon />
             </ListItemIcon>
-            <ListItemText primary="My Activity" />
+            <ListItemText primary='My Activity' />
         </ListItemButton>
-        <ListItemButton component={Link} to="/my-goals">
+        <ListItemButton component={Link} to='/my-goals'>
             <ListItemIcon>
                 <TrackChangesRoundedIcon />
             </ListItemIcon>
-            <ListItemText primary="My Goals" />
+            <ListItemText primary='My Goals' />
         </ListItemButton>
         <ListItemButton>
             <ListItemIcon>
                 <KitchenRoundedIcon />
             </ListItemIcon>
-            <ListItemText primary="Diet" />
+            <ListItemText primary='Diet' />
         </ListItemButton>
 
         <ListItemButton>
             <ListItemIcon>
                 <BarChartIcon />
             </ListItemIcon>
-            <ListItemText primary="BMI" />
+            <ListItemText primary='BMI' />
         </ListItemButton>
     </React.Fragment>
 );
 
 export const secondaryListItems = (
     <React.Fragment>
-        <ListSubheader component="div" inset>
+        <ListSubheader component='div' inset>
             Social
         </ListSubheader>
-        <ListItemButton>
+        <ListItemButton component={Link} to='/friends'>
             <ListItemIcon>
                 <GroupsRoundedIcon />
             </ListItemIcon>
-            <ListItemText primary="Friends" />
+            <ListItemText primary='Friends' />
         </ListItemButton>
         <ListItemButton>
             <ListItemIcon>
                 <FitnessCenterRoundedIcon />
             </ListItemIcon>
-            <ListItemText primary="Shared activities" />
+            <ListItemText primary='Shared activities' />
         </ListItemButton>
         <ListItemButton>
             <ListItemIcon>
                 <TrackChangesRoundedIcon />
             </ListItemIcon>
-            <ListItemText primary="Shared goals" />
+            <ListItemText primary='Shared goals' />
         </ListItemButton>
     </React.Fragment>
 );

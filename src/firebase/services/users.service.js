@@ -22,6 +22,29 @@ export const getUserData = (uid) => {
     return get(query(ref(db, 'users'), orderByChild('uid'), equalTo(uid)));
 };
 
+// to get all users
+const fromUsersDocument = (snapshot) => {
+    const UsersDocument = snapshot.val();
+
+    return Object.keys(UsersDocument).map((key) => {
+        const user = UsersDocument[key];
+
+        return {
+            ...user,
+        };
+    });
+};
+
+export const getAllUsers = () => {
+    return get(ref(db, 'users')).then((snapshot) => {
+        if (!snapshot.exists()) {
+            return [];
+        }
+
+        return fromUsersDocument(snapshot);
+    });
+};
+
 export const createUsername = (username, uid, email, phoneNumber) => {
     return set(ref(db, `users/${username}`), {
         username: username,
