@@ -93,3 +93,11 @@ export const getUserActivities = (username) => {
         return [...fitnessExercises, ...cardioSessions, ...sportSessions];
     });
 };
+
+// On follow user, creates a new entry in the following and followers lists for the user document
+export const followUser = (username, followedUsername) => {
+    return update(ref(db), {
+        [`/users/${username}/following/${followedUsername}`]: true,
+        [`/users/${followedUsername}/followers/${username}`]: true,
+    });
+};
