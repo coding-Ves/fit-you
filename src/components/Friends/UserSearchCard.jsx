@@ -12,6 +12,7 @@ import {
 import { useContext, useState } from 'react';
 import { USER_NAME_MAX_LENGTH } from '../../common/constants';
 import AuthContext from '../../contexts/AuthContext';
+import FollowButton from '../Profile/FollowButton/FollowButton';
 
 const UserSearchCard = ({ user: singleUser }) => {
     const { userData } = useContext(AuthContext);
@@ -71,8 +72,8 @@ const UserSearchCard = ({ user: singleUser }) => {
                     ></Typography>
                 </CardContent>
                 <CardActions sx={{ justifyContent: 'space-evenly' }}>
-                    {singleUser.username !== userData.username && (
-                        <Button>Follow</Button>
+                    {userData && singleUser.username !== userData.username && (
+                        <FollowButton userToFollow={singleUser.username} />
                     )}
                     <Button href={`/profile/${singleUser.username}`}>
                         Details

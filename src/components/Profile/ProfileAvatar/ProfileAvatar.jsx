@@ -20,12 +20,14 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '../../../firebase/firebase-config';
 import { updateUserAvatar } from '../../../firebase/services/users.service';
 import errorHandler from './../../Authentication/ErrorHandling/errors.services';
+import FollowButton from '../FollowButton/FollowButton';
 
 export const ProfileAvatar = ({ userData }) => {
     // Context and State
     const [isLoading, setIsLoading] = useState(false);
     const { setContext } = useContext(AuthContext);
     const [editAvatar, setEditAvatar] = useState(false);
+    const [user] = useAuthState(auth);
 
     const handleEditAvatar = () => {
         setEditAvatar(true);
@@ -44,14 +46,10 @@ export const ProfileAvatar = ({ userData }) => {
         setSnackbarOpen(false);
     };
 
-    // Conditionally display upload avatar button if user is viewing their own profile
-    const [user] = useAuthState(auth);
-
     if (!user) {
-        return null; // or return a loading state
+        return null;
     }
 
-    // Use React Hook Form with Yup for validation
     const {
         register,
         handleSubmit,
@@ -218,7 +216,11 @@ export const ProfileAvatar = ({ userData }) => {
                             </Button>
                         )}
                     </Box>
-                ) : null}
+                ) : (
+                    <Box mt={3}>
+                        <FollowButton userToFollow={userData?.username} />
+                    </Box>
+                )}
             </Box>
         </>
     );
