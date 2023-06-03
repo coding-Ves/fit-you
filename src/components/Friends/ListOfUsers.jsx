@@ -13,7 +13,7 @@ const ListOfUsers = () => {
     // For the pagination
     const indexOfLastUsersOnPage = currentPage * RESULTS_PER_PAGE;
     const indexOfFirstUsersOnPage = indexOfLastUsersOnPage - RESULTS_PER_PAGE;
-    const currentUsersOnPage = users.slice(
+    const currentUsersOnPage = users?.slice(
         indexOfFirstUsersOnPage,
         indexOfLastUsersOnPage
     );

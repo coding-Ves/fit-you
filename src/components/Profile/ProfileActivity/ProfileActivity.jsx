@@ -4,6 +4,9 @@ import { Tabs, Tab, Typography, Box, Card } from '@mui/material';
 
 import Achievements from '../Achievements/Achievements';
 import ActivitiesTable from '../../Activity/ActivitiesTable/ActivitiesTable';
+import { useContext } from 'react';
+
+import AuthContext from './../../../contexts/AuthContext';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -38,7 +41,8 @@ function a11yProps(index) {
     };
 }
 
-export const ProfileActivity = ({ userData }) => {
+export const ProfileActivity = ({ userData: userProfileData }) => {
+    const { userData } = useContext(AuthContext);
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
@@ -69,10 +73,10 @@ export const ProfileActivity = ({ userData }) => {
             </Box>
             <TabPanel value={value} index={0}></TabPanel>
             <TabPanel value={value} index={1}>
-                <ActivitiesTable userData={userData} />
+                <ActivitiesTable userData={userProfileData} />
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <Achievements userData={userData} />
+                <Achievements userData={userProfileData} />
             </TabPanel>
             <TabPanel value={value} index={3}>
                 Activity
