@@ -31,7 +31,7 @@ const FindFriends = () => {
                     }}
                 >
                     <FriendSearchBar />
-                    {/* So I can focus on Search bar */}
+
                     <ListOfUsers />
                 </Box>
             </Box>

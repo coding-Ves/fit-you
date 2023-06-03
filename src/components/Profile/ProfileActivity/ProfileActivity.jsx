@@ -7,6 +7,7 @@ import ActivitiesTable from '../../Activity/ActivitiesTable/ActivitiesTable';
 import { useContext } from 'react';
 
 import AuthContext from './../../../contexts/AuthContext';
+import FollowMain from '../Follow/FollowMain';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -79,7 +80,7 @@ export const ProfileActivity = ({ userData: userProfileData }) => {
                 <Achievements userData={userProfileData} />
             </TabPanel>
             <TabPanel value={value} index={3}>
-                Activity
+                <FollowMain userData={userProfileData} />
             </TabPanel>
         </Card>
     );
