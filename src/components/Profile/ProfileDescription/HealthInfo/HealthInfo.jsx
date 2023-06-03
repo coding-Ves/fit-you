@@ -11,15 +11,17 @@ import {
     Snackbar,
     Alert,
 } from '@mui/material';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Edit } from '@mui/icons-material';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import healthValidationSchema from './healthValidationSchema';
 import { updateUserHealthInfo } from './../../../../firebase/services/users.service';
+import AuthContext from '../../../../contexts/AuthContext';
 
-export const HealthInfo = ({ userData }) => {
+export const HealthInfo = ({ userData: userProfileData }) => {
+    const { userData } = useContext(AuthContext);
     const [isLoading, setIsLoading] = useState(false);
     const [editable, setEditable] = useState(false); // State to track if fields are editable or not
     const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -46,7 +48,7 @@ export const HealthInfo = ({ userData }) => {
         setIsLoading(true);
 
         updateUserHealthInfo(
-            userData.username,
+            userProfileData.username,
             data.height,
             data.weight,
             data.age
@@ -102,7 +104,7 @@ export const HealthInfo = ({ userData }) => {
                         fullWidth
                         id='height'
                         label='Height'
-                        defaultValue={userData?.height}
+                        defaultValue={userProfileData?.height}
                         {...register('height')}
                         error={!!errors.height}
                         helperText={errors.height?.message}
@@ -125,7 +127,7 @@ export const HealthInfo = ({ userData }) => {
                         fullWidth
                         id='weight'
                         label='Weight'
-                        defaultValue={userData?.weight}
+                        defaultValue={userProfileData?.weight}
                         {...register('weight')}
                         error={!!errors.weight}
                         helperText={errors.weight?.message}
@@ -147,7 +149,7 @@ export const HealthInfo = ({ userData }) => {
                         fullWidth
                         id='age'
                         label='Age'
-                        defaultValue={userData?.age}
+                        defaultValue={userProfileData?.age}
                         {...register('age')}
                         error={!!errors.age}
                         helperText={errors.age?.message}
@@ -164,26 +166,31 @@ export const HealthInfo = ({ userData }) => {
                         }}
                     />
                 </Grid>
-                <Grid item xs={12}>
-                    {!editable ? (
-                        <Button variant='outlined' onClick={handleEdit}>
-                            Edit
-                        </Button>
-                    ) : (
-                        <Box>
-                            <Button
-                                variant='contained'
-                                type='submit'
-                                sx={{ mr: 2 }}
-                            >
-                                Save
+                {userData?.username === userProfileData?.username ? (
+                    <Grid item xs={12}>
+                        {!editable ? (
+                            <Button variant='outlined' onClick={handleEdit}>
+                                Edit
                             </Button>
-                            <Button variant='outlined' onClick={handleCancel}>
-                                Cancel
-                            </Button>
-                        </Box>
-                    )}
-                </Grid>
+                        ) : (
+                            <Box>
+                                <Button
+                                    variant='contained'
+                                    type='submit'
+                                    sx={{ mr: 2 }}
+                                >
+                                    Save
+                                </Button>
+                                <Button
+                                    variant='outlined'
+                                    onClick={handleCancel}
+                                >
+                                    Cancel
+                                </Button>
+                            </Box>
+                        )}
+                    </Grid>
+                ) : null}
             </Grid>
         </Box>
     );

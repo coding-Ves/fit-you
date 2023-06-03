@@ -8,17 +8,19 @@ import {
     Snackbar,
     Alert,
 } from '@mui/material';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Edit from '@mui/icons-material/Edit';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import phoneValidationSchema from './registrationValidationSchema';
 import { updateUserDetails } from '../../../../firebase/services/users.service';
+import AuthContext from '../../../../contexts/AuthContext';
 
-export const AccountInfo = ({ userData }) => {
-    const formattedDate = new Date(userData.createdOn);
+export const AccountInfo = ({ userData: userProfileData }) => {
+    const formattedDate = new Date(userProfileData.createdOn);
     const displayDate = formattedDate.toDateString();
+    const { userData } = useContext(AuthContext);
 
     const [isLoading, setIsLoading] = useState(false);
     const [editable, setEditable] = useState(false);
@@ -50,7 +52,7 @@ export const AccountInfo = ({ userData }) => {
     const onSubmit = (data) => {
         setIsLoading(true);
 
-        updateUserDetails(userData.username, data.phoneNumber)
+        updateUserDetails(userProfileData.username, data.phoneNumber)
             .then(() => {
                 setSnackbarMessage('Account Info Updated!');
                 setSnackbarSeverity('success');
@@ -100,7 +102,7 @@ export const AccountInfo = ({ userData }) => {
                         {...register('username')}
                         error={!!errors.username}
                         helperText={errors.username?.message}
-                        defaultValue={userData.username}
+                        defaultValue={userProfileData.username}
                         InputProps={{
                             readOnly: true,
                         }}
@@ -112,7 +114,7 @@ export const AccountInfo = ({ userData }) => {
                         fullWidth
                         id='phoneNumber'
                         label='Phone Number'
-                        defaultValue={userData.phoneNumber}
+                        defaultValue={userProfileData.phoneNumber}
                         {...register('phoneNumber')}
                         error={!!errors.phoneNumber}
                         helperText={errors.phoneNumber?.message}
@@ -142,26 +144,31 @@ export const AccountInfo = ({ userData }) => {
                         }}
                     />
                 </Grid>
-                <Grid item xs={12}>
-                    {!editable ? (
-                        <Button variant='outlined' onClick={handleEdit}>
-                            Edit
-                        </Button>
-                    ) : (
-                        <Box>
-                            <Button
-                                sx={{ mr: 2 }}
-                                variant='contained'
-                                type='submit'
-                            >
-                                Save
+                {userData?.username === userProfileData?.username ? (
+                    <Grid item xs={12}>
+                        {!editable ? (
+                            <Button variant='outlined' onClick={handleEdit}>
+                                Edit
                             </Button>
-                            <Button variant='outlined' onClick={handleCancel}>
-                                Cancel
-                            </Button>
-                        </Box>
-                    )}
-                </Grid>
+                        ) : (
+                            <Box>
+                                <Button
+                                    sx={{ mr: 2 }}
+                                    variant='contained'
+                                    type='submit'
+                                >
+                                    Save
+                                </Button>
+                                <Button
+                                    variant='outlined'
+                                    onClick={handleCancel}
+                                >
+                                    Cancel
+                                </Button>
+                            </Box>
+                        )}
+                    </Grid>
+                ) : null}
             </Grid>
         </Box>
     );

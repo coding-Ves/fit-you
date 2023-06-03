@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Tab, Typography, Box, Card } from '@mui/material';
 
@@ -33,7 +33,7 @@ function a11yProps(index) {
 }
 
 export const ProfileDescription = ({ userData }) => {
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
