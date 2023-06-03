@@ -9,10 +9,12 @@ import {
     Grid,
     Typography,
 } from '@mui/material';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { USER_NAME_MAX_LENGTH } from '../../common/constants';
+import AuthContext from '../../contexts/AuthContext';
 
-const UserSearchCard = ({ user }) => {
+const UserSearchCard = ({ user: singleUser }) => {
+    const { userData } = useContext(AuthContext);
     const [open, setOpen] = useState(false);
 
     const handleClose = () => {
@@ -20,9 +22,9 @@ const UserSearchCard = ({ user }) => {
     };
 
     const shortenedUserName =
-        user.username.length > USER_NAME_MAX_LENGTH
-            ? user.username.substring(0, USER_NAME_MAX_LENGTH) + '...'
-            : user.username;
+        singleUser.username.length > USER_NAME_MAX_LENGTH
+            ? singleUser.username.substring(0, USER_NAME_MAX_LENGTH) + '...'
+            : singleUser.username;
 
     return (
         <Card sx={{ maxWidth: 345 }}>
@@ -40,7 +42,7 @@ const UserSearchCard = ({ user }) => {
                         width: 'fit-content',
                         p: '5px',
                     }}
-                    src={user.avatarURL}
+                    src={singleUser.avatarURL}
                     variant='rounded'
                 />
                 <CardContent align='center'>
@@ -69,8 +71,12 @@ const UserSearchCard = ({ user }) => {
                     ></Typography>
                 </CardContent>
                 <CardActions sx={{ justifyContent: 'space-evenly' }}>
-                    <Button>Follow</Button>
-                    <Button href={`/profile/${user.username}`}>Details</Button>
+                    {singleUser.username !== userData.username && (
+                        <Button>Follow</Button>
+                    )}
+                    <Button href={`/profile/${singleUser.username}`}>
+                        Details
+                    </Button>
                 </CardActions>
             </Grid>
         </Card>
