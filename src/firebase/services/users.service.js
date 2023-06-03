@@ -101,3 +101,32 @@ export const followUser = (username, followedUsername) => {
         [`/users/${followedUsername}/followers/${username}`]: true,
     });
 };
+
+// On unfollow user, removes the entry in the following and followers lists for the user document
+export const unfollowUser = (username, followedUsername) => {
+    return update(ref(db), {
+        [`/users/${username}/following/${followedUsername}`]: null,
+        [`/users/${followedUsername}/followers/${username}`]: null,
+    });
+};
+
+// Get the list of followed users for the current user
+export const getFollowedUsers = (username) => {
+    return get(ref(db, `users/${username}/following`)).then((snapshot) => {
+        if (!snapshot.exists()) {
+            return [];
+        }
+
+        return Object.keys(snapshot.val());
+    });
+};
+
+// Get the list of followers for the current user
+export const getFollowers = (username) => {
+    return get(ref(db, `users/${username}/followers`)).then((snapshot) => {
+        if (!snapshot.exists()) {
+            return [];
+        }
+        return Object.keys(snapshot.val());
+    });
+};
