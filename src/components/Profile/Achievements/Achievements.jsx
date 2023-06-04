@@ -1,76 +1,39 @@
 import { Grid, Card, CardContent, Typography } from '@mui/material';
-import { DonutLargeTwoTone } from '@mui/icons-material';
-
-// When properly implemented this object will hold the icon of the achievement, we'll do a check against the userData object and render
-// the different items accordingly
-
-const cardsData = [
-    {
-        title: 'Achievement',
-        description: 'Achievement description',
-    },
-    {
-        title: 'Achievement',
-        description: 'Achievement description',
-    },
-    {
-        title: 'Achievement',
-        description: 'Achievement description',
-    },
-    {
-        title: 'Achievement',
-        description: 'Achievement description',
-    },
-    {
-        title: 'Achievement',
-        description: 'Achievement description',
-    },
-    {
-        title: 'Achievement',
-        description: 'Achievement description',
-    },
-    {
-        title: 'Achievement',
-        description: 'Achievement description',
-    },
-    {
-        title: 'Achievement',
-        description: 'Achievement description',
-    },
-    {
-        title: 'Achievement',
-        description: 'Achievement description',
-    },
-    {
-        title: 'Achievement',
-        description: 'Achievement description',
-    },
-    {
-        title: 'Achievement',
-        description: 'Achievement description',
-    },
-    {
-        title: 'Achievement',
-        description: 'Achievement description',
-    },
-];
+import {} from '@mui/icons-material';
+import {
+    EmojiEvents,
+    Flag,
+    SportsHandball,
+    CheckCircle,
+    ImportContacts,
+    Face2,
+    DirectionsRun,
+    FollowTheSigns,
+    WavingHand,
+    AutoFixHigh,
+    AutoAwesome,
+    DonutLargeTwoTone,
+} from '@mui/icons-material';
+import achievementChecker from './helpers/achievementChecker';
 
 export const Achievements = ({ userData }) => {
+    const achievements = achievementChecker(userData);
+
     return (
         <Card align='center'>
             <Typography mb={3} variant='h4'>
                 Achievements
             </Typography>
             <Grid container spacing={2} align='center' fullWidth>
-                {cardsData.map((card, index) => (
+                {achievements.map((card, index) => (
                     <Grid item xs={6} sm={6} md={3} lg={2} key={index}>
                         <Card>
                             <CardContent>
-                                <DonutLargeTwoTone size={32} />
-                                <Typography variant='h6'>
+                                {card.icon}
+                                <Typography variant='h6' color={card.color}>
                                     {card.title}
                                 </Typography>
-                                <Typography variant='body1'>
+                                <Typography variant='body1' color={card.color}>
                                     {card.description}
                                 </Typography>
                             </CardContent>
