@@ -2,13 +2,15 @@
 import { Alert, Box, Button, FormControl, InputLabel, MenuItem, Select, Slider, Snackbar, Stack, TextField, Typography } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { EXERCISES_UNITS, WEIGHT_UNIT } from '../../../common/constants';
+import { ActivitiesContext } from '../../../contexts/ActivitiesContext';
 import AuthContext from '../../../contexts/AuthContext';
-import { addFitnessExercise, addFitnessExerciseToGoal } from '../../../firebase/services/fitnessExercises.service';
-import { getGoalsByUsername } from '../../../firebase/services/goals.service';
+import { addFitnessExercise } from '../../../firebase/services/fitnessExercises.service';
+import { addActivityToGoal, getGoalsByUsername } from '../../../firebase/services/goals.service';
 
 const CreateFitnessExerciseForm = ({ exercise }) => {
 
     const { userData } = useContext(AuthContext);
+    const { category } = useContext(ActivitiesContext);
 
     // eslint-disable-next-line no-unused-vars
     const [isLoading, setIsLoading] = useState(false);
@@ -84,12 +86,13 @@ const CreateFitnessExerciseForm = ({ exercise }) => {
     const handleSubmit = () => {
         setIsLoading(true);
 
+
         addFitnessExercise(userData.username, exercise.name, formInputs)
             .then((id) => {
                 setIsLoading(false);
 
                 if (selectedGoal) {
-                    return addFitnessExerciseToGoal(selectedGoal, id);
+                    return addActivityToGoal(selectedGoal, id, category);
                 }
             })
             .then(() => {

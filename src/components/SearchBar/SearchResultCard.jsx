@@ -7,7 +7,6 @@ import CreateActivityDialog from '../Activity/CreateActivity/CreateActivityDialo
 
 const SearchResultCard = ({ activity }) => {
 
-    // when I try to reuse it in the ActivityDetails component, context doesn't work, need to check why
     const { category } = useContext(ActivitiesContext);
     const [open, setOpen] = useState(false);
     const [image, setImage] = useState();
@@ -55,17 +54,17 @@ const SearchResultCard = ({ activity }) => {
                 )}
             </CardContent>
             <CardActions sx={{ justifyContent: 'space-between' }}>
-                <div>
+                <>
                     <Button size='medium' onClick={() => setOpen(true)}>
                         Add!
                     </Button>
-                </div>
+                </>
 
-                <div>
+                <>
                     <Button href={`/search/${category}/${activity.id}`}>
                         Details
                     </Button>
-                </div>
+                </>
 
                 <CreateActivityDialog open={open} handleClose={handleClose} activity={activity} />
             </CardActions>

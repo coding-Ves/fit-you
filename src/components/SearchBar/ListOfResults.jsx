@@ -8,7 +8,7 @@ import SearchResultCard from './SearchResultCard';
 const ListOfResults = ({ category }) => {
     const { exercises, sports } = useContext(ActivitiesContext);
     const [currentPage, setCurrentPage] = useState(1);
-    const [currentActivitiesOnPage, setCurrentActivitiesOnPage] = useState([]);
+    const [currentActivities, setCurrentActivities] = useState([]);
 
     useEffect(() => {
         let activities;
@@ -16,17 +16,16 @@ const ListOfResults = ({ category }) => {
             activities = exercises;
         } else if (category === 'sports') {
             activities = sports;
+        } else if (category === 'cardio') {
+            // activities = cardio;
         }
-        // else if (category === 'cardio') {
-        //     activities = cardio;
-        // }
-        setCurrentActivitiesOnPage(activities);
+        setCurrentActivities(activities);
     }, [category, exercises, sports]);
 
     // For the pagination
     const indexOfLastActivityOnPage = currentPage * RESULTS_PER_PAGE;
     const indexOfFirstActivityOnPage = indexOfLastActivityOnPage - RESULTS_PER_PAGE;
-    const activitiesToShow = currentActivitiesOnPage.slice(indexOfFirstActivityOnPage, indexOfLastActivityOnPage);
+    const activitiesToShow = currentActivities.slice(indexOfFirstActivityOnPage, indexOfLastActivityOnPage);
 
     const handlePageChange = (event, value) => {
         setCurrentPage(value);
@@ -34,11 +33,11 @@ const ListOfResults = ({ category }) => {
     };
 
     // when we have a loader?
-    // if (!currentExercisesOnPage.length) return <Loader />;
+    // if (!activitiesToShow.length) return <Loader />;
 
     return (
         <>
-            {currentActivitiesOnPage && (
+            {currentActivities && (
                 <Box
                     id='activities'
                     margin={{ lg: '80px', xs: '40px' }}
@@ -57,13 +56,13 @@ const ListOfResults = ({ category }) => {
                         sx={{ mt: { lg: '114px', xs: '70px' } }}
                         alignItems='center'
                     >
-                        {exercises.length > RESULTS_PER_PAGE && (
+                        {currentActivities.length > RESULTS_PER_PAGE && (
                             <Pagination
                                 color='secondary'
                                 shape='rounded'
                                 size='large'
                                 count={Math.ceil(
-                                    exercises.length / RESULTS_PER_PAGE
+                                    currentActivities.length / RESULTS_PER_PAGE
                                 )}
                                 page={currentPage}
                                 onChange={handlePageChange}
