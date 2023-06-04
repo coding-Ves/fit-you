@@ -13,7 +13,9 @@ export const addSportSession = (username, sportName, durationInMinutes) => {
         const updateSportSession = {};
         updateSportSession[`/sportSessions/${id}/id`] = id;
         updateSportSession[`/users/${username}/sportSessions/${id}`] = true;
-        return update(ref(db), updateSportSession);
+
+        return update(ref(db), updateSportSession)
+            .then(() => id);
     });
 };
 
@@ -42,3 +44,11 @@ export const getSportSessionsByUsername = (username) => {
         }
     );
 };
+
+// export const addSportSessionToGoal = (goalId, id) => {
+//     const updateData = {};
+//     updateData[`/goals/${goalId}/activities/${id}`] = true;
+//     updateData[`/sportSessions/${id}/goals/${goalId}`] = true;
+
+//     return update(ref(db), updateData);
+// };

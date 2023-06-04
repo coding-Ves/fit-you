@@ -52,12 +52,3 @@ export const getFitnessExercisesByUsername = (username) => {
         return fitnessExercises;
     });
 };
-
-export const addFitnessExerciseToGoal = (goalId, id) => {
-    const updateData = {};
-    updateData[`/goals/${goalId}/activities/${id}`] = true;
-    updateData[`/fitnessExercises/${id}/goals/${goalId}`] = true;
-
-    return update(ref(db), updateData);
-};
-

@@ -40,23 +40,6 @@ export const getGoalById = (goalId) => {
     });
 };
 
-// // Fail 1:
-// // Uncaught (in promise) Error: Index not defined, add ".indexOn": "username", for path "/goals", to the rules
-// // Edit: it works after changing the rules for goals in Firebase
-// export const getGoalsByUsername = (username) => {
-//     return get(query(ref(db, 'goals'), orderByChild('username'), equalTo(username)))
-//         .then((result) => {
-//             if (!result.exists()) return [];
-//             const goals = Object.values(result.val());
-
-//             goals.forEach((goal) => {
-//                 goal.createdOn = new Date(goal.createdOn).toLocaleString();
-//             });
-
-//             return goals;
-//         });
-// };
-
 export const getGoalsByUsername = (username) => {
     return get(ref(db, 'goals'))
         .then((result) => {
@@ -72,4 +55,19 @@ export const getGoalsByUsername = (username) => {
 
             return filteredGoals;
         });
+};
+
+export const addActivityToGoal = (goalId, activityId, category) => {
+    const updateData = {};
+    updateData[`/goals/${goalId}/activities/${activityId}`] = true;
+
+    if (category === 'fitness') {
+        updateData[`/fitnessExercises/${activityId}/goals/${goalId}`] = true;
+    } else if (category === 'sports') {
+        updateData[`/sportSessions/${activityId}/goals/${goalId}`] = true;
+    } else if (category === 'cardio') {
+        updateData[`/cardioSessions/${activityId}/goals/${goalId}`] = true;
+    }
+
+    return update(ref(db), updateData);
 };
