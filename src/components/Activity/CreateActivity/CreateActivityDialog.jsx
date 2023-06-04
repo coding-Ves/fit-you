@@ -3,6 +3,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/
 import { useContext } from 'react';
 import { ActivitiesContext } from '../../../contexts/ActivitiesContext';
 import CreateFitnessExerciseForm from './CreateFitnessExerciseForm';
+import CreateSportsSessionForm from './CreateSportsSessionForm';
 
 const CreateActivityDialog = ({ open, handleClose, activity }) => {
 
@@ -14,6 +15,7 @@ const CreateActivityDialog = ({ open, handleClose, activity }) => {
                 <DialogTitle>{activity.name.toUpperCase()}</DialogTitle>
                 <DialogContent>
                     {category === 'fitness' && <CreateFitnessExerciseForm exercise={activity} />}
+                    {category === 'sports' && <CreateSportsSessionForm sport={activity} />}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Close</Button>
