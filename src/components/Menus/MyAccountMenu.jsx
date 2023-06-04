@@ -56,6 +56,7 @@ const MyAccountMenu = () => {
                             variant='rounded'
                             sx={{ width: 32, height: 32 }}
                             src={userData?.avatarURL}
+                            alt={userData?.username}
                         ></Avatar>
                     </IconButton>
                 </Tooltip>
@@ -101,7 +102,11 @@ const MyAccountMenu = () => {
                     to={`/profile/${userData?.username}`}
                     style={{ color: 'inherit' }}
                 >
-                    <Avatar /> My account
+                    <Avatar
+                        src={userData?.avatarURL}
+                        alt={userData?.username}
+                    />{' '}
+                    My account
                 </MenuItem>
                 <Divider />
                 <MenuItem
