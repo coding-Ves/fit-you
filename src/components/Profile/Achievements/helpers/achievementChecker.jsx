@@ -260,7 +260,6 @@ export const achievementChecker = (userData) => {
     if (userData.cardioSessions) {
         totalActivities += Object.keys(userData.cardioSessions).length;
     }
-    console.log(totalActivities);
 
     // If there's more than 10 activities, award the achievement
 
@@ -373,7 +372,7 @@ export const achievementChecker = (userData) => {
     }
 
     // Check if the user has the default avatar RANDOM_AVATAR_STYLE + userData.username
-    if (userData.avatar !== RANDOM_AVATAR_STYLE + userData.username) {
+    if (userData.avatarURL !== RANDOM_AVATAR_STYLE + userData.username) {
         achievements.push({
             title: 'SWAG',
             description: 'You changed your avatar!',
