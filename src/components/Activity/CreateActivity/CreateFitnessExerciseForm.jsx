@@ -32,8 +32,11 @@ const CreateFitnessExerciseForm = ({ exercise }) => {
 
     useEffect(() => {
         getGoalsByUsername(userData.username)
-            .then((snapshot) => setGoals(snapshot));
-    }, [userData.username]);
+            .then((snapshot) => {
+                const filteredByCategory = snapshot.filter(goal => goal?.goalType?.toLowerCase() === category);
+                setGoals(filteredByCategory);
+            });
+    }, [userData.username, category]);
 
     const handleNumOfSetsChange = (event, value) => {
         setNumOfSets(value);
