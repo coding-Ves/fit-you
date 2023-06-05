@@ -8,6 +8,8 @@ export const USER_ROLES = {
     banned: 3,
 };
 
+export const DAY_TO_MILLISECONDS = 86400000;
+
 export const DRAWER_WIDTH_OPEN = 240;
 
 export const DRAWER_WIDTH_CLOSED = 70;
@@ -100,3 +102,4 @@ export const GOAL_TYPES_TARGETS = {
 
 
 export const PROGRESS_PIE_COLORS = ['#175075', '#9eb2c3'];
+
