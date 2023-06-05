@@ -95,7 +95,20 @@ const CreateFitnessExerciseForm = ({ exercise }) => {
                 setIsLoading(false);
 
                 if (selectedGoal) {
-                    return addActivityToGoal(selectedGoal, id, category);
+                    const { goalProgress, goalTargetType } = goals.find(
+                        (goal) => goal.goalId === selectedGoal
+                    );
+                    const repetitions = formInputs.reduce((acc, curr) => {
+                        return acc + Number(curr.reps);
+                    }, 0);
+                    return addActivityToGoal(
+                        selectedGoal,
+                        id,
+                        category,
+                        goalProgress,
+                        goalTargetType,
+                        repetitions
+                    );
                 }
             })
             .then(() => {
