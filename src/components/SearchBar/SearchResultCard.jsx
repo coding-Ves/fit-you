@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
 import { Button, Card, CardActions, CardContent, CardMedia, Divider, Typography } from '@mui/material';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { ACTIVITY_NAME_MAX_LENGTH } from '../../common/constants';
-import { ActivitiesContext } from '../../contexts/ActivitiesContext';
 import CreateActivityDialog from '../Activity/CreateActivity/CreateActivityDialog';
 
 const SearchResultCard = ({ activity }) => {
 
-    const { category } = useContext(ActivitiesContext);
+    const { category } = useParams();
     const [open, setOpen] = useState(false);
     const [image, setImage] = useState();
 

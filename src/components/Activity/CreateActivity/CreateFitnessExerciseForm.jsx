@@ -2,15 +2,15 @@
 import { Alert, Box, Button, FormControl, InputLabel, MenuItem, Select, Slider, Snackbar, Stack, TextField, Typography } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { EXERCISES_UNITS, WEIGHT_UNIT } from '../../../common/constants';
-import { ActivitiesContext } from '../../../contexts/ActivitiesContext';
 import AuthContext from '../../../contexts/AuthContext';
 import { addFitnessExercise } from '../../../firebase/services/fitnessExercises.service';
 import { addActivityToGoal, getGoalsByUsername } from '../../../firebase/services/goals.service';
+import { useParams } from 'react-router-dom';
 
 const CreateFitnessExerciseForm = ({ exercise }) => {
 
     const { userData } = useContext(AuthContext);
-    const { category } = useContext(ActivitiesContext);
+    const { category } = useParams();
 
     // eslint-disable-next-line no-unused-vars
     const [isLoading, setIsLoading] = useState(false);

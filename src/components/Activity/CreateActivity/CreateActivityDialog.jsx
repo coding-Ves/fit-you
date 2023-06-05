@@ -1,13 +1,12 @@
 /* eslint-disable react/prop-types */
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import { useContext } from 'react';
-import { ActivitiesContext } from '../../../contexts/ActivitiesContext';
+import { useParams } from 'react-router-dom';
 import CreateFitnessExerciseForm from './CreateFitnessExerciseForm';
 import CreateSportsSessionForm from './CreateSportsSessionForm';
 
 const CreateActivityDialog = ({ open, handleClose, activity }) => {
 
-    const { category } = useContext(ActivitiesContext);
+    const { category } = useParams();
 
     return (
         <>
