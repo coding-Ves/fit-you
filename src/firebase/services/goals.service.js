@@ -29,7 +29,6 @@ export const getGoalById = (goalId) => {
         }
 
         const goal = result.val();
-        goal.createdOn = new Date(goal.createdOn).toLocaleString();
         !goal.activities
             ? (goal.activities = [])
             : (goal.activities = Object.keys(goal.activities));
@@ -43,13 +42,7 @@ export const getGoalsByUsername = (username) => {
             if (!result.exists()) return [];
 
             const goals = Object.values(result.val());
-
             const filteredGoals = goals.filter((goal) => goal.username === username);
-
-            filteredGoals.forEach((goal) => {
-                goal.createdOn = new Date(goal.createdOn).toLocaleString();
-            });
-
             return filteredGoals;
         });
 };
