@@ -97,3 +97,6 @@ export const GOAL_TYPES_TARGETS = {
     ],
     Sports: [GOAL_TARGET_TYPES.TOTAL_SESSIONS, GOAL_TARGET_TYPES.TOTAL_MINUTES],
 };
+
+
+export const PROGRESS_PIE_COLORS = ['#175075', '#9eb2c3'];
