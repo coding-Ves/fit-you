@@ -11,6 +11,10 @@ import {
     AutoFixHigh,
     AutoAwesome,
     DonutLargeTwoTone,
+    FitnessCenter,
+    SportsGymnastics,
+    Pool,
+    GolfCourse,
 } from '@mui/icons-material';
 import { RANDOM_AVATAR_STYLE } from '../../../../common/constants';
 
@@ -211,7 +215,12 @@ export const achievementChecker = (userData) => {
     }
 
     // Check if the user has a property called activities (Which means they have logged an activity)
-    if (userData.activities) {
+
+    if (
+        userData.fitnessExercises ||
+        userData.sportSessions ||
+        userData.cardioSessions
+    ) {
         achievements.push({
             title: 'Activity Log: Day 1',
             description: 'You logged an activity!',
@@ -233,6 +242,130 @@ export const achievementChecker = (userData) => {
                     size={50}
                     sx={{ color: 'lightGray', fontSize: '50px' }}
                 />
+            ),
+            status: 'locked',
+            color: 'lightGray',
+        });
+    }
+
+    // find the total number of activities the user has
+
+    let totalActivities = 0;
+    if (userData.fitnessExercises) {
+        totalActivities += Object.keys(userData.fitnessExercises).length;
+    }
+    if (userData.sportSessions) {
+        totalActivities += Object.keys(userData.sportSessions).length;
+    }
+    if (userData.cardioSessions) {
+        totalActivities += Object.keys(userData.cardioSessions).length;
+    }
+    console.log(totalActivities);
+
+    // If there's more than 10 activities, award the achievement
+
+    if (totalActivities >= 10) {
+        achievements.push({
+            title: 'Keep Up The Tempo',
+            description: 'You logged 10 activities!',
+            icon: (
+                <GolfCourse
+                    size={50}
+                    sx={{ color: 'green', fontSize: '50px' }}
+                />
+            ),
+            status: 'earned',
+            color: 'primary.main',
+        });
+    } else {
+        achievements.push({
+            title: 'Keep Up The Tempo',
+            description: 'You logged 10 activities!',
+            icon: (
+                <GolfCourse
+                    size={50}
+                    sx={{ color: 'lightGray', fontSize: '50px' }}
+                />
+            ),
+            status: 'locked',
+            color: 'lightGray',
+        });
+    }
+
+    // Check if the user has a property called fitnessExercises (Which means they have logged a fitness exercise)
+    if (userData.fitnessExercises) {
+        achievements.push({
+            title: 'Put the "FIT" in Fitness',
+            description: 'You logged a fitness exercise!',
+            icon: (
+                <FitnessCenter
+                    size={50}
+                    sx={{ color: 'green', fontSize: '50px' }}
+                />
+            ),
+            status: 'earned',
+            color: 'primary.main',
+        });
+    } else {
+        achievements.push({
+            title: 'Put the "FIT" in Fitness',
+            description: 'You logged a fitness exercise!',
+            icon: (
+                <FitnessCenter
+                    size={50}
+                    sx={{ color: 'lightGray', fontSize: '50px' }}
+                />
+            ),
+            status: 'locked',
+            color: 'lightGray',
+        });
+    }
+
+    // Check if the user has a property called sportsSessions (Which means they have logged a sports session)
+    if (userData.sportSessions) {
+        achievements.push({
+            title: 'Sportin',
+            description: 'You logged a sports session!',
+            icon: (
+                <SportsGymnastics
+                    size={50}
+                    sx={{ color: 'green', fontSize: '50px' }}
+                />
+            ),
+            status: 'earned',
+            color: 'primary.main',
+        });
+    } else {
+        achievements.push({
+            title: 'Sportin',
+            description: 'You logged a sports session!',
+            icon: (
+                <SportsGymnastics
+                    size={50}
+                    sx={{ color: 'lightGray', fontSize: '50px' }}
+                />
+            ),
+            status: 'locked',
+            color: 'lightGray',
+        });
+    }
+
+    // Check if the user has a property called cardioSessions (Which means they have logged a cardio session)
+
+    if (userData.cardioSessions) {
+        achievements.push({
+            title: 'Get the Blood Pumping',
+            description: 'You logged a cardio session!',
+            icon: <Pool size={50} sx={{ color: 'green', fontSize: '50px' }} />,
+            status: 'earned',
+            color: 'primary.main',
+        });
+    } else {
+        achievements.push({
+            title: 'Get the Blood Pumping',
+            description: 'You logged a cardio session!',
+            icon: (
+                <Pool size={50} sx={{ color: 'lightGray', fontSize: '50px' }} />
             ),
             status: 'locked',
             color: 'lightGray',
