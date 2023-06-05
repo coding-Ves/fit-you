@@ -72,3 +72,28 @@ export const SPORTS_CATEGORIES = {
     MOTORSPORTS: 'motorsports',
     OTHER: 'other',
 };
+
+export const GOAL_TYPES = ['Fitness', 'Cardio', 'Sports', 'Other'];
+
+export const GOAL_TARGET_TYPES = {
+    TOTAL_SESSIONS: 'Total sessions',
+    TOTAL_REPETITIONS: 'Total repetitions',
+    TOTAL_DISTANCE: 'Total distance',
+    TOTAL_MINUTES: 'Total minutes',
+    TOTAL_SECONDS: 'Total seconds',
+};
+
+export const GOAL_TYPES_TARGETS = {
+    Fitness: [
+        GOAL_TARGET_TYPES.TOTAL_SESSIONS,
+        GOAL_TARGET_TYPES.TOTAL_REPETITIONS,
+        GOAL_TARGET_TYPES.TOTAL_MINUTES,
+        GOAL_TARGET_TYPES.TOTAL_SECONDS,
+    ],
+    Cardio: [
+        GOAL_TARGET_TYPES.TOTAL_SESSIONS,
+        GOAL_TARGET_TYPES.TOTAL_DISTANCE,
+        GOAL_TARGET_TYPES.TOTAL_MINUTES,
+    ],
+    Sports: [GOAL_TARGET_TYPES.TOTAL_SESSIONS, GOAL_TARGET_TYPES.TOTAL_MINUTES],
+};
