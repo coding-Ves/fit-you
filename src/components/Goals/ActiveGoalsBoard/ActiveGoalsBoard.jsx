@@ -2,6 +2,7 @@ import { Box, Grid, Typography } from '@mui/material';
 import SingleActiveGoalCard from '../SingleActiveGoalCard/SingleActiveGoalCard';
 import { useEffect, useState } from 'react';
 import { getGoalsByUsername } from '../../../firebase/services/goals.service';
+import PropTypes from 'prop-types';
 
 const ActiveGoalsBoard = ({ username }) => {
     const [goals, setGoals] = useState([]);
@@ -44,6 +45,8 @@ const ActiveGoalsBoard = ({ username }) => {
     );
 };
 
-ActiveGoalsBoard.propTypes = {};
+ActiveGoalsBoard.propTypes = {
+    username: PropTypes.string.isRequired,
+};
 
 export default ActiveGoalsBoard;
