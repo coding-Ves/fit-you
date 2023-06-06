@@ -8,9 +8,11 @@ export const ActivitiesProvider = ({ children }) => {
     const [bodyPart, setBodyPart] = useState('all');
     const [category, setCategory] = useState('');
     const [sports, setSports] = useState([]);
+    const [cardio, setCardio] = useState([]);
 
     return (
-        <ActivitiesContext.Provider value={{ exercises, setExercises, bodyPart, setBodyPart, category, setCategory, sports, setSports }}>
+        <ActivitiesContext.Provider
+            value={{ exercises, setExercises, bodyPart, setBodyPart, category, setCategory, sports, setSports, cardio, setCardio }}>
             {children}
         </ActivitiesContext.Provider>
     );

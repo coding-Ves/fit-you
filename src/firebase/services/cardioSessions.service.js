@@ -15,7 +15,8 @@ export const addCardioSession = (username, cardioName, distance, durationInMinut
         const updateCardioSession = {};
         updateCardioSession[`/cardioSessions/${id}/id`] = id;
         updateCardioSession[`/users/${username}/cardioSessions/${id}`] = true;
-        return update(ref(db), updateCardioSession);
+        return update(ref(db), updateCardioSession)
+            .then(() => id);
     });
 };
 

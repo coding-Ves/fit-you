@@ -1,6 +1,7 @@
-import { fetchDataFromExerciseDB, exerciseOptions, } from '../../../services/exercises.service';
+import cardioData from '../../../common/cardioData';
 import { EXERCISE_DB_URL } from '../../../common/constants';
 import sportsData from '../../../common/sportsData';
+import { exerciseOptions, fetchDataFromExerciseDB, } from '../../../services/exercises.service';
 
 export const searchFitness = (searchQuery) => {
     return fetchDataFromExerciseDB(EXERCISE_DB_URL, exerciseOptions)
@@ -31,4 +32,16 @@ export const searchSports = (searchQuery) => {
     });
 
     return searchedSports;
+};
+
+export const searchCardio = (searchQuery) => {
+
+    const searchedCardio = cardioData.filter((cardio) => {
+        return (
+            cardio.name.toLowerCase().includes(searchQuery) ||
+            cardio.category.toLowerCase().includes(searchQuery)
+        );
+    });
+
+    return searchedCardio;
 };

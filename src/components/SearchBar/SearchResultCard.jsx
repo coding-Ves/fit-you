@@ -14,7 +14,7 @@ const SearchResultCard = ({ activity }) => {
     useEffect(() => {
         if (category === 'fitness') {
             setImage(activity.gifUrl);
-        } else if (category === 'sports') {
+        } else if (category === 'sports' || category === 'cardio') {
             setImage(activity.imgUrl);
         }
     }, [activity.gifUrl, activity.imgUrl, category]);
@@ -41,6 +41,8 @@ const SearchResultCard = ({ activity }) => {
                 <Typography gutterBottom variant="h5" component="div">
                     {shortenedActivityName}
                 </Typography>
+
+                {/* extra fields for fitness cards */}
                 {category === 'fitness' && (
                     <Typography level="body3" sx={{ fontWeight: 'md', color: 'text.secondary' }}>
                         Body part: {activity.bodyPart}
@@ -52,6 +54,7 @@ const SearchResultCard = ({ activity }) => {
                         Target: {activity.target}
                     </Typography>
                 )}
+
             </CardContent>
             <CardActions sx={{ justifyContent: 'space-between' }}>
                 <>

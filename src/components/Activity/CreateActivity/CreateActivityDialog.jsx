@@ -2,19 +2,20 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import CreateFitnessExerciseForm from './CreateFitnessExerciseForm';
-import CreateSportsSessionForm from './CreateSportsSessionForm';
+import CreateSportsOrCardioSessionForm from './CreateSportsOrCardioSessionForm';
 
 const CreateActivityDialog = ({ open, handleClose, activity }) => {
 
     const { category } = useParams();
+    // console.log(category);
 
     return (
         <>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>{activity.name.toUpperCase()}</DialogTitle>
                 <DialogContent>
-                    {category === 'fitness' && <CreateFitnessExerciseForm exercise={activity} />}
-                    {category === 'sports' && <CreateSportsSessionForm sport={activity} />}
+                    {category === 'fitness' && <CreateFitnessExerciseForm exercise={activity} category={category}/>}
+                    {(category === 'sports' || category === 'cardio') && <CreateSportsOrCardioSessionForm activity={activity} category={category} />}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Close</Button>

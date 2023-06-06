@@ -5,12 +5,10 @@ import { EXERCISES_UNITS, WEIGHT_UNIT } from '../../../common/constants';
 import AuthContext from '../../../contexts/AuthContext';
 import { addFitnessExercise } from '../../../firebase/services/fitnessExercises.service';
 import { addActivityToGoal, getGoalsByUsername } from '../../../firebase/services/goals.service';
-import { useParams } from 'react-router-dom';
 
-const CreateFitnessExerciseForm = ({ exercise }) => {
+const CreateFitnessExerciseForm = ({ exercise, category }) => {
 
     const { userData } = useContext(AuthContext);
-    const { category } = useParams();
 
     // eslint-disable-next-line no-unused-vars
     const [isLoading, setIsLoading] = useState(false);
@@ -213,7 +211,7 @@ const CreateFitnessExerciseForm = ({ exercise }) => {
                             <em>No, thanks</em>
                         </MenuItem>
                         {Object.values(goals).map((goal) =>
-                            <MenuItem key={goal.goalId} value={goal.goalId}>{goal.goalName}</MenuItem>
+                            <MenuItem key={goal.goalId} value={goal.goalId}>{goal.goalName} ({goal.goalTargetType})</MenuItem>
                         )}
                     </Select>
                 </FormControl>

@@ -76,7 +76,10 @@ export const addActivityToGoal = (
     case GOAL_TARGET_TYPES.TOTAL_DISTANCE:
         updateData[`/goals/${goalId}/goalProgress`] = goalProgress + addedProgress;
         break;
-    case GOAL_TARGET_TYPES.TOTAL_TIME:
+    case GOAL_TARGET_TYPES.TOTAL_MINUTES:
+        updateData[`/goals/${goalId}/goalProgress`] = goalProgress + addedProgress;
+        break;
+    case GOAL_TARGET_TYPES.TOTAL_SECONDS:
         updateData[`/goals/${goalId}/goalProgress`] = goalProgress + addedProgress;
         break;
     }

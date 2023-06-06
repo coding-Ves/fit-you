@@ -6,7 +6,7 @@ import { ActivitiesContext } from '../../contexts/ActivitiesContext';
 import SearchResultCard from './SearchResultCard';
 
 const ListOfResults = ({ category }) => {
-    const { exercises, sports } = useContext(ActivitiesContext);
+    const { exercises, sports, cardio } = useContext(ActivitiesContext);
     const [currentPage, setCurrentPage] = useState(1);
     const [currentActivities, setCurrentActivities] = useState([]);
 
@@ -17,10 +17,10 @@ const ListOfResults = ({ category }) => {
         } else if (category === 'sports') {
             activities = sports;
         } else if (category === 'cardio') {
-            // activities = cardio;
+            activities = cardio;
         }
         setCurrentActivities(activities);
-    }, [category, exercises, sports]);
+    }, [category, exercises, sports, cardio]);
 
     // For the pagination
     const indexOfLastActivityOnPage = currentPage * RESULTS_PER_PAGE;

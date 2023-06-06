@@ -2,17 +2,17 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Box, Button, InputAdornment, Stack, TextField, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useContext, useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { ActivitiesContext } from '../../contexts/ActivitiesContext';
-import { searchFitness, searchSports } from './helpers/searchBarHelpers';
-import { set, useForm } from 'react-hook-form';
+import { searchCardio, searchFitness, searchSports } from './helpers/searchBarHelpers';
 
 const SearchBar = ({ category }) => {
 
     const { handleSubmit, register, reset } = useForm();
     // const [search, setSearch] = useState('');
     const [placeholder, setPlaceholder] = useState('Search');
-    const { setExercises, setCategory, setSports } = useContext(ActivitiesContext);
+    const { setCategory, setExercises, setSports, setCardio } = useContext(ActivitiesContext);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -21,7 +21,7 @@ const SearchBar = ({ category }) => {
         } else if (category === 'sports') {
             setPlaceholder('Search by sports name or category');
         } else if (category === 'cardio') {
-            setPlaceholder('Search by name');
+            setPlaceholder('Search by name or category');
         }
     }, [category]);
 
@@ -42,6 +42,11 @@ const SearchBar = ({ category }) => {
             } else if (category === 'sports') {
                 const result = searchSports(data.search);
                 setSports(result);
+                setCategory(category);
+                navigate(searchQueryUrl);
+            } else if (category === 'cardio') {
+                const result = searchCardio(data.search);
+                setCardio(result);
                 setCategory(category);
                 navigate(searchQueryUrl);
             }
