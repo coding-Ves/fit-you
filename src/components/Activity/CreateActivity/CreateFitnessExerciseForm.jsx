@@ -29,11 +29,16 @@ const CreateFitnessExerciseForm = ({ exercise }) => {
 
     const [goals, setGoals] = useState({});
     const [selectedGoal, setSelectedGoal] = useState('');
+    const [addedExerciseToGoal, setAddedExerciseToGoal] = useState(false);
 
     useEffect(() => {
         getGoalsByUsername(userData.username)
-            .then((snapshot) => setGoals(snapshot));
-    }, [userData.username]);
+            .then((snapshot) => {
+                const filteredByCategory = snapshot.filter(goal => goal?.goalType?.toLowerCase() === category);
+                setGoals(filteredByCategory);
+            });
+        setAddedExerciseToGoal(false);
+    }, [userData.username, category, addedExerciseToGoal]);
 
     const handleNumOfSetsChange = (event, value) => {
         setNumOfSets(value);
@@ -92,7 +97,21 @@ const CreateFitnessExerciseForm = ({ exercise }) => {
                 setIsLoading(false);
 
                 if (selectedGoal) {
-                    return addActivityToGoal(selectedGoal, id, category);
+                    const { goalProgress, goalTargetType } = goals.find(
+                        (goal) => goal.goalId === selectedGoal
+                    );
+                    const repetitions = formInputs.reduce((acc, curr) => {
+                        return acc + Number(curr.reps);
+                    }, 0);
+                    setAddedExerciseToGoal(true);
+                    return addActivityToGoal(
+                        selectedGoal,
+                        id,
+                        category,
+                        goalProgress,
+                        goalTargetType,
+                        repetitions
+                    );
                 }
             })
             .then(() => {

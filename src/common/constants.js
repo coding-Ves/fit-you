@@ -8,6 +8,8 @@ export const USER_ROLES = {
     banned: 3,
 };
 
+export const DAY_TO_MILLISECONDS = 86400000;
+
 export const DRAWER_WIDTH_OPEN = 240;
 
 export const DRAWER_WIDTH_CLOSED = 70;
@@ -72,3 +74,32 @@ export const SPORTS_CATEGORIES = {
     MOTORSPORTS: 'motorsports',
     OTHER: 'other',
 };
+
+export const GOAL_TYPES = ['Fitness', 'Cardio', 'Sports', 'Other'];
+
+export const GOAL_TARGET_TYPES = {
+    TOTAL_SESSIONS: 'Total sessions',
+    TOTAL_REPETITIONS: 'Total repetitions',
+    TOTAL_DISTANCE: 'Total distance',
+    TOTAL_MINUTES: 'Total minutes',
+    TOTAL_SECONDS: 'Total seconds',
+};
+
+export const GOAL_TYPES_TARGETS = {
+    Fitness: [
+        GOAL_TARGET_TYPES.TOTAL_SESSIONS,
+        GOAL_TARGET_TYPES.TOTAL_REPETITIONS,
+        GOAL_TARGET_TYPES.TOTAL_MINUTES,
+        GOAL_TARGET_TYPES.TOTAL_SECONDS,
+    ],
+    Cardio: [
+        GOAL_TARGET_TYPES.TOTAL_SESSIONS,
+        GOAL_TARGET_TYPES.TOTAL_DISTANCE,
+        GOAL_TARGET_TYPES.TOTAL_MINUTES,
+    ],
+    Sports: [GOAL_TARGET_TYPES.TOTAL_SESSIONS, GOAL_TARGET_TYPES.TOTAL_MINUTES],
+};
+
+
+export const PROGRESS_PIE_COLORS = ['#175075', '#9eb2c3'];
+

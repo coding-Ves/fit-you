@@ -11,19 +11,24 @@ import {
     Grid,
     TextField,
     Typography,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem,
 } from '@mui/material';
 
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import { addGoal } from '../../../firebase/services/goals.service';
 import goalValidationSchema from './goalValidationSchema';
 import AuthContext from '../../../contexts/AuthContext';
+import { GOAL_TYPES, GOAL_TYPES_TARGETS } from '../../../common/constants';
 
 const NewGoalForm = () => {
     const { userData } = useContext(AuthContext);
     const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate();
+    const [goalType, setGoalType] = useState('');
+    const [goalTargetType, setGoalTargetType] = useState('');
 
     // Responsible for Snackbar and Alert - Showing error  and success messages
     const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -43,21 +48,24 @@ const NewGoalForm = () => {
         resolver: yupResolver(goalValidationSchema),
     });
 
+    const handleGoalTypeChange = (event) => {
+        setGoalType(event.target.value);
+        setGoalTargetType(''); // Reset goalTargetType when goalType changes
+    };
+
+    const handleGoalTargetTypeChange = (event) => {
+        setGoalTargetType(event.target.value);
+    };
+
     const onSubmit = (data) => {
         setIsLoading(true);
-        console.log(
-            userData.username,
-            data.goalName,
-            data.description,
-            data.targetValue,
-            data.date
-        );
         addGoal(
             userData.username,
             data.goalName,
-            data.description,
-            data.targetValue,
-            data.date
+            data.goalType,
+            data.goalTargetType,
+            +data.targetValue,
+            +data.targetDate
         )
             .then(() => {
                 setSnackbarMessage('Goal added successfully!');
@@ -117,6 +125,51 @@ const NewGoalForm = () => {
                     >
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
+                                <FormControl fullWidth>
+                                    <InputLabel>Goal Type</InputLabel>
+                                    <Select
+                                        name='goalType'
+                                        id='goalType'
+                                        label='Goal Type'
+                                        required
+                                        {...register('goalType')}
+                                        value={goalType}
+                                        onChange={handleGoalTypeChange}
+                                    >
+                                        {GOAL_TYPES.map((type) => {
+                                            return (
+                                                <MenuItem key={type} value={type}>
+                                                    {type}
+                                                </MenuItem>
+                                            );
+                                        })}
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                            {goalType !== 'Other' && goalType && (
+                                <Grid item xs={12}>
+                                    <FormControl fullWidth>
+                                        <InputLabel>Goal Target Type</InputLabel>
+                                        <Select
+                                            name='goalTargetType'
+                                            id='goalTargetType'
+                                            label='Goal Target Type'
+                                            {...register('goalTargetType')}
+                                            value={goalTargetType}
+                                            onChange={handleGoalTargetTypeChange}
+                                        >
+                                            {GOAL_TYPES_TARGETS[goalType]?.map((type) => {
+                                                return (
+                                                    <MenuItem key={type} value={type}>
+                                                        {type}
+                                                    </MenuItem>
+                                                );
+                                            })}
+                                        </Select>
+                                    </FormControl>
+                                </Grid>
+                            )}
+                            <Grid item xs={12}>
                                 <TextField
                                     autoComplete='goalName'
                                     name='goalName'
@@ -124,23 +177,9 @@ const NewGoalForm = () => {
                                     fullWidth
                                     id='goalName'
                                     label='Goal Name'
-                                    autoFocus
                                     {...register('goalName')}
                                     error={!!errors.goalName}
                                     helperText={errors.goalName?.message}
-                                />
-                            </Grid>
-
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id='description'
-                                    label='Description'
-                                    name='description'
-                                    {...register('description')}
-                                    error={!!errors.description}
-                                    helperText={errors.description?.message}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -159,12 +198,12 @@ const NewGoalForm = () => {
                                 <TextField
                                     required
                                     fullWidth
-                                    id='date'
+                                    id='targetDate'
                                     label='Target Date'
-                                    name='date'
-                                    {...register('date')}
-                                    error={!!errors.date}
-                                    helperText={errors.date?.message}
+                                    name='targetDate'
+                                    {...register('targetDate')}
+                                    error={!!errors.targetDate}
+                                    helperText={errors.targetDate?.message}
                                 />
                             </Grid>
                         </Grid>

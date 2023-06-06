@@ -1,20 +1,17 @@
-import { get, orderByChild, push, query, ref, update, equalTo } from 'firebase/database';
+import { get, push, ref, update } from 'firebase/database';
 import { db } from '../firebase-config';
+import { GOAL_TARGET_TYPES } from '../../common/constants';
 
-export const addGoal = (
-    username,
-    goalName,
-    goalDescription,
-    targetValue,
-    targetDate
-) => {
+export const addGoal = (username, goalName, goalType, goalTargetType, targetValue, targetDate) => {
     return push(ref(db, 'goals'), {
-        username: username,
+        username,
         goalName,
-        goalDescription,
+        goalType,
+        goalTargetType,
         targetValue,
         targetDate,
         createdOn: Date.now(),
+        goalProgress: 0,
     }).then((result) => {
         // add the goal id to the goal and user goals objects
         const goalId = result.key;
@@ -32,7 +29,6 @@ export const getGoalById = (goalId) => {
         }
 
         const goal = result.val();
-        goal.createdOn = new Date(goal.createdOn).toLocaleString();
         !goal.activities
             ? (goal.activities = [])
             : (goal.activities = Object.keys(goal.activities));
@@ -46,18 +42,19 @@ export const getGoalsByUsername = (username) => {
             if (!result.exists()) return [];
 
             const goals = Object.values(result.val());
-
             const filteredGoals = goals.filter((goal) => goal.username === username);
-
-            filteredGoals.forEach((goal) => {
-                goal.createdOn = new Date(goal.createdOn).toLocaleString();
-            });
-
             return filteredGoals;
         });
 };
 
-export const addActivityToGoal = (goalId, activityId, category) => {
+export const addActivityToGoal = (
+    goalId,
+    activityId,
+    category,
+    goalProgress,
+    goalTargetType,
+    addedProgress
+) => {
     const updateData = {};
     updateData[`/goals/${goalId}/activities/${activityId}`] = true;
 
@@ -67,6 +64,21 @@ export const addActivityToGoal = (goalId, activityId, category) => {
         updateData[`/sportSessions/${activityId}/goals/${goalId}`] = true;
     } else if (category === 'cardio') {
         updateData[`/cardioSessions/${activityId}/goals/${goalId}`] = true;
+    }
+
+    switch (goalTargetType) {
+    case GOAL_TARGET_TYPES.TOTAL_SESSIONS:
+        updateData[`/goals/${goalId}/goalProgress`] = goalProgress + 1;
+        break;
+    case GOAL_TARGET_TYPES.TOTAL_REPETITIONS:
+        updateData[`/goals/${goalId}/goalProgress`] = goalProgress + addedProgress;
+        break;
+    case GOAL_TARGET_TYPES.TOTAL_DISTANCE:
+        updateData[`/goals/${goalId}/goalProgress`] = goalProgress + addedProgress;
+        break;
+    case GOAL_TARGET_TYPES.TOTAL_TIME:
+        updateData[`/goals/${goalId}/goalProgress`] = goalProgress + addedProgress;
+        break;
     }
 
     return update(ref(db), updateData);
