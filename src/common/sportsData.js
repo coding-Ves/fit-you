@@ -1,6 +1,5 @@
-import { UNSPLASH_RANDOM_URL } from './constants';
 import { v4 as uuidv4 } from 'uuid';
-import { SPORTS_CATEGORIES } from './constants';
+import { SPORTS_CATEGORIES, UNSPLASH_RANDOM_URL } from './constants';
 
 // structure
 // const sportsData = [
@@ -12,140 +11,15 @@ import { SPORTS_CATEGORIES } from './constants';
 //     },
 // ];
 
-// for the cardio section
-// // RUNNING
-// {
-//     id: uuidv4(),
-//     name: 'Marathon',
-//     imgUrl: `${UNSPLASH_RANDOM_URL}Marathon`,
-//     category: SPORTS_CATEGORIES.RUNNING,
-// },
-// {
-//     id: uuidv4(),
-//     name: 'Sprint',
-//     imgUrl: `${UNSPLASH_RANDOM_URL}Sprint`,
-//     category: SPORTS_CATEGORIES.RUNNING,
-// },
-
-// need to add more at some point
+// need to add more at some point :?
 const sportsData = [
+    // ACROBATIC
     {
         id: uuidv4(),
         name: 'Acrobatics',
         imgUrl: `${UNSPLASH_RANDOM_URL}Acrobatics`,
         category: SPORTS_CATEGORIES.ACROBATIC,
     },
-    {
-        id: uuidv4(),
-        name: 'Archery',
-        // imgUrl: 'https://images.unsplash.com/photo-1485802240079-a8245c843b95?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-        imgUrl: `${UNSPLASH_RANDOM_URL}Archery`,
-        category: SPORTS_CATEGORIES.ARCHERY,
-    },
-    {
-        id: uuidv4(),
-        name: 'Baseball',
-        // imgUrl: 'https://images.unsplash.com/photo-1521941651707-748bdbae77e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-        imgUrl: `${UNSPLASH_RANDOM_URL}Baseball`,
-        category: SPORTS_CATEGORIES.BALL,
-    },
-    {
-        id: uuidv4(),
-        name: 'Basketball',
-        imgUrl: `${UNSPLASH_RANDOM_URL}Basketball`,
-        category: SPORTS_CATEGORIES.BALL,
-    },
-    {
-        id: uuidv4(),
-        name: 'Climbing',
-        imgUrl: `${UNSPLASH_RANDOM_URL}Climbing`,
-        category: SPORTS_CATEGORIES.CLIMBING,
-    },
-    {
-        id: uuidv4(),
-        name: 'Cycling',
-        imgUrl: `${UNSPLASH_RANDOM_URL}Cycling`,
-        category: SPORTS_CATEGORIES.CYCLING,
-    },
-    {
-        id: uuidv4(),
-        name: 'Fencing',
-        imgUrl: `${UNSPLASH_RANDOM_URL}Fencing`,
-        category: SPORTS_CATEGORIES.COMBAT,
-    },
-    {
-        id: uuidv4(),
-        name: 'Gymnastics',
-        imgUrl: `${UNSPLASH_RANDOM_URL}Gymnastics`,
-        category: SPORTS_CATEGORIES.GYMNASTICS,
-    },
-    {
-        id: uuidv4(),
-        name: 'Ice Hockey',
-        imgUrl: `${UNSPLASH_RANDOM_URL}${encodeURIComponent('Ice Hockey')}`,
-        category: SPORTS_CATEGORIES.ICE,
-    },
-    {
-        id: uuidv4(),
-        name: 'Kite Surfing',
-        imgUrl: `${UNSPLASH_RANDOM_URL}${encodeURIComponent('Kite Surfing')}`,
-        category: SPORTS_CATEGORIES.KITE,
-    },
-    {
-        id: uuidv4(),
-        name: 'Mixed Martial Arts',
-        imgUrl: `${UNSPLASH_RANDOM_URL}${encodeURIComponent('Mixed Martial Arts')}`,
-        category: SPORTS_CATEGORIES.MIXED_DISCIPLINE,
-    },
-    {
-        id: uuidv4(),
-        name: 'Parkour',
-        imgUrl: `${UNSPLASH_RANDOM_URL}Parkour`,
-        category: SPORTS_CATEGORIES.PARKOUR,
-    },
-    {
-        id: uuidv4(),
-        name: 'Running',
-        imgUrl: `${UNSPLASH_RANDOM_URL}Running`,
-        category: SPORTS_CATEGORIES.RUNNING,
-    },
-    {
-        id: uuidv4(),
-        name: 'Sailing',
-        imgUrl: `${UNSPLASH_RANDOM_URL}Sailing`,
-        category: SPORTS_CATEGORIES.SAILING,
-    },
-    {
-        id: uuidv4(),
-        name: 'Snowboarding',
-        imgUrl: `${UNSPLASH_RANDOM_URL}Snowboarding`,
-        category: SPORTS_CATEGORIES.SNOW_SPORTS,
-    },
-    {
-        id: uuidv4(),
-        name: 'Water Polo',
-        imgUrl: `${UNSPLASH_RANDOM_URL}${encodeURIComponent('Water Polo')}`,
-        category: SPORTS_CATEGORIES.WATER,
-    },
-    {
-        id: uuidv4(),
-        name: 'Weightlifting',
-        imgUrl: `${UNSPLASH_RANDOM_URL}Weightlifting`,
-        category: SPORTS_CATEGORIES.WEIGHTLIFTING,
-    },
-    {
-        id: uuidv4(),
-        name: 'Motocross',
-        imgUrl: `${UNSPLASH_RANDOM_URL}Motocross`,
-        category: SPORTS_CATEGORIES.MOTORSPORTS,
-    },
-    {
-        id: uuidv4(),
-        name: 'Other Sport',
-        imgUrl: `${UNSPLASH_RANDOM_URL}Other Sport`,
-        category: SPORTS_CATEGORIES.OTHER,
-    },
-    // ACROBATIC
     {
         id: uuidv4(),
         name: 'Aerial Silks',
@@ -174,6 +48,12 @@ const sportsData = [
     // ARCHERY
     {
         id: uuidv4(),
+        name: 'Archery',
+        imgUrl: `${UNSPLASH_RANDOM_URL}Archery`,
+        category: SPORTS_CATEGORIES.ARCHERY,
+    },
+    {
+        id: uuidv4(),
         name: 'Target Archery',
         imgUrl: `${UNSPLASH_RANDOM_URL}${encodeURIComponent('Target Archery')}`,
         category: SPORTS_CATEGORIES.ARCHERY,
@@ -200,6 +80,18 @@ const sportsData = [
     // BALL
     {
         id: uuidv4(),
+        name: 'Baseball',
+        imgUrl: `${UNSPLASH_RANDOM_URL}Baseball`,
+        category: SPORTS_CATEGORIES.BALL,
+    },
+    {
+        id: uuidv4(),
+        name: 'Basketball',
+        imgUrl: `${UNSPLASH_RANDOM_URL}Basketball`,
+        category: SPORTS_CATEGORIES.BALL,
+    },
+    {
+        id: uuidv4(),
         name: 'Football',
         imgUrl: `${UNSPLASH_RANDOM_URL}Football`,
         category: SPORTS_CATEGORIES.BALL,
@@ -211,6 +103,12 @@ const sportsData = [
         category: SPORTS_CATEGORIES.BALL,
     },
     // CLIMBING
+    {
+        id: uuidv4(),
+        name: 'Climbing',
+        imgUrl: `${UNSPLASH_RANDOM_URL}Climbing`,
+        category: SPORTS_CATEGORIES.CLIMBING,
+    },
     {
         id: uuidv4(),
         name: 'Rock Climbing',
@@ -226,6 +124,12 @@ const sportsData = [
     // CYCLING
     {
         id: uuidv4(),
+        name: 'Cycling',
+        imgUrl: `${UNSPLASH_RANDOM_URL}Cycling`,
+        category: SPORTS_CATEGORIES.CYCLING,
+    },
+    {
+        id: uuidv4(),
         name: 'Mountain Biking',
         imgUrl: `${UNSPLASH_RANDOM_URL}Mountain Biking`,
         category: SPORTS_CATEGORIES.CYCLING,
@@ -239,6 +143,18 @@ const sportsData = [
     // COMBAT
     {
         id: uuidv4(),
+        name: 'Mixed Martial Arts',
+        imgUrl: `${UNSPLASH_RANDOM_URL}${encodeURIComponent('Mixed Martial Arts')}`,
+        category: SPORTS_CATEGORIES.COMBAT,
+    },
+    {
+        id: uuidv4(),
+        name: 'Fencing',
+        imgUrl: `${UNSPLASH_RANDOM_URL}Fencing`,
+        category: SPORTS_CATEGORIES.COMBAT,
+    },
+    {
+        id: uuidv4(),
         name: 'Boxing',
         imgUrl: `${UNSPLASH_RANDOM_URL}Boxing`,
         category: SPORTS_CATEGORIES.COMBAT,
@@ -250,6 +166,12 @@ const sportsData = [
         category: SPORTS_CATEGORIES.COMBAT,
     },
     // GYMNASTICS
+    {
+        id: uuidv4(),
+        name: 'Gymnastics',
+        imgUrl: `${UNSPLASH_RANDOM_URL}Gymnastics`,
+        category: SPORTS_CATEGORIES.GYMNASTICS,
+    },
     {
         id: uuidv4(),
         name: 'Artistic Gymnastics',
@@ -275,17 +197,23 @@ const sportsData = [
         imgUrl: `${UNSPLASH_RANDOM_URL}Ice Dancing`,
         category: SPORTS_CATEGORIES.ICE,
     },
+    {
+        id: uuidv4(),
+        name: 'Ice Hockey',
+        imgUrl: `${UNSPLASH_RANDOM_URL}Ice Hockey`,
+        category: SPORTS_CATEGORIES.ICE,
+    },
     // KITE
     {
         id: uuidv4(),
-        name: 'Kiteboarding',
-        imgUrl: `${UNSPLASH_RANDOM_URL}Kiteboarding`,
+        name: 'Kite Surfing',
+        imgUrl: `${UNSPLASH_RANDOM_URL}${encodeURIComponent('Kite Surfing')}`,
         category: SPORTS_CATEGORIES.KITE,
     },
     {
         id: uuidv4(),
-        name: 'Kitesurfing',
-        imgUrl: `${UNSPLASH_RANDOM_URL}Kitesurfing`,
+        name: 'Kiteboarding',
+        imgUrl: `${UNSPLASH_RANDOM_URL}Kiteboarding`,
         category: SPORTS_CATEGORIES.KITE,
     },
     // MIXED_DISCIPLINE
@@ -304,6 +232,12 @@ const sportsData = [
     // PARKOUR
     {
         id: uuidv4(),
+        name: 'Parkour',
+        imgUrl: `${UNSPLASH_RANDOM_URL}Parkour`,
+        category: SPORTS_CATEGORIES.PARKOUR,
+    },
+    {
+        id: uuidv4(),
         name: 'Freerunning',
         imgUrl: `${UNSPLASH_RANDOM_URL}Freerunning`,
         category: SPORTS_CATEGORIES.PARKOUR,
@@ -315,6 +249,12 @@ const sportsData = [
         category: SPORTS_CATEGORIES.PARKOUR,
     },
     // SAILING
+    {
+        id: uuidv4(),
+        name: 'Sailing',
+        imgUrl: `${UNSPLASH_RANDOM_URL}Sailing`,
+        category: SPORTS_CATEGORIES.SAILING,
+    },
     {
         id: uuidv4(),
         name: 'Yachting',
@@ -340,20 +280,13 @@ const sportsData = [
         imgUrl: `${UNSPLASH_RANDOM_URL}Snowboarding`,
         category: SPORTS_CATEGORIES.SNOW_SPORTS,
     },
-    // WALKING
-    {
-        id: uuidv4(),
-        name: 'Hiking',
-        imgUrl: `${UNSPLASH_RANDOM_URL}Hiking`,
-        category: SPORTS_CATEGORIES.WALKING,
-    },
-    {
-        id: uuidv4(),
-        name: 'Racewalking',
-        imgUrl: `${UNSPLASH_RANDOM_URL}Racewalking`,
-        category: SPORTS_CATEGORIES.WALKING,
-    },
     // WATER
+    {
+        id: uuidv4(),
+        name: 'Water Polo',
+        imgUrl: `${UNSPLASH_RANDOM_URL}${encodeURIComponent('Water Polo')}`,
+        category: SPORTS_CATEGORIES.WATER,
+    },
     {
         id: uuidv4(),
         name: 'Swimming',
@@ -367,6 +300,12 @@ const sportsData = [
         category: SPORTS_CATEGORIES.WATER,
     },
     // WEIGHTLIFTING
+    {
+        id: uuidv4(),
+        name: 'Weightlifting',
+        imgUrl: `${UNSPLASH_RANDOM_URL}Weightlifting`,
+        category: SPORTS_CATEGORIES.WEIGHTLIFTING,
+    },
     {
         id: uuidv4(),
         name: 'Powerlifting',
@@ -395,14 +334,14 @@ const sportsData = [
     // OTHER
     {
         id: uuidv4(),
-        name: 'Chess',
-        imgUrl: `${UNSPLASH_RANDOM_URL}Chess`,
+        name: 'Ultimate Frisbee',
+        imgUrl: `${UNSPLASH_RANDOM_URL}Ultimate Frisbee`,
         category: SPORTS_CATEGORIES.OTHER,
     },
     {
         id: uuidv4(),
-        name: 'Ultimate Frisbee',
-        imgUrl: `${UNSPLASH_RANDOM_URL}Ultimate Frisbee`,
+        name: 'Other Sport',
+        imgUrl: `${UNSPLASH_RANDOM_URL}Other Sport`,
         category: SPORTS_CATEGORIES.OTHER,
     },
 ];
