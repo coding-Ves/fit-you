@@ -6,7 +6,21 @@ import ProductFeatures from '../../components/Home/ProductFeatures/ProductFeatur
 
 const Home = () => {
     return (
-        <Grid container direction='column' spacing={2} align='center'>
+        <Grid
+            container
+            direction='column'
+            spacing={2}
+            align='center'
+            // style={{
+            //     backgroundImage:
+            //         "url('../../public/imgs/henry-co--odUkx8C2gg-unsplash.jpg')",
+            // }}
+            // sx={{
+            //     backgroundPosition: 'center',
+            //     backgroundSize: 'cover',
+            //     width: '100%',
+            // }}
+        >
             <Grid item xs={12} sm={6}>
                 <HeroBanner />
             </Grid>
