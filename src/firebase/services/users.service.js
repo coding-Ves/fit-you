@@ -1,14 +1,6 @@
-import {
-    equalTo,
-    get,
-    orderByChild,
-    query,
-    ref,
-    set,
-    update,
-} from 'firebase/database';
+import { equalTo, get, orderByChild, query, ref, set, update, } from 'firebase/database';
 import { db } from '../firebase-config';
-import { USER_ROLES } from '../../common/constants';
+// import { USER_ROLES } from '../../common/constants';
 import { RANDOM_AVATAR_STYLE } from '../../common/constants';
 import { getCardioSessionsByUsername } from './cardioSessions.service';
 import { getFitnessExercisesByUsername } from './fitnessExercises.service';
@@ -90,7 +82,15 @@ export const getUserActivities = (username) => {
         getCardioSessionsByUsername(username),
         getSportSessionsByUsername(username),
     ]).then(([fitnessExercises, cardioSessions, sportSessions]) => {
-        return [...fitnessExercises, ...cardioSessions, ...sportSessions];
+        const activities = [...fitnessExercises, ...cardioSessions, ...sportSessions];
+
+        activities.sort((a, b) => {
+            const dateA = new Date(a.createdOn);
+            const dateB = new Date(b.createdOn);
+            return dateB - dateA;
+        });
+
+        return activities;
     });
 };
 
