@@ -7,7 +7,13 @@ import Toolbar from '@mui/material/Toolbar';
 import { styled } from '@mui/material/styles';
 import { useState } from 'react';
 import { DRAWER_WIDTH_OPEN, DRAWER_WIDTH_CLOSED } from '../../common/constants';
-import { mainListItems, secondaryListItems } from './ListItems';
+import {
+    mainListItems,
+    physicalListItems,
+    mentalListItems,
+    wellnessListItems,
+    socialListItems,
+} from './ListItems';
 import { Box } from '@mui/material';
 
 const StyledDrawer = styled(MuiDrawer, {
@@ -50,12 +56,14 @@ const SideBarDrawer = () => {
             variant='permanent'
             open={open}
             sx={{ ml: { marginLeft } }}
+            // if the sidebar is open, then the main content should have a margin
+            // if the sidebar is closed, then the main content should not have a margin
         >
             <Toolbar
                 sx={{
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'flex-end',
+                    justifyContent: 'center',
                 }}
             >
                 <IconButton onClick={toggleDrawer}>
@@ -66,7 +74,13 @@ const SideBarDrawer = () => {
             <List component='nav'>
                 {mainListItems}
                 <Divider sx={{ my: 1 }} />
-                {secondaryListItems}
+                {physicalListItems}
+                <Divider sx={{ my: 1 }} />
+                {mentalListItems}
+                <Divider sx={{ my: 1 }} />
+                {wellnessListItems}
+                <Divider sx={{ my: 1 }} />
+                {socialListItems}
             </List>
         </StyledDrawer>
     );

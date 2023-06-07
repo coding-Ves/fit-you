@@ -10,9 +10,9 @@ export const USER_ROLES = {
 
 export const DAY_TO_MILLISECONDS = 86400000;
 
-export const DRAWER_WIDTH_OPEN = 240;
+export const DRAWER_WIDTH_OPEN = 220;
 
-export const DRAWER_WIDTH_CLOSED = 70;
+export const DRAWER_WIDTH_CLOSED = 20;
 
 export const RESULTS_PER_PAGE = 9;
 
@@ -100,6 +100,4 @@ export const GOAL_TYPES_TARGETS = {
     Sports: [GOAL_TARGET_TYPES.TOTAL_SESSIONS, GOAL_TARGET_TYPES.TOTAL_MINUTES],
 };
 
-
 export const PROGRESS_PIE_COLORS = ['#175075', '#9eb2c3'];
-
