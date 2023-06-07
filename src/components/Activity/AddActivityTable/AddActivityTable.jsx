@@ -1,51 +1,42 @@
-import { Box, Grid, Typography } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Accordion, AccordionDetails, AccordionSummary, Grid, Typography } from '@mui/material';
 import { ACTIVITY_CATEGORIES } from '../../../common/constants';
-import ActivityCategoryCard from '../ActivityCategoryCard/ActivityCategoryCard';
+import ActivityCategoryCard from './ActivityCategoryCard';
 
 const AddActivityTable = () => {
     return (
         <>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                }}
-            >
-                <Typography
-                    fontWeight={700}
-                    sx={{
-                        fontSize: '44px',
-                        '@media (max-width: 600px)': { fontSize: '30px' },
-                    }}
-                    mb='49px'
-                    textAlign='center'
+            <Accordion>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
                 >
-                    Add a new activity!
-                </Typography>
-                <Grid container spacing={4} justifyContent='center'>
-                    {ACTIVITY_CATEGORIES.map((category, index) => (
-                        <Grid item key={index}>
-                            <ActivityCategoryCard
-                                key={index}
-                                categoryName={category}
-                            />
-                        </Grid>
-                    ))}
-                </Grid>
-            </Box>
+                    <Typography
+                        fontWeight={700}
+                        sx={{
+                            fontSize: '20px',
+                            '@media (max-width: 600px)': { fontSize: '30px' },
+                        }}
+                    >
+                        Add a new activity!
+                    </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Grid container spacing={4} justifyContent='center'>
+                        {ACTIVITY_CATEGORIES.map((category, index) => (
+                            <Grid item key={index}>
+                                <ActivityCategoryCard
+                                    key={index}
+                                    categoryName={category}
+                                />
+                            </Grid>
+                        ))}
+                    </Grid>
+                </AccordionDetails>
+            </Accordion>
         </>
     );
 };
 
 export default AddActivityTable;
-
-{
-    /* <Stack>
-{ACTIVITY_CATEGORIES.map((category, index) => {
-    return (
-        <ActivityCategoryCard key={index} categoryName={category} />
-    );
-})}
-</Stack> */
-}
