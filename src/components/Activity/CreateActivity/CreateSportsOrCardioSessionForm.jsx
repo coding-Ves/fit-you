@@ -7,7 +7,7 @@ import { addCardioSession } from '../../../firebase/services/cardioSessions.serv
 import { addActivityToGoal, getGoalsByUsername } from '../../../firebase/services/goals.service';
 import { addSportSession } from '../../../firebase/services/sportSessions.service';
 
-const CreateSportsOrCardioSessionForm = ({ activity, category }) => {
+const CreateSportsOrCardioSessionForm = ({ activity, category, handleClose }) => {
     const { userData } = useContext(AuthContext);
     const { register, handleSubmit, reset } = useForm();
 
@@ -66,6 +66,10 @@ const CreateSportsOrCardioSessionForm = ({ activity, category }) => {
                     setSnackbarSeverity('success');
                     setSnackbarOpen(true);
                     reset();
+
+                    setTimeout(() => {
+                        handleClose();
+                    }, 1500);
                 })
                 .catch((error) => {
                     setIsLoading(false);
@@ -107,6 +111,10 @@ const CreateSportsOrCardioSessionForm = ({ activity, category }) => {
                     setSnackbarSeverity('success');
                     setSnackbarOpen(true);
                     reset();
+
+                    setTimeout(() => {
+                        handleClose();
+                    }, 1500);
                 })
                 .catch((error) => {
                     setIsLoading(false);
