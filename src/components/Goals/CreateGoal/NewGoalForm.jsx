@@ -15,6 +15,7 @@ import {
     InputLabel,
     Select,
     MenuItem,
+    Paper,
 } from '@mui/material';
 
 import { useContext, useState } from 'react';
@@ -85,9 +86,14 @@ const NewGoalForm = () => {
     };
 
     return (
-        <>
-            <Container component='main' maxWidth='xs'>
-                <CssBaseline />
+        <Box align='center'>
+            <Paper
+                variant='elevation'
+                elevation={4}
+                sx={{ width: 'fit-content', p: 2 }}
+                component='main'
+                maxWidth='xs'
+            >
                 <Snackbar
                     open={snackbarOpen}
                     autoHideDuration={3000}
@@ -138,7 +144,10 @@ const NewGoalForm = () => {
                                     >
                                         {GOAL_TYPES.map((type) => {
                                             return (
-                                                <MenuItem key={type} value={type}>
+                                                <MenuItem
+                                                    key={type}
+                                                    value={type}
+                                                >
                                                     {type}
                                                 </MenuItem>
                                             );
@@ -149,22 +158,31 @@ const NewGoalForm = () => {
                             {goalType !== 'Other' && goalType && (
                                 <Grid item xs={12}>
                                     <FormControl fullWidth>
-                                        <InputLabel>Goal Target Type</InputLabel>
+                                        <InputLabel>
+                                            Goal Target Type
+                                        </InputLabel>
                                         <Select
                                             name='goalTargetType'
                                             id='goalTargetType'
                                             label='Goal Target Type'
                                             {...register('goalTargetType')}
                                             value={goalTargetType}
-                                            onChange={handleGoalTargetTypeChange}
+                                            onChange={
+                                                handleGoalTargetTypeChange
+                                            }
                                         >
-                                            {GOAL_TYPES_TARGETS[goalType]?.map((type) => {
-                                                return (
-                                                    <MenuItem key={type} value={type}>
-                                                        {type}
-                                                    </MenuItem>
-                                                );
-                                            })}
+                                            {GOAL_TYPES_TARGETS[goalType]?.map(
+                                                (type) => {
+                                                    return (
+                                                        <MenuItem
+                                                            key={type}
+                                                            value={type}
+                                                        >
+                                                            {type}
+                                                        </MenuItem>
+                                                    );
+                                                }
+                                            )}
                                         </Select>
                                     </FormControl>
                                 </Grid>
@@ -217,8 +235,8 @@ const NewGoalForm = () => {
                         </Button>
                     </Box>
                 </Box>
-            </Container>
-        </>
+            </Paper>
+        </Box>
     );
 };
 

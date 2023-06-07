@@ -1,12 +1,19 @@
 /* eslint-disable react/prop-types */
-import { Button, Card, CardActions, CardContent, CardMedia, Divider, Typography } from '@mui/material';
+import {
+    Button,
+    Card,
+    CardActions,
+    CardContent,
+    CardMedia,
+    Divider,
+    Typography,
+} from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ACTIVITY_NAME_MAX_LENGTH } from '../../common/constants';
 import CreateActivityDialog from '../Activity/CreateActivity/CreateActivityDialog';
 
 const SearchResultCard = ({ activity }) => {
-
     const { category } = useParams();
     const [open, setOpen] = useState(false);
     const [image, setImage] = useState();
@@ -29,7 +36,7 @@ const SearchResultCard = ({ activity }) => {
             : activity.name;
 
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card variant='elevation' elevation={5} sx={{ maxWidth: 345 }}>
             <CardMedia
                 component='img'
                 alt={activity.name}
@@ -38,23 +45,28 @@ const SearchResultCard = ({ activity }) => {
                 loading='lazy'
             />
             <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant='h5' component='div'>
                     {shortenedActivityName}
                 </Typography>
 
                 {/* extra fields for fitness cards */}
                 {category === 'fitness' && (
-                    <Typography level="body3" sx={{ fontWeight: 'md', color: 'text.secondary' }}>
+                    <Typography
+                        level='body3'
+                        sx={{ fontWeight: 'md', color: 'text.secondary' }}
+                    >
                         Body part: {activity.bodyPart}
                     </Typography>
                 )}
-                <Divider orientation="vertical" />
+                <Divider orientation='vertical' />
                 {category === 'fitness' && (
-                    <Typography level="body3" sx={{ fontWeight: 'md', color: 'text.secondary' }}>
+                    <Typography
+                        level='body3'
+                        sx={{ fontWeight: 'md', color: 'text.secondary' }}
+                    >
                         Target: {activity.target}
                     </Typography>
                 )}
-
             </CardContent>
             <CardActions sx={{ justifyContent: 'space-between' }}>
                 <>
@@ -69,7 +81,11 @@ const SearchResultCard = ({ activity }) => {
                     </Button>
                 </>
 
-                <CreateActivityDialog open={open} handleClose={handleClose} activity={activity} />
+                <CreateActivityDialog
+                    open={open}
+                    handleClose={handleClose}
+                    activity={activity}
+                />
             </CardActions>
         </Card>
     );

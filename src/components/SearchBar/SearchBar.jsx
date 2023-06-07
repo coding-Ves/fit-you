@@ -1,23 +1,36 @@
 import SearchIcon from '@mui/icons-material/Search';
-import { Box, Button, InputAdornment, Stack, TextField, Typography } from '@mui/material';
+import {
+    Box,
+    Button,
+    InputAdornment,
+    Stack,
+    TextField,
+    Typography,
+} from '@mui/material';
 import PropTypes from 'prop-types';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { ActivitiesContext } from '../../contexts/ActivitiesContext';
-import { searchCardio, searchFitness, searchSports } from './helpers/searchBarHelpers';
+import {
+    searchCardio,
+    searchFitness,
+    searchSports,
+} from './helpers/searchBarHelpers';
 
 const SearchBar = ({ category }) => {
-
     const { handleSubmit, register, reset } = useForm();
     // const [search, setSearch] = useState('');
     const [placeholder, setPlaceholder] = useState('Search');
-    const { setCategory, setExercises, setSports, setCardio } = useContext(ActivitiesContext);
+    const { setCategory, setExercises, setSports, setCardio } =
+        useContext(ActivitiesContext);
     const navigate = useNavigate();
 
     useEffect(() => {
         if (category === 'fitness') {
-            setPlaceholder('Search by name, target muscle, body part or equipment');
+            setPlaceholder(
+                'Search by name, target muscle, body part or equipment'
+            );
         } else if (category === 'sports') {
             setPlaceholder('Search by sports name or category');
         } else if (category === 'cardio') {
@@ -33,12 +46,11 @@ const SearchBar = ({ category }) => {
             const searchQueryUrl = `/search/${category}?query=${encodedSearch}`;
 
             if (category === 'fitness') {
-                searchFitness(data.search)
-                    .then((result) => {
-                        setExercises(result);
-                        setCategory(category);
-                        navigate(searchQueryUrl);
-                    });
+                searchFitness(data.search).then((result) => {
+                    setExercises(result);
+                    setCategory(category);
+                    navigate(searchQueryUrl);
+                });
             } else if (category === 'sports') {
                 const result = searchSports(data.search);
                 setSports(result);
@@ -63,11 +75,20 @@ const SearchBar = ({ category }) => {
     };
 
     return (
-        <Stack alignItems="center" mt="37px" justifyContent="center" p="20px">
-            <Typography fontWeight={700} sx={{ fontSize: '44px', '@media (max-width: 600px)': { fontSize: '30px' } }} mb="49px" textAlign="center">
+        <Stack alignItems='center' mt='70px' justifyContent='center' p='20px'>
+            <Typography
+                fontWeight={700}
+                sx={{
+                    fontSize: '44px',
+                    '@media (max-width: 600px)': { fontSize: '30px' },
+                }}
+                mb='49px'
+                textAlign='center'
+            >
                 {`Pick a ${category}-related activity!`}
             </Typography>
-            <Box position="relative"
+            <Box
+                position='relative'
                 component='form'
                 onSubmit={handleSubmit(handleSearch)}
                 sx={{
@@ -80,14 +101,14 @@ const SearchBar = ({ category }) => {
                     {...register('search')}
                     onKeyDown={handleKeyDown}
                     placeholder={placeholder}
-                    type="text"
+                    type='text'
                     sx={{
                         width: '100%',
                         maxWidth: '600px',
                     }}
                     InputProps={{
                         endAdornment: (
-                            <InputAdornment position="end">
+                            <InputAdornment position='end'>
                                 <Button type='submit'>
                                     <SearchIcon />
                                 </Button>
@@ -96,7 +117,7 @@ const SearchBar = ({ category }) => {
                     }}
                 />
             </Box>
-        </Stack >
+        </Stack>
     );
 };
 

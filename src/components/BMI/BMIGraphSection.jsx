@@ -14,12 +14,12 @@ export const BMIGraphSection = ({ userData }) => {
     }
 
     return (
-        <Card sx={{ m: 2, p: 1 }}>
+        <Paper variant='elevation' elevation={4} sx={{ m: 2, p: 1 }}>
             <Typography variant='h4' textAlign='center'>
                 BMI: {userData.bmi}
             </Typography>
             <BMIGraph userData={userData} />
-        </Card>
+        </Paper>
     );
 };
 

@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Grid, Paper, Typography } from '@mui/material';
 import SingleActiveGoalCard from '../SingleActiveGoalCard/SingleActiveGoalCard';
 import { useEffect, useState } from 'react';
 import { getGoalsByUsername } from '../../../firebase/services/goals.service';
@@ -16,13 +16,7 @@ const ActiveGoalsBoard = ({ username }) => {
     // TODO - currently, all goals are displayed, regardless if they are active or not
 
     return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-            }}
-        >
+        <>
             <Typography
                 fontWeight={700}
                 sx={{
@@ -41,7 +35,7 @@ const ActiveGoalsBoard = ({ username }) => {
                     </Grid>
                 ))}
             </Grid>
-        </Box>
+        </>
     );
 };
 

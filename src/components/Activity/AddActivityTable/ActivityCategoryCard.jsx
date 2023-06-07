@@ -1,12 +1,30 @@
 /* eslint-disable react/prop-types */
 import AddIcon from '@mui/icons-material/Add';
-import { Box, Card, CardContent, CardMedia, Fab, Typography, } from '@mui/material';
+import {
+    Box,
+    Card,
+    CardContent,
+    CardMedia,
+    Fab,
+    Typography,
+    Paper,
+} from '@mui/material';
 import { UNSPLASH_RANDOM_URL } from '../../../common/constants';
 
 const ActivityCategoryCard = ({ categoryName }) => {
     return (
-        <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-            <CardContent sx={{ flexGrow: 1 }}>
+        <Card
+            variant='elevation'
+            elevation={5}
+            sx={{
+                height: '100%',
+                minHeight: '290px',
+                display: 'flex',
+                flexDirection: 'column',
+                pt: 2,
+            }}
+        >
+            <CardContent>
                 <Typography variant='h6'>
                     {categoryName.toUpperCase()}
                 </Typography>
@@ -32,17 +50,30 @@ const ActivityCategoryCard = ({ categoryName }) => {
                         width: '100%',
                         height: '100%',
                         objectFit: 'cover',
+                        minHeight: '198px',
                     }}
                 />
             </Box>
 
-            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 'auto' }}>
+            <Box
+                variant='elevation'
+                elevation={7}
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    mt: 'auto',
+                }}
+            >
                 <Fab
                     href={`/search/${categoryName}`}
-                    variant='contained'
+                    // Add a white glow around the button
+                    variant='circular'
+                    elevation={4}
                     size='sm'
-                    backgroundColor='secondary'
-                    sx={{ fontWeight: 600 }}
+                    sx={{
+                        fontWeight: 600,
+                        mb: 1,
+                    }}
                     color='primary'
                     aria-label='add'
                 >

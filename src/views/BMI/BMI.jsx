@@ -1,11 +1,10 @@
-import { Box, Container, Grid, Paper, TextField } from '@mui/material';
+import { Box, Paper } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 
-import SideBarDrawer from '../../components/SideBarDrawer/SideBarDrawer';
-import HealthInfo from '../../components/Profile/ProfileDescription/HealthInfo/HealthInfo';
-import AuthContext from '../../contexts/AuthContext';
-import BMIGraph from '../../components/BMI/BMIGraph';
 import { BMIGraphSection } from '../../components/BMI/BMIGraphSection';
+import HealthInfo from '../../components/Profile/ProfileDescription/HealthInfo/HealthInfo';
+import SideBarDrawer from '../../components/SideBarDrawer/SideBarDrawer';
+import AuthContext from '../../contexts/AuthContext';
 
 const BMI = () => {
     const { userData } = useContext(AuthContext);
@@ -16,12 +15,12 @@ const BMI = () => {
     }, [userData]);
 
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box variant='elevation' elevation={2} sx={{ display: 'flex' }}>
             <SideBarDrawer />
-            <Paper sx={{ p: 1, m: 1 }}>
+            <Paper variant='elevation' elevation={2} sx={{ p: 1, m: 1 }}>
                 <BMIGraphSection userData={user} />
             </Paper>
-            <Paper sx={{ p: 1, m: 1 }}>
+            <Paper variant='elevation' elevation={2} sx={{ p: 1, m: 1 }}>
                 <HealthInfo userData={user} />
             </Paper>
         </Box>

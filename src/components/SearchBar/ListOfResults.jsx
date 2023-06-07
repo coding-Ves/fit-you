@@ -1,4 +1,4 @@
-import { Box, Grid, Pagination, Stack } from '@mui/material';
+import { Box, Grid, Pagination, Paper, Stack } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useContext, useEffect, useState } from 'react';
 import { RESULTS_PER_PAGE } from '../../common/constants';
@@ -24,8 +24,12 @@ const ListOfResults = ({ category }) => {
 
     // For the pagination
     const indexOfLastActivityOnPage = currentPage * RESULTS_PER_PAGE;
-    const indexOfFirstActivityOnPage = indexOfLastActivityOnPage - RESULTS_PER_PAGE;
-    const activitiesToShow = currentActivities.slice(indexOfFirstActivityOnPage, indexOfLastActivityOnPage);
+    const indexOfFirstActivityOnPage =
+        indexOfLastActivityOnPage - RESULTS_PER_PAGE;
+    const activitiesToShow = currentActivities.slice(
+        indexOfFirstActivityOnPage,
+        indexOfLastActivityOnPage
+    );
 
     const handlePageChange = (event, value) => {
         setCurrentPage(value);
@@ -46,7 +50,14 @@ const ListOfResults = ({ category }) => {
                 >
                     <Grid container spacing={2} ml={0}>
                         {activitiesToShow.map((activity) => (
-                            <Grid item xs={12} sm={6} md={4} key={activity.id}>
+                            <Grid
+                                item
+                                xs={12}
+                                sm={6}
+                                md={4}
+                                key={activity.id}
+                                mb={3}
+                            >
                                 <SearchResultCard activity={activity} />
                             </Grid>
                         ))}
