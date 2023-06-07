@@ -28,23 +28,20 @@ const UserSearchCard = ({ user: singleUser }) => {
             : singleUser.username;
 
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 345 }} variant='elevation' elevation={5}>
             <Grid>
                 <Avatar
+                    variant='rounded'
                     sx={{
-                        mt: '10px',
-                        ml: 'auto',
-                        mr: 'auto',
                         width: '150px',
                         height: '150px',
                         // border: '1px solid',
                         // borderColor: 'primary.main',
                         // borderRadius: '5px',
                         width: 'fit-content',
-                        p: '5px',
+                        m: 2,
                     }}
                     src={singleUser.avatarURL}
-                    variant='rounded'
                 />
                 <CardContent align='center'>
                     <Typography

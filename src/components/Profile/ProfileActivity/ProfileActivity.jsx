@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { Tabs, Tab, Typography, Box, Card } from '@mui/material';
+import { Tabs, Tab, Typography, Box, Card, Paper } from '@mui/material';
 
 import Achievements from '../Achievements/Achievements';
 import ActivitiesTable from '../../Activity/ActivitiesTable/ActivitiesTable';
@@ -51,7 +51,7 @@ export const ProfileActivity = ({ userData: userProfileData }) => {
     };
 
     return (
-        <Card sx={{ p: 2, width: '100%' }}>
+        <Paper variant='elevation' elevation={1} sx={{ p: 2, width: '100%' }}>
             <Box
                 sx={{
                     borderBottom: 1,
@@ -82,7 +82,7 @@ export const ProfileActivity = ({ userData: userProfileData }) => {
             <TabPanel value={value} index={3}>
                 <FollowMain userData={userProfileData} />
             </TabPanel>
-        </Card>
+        </Paper>
     );
 };
 

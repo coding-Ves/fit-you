@@ -1,4 +1,4 @@
-import { Box, Grid, Pagination, Stack } from '@mui/material';
+import { Box, Grid, Pagination, Paper, Stack } from '@mui/material';
 import { useContext, useState } from 'react';
 import { RESULTS_PER_PAGE } from '../../common/constants';
 import UserSearchCard from './../Friends/UserSearchCard';
@@ -19,32 +19,30 @@ const UserList = ({ followUserList }) => {
     };
 
     return (
-        <>
-            <Box id='users' margin={{ lg: '10px', xs: '5px' }} p='5px'>
-                <Grid container spacing={2}>
-                    {currentUsersOnPage.map((user) => (
-                        <Grid item xs={12} sm={6} md={4} key={users.uid}>
-                            <UserSearchCard user={user} />
-                        </Grid>
-                    ))}
-                </Grid>
+        <Box id='users'>
+            <Grid container spacing={2}>
+                {currentUsersOnPage.map((user) => (
+                    <Grid item xs={12} sm={6} md={4} key={users.uid}>
+                        <UserSearchCard user={user} />
+                    </Grid>
+                ))}
+            </Grid>
 
-                <Stack alignItems='center'>
-                    {followUserList.length > RESULTS_PER_PAGE && (
-                        <Pagination
-                            color='secondary'
-                            shape='rounded'
-                            size='large'
-                            count={Math.ceil(
-                                followUserList.length / RESULTS_PER_PAGE
-                            )}
-                            page={currentPage}
-                            onChange={handlePageChange}
-                        />
-                    )}
-                </Stack>
-            </Box>
-        </>
+            <Stack alignItems='center'>
+                {followUserList.length > RESULTS_PER_PAGE && (
+                    <Pagination
+                        color='secondary'
+                        shape='rounded'
+                        size='large'
+                        count={Math.ceil(
+                            followUserList.length / RESULTS_PER_PAGE
+                        )}
+                        page={currentPage}
+                        onChange={handlePageChange}
+                    />
+                )}
+            </Stack>
+        </Box>
     );
 };
 

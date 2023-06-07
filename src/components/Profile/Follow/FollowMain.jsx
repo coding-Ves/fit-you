@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, Grid, Typography } from '@mui/material';
+import { Card, CardContent, Grid, Typography, Paper } from '@mui/material';
 import FollowUser from './FollowUsers';
 import { useState } from 'react';
 
@@ -10,19 +10,21 @@ const FollowMain = ({ userData }) => {
         userData?.following && Object.keys(userData?.following).length > 0;
 
     return (
-        <Card>
-            <CardContent>
-                <Grid container spacing={2}>
-                    <Grid item xs={6}>
+        <>
+            <Grid container spacing={2}>
+                <Grid item xs={6}>
+                    <Paper variant='elevation' elevation={2} sx={{ p: 3 }}>
                         <Typography variant='h5'>Followers</Typography>
                         {hasFollowers ? (
                             <FollowUser followUsers={userData?.followers} />
                         ) : (
                             <Typography variant='h6'>No followers</Typography>
                         )}
-                    </Grid>
+                    </Paper>
+                </Grid>
 
-                    <Grid item xs={6} sx={{ backgroundColor: '#f9f9f9' }}>
+                <Grid item xs={6} sx={{ p: 2 }}>
+                    <Paper variant='elevation' elevation={2} sx={{ p: 3 }}>
                         <Typography variant='h5'>Following</Typography>
                         {hasFollowing ? (
                             <FollowUser followUsers={userData?.following} />
@@ -31,10 +33,10 @@ const FollowMain = ({ userData }) => {
                                 Following No one
                             </Typography>
                         )}
-                    </Grid>
+                    </Paper>
                 </Grid>
-            </CardContent>
-        </Card>
+            </Grid>
+        </>
     );
 };
 

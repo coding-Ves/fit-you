@@ -1,6 +1,5 @@
-import { useState, useContext } from 'react';
-import PropTypes from 'prop-types';
-import { Tabs, Tab, Typography, Box, Card } from '@mui/material';
+import { Box, Paper, Tab, Tabs, Typography } from '@mui/material';
+import { useState } from 'react';
 
 import AccountInfo from './AccountInfo/AccountInfo';
 import HealthInfo from './HealthInfo/HealthInfo';
@@ -40,7 +39,7 @@ export const ProfileDescription = ({ userData }) => {
     };
 
     return (
-        <Card sx={{ p: 2, width: '100%' }}>
+        <Paper variant='elevation' elevation={3} sx={{ p: 2, width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs
                     value={value}
@@ -64,7 +63,7 @@ export const ProfileDescription = ({ userData }) => {
             {/* <TabPanel value={value} index={2}>
                 Item Three
             </TabPanel> */}
-        </Card>
+        </Paper>
     );
 };
 

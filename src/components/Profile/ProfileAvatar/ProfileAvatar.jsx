@@ -19,8 +19,8 @@ import { auth } from '../../../firebase/firebase-config';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '../../../firebase/firebase-config';
 import { updateUserAvatar } from '../../../firebase/services/users.service';
-import errorHandler from './../../Authentication/ErrorHandling/errors.services';
 import FollowButton from '../FollowButton/FollowButton';
+import errorHandler from './../../Authentication/ErrorHandling/errors.services';
 
 export const ProfileAvatar = ({ userData }) => {
     // Context and State
@@ -140,18 +140,20 @@ export const ProfileAvatar = ({ userData }) => {
                     </Alert>
                 </Snackbar>
                 <Paper
+                    variant='elevation'
+                    elevation={3}
                     sx={{
                         p: 2,
-
+                        m: 1,
+                        width: '60%',
                         width: '100%',
-                        height: '100%',
                     }}
                 >
                     <Avatar
                         sx={{
-                            width: '150px',
-                            height: '150px',
-                            mb: 2,
+                            width: '200px',
+                            height: '200px',
+                            m: 2,
                         }}
                         src={userData?.avatarURL}
                         alt={userData?.username}
@@ -159,68 +161,84 @@ export const ProfileAvatar = ({ userData }) => {
                     >
                         {userData.username}
                     </Avatar>
-                    <Typography gutterBottom variant='h5'>
+                    <Typography gutterBottom variant='h4'>
                         {userData.username}
                     </Typography>
-                </Paper>
 
-                {userData.uid === user.uid ? (
-                    <Box mt={3}>
-                        {editAvatar ? (
-                            <Box
-                                display='flex'
-                                flexDirection='column'
-                                gap={2}
-                                justifyContent='center'
-                                alignItems='center'
-                                component='form'
-                                onSubmit={handleSubmit(onSubmit)}
-                            >
-                                <FormControl error={!!errors?.file}>
-                                    <Input
-                                        type='file'
-                                        name='file'
-                                        id='file'
-                                        accept='image/*'
-                                        {...register('file')}
-                                    />
-                                    <FormHelperText>
-                                        {errors.file?.message}
-                                    </FormHelperText>
-                                </FormControl>
+                    {userData.uid === user.uid ? (
+                        <Paper
+                            variant='outlined'
+                            p={3}
+                            mt={3}
+                            display='flex'
+                            sx={{ width: '50%' }}
+                        >
+                            {editAvatar ? (
                                 <Box
-                                    mt={1}
+                                    p={1}
                                     display='flex'
-                                    gap={3}
+                                    flexDirection='column'
+                                    gap={2}
                                     justifyContent='center'
+                                    alignItems='center'
+                                    component='form'
+                                    onSubmit={handleSubmit(onSubmit)}
                                 >
-                                    <Button
-                                        type='submit'
-                                        variant='contained'
-                                        color='primary'
-                                    >
-                                        Submit
-                                    </Button>
-                                    <Button
-                                        variant='outlined'
-                                        color='primary'
-                                        onClick={handleCancelEditAvatar}
-                                    >
-                                        Cancel
-                                    </Button>
+                                    <FormControl error={!!errors?.file}>
+                                        <Input
+                                            type='file'
+                                            name='file'
+                                            id='file'
+                                            accept='image/*'
+                                            {...register('file')}
+                                        />
+                                        <FormHelperText>
+                                            {errors.file?.message}
+                                        </FormHelperText>
+                                    </FormControl>
+                                    <Box display='flex' gap={2} mb={1}>
+                                        <Button
+                                            type='submit'
+                                            variant='contained'
+                                            color='primary'
+                                            ml={2}
+                                        >
+                                            Submit
+                                        </Button>
+                                        <Button
+                                            variant='outlined'
+                                            color='primary'
+                                            onClick={handleCancelEditAvatar}
+                                        >
+                                            Cancel
+                                        </Button>
+                                    </Box>
                                 </Box>
-                            </Box>
-                        ) : (
-                            <Button onClick={handleEditAvatar}>
-                                Edit Avatar
-                            </Button>
-                        )}
-                    </Box>
-                ) : (
-                    <Box mt={3}>
-                        <FollowButton userToFollow={userData?.username} />
-                    </Box>
-                )}
+                            ) : (
+                                <Paper>
+                                    <Button
+                                        variant='contained'
+                                        onClick={handleEditAvatar}
+                                        sx={{ width: '100%' }}
+                                    >
+                                        Edit Avatar
+                                    </Button>
+                                </Paper>
+                            )}
+                        </Paper>
+                    ) : (
+                        <Paper
+                            variant='outlined'
+                            mt={3}
+                            sx={{ width: 'fit-content' }}
+                        >
+                            <FollowButton
+                                p={3}
+                                userToFollow={userData?.username}
+                            />
+                        </Paper>
+                    )}
+                </Paper>
             </Box>
         </>
     );
