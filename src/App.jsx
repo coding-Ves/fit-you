@@ -12,6 +12,7 @@ import AuthContext from './contexts/AuthContext';
 import { auth } from './firebase/firebase-config';
 import { getUserData } from './firebase/services/users.service';
 import ScrollToTop from './components/NavBar/ScrollToTop';
+import { Loader } from './components/Loader/Loader';
 const App = () => {
     const [user, isLoading] = useAuthState(auth);
     const [theme, setTheme] = useState(lightTheme);
@@ -49,6 +50,10 @@ const App = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user]);
 
+    if (isLoading) {
+        return <Loader />;
+    }
+
     return (
         <>
             <AuthContext.Provider
@@ -57,6 +62,7 @@ const App = () => {
                 <ThemeProvider theme={theme}>
                     <CssBaseline />
                     <NavBar onThemeChange={handleThemeChange} />
+                    {isLoading && <Loader />}
                     <AppRouter />
                     <ScrollToTop />
                 </ThemeProvider>
