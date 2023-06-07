@@ -11,6 +11,7 @@ import Register from '../../views/Register/Register';
 import RegisterHealth from '../../views/Register/RegisterHealth';
 import Search from '../../views/Search/Search';
 import FindFriends from '../../views/FindFriends/FindFriends';
+import BMI from '../../views/BMI/BMI';
 
 export const AppRouter = () => {
     return (
@@ -23,6 +24,7 @@ export const AppRouter = () => {
             <Route path='/profile/:username' element={<Profile />} />
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/friends' element={<FindFriends />} />
+            <Route path='/bmi' element={<BMI />} />
             <Route path='/my-activity' element={<MyActivity />} />
             <Route path='/my-goals' element={<MyGoals />} />
             <Route path='/search/:category' element={<Search />} />

@@ -1,4 +1,4 @@
-import { Grid, Card, CardContent, Typography } from '@mui/material';
+import { Grid, Card, CardContent, Typography, Paper } from '@mui/material';
 import {} from '@mui/icons-material';
 import {
     EmojiEvents,
@@ -20,7 +20,7 @@ export const Achievements = ({ userData }) => {
     const achievements = achievementChecker(userData);
 
     return (
-        <Card align='center'>
+        <Paper align='center'>
             <Typography mb={3} variant='h4'>
                 Achievements
             </Typography>
@@ -41,7 +41,7 @@ export const Achievements = ({ userData }) => {
                     </Grid>
                 ))}
             </Grid>
-        </Card>
+        </Paper>
     );
 };
 

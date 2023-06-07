@@ -1,6 +1,7 @@
 import { ArrowLeft } from '@mui/icons-material';
 import { Box, Container, Button, Typography, Avatar } from '@mui/material';
 import { NOT_FOUND_IMAGE } from '../../common/constants';
+import { Link } from 'react-router-dom';
 
 const NotFound = () => {
     return (
@@ -49,8 +50,13 @@ const NotFound = () => {
                             This isn't where we wanted to go, are we lost? Let's
                             go back to safety.
                         </Typography>
-                        <Button href='/' sx={{ mt: 3 }} variant='contained'>
-                            Go back to dashboard <ArrowLeft />
+                        <Button
+                            as={Link}
+                            to='/dashboard'
+                            sx={{ mt: 3 }}
+                            variant='contained'
+                        >
+                            Go back to dashboard
                         </Button>
                     </Box>
                 </Container>

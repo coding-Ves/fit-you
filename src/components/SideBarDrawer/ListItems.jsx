@@ -1,3 +1,17 @@
+import {
+    Calculate,
+    DirectionsRun,
+    FitnessCenter,
+    LocalDining,
+    RunCircle,
+    RunningWithErrors,
+    SelfImprovement,
+    Spa,
+    Sports,
+    SportsBar,
+    SportsBasketball,
+    WaterDrop,
+} from '@mui/icons-material';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import FitnessCenterRoundedIcon from '@mui/icons-material/FitnessCenterRounded';
@@ -13,7 +27,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 export const mainListItems = (
-    <React.Fragment>
+    <>
         <ListItemButton component={Link} to='/dashboard'>
             <ListItemIcon>
                 <DashboardIcon />
@@ -32,44 +46,83 @@ export const mainListItems = (
             </ListItemIcon>
             <ListItemText primary='My Goals' />
         </ListItemButton>
-        <ListItemButton>
-            <ListItemIcon>
-                <KitchenRoundedIcon />
-            </ListItemIcon>
-            <ListItemText primary='Diet' />
-        </ListItemButton>
-
-        <ListItemButton>
-            <ListItemIcon>
-                <BarChartIcon />
-            </ListItemIcon>
-            <ListItemText primary='BMI' />
-        </ListItemButton>
-    </React.Fragment>
+    </>
 );
 
-export const secondaryListItems = (
-    <React.Fragment>
-        <ListSubheader component='div' inset>
-            Social
-        </ListSubheader>
+export const physicalListItems = (
+    <>
+        {/* <ListSubheader>Physical</ListSubheader> */}
+        <ListItemButton component={Link} to='/search/fitness'>
+            <ListItemIcon>
+                <FitnessCenter />
+            </ListItemIcon>
+            <ListItemText primary='Fitness' />
+        </ListItemButton>
+        <ListItemButton component={Link} to='/search/sports'>
+            <ListItemIcon>
+                <SportsBasketball />
+            </ListItemIcon>
+            <ListItemText primary='Sports' />
+        </ListItemButton>
+        <ListItemButton component={Link} to='/search/cardio'>
+            <ListItemIcon>
+                <DirectionsRun />
+            </ListItemIcon>
+            <ListItemText primary='Cardio' />
+        </ListItemButton>
+    </>
+);
+
+export const socialListItems = (
+    <>
+        {/* <ListSubheader>Connect</ListSubheader> */}
         <ListItemButton component={Link} to='/friends'>
             <ListItemIcon>
                 <GroupsRoundedIcon />
             </ListItemIcon>
-            <ListItemText primary='Friends' />
+            <ListItemText primary='Find Friends' />
         </ListItemButton>
-        <ListItemButton>
+    </>
+);
+
+export const wellnessListItems = (
+    <>
+        {/* <ListSubheader>Wellness</ListSubheader> */}
+        <ListItemButton component={Link} to='/bmi'>
             <ListItemIcon>
-                <FitnessCenterRoundedIcon />
+                <Calculate />
             </ListItemIcon>
-            <ListItemText primary='Shared activities' />
+            <ListItemText primary='BMI' />
         </ListItemButton>
-        <ListItemButton>
+        <ListItemButton component={Link} to='/water'>
             <ListItemIcon>
-                <TrackChangesRoundedIcon />
+                <WaterDrop />
             </ListItemIcon>
-            <ListItemText primary='Shared goals' />
+            <ListItemText primary='Water' />
         </ListItemButton>
-    </React.Fragment>
+        <ListItemButton component={Link} to='/diet'>
+            <ListItemIcon>
+                <LocalDining />
+            </ListItemIcon>
+            <ListItemText primary='Diet' />
+        </ListItemButton>
+    </>
+);
+
+export const mentalListItems = (
+    <>
+        {/* <ListSubheader>Mental Health</ListSubheader> */}
+        <ListItemButton component={Link} to='/meditation'>
+            <ListItemIcon>
+                <SelfImprovement />
+            </ListItemIcon>
+            <ListItemText primary='Meditation' />
+        </ListItemButton>
+        <ListItemButton component={Link} to='/Yoga'>
+            <ListItemIcon>
+                <Spa />
+            </ListItemIcon>
+            <ListItemText primary='Yoga' />
+        </ListItemButton>
+    </>
 );

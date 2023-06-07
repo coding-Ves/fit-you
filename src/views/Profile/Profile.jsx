@@ -1,4 +1,4 @@
-import { CircularProgress, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import * as React from 'react';
 import ProfileAvatar from '../../components/Profile/ProfileAvatar/ProfileAvatar';
 import ProfileDescription from '../../components/Profile/ProfileDescription/ProfileDescription.jsx';
@@ -9,6 +9,7 @@ import { getUserByUsername } from '../../firebase/services/users.service';
 import Achievements from '../../components/Profile/Achievements/Achievements';
 import ProfileInformation from '../../components/Profile/ProfileInformation/ProfileInformation';
 import ProfileActivity from '../../components/Profile/ProfileActivity/ProfileActivity';
+import Loader from '../../components/Loader/Loader';
 
 const Profile = () => {
     const [userData, setUserData] = useState({});
@@ -36,7 +37,7 @@ const Profile = () => {
     return (
         <>
             {isLoading ? (
-                <CircularProgress />
+                <Loader />
             ) : (
                 <Grid align='center' spacing={2}>
                     <ProfileInformation userData={userData} />
