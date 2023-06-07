@@ -129,10 +129,10 @@ const LoginForm = () => {
                         autoComplete='current-password'
                         {...register('password')}
                     />
-                    <FormControlLabel
+                    {/* <FormControlLabel
                         control={<Checkbox value='remember' color='primary' />}
                         label='Remember me'
-                    />
+                    /> */}
                     <Button
                         type='submit'
                         variant='contained'
@@ -143,11 +143,11 @@ const LoginForm = () => {
                         Sign In
                     </Button>
                     <Grid container>
-                        <Grid item xs>
+                        {/* <Grid item xs>
                             <Link href='#' variant='body2'>
                                 Forgot password?
                             </Link>
-                        </Grid>
+                        </Grid> */}
                         <Grid item>
                             <Link
                                 as={ReactRouterLink}
@@ -156,7 +156,7 @@ const LoginForm = () => {
                                     color: 'primary.main',
                                 }}
                             >
-                                {"Don't have an account? Sign Up"}
+                                {"Don't have an account? Register"}
                             </Link>
                         </Grid>
                     </Grid>

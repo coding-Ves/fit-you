@@ -1,5 +1,5 @@
 import { DarkMode, Home, WbSunny } from '@mui/icons-material';
-import { Link, Switch } from '@mui/material';
+import { Link, Switch, Avatar } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -31,19 +31,10 @@ const NavBar = ({ onThemeChange }) => {
             <ElevationScroll>
                 <AppBar sx={{ background: '#284A67' }}>
                     <Toolbar>
-                        <Link
-                            as={ReactRouterLink}
-                            to={`/`}
-                            focusRipple='none'
-                            sx={{ mr: 2 }}
-                        >
+                        <Avatar as={ReactRouterLink} to={`/`} sx={{ mr: 2 }}>
                             <Home />
-                        </Link>
-                        <Typography
-                            variant='h6'
-                            component='div'
-                            sx={{ flexGrow: 1 }}
-                        >
+                        </Avatar>
+                        <Typography variant='h6' sx={{ flexGrow: 1 }}>
                             Fit You
                         </Typography>
                         <Switch

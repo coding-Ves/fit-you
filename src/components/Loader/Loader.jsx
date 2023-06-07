@@ -1,10 +1,13 @@
 import { Backdrop } from '@mui/material';
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, LinearProgress } from '@mui/material';
 
 export const Loader = () => {
     return (
-        <Backdrop>
-            <CircularProgress size='50' />
+        <Backdrop
+            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={true}
+        >
+            <CircularProgress color='inherit' size='100px' />
         </Backdrop>
     );
 };

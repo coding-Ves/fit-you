@@ -255,17 +255,6 @@ export const RegistrationForm = () => {
                                     helperText={errors.phoneNumber?.message}
                                 />
                             </Grid>
-                            <Grid item xs={12}>
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            value='allowExtraEmails'
-                                            color='primary'
-                                        />
-                                    }
-                                    label='I want to receive memes, marketing memes and memes via email.'
-                                />
-                            </Grid>
                         </Grid>
                         <Button
                             type='submit'
