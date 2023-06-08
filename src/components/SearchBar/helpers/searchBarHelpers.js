@@ -1,7 +1,11 @@
 import cardioData from '../../../common/cardioData';
 import { EXERCISE_DB_URL } from '../../../common/constants';
 import sportsData from '../../../common/sportsData';
-import { exerciseOptions, fetchDataFromExerciseDB, } from '../../../services/exercises.service';
+import {
+    exerciseOptions,
+    fetchDataFromExerciseDB,
+} from '../../../services/exercises.service';
+import { fetchDataFromYogaDB } from '../../../services/yoga.service';
 
 export const searchFitness = (searchQuery) => {
     return fetchDataFromExerciseDB(EXERCISE_DB_URL, exerciseOptions)
@@ -23,7 +27,6 @@ export const searchFitness = (searchQuery) => {
 };
 
 export const searchSports = (searchQuery) => {
-
     const searchedSports = sportsData.filter((sport) => {
         return (
             sport.name.toLowerCase().includes(searchQuery) ||
@@ -35,7 +38,6 @@ export const searchSports = (searchQuery) => {
 };
 
 export const searchCardio = (searchQuery) => {
-
     const searchedCardio = cardioData.filter((cardio) => {
         return (
             cardio.name.toLowerCase().includes(searchQuery) ||
@@ -44,4 +46,28 @@ export const searchCardio = (searchQuery) => {
     });
 
     return searchedCardio;
+};
+
+export const searchYoga = (searchQuery) => {
+    return fetchDataFromYogaDB()
+        .then((yogaData) => {
+            const searchedYogaPoses = yogaData.filter((yogaPose) => {
+                return (
+                    yogaPose.english_name.toLowerCase().includes(searchQuery) ||
+                    yogaPose.sanskrit_name_adapted
+                        .toLowerCase()
+                        .includes(searchQuery)
+                    // ||
+                    // yogaPose.pose_description
+                    //     .toLowerCase()
+                    //     .includes(searchQuery) ||
+                    // yogaPose.pose_benefits.toLowerCase().includes(searchQuery)
+                );
+            });
+            console.log(searchedYogaPoses);
+            return searchedYogaPoses;
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 };
