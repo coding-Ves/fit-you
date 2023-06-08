@@ -1,6 +1,8 @@
-import { Box, Grid, Pagination, Paper, Stack } from '@mui/material';
+import { Box, Grid, Pagination, Stack } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useContext, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import NoResultsIcon from '../../assets/images/no-results-found.png';
 import { RESULTS_PER_PAGE } from '../../common/constants';
 import { ActivitiesContext } from '../../contexts/ActivitiesContext';
 import SearchResultCard from './SearchResultCard';
@@ -9,6 +11,7 @@ const ListOfResults = ({ category }) => {
     const { exercises, sports, cardio } = useContext(ActivitiesContext);
     const [currentPage, setCurrentPage] = useState(1);
     const [currentActivities, setCurrentActivities] = useState([]);
+    const isSearched = Boolean(useLocation().search);
 
     useEffect(() => {
         let activities;
@@ -41,7 +44,11 @@ const ListOfResults = ({ category }) => {
 
     return (
         <>
-            {currentActivities && (
+            {activitiesToShow.length === 0 && isSearched ? (
+                <Box display="flex" justifyContent="center" alignItems="center" minHeight={200} mt={20} px={10} >
+                    <img src={NoResultsIcon} style={{ maxWidth: '60%', height: 'auto', }} alt="No Results" />
+                </Box>
+            ) : (
                 <Box
                     id='activities'
                     margin={{ lg: '80px', xs: '40px' }}
