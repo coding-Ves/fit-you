@@ -8,7 +8,7 @@ const ProgressPieChart = ({ currentProgress, goalTarget }) => {
         { name: 'Remaining', value: goalTarget - currentProgress },
     ];
     return (
-        <PieChart width={250} height={250}>
+        <PieChart width={250} height={230}>
             <Pie
                 data={data}
                 dataKey='value'
@@ -19,6 +19,7 @@ const ProgressPieChart = ({ currentProgress, goalTarget }) => {
                 innerRadius={70}
                 outerRadius={90}
                 fill='#284a67'
+                style={{outline:'none'}}
             >
                 <Cell key={'progress'} fill={PROGRESS_PIE_COLORS[0]} />
                 <Cell key={'target'} fill={PROGRESS_PIE_COLORS[1]} />
