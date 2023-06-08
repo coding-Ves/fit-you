@@ -21,6 +21,8 @@ const MyGoals = () => {
             >
                 <Container maxWidth='xl' sx={{ mt: 4, mb: 4 }}>
                     <Paper
+                        variant='elevation'
+                        elevation={4}
                         sx={{
                             p: 2,
                             display: 'flex',
