@@ -1,10 +1,9 @@
 import { Box, Paper, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import { DAY_TO_MILLISECONDS } from '../../../common/constants';
 import SingleGoalMenu from '../SingleGoalMenu/SingleGoalMenu';
 import ProgressPieChart from './ProgressPieChart/ProgressPieChart';
 
-const SingleActiveGoalCard = ({ goal, onDeleteGoal }) => {
+const SingleActiveGoalCard = ({ goal, onDeleteGoal, onEditGoal }) => {
     return (
         <Paper
             variant='elevation'
@@ -15,6 +14,8 @@ const SingleActiveGoalCard = ({ goal, onDeleteGoal }) => {
         >
             <SingleGoalMenu
                 onDeleteGoal={onDeleteGoal}
+                onEditGoal={onEditGoal}
+                goal={goal}
                 goalId={goal.goalId}
                 username={goal.username}
                 sx={{ position: 'absolute' }}
@@ -29,10 +30,7 @@ const SingleActiveGoalCard = ({ goal, onDeleteGoal }) => {
             >
                 {goal.goalName}
             </Typography>
-            <ProgressPieChart
-                currentProgress={goal.goalProgress}
-                goalTarget={goal.targetValue}
-            />
+            <ProgressPieChart currentProgress={goal.goalProgress} goalTarget={goal.targetValue} />
             <Typography
                 fontWeight={500}
                 sx={{
@@ -56,10 +54,8 @@ const SingleActiveGoalCard = ({ goal, onDeleteGoal }) => {
                     {new Date(goal.createdOn).toLocaleDateString('en-GB')}
                 </Typography>
                 <Typography>
-                    Target date: <br />{' '}
-                    {new Date(
-                        goal.createdOn + goal.targetDate * DAY_TO_MILLISECONDS
-                    ).toLocaleDateString('en-GB')}
+                    Target date: <br />
+                    {new Date(goal.targetDate).toLocaleDateString('en-GB')}
                 </Typography>
             </Box>
         </Paper>
@@ -69,6 +65,7 @@ const SingleActiveGoalCard = ({ goal, onDeleteGoal }) => {
 SingleActiveGoalCard.propTypes = {
     goal: PropTypes.object.isRequired,
     onDeleteGoal: PropTypes.func.isRequired,
+    onEditGoal: PropTypes.func.isRequired,
 };
 
 export default SingleActiveGoalCard;

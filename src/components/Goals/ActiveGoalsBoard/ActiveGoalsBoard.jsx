@@ -8,17 +8,23 @@ import CreateGoalDialog from '../CreateGoal/CreateGoalDialog';
 const ActiveGoalsBoard = ({ username }) => {
     const [goals, setGoals] = useState([]);
     const [goalDeleted, setGoalDeleted] = useState(false);
+    const [goalEdited, setGoalEdited] = useState(false);
 
     useEffect(() => {
         getGoalsByUsername(username).then((goals) => {
             setGoals(goals);
         });
         setGoalDeleted(false);
-    }, [username, goalDeleted]);
+        setGoalEdited(false);
+    }, [username, goalDeleted, goalEdited]);
 
     const handleDeleteGoal = (goalId, username) => {
         deleteGoal(goalId, username);
         setGoalDeleted(true);
+    };
+
+    const handleEditGoal = () => {
+        setGoalEdited(true);
     };
 
     // TODO - currently, all goals are displayed, regardless if they are active or not
@@ -46,6 +52,7 @@ const ActiveGoalsBoard = ({ username }) => {
                 {goals.map((goal) => (
                     <SingleActiveGoalCard
                         onDeleteGoal={handleDeleteGoal}
+                        onEditGoal={handleEditGoal}
                         key={goal.id}
                         goal={goal}
                     />
