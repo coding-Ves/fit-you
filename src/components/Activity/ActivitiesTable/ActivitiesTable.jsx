@@ -1,4 +1,12 @@
-import { Pagination, Stack, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import {
+    Pagination,
+    Stack,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow,
+} from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { ACTIVITIES_PER_PAGE } from '../../../common/constants';
 import AuthContext from '../../../contexts/AuthContext';
@@ -6,14 +14,17 @@ import { getUserActivities } from '../../../firebase/services/users.service';
 import Title from '../../Dashboard/Title/Title';
 
 const ActivitiesTable = () => {
-
     const { userData } = useContext(AuthContext);
     const [activities, setActivities] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
 
     const indexOfLastActivityOnPage = currentPage * ACTIVITIES_PER_PAGE;
-    const indexOfFirstActivityOnPage = indexOfLastActivityOnPage - ACTIVITIES_PER_PAGE;
-    const currentActivitiesOnPage = activities.slice(indexOfFirstActivityOnPage, indexOfLastActivityOnPage);
+    const indexOfFirstActivityOnPage =
+        indexOfLastActivityOnPage - ACTIVITIES_PER_PAGE;
+    const currentActivitiesOnPage = activities.slice(
+        indexOfFirstActivityOnPage,
+        indexOfLastActivityOnPage
+    );
 
     useEffect(() => {
         if (userData && userData.username) {
@@ -48,41 +59,65 @@ const ActivitiesTable = () => {
                                 {activity?.fitnessExerciseName}
                                 {activity?.sportName}
                                 {activity?.cardioName}
+                                {activity?.poseName}
                             </TableCell>
 
-
-                            {activity?.fitnessExerciseName && <TableCell>Fitness</TableCell>}
-                            {activity?.sportName && <TableCell>Sports</TableCell>}
-                            {activity?.cardioName && <TableCell>Cardio</TableCell>}
-
-                            {activity?.fitnessExerciseName && <TableCell align='right'>{activity.sets.length} sets</TableCell>}
-
+                            {activity?.fitnessExerciseName && (
+                                <TableCell>Fitness</TableCell>
+                            )}
                             {activity?.sportName && (
-                                activity.durationInMinutes ? (
-                                    <TableCell align='right'>Duration: {activity.durationInMinutes} mins</TableCell>
-                                ) : (
-                                    <TableCell align='right'>A session</TableCell>
-                                )
+                                <TableCell>Sports</TableCell>
                             )}
-
                             {activity?.cardioName && (
-                                activity.durationInMinutes ? (
-                                    <TableCell align='right'>{activity.durationInMinutes} mins</TableCell>
-                                ) : (
-                                    <TableCell align='right'>{activity.distance} km</TableCell>
-                                )
+                                <TableCell>Cardio</TableCell>
+                            )}
+                            {activity?.poseName && <TableCell>Yoga</TableCell>}
+
+                            {activity?.fitnessExerciseName && (
+                                <TableCell align='right'>
+                                    {activity.sets.length} sets
+                                </TableCell>
                             )}
 
+                            {activity?.sportName &&
+                                (activity.durationInMinutes ? (
+                                    <TableCell align='right'>
+                                        Duration: {activity.durationInMinutes}{' '}
+                                        mins
+                                    </TableCell>
+                                ) : (
+                                    <TableCell align='right'>
+                                        A session
+                                    </TableCell>
+                                ))}
 
+                            {activity?.cardioName &&
+                                (activity.durationInMinutes ? (
+                                    <TableCell align='right'>
+                                        {activity.durationInMinutes} mins
+                                    </TableCell>
+                                ) : (
+                                    <TableCell align='right'>
+                                        {activity.distance} km
+                                    </TableCell>
+                                ))}
+
+                            {activity?.poseName &&
+                                (activity.durationInMinutes ? (
+                                    <TableCell align='right'>
+                                        {activity.durationInMinutes} mins
+                                    </TableCell>
+                                ) : (
+                                    <TableCell align='right'>
+                                        {activity.sessions} session
+                                    </TableCell>
+                                ))}
                         </TableRow>
                     ))}
                 </TableBody>
             </Table>
 
-            <Stack
-                sx={{ mt: { lg: '25px', xs: '5px' } }}
-                alignItems='center'
-            >
+            <Stack sx={{ mt: { lg: '25px', xs: '5px' } }} alignItems='center'>
                 {activities.length > ACTIVITIES_PER_PAGE && (
                     <Pagination
                         color='secondary'
@@ -133,7 +168,6 @@ export default ActivitiesTable;
 //     }
 //     return 0;
 // };
-
 
 // const getComparator = (order, orderBy) => {
 //     return order === 'desc'
