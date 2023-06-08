@@ -2,6 +2,7 @@ import { Box, Typography, Paper } from '@mui/material';
 import PropTypes from 'prop-types';
 import { DAY_TO_MILLISECONDS } from '../../../common/constants';
 import ProgressPieChart from './ProgressPieChart/ProgressPieChart';
+import SingleGoalMenu from '../SingleGoalMenu/SingleGoalMenu';
 
 // TODO - move the PieChart to a separate component
 
@@ -14,6 +15,7 @@ const SingleActiveGoalCard = ({ goal }) => {
             border={'solid 1px #e4e4e4'}
             sx={{ m: 2, p: 2 }}
         >
+            <SingleGoalMenu sx={{ position: 'absolute'}}/>
             <Typography
                 fontWeight={500}
                 sx={{
