@@ -5,9 +5,10 @@ export const editGoalValidationSchema = yup.object({
     newTargetValue: yup
         .number()
         .typeError('Please enter a number')
+        .required('You must enter a target value')
         .positive('Your target must be higher than 0')
         .max(10000),
-    newTargetDate: yup.date().typeError('Please enter a number').required()
+    newTargetDate: yup.date().required(),
 });
 
 export default editGoalValidationSchema;
