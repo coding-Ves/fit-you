@@ -1,13 +1,32 @@
 /* eslint-disable react/prop-types */
-import { Alert, Box, Button, FormControl, InputLabel, MenuItem, Select, Snackbar, Stack, TextField } from '@mui/material';
+import {
+    Alert,
+    Box,
+    Button,
+    FormControl,
+    InputLabel,
+    MenuItem,
+    Select,
+    Snackbar,
+    Stack,
+    TextField,
+} from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import AuthContext from '../../../contexts/AuthContext';
 import { addCardioSession } from '../../../firebase/services/cardioSessions.service';
-import { addActivityToGoal, getGoalsByUsername } from '../../../firebase/services/goals.service';
+import {
+    addActivityToGoal,
+    getGoalsByUsername,
+} from '../../../firebase/services/goals.service';
 import { addSportSession } from '../../../firebase/services/sportSessions.service';
+import { addYogaSession } from './../../../firebase/services/yogaSessions.service';
 
-const CreateSportsOrCardioSessionForm = ({ activity, category, handleClose }) => {
+const CreateSportsOrCardioSessionForm = ({
+    activity,
+    category,
+    handleClose,
+}) => {
     const { userData } = useContext(AuthContext);
     const { register, handleSubmit, reset } = useForm();
 
@@ -23,11 +42,12 @@ const CreateSportsOrCardioSessionForm = ({ activity, category, handleClose }) =>
     const [addedExerciseToGoal, setAddedExerciseToGoal] = useState(false);
 
     useEffect(() => {
-        getGoalsByUsername(userData.username)
-            .then((snapshot) => {
-                const filteredByCategory = snapshot.filter(goal => goal?.goalType?.toLowerCase() === category);
-                setGoals(filteredByCategory);
-            });
+        getGoalsByUsername(userData.username).then((snapshot) => {
+            const filteredByCategory = snapshot.filter(
+                (goal) => goal?.goalType?.toLowerCase() === category
+            );
+            setGoals(filteredByCategory);
+        });
         setAddedExerciseToGoal(false);
     }, [userData.username, category, addedExerciseToGoal]);
 
@@ -40,7 +60,11 @@ const CreateSportsOrCardioSessionForm = ({ activity, category, handleClose }) =>
         setIsLoading(true);
 
         if (category === 'sports') {
-            addSportSession(userData.username, activity.name, data.durationInMinutes)
+            addSportSession(
+                userData.username,
+                activity.name,
+                data.durationInMinutes
+            )
                 .then((id) => {
                     setIsLoading(false);
 
@@ -56,10 +80,9 @@ const CreateSportsOrCardioSessionForm = ({ activity, category, handleClose }) =>
                             category,
                             goalProgress,
                             goalTargetType,
-                            Number(data.durationInMinutes),
+                            Number(data.durationInMinutes)
                         );
                     }
-
                 })
                 .then(() => {
                     setSnackbarMessage('Activity added successfully!');
@@ -77,9 +100,13 @@ const CreateSportsOrCardioSessionForm = ({ activity, category, handleClose }) =>
                     setSnackbarSeverity('error');
                     setSnackbarOpen(true);
                 });
-
         } else if (category === 'cardio') {
-            addCardioSession(userData.username, activity.name, data.distance, data.durationInMinutes)
+            addCardioSession(
+                userData.username,
+                activity.name,
+                data.distance,
+                data.durationInMinutes
+            )
                 .then((id) => {
                     setIsLoading(false);
 
@@ -102,7 +129,55 @@ const CreateSportsOrCardioSessionForm = ({ activity, category, handleClose }) =>
                             category,
                             goalProgress,
                             goalTargetType,
-                            newProgress,
+                            newProgress
+                        );
+                    }
+                })
+                .then(() => {
+                    setSnackbarMessage('Activity added successfully!');
+                    setSnackbarSeverity('success');
+                    setSnackbarOpen(true);
+                    reset();
+
+                    setTimeout(() => {
+                        handleClose();
+                    }, 1500);
+                })
+                .catch((error) => {
+                    setIsLoading(false);
+                    setSnackbarMessage(error.message);
+                    setSnackbarSeverity('error');
+                    setSnackbarOpen(true);
+                });
+        } else if (category === 'yoga') {
+            addYogaSession(
+                userData.username,
+                activity.english_name,
+                data.durationInMinutes
+            )
+                .then((id) => {
+                    setIsLoading(false);
+
+                    if (selectedGoal) {
+                        const { goalProgress, goalTargetType } = goals.find(
+                            (goal) => goal.goalId === selectedGoal
+                        );
+
+                        let newProgress;
+                        if (goalTargetType === 'Total sessions') {
+                            newProgress = Number(data.sessions);
+                        } else if (goalTargetType === 'Total minutes') {
+                            newProgress = Number(data.durationInMinutes);
+                        }
+
+                        setAddedExerciseToGoal(true);
+                        return addActivityToGoal(
+                            selectedGoal,
+                            id,
+                            category,
+                            goalProgress,
+                            goalTargetType,
+                            Number(data.durationInMinutes)
                         );
                     }
                 })
@@ -123,7 +198,6 @@ const CreateSportsOrCardioSessionForm = ({ activity, category, handleClose }) =>
                     setSnackbarOpen(true);
                 });
         }
-
     };
 
     return (
@@ -164,6 +238,17 @@ const CreateSportsOrCardioSessionForm = ({ activity, category, handleClose }) =>
                     </Box>
                 )}
 
+                {category === 'yoga' && (
+                    <Box>
+                        <TextField
+                            label='Sessions'
+                            {...register('sessions')}
+                            fullWidth
+                            margin='normal'
+                        />
+                    </Box>
+                )}
+
                 <Box>
                     <FormControl fullWidth margin='normal'>
                         <InputLabel>Add to goals?</InputLabel>
@@ -175,14 +260,15 @@ const CreateSportsOrCardioSessionForm = ({ activity, category, handleClose }) =>
                             <MenuItem value=''>
                                 <em>No, thanks</em>
                             </MenuItem>
-                            {Object.values(goals).map((goal) =>
-                                <MenuItem key={goal.goalId} value={goal.goalId}>{goal.goalName} ({goal.goalTargetType})</MenuItem>
-                            )}
+                            {Object.values(goals).map((goal) => (
+                                <MenuItem key={goal.goalId} value={goal.goalId}>
+                                    {goal.goalName} ({goal.goalTargetType})
+                                </MenuItem>
+                            ))}
                         </Select>
                     </FormControl>
                     <Button onClick={handleSubmit(onSubmit)}>Submit</Button>
                 </Box>
-
             </Stack>
         </>
     );
