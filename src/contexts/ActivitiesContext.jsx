@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { createContext, useState } from 'react';
+import { set } from 'firebase/database';
 
 export const ActivitiesContext = createContext();
 
@@ -9,10 +10,25 @@ export const ActivitiesProvider = ({ children }) => {
     const [category, setCategory] = useState('');
     const [sports, setSports] = useState([]);
     const [cardio, setCardio] = useState([]);
+    const [yoga, setYoga] = useState([]);
 
     return (
         <ActivitiesContext.Provider
-            value={{ exercises, setExercises, bodyPart, setBodyPart, category, setCategory, sports, setSports, cardio, setCardio }}>
+            value={{
+                exercises,
+                setExercises,
+                bodyPart,
+                setBodyPart,
+                category,
+                setCategory,
+                sports,
+                setSports,
+                cardio,
+                setCardio,
+                yoga,
+                setYoga,
+            }}
+        >
             {children}
         </ActivitiesContext.Provider>
     );
