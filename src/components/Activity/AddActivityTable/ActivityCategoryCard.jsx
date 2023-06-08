@@ -19,6 +19,7 @@ const ActivityCategoryCard = ({ categoryName }) => {
             sx={{
                 height: '100%',
                 minHeight: '290px',
+                minWidth: '100px',
                 display: 'flex',
                 flexDirection: 'column',
                 pt: 2,

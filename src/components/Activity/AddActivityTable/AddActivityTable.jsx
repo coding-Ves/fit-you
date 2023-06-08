@@ -29,7 +29,7 @@ const AddActivityTable = () => {
                 </Typography>
             </AccordionSummary>
             <AccordionDetails>
-                <Grid container spacing={4} justifyContent='center'>
+                <Grid container spacing={5} justifyContent='center'>
                     {ACTIVITY_CATEGORIES.map((category, index) => (
                         <Grid item key={index}>
                             <ActivityCategoryCard
