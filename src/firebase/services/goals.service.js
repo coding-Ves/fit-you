@@ -86,3 +86,25 @@ export const addActivityToGoal = (
 
     return update(ref(db), updateData);
 };
+
+
+
+export const deleteGoal = (goalId, username) => {
+    const deleteGoal = {};
+    deleteGoal[`/goals/${goalId}`] = null;
+    deleteGoal[`/users/${username}/goals/${goalId}`] = null;
+
+    return update(ref(db), deleteGoal);
+}
+
+
+export const editGoal = (goalId, newGoalName, newGoalTargetValue, newGoalDateTarget) => {
+
+    const updateGoal = {};
+    updateGoal[`/goals/${goalId}/goalName`] = newGoalName;
+    updateGoal[`/goals/${goalId}/targetValue`] = newGoalTargetValue;
+    updateGoal[`/goals/${goalId}/targetDate`] = newGoalDateTarget;
+
+    return update(ref(db), updateGoal);
+
+}
