@@ -3,6 +3,7 @@ import SingleActiveGoalCard from '../SingleActiveGoalCard/SingleActiveGoalCard';
 import { useEffect, useState } from 'react';
 import { getGoalsByUsername } from '../../../firebase/services/goals.service';
 import PropTypes from 'prop-types';
+import CreateGoalDialog from '../CreateGoal/CreateGoalDialog';
 
 const ActiveGoalsBoard = ({ username }) => {
     const [goals, setGoals] = useState([]);
@@ -17,17 +18,23 @@ const ActiveGoalsBoard = ({ username }) => {
 
     return (
         <>
-            <Typography
-                fontWeight={700}
+            <Box
                 sx={{
-                    fontSize: '44px',
-                    '@media (max-width: 600px)': { fontSize: '30px' },
+                    display: 'flex',
+                    justifyContent: 'space-between',
                 }}
-                mb='49px'
-                textAlign='center'
             >
-                Currently active goals:
-            </Typography>
+                <Typography
+                    sx={{
+                        fontSize: '40px',
+                        '@media (max-width: 600px)': { fontSize: '30px' },
+                    }}
+                    textAlign='center'
+                >
+                    Currently active goals:
+                </Typography>
+                <CreateGoalDialog />
+            </Box>
             <Grid container spacing={1} justifyContent='center'>
                 {goals.map((goal) => (
                     <Grid item key={goal.id}>
