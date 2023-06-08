@@ -16,13 +16,14 @@ import {
     searchCardio,
     searchFitness,
     searchSports,
+    searchYoga,
 } from './helpers/searchBarHelpers';
 
 const SearchBar = ({ category }) => {
     const { handleSubmit, register, reset } = useForm();
     // const [search, setSearch] = useState('');
     const [placeholder, setPlaceholder] = useState('Search');
-    const { setCategory, setExercises, setSports, setCardio } =
+    const { setCategory, setExercises, setSports, setCardio, setYoga } =
         useContext(ActivitiesContext);
     const navigate = useNavigate();
 
@@ -35,6 +36,8 @@ const SearchBar = ({ category }) => {
             setPlaceholder('Search by sports name or category');
         } else if (category === 'cardio') {
             setPlaceholder('Search by name or category');
+        } else if (category === 'yoga') {
+            setPlaceholder('Search by yoga pose name in English or Sanskrit');
         }
     }, [category]);
 
@@ -61,6 +64,13 @@ const SearchBar = ({ category }) => {
                 setCardio(result);
                 setCategory(category);
                 navigate(searchQueryUrl);
+            } else if (category === 'yoga') {
+                searchYoga(data.search).then((result) => {
+                    console.log(result);
+                    setYoga(result);
+                    setCategory(category);
+                    navigate(searchQueryUrl);
+                });
             }
 
             window.scrollTo({ top: 1800, left: 100, behavior: 'smooth' });
