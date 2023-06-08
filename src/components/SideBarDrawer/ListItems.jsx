@@ -62,6 +62,12 @@ export const physicalListItems = (
             </ListItemIcon>
             <ListItemText primary='Cardio' />
         </ListItemButton>
+        <ListItemButton component={Link} to='/search/yoga'>
+            <ListItemIcon>
+                <Spa />
+            </ListItemIcon>
+            <ListItemText primary='Yoga' />
+        </ListItemButton>
     </>
 );
 
@@ -109,12 +115,6 @@ export const mentalListItems = (
                 <SelfImprovement />
             </ListItemIcon>
             <ListItemText primary='Meditation' />
-        </ListItemButton>
-        <ListItemButton component={Link} to='/Yoga'>
-            <ListItemIcon>
-                <Spa />
-            </ListItemIcon>
-            <ListItemText primary='Yoga' />
         </ListItemButton>
     </>
 );
