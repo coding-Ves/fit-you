@@ -8,7 +8,7 @@ import { ActivitiesContext } from '../../contexts/ActivitiesContext';
 import SearchResultCard from './SearchResultCard';
 
 const ListOfResults = ({ category }) => {
-    const { exercises, sports, cardio } = useContext(ActivitiesContext);
+    const { exercises, sports, cardio, yoga } = useContext(ActivitiesContext);
     const [currentPage, setCurrentPage] = useState(1);
     const [currentActivities, setCurrentActivities] = useState([]);
     const isSearched = Boolean(useLocation().search);
@@ -21,9 +21,11 @@ const ListOfResults = ({ category }) => {
             activities = sports;
         } else if (category === 'cardio') {
             activities = cardio;
+        } else if (category === 'yoga') {
+            activities = yoga;
         }
         setCurrentActivities(activities);
-    }, [category, exercises, sports, cardio]);
+    }, [category, exercises, sports, cardio, yoga]);
 
     // For the pagination
     const indexOfLastActivityOnPage = currentPage * RESULTS_PER_PAGE;
@@ -45,8 +47,19 @@ const ListOfResults = ({ category }) => {
     return (
         <>
             {activitiesToShow.length === 0 && isSearched ? (
-                <Box display="flex" justifyContent="center" alignItems="center" minHeight={200} mt={20} px={10} >
-                    <img src={NoResultsIcon} style={{ maxWidth: '60%', height: 'auto', }} alt="No Results" />
+                <Box
+                    display='flex'
+                    justifyContent='center'
+                    alignItems='center'
+                    minHeight={200}
+                    mt={20}
+                    px={10}
+                >
+                    <img
+                        src={NoResultsIcon}
+                        style={{ maxWidth: '60%', height: 'auto' }}
+                        alt='No Results'
+                    />
                 </Box>
             ) : (
                 <Box
