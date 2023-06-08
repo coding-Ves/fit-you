@@ -1,10 +1,19 @@
-import { equalTo, get, orderByChild, query, ref, set, update, } from 'firebase/database';
+import {
+    equalTo,
+    get,
+    orderByChild,
+    query,
+    ref,
+    set,
+    update,
+} from 'firebase/database';
 import { db } from '../firebase-config';
 // import { USER_ROLES } from '../../common/constants';
 import { RANDOM_AVATAR_STYLE } from '../../common/constants';
 import { getCardioSessionsByUsername } from './cardioSessions.service';
 import { getFitnessExercisesByUsername } from './fitnessExercises.service';
 import { getSportSessionsByUsername } from './sportSessions.service';
+import { getYogaSessionsByUsername } from './yogaSessions.service';
 
 export const getUserByUsername = (username) => {
     return get(ref(db, `users/${username}`));
@@ -81,17 +90,25 @@ export const getUserActivities = (username) => {
         getFitnessExercisesByUsername(username),
         getCardioSessionsByUsername(username),
         getSportSessionsByUsername(username),
-    ]).then(([fitnessExercises, cardioSessions, sportSessions]) => {
-        const activities = [...fitnessExercises, ...cardioSessions, ...sportSessions];
+        getYogaSessionsByUsername(username),
+    ]).then(
+        ([fitnessExercises, cardioSessions, sportSessions, yogaSessions]) => {
+            const activities = [
+                ...fitnessExercises,
+                ...cardioSessions,
+                ...sportSessions,
+                ...yogaSessions,
+            ];
 
-        activities.sort((a, b) => {
-            const dateA = new Date(a.createdOn);
-            const dateB = new Date(b.createdOn);
-            return dateB - dateA;
-        });
+            activities.sort((a, b) => {
+                const dateA = new Date(a.createdOn);
+                const dateB = new Date(b.createdOn);
+                return dateB - dateA;
+            });
 
-        return activities;
-    });
+            return activities;
+        }
+    );
 };
 
 // On follow user, creates a new entry in the following and followers lists for the user document
