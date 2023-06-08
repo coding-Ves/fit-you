@@ -11,25 +11,37 @@ const SingleActiveGoalCard = ({ goal, onDeleteGoal, onEditGoal }) => {
             border={'solid 1px #e4e4e4'}
             sx={{ m: 2, p: 2 }}
         >
-            <SingleGoalMenu
-                onDeleteGoal={onDeleteGoal}
-                onEditGoal={onEditGoal}
-                goal={goal}
-                goalId={goal.goalId}
-                username={goal.username}
-                sx={{ position: 'absolute' }}
-            />
-            <Typography
-                fontWeight={500}
+            <Box
                 sx={{
-                    '@media (max-width: 600px)': { fontSize: '30px' },
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    width: '100%',
+                    direction: 'column',
                 }}
-                textAlign='center'
-                m={'10px 10px 0px 10px'}
             >
-                {goal.goalName}
-            </Typography>
-            <ProgressPieChart currentProgress={goal.goalProgress} goalTarget={goal.targetValue} />
+                <Typography
+                    fontWeight={500}
+                    sx={{
+                        '@media (max-width: 600px)': { fontSize: '30px' },
+                    }}
+                    textAlign='center'
+                    m={'10px 10px 0px 10px'}
+                >
+                    {goal.goalName}
+                </Typography>
+                <SingleGoalMenu
+                    onDeleteGoal={onDeleteGoal}
+                    onEditGoal={onEditGoal}
+                    goal={goal}
+                    goalId={goal.goalId}
+                    username={goal.username}
+                    sx={{ position: 'absolute' }}
+                />
+            </Box>
+            <ProgressPieChart
+                currentProgress={goal.goalProgress}
+                goalTarget={goal.targetValue}
+            />
             <Typography
                 fontWeight={500}
                 sx={{

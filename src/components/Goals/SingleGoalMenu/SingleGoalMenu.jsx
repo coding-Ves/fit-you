@@ -1,5 +1,12 @@
 import { Delete, Edit, MoreVert } from '@mui/icons-material';
-import { Box, IconButton, ListItemIcon, Menu, MenuItem, Tooltip } from '@mui/material';
+import {
+    Box,
+    IconButton,
+    ListItemIcon,
+    Menu,
+    MenuItem,
+    Tooltip,
+} from '@mui/material';
 import { useState } from 'react';
 import DeleteGoalDialog from '../DeleteGoalDialog/DeleteGoalDialog';
 import PropTypes from 'prop-types';
@@ -37,7 +44,7 @@ const SingleGoalMenu = ({ goal, onDeleteGoal, onEditGoal }) => {
     };
 
     return (
-        <Box sx={{ position: 'absolute' }}>
+        <Box>
             <Tooltip title='Goal menu'>
                 <IconButton onClick={handleClick}>
                     <MoreVert />
@@ -70,7 +77,12 @@ const SingleGoalMenu = ({ goal, onDeleteGoal, onEditGoal }) => {
                     Delete
                 </MenuItem>
             </Menu>
-            <EditGoalDialog goal={goal} isOpen={isEditDialogOpen} onClose={handleEditCloseDialog} onEditGoal={onEditGoal} />
+            <EditGoalDialog
+                goal={goal}
+                isOpen={isEditDialogOpen}
+                onClose={handleEditCloseDialog}
+                onEditGoal={onEditGoal}
+            />
             <DeleteGoalDialog
                 onDeleteGoal={onDeleteGoal}
                 goalId={goal.goalId}

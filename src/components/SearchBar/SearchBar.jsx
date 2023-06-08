@@ -66,7 +66,6 @@ const SearchBar = ({ category }) => {
                 navigate(searchQueryUrl);
             } else if (category === 'yoga') {
                 searchYoga(data.search).then((result) => {
-                    console.log(result);
                     setYoga(result);
                     setCategory(category);
                     navigate(searchQueryUrl);
