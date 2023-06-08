@@ -1,14 +1,15 @@
 import { Box, Grid, Typography } from '@mui/material';
-import SingleActiveGoalCard from '../SingleActiveGoalCard/SingleActiveGoalCard';
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { deleteGoal, getGoalsByUsername } from '../../../firebase/services/goals.service';
-import PropTypes from 'prop-types';
 import CreateGoalDialog from '../CreateGoal/CreateGoalDialog';
+import SingleActiveGoalCard from '../SingleActiveGoalCard/SingleActiveGoalCard';
 
 const ActiveGoalsBoard = ({ username }) => {
     const [goals, setGoals] = useState([]);
     const [goalDeleted, setGoalDeleted] = useState(false);
     const [goalEdited, setGoalEdited] = useState(false);
+    const [goalAdded, setGoalAdded] = useState(false);
 
     useEffect(() => {
         getGoalsByUsername(username).then((goals) => {
@@ -16,7 +17,8 @@ const ActiveGoalsBoard = ({ username }) => {
         });
         setGoalDeleted(false);
         setGoalEdited(false);
-    }, [username, goalDeleted, goalEdited]);
+        setGoalAdded(false);
+    }, [username, goalDeleted, goalEdited, goalAdded]);
 
     const handleDeleteGoal = (goalId, username) => {
         deleteGoal(goalId, username);
@@ -24,6 +26,10 @@ const ActiveGoalsBoard = ({ username }) => {
     };
 
     const handleEditGoal = () => {
+        setGoalEdited(true);
+    };
+
+    const handleAddGoal = () => {
         setGoalEdited(true);
     };
 
@@ -46,7 +52,7 @@ const ActiveGoalsBoard = ({ username }) => {
                 >
                     Currently active goals:
                 </Typography>
-                <CreateGoalDialog />
+                <CreateGoalDialog onAddGoal={handleAddGoal} />
             </Box>
             <Grid container spacing={1} justifyContent='center'>
                 {goals.map((goal) => (

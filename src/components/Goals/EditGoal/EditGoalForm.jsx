@@ -139,8 +139,7 @@ const EditGoalForm = ({ goal, onEditGoal, onClose }) => {
                                     id='newTargetDate'
                                     name='newTargetDate'
                                     label='Target Date'
-                                    InputLabelProps={{ shrink: true }}
-                                    aria-label='target date'
+                                    InputLabelProps={{ shrink: true}}
                                     shouldControlSelection={false}
                                     inputProps={{
                                         min: new Date().toISOString().slice(0, 10),

@@ -1,9 +1,9 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent } from '@mui/material';
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import NewGoalForm from './NewGoalForm';
 
-const CreateGoalDialog = () => {
-    
+const CreateGoalDialog = ({ onAddGoal }) => {
     const [open, setOpen] = useState(false);
 
     const handleClose = () => {
@@ -23,9 +23,8 @@ const CreateGoalDialog = () => {
                 Add a new goal
             </Button>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Add a new goal</DialogTitle>
                 <DialogContent>
-                    <NewGoalForm />
+                    <NewGoalForm handleClose={handleClose} onAddGoal={onAddGoal} />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Close</Button>
@@ -33,6 +32,10 @@ const CreateGoalDialog = () => {
             </Dialog>
         </>
     );
+};
+
+CreateGoalDialog.propTypes = {
+    onAddGoal: PropTypes.func.isRequired,
 };
 
 export default CreateGoalDialog;
