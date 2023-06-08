@@ -1,5 +1,8 @@
 export const EXERCISE_DB_URL = 'https://exercisedb.p.rapidapi.com/exercises/';
 
+// gets all Yoga poses in the DB
+export const YOGA_DB_URL = 'https://yoga-api-nzy4.onrender.com/v1/poses';
+
 export const TODAY = new Date().getTime();
 
 export const USER_ROLES = {
@@ -30,7 +33,7 @@ export const HOME_HERO_IMAGE =
 
 export const ACTIVITY_NAME_MAX_LENGTH = 25;
 
-export const ACTIVITY_CATEGORIES = ['fitness', 'sports', 'cardio'];
+export const ACTIVITY_CATEGORIES = ['fitness', 'sports', 'cardio', 'yoga'];
 
 export const REGISTRATION_STEPS = ['Basic Information', 'Health Information'];
 
@@ -75,7 +78,7 @@ export const SPORTS_CATEGORIES = {
     OTHER: 'other',
 };
 
-export const GOAL_TYPES = ['Fitness', 'Cardio', 'Sports', 'Other'];
+export const GOAL_TYPES = ['Fitness', 'Cardio', 'Sports', 'Yoga', 'Other'];
 
 export const GOAL_TARGET_TYPES = {
     TOTAL_SESSIONS: 'Total sessions',
@@ -98,6 +101,7 @@ export const GOAL_TYPES_TARGETS = {
         GOAL_TARGET_TYPES.TOTAL_MINUTES,
     ],
     Sports: [GOAL_TARGET_TYPES.TOTAL_SESSIONS, GOAL_TARGET_TYPES.TOTAL_MINUTES],
+    Yoga: [GOAL_TARGET_TYPES.TOTAL_SESSIONS, GOAL_TARGET_TYPES.TOTAL_MINUTES],
 };
 
 export const PROGRESS_PIE_COLORS = ['#175075', '#9eb2c3'];
