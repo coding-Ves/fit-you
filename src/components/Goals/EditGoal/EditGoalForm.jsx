@@ -13,17 +13,20 @@ import {
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { editGoal } from '../../../firebase/services/goals.service';
 import editGoalValidationSchema from './editGoalValidationSchema';
 import dayjs from 'dayjs';
 import Loader from '../../Loader/Loader';
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 const EditGoalForm = ({ goal, onEditGoal, onClose }) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const {
         register,
+        control,
         handleSubmit,
         formState: { errors },
     } = useForm({
@@ -65,7 +68,6 @@ const EditGoalForm = ({ goal, onEditGoal, onClose }) => {
                 elevation={4}
                 sx={{ width: 'fit-content', p: 2 }}
                 component='main'
-                maxWidth='xs'
             >
                 <Snackbar
                     open={snackbarOpen}
@@ -131,23 +133,26 @@ const EditGoalForm = ({ goal, onEditGoal, onClose }) => {
                                 />
                             </Grid>
                             <Grid item xs={12}>
-                                <TextField
-                                    type='date'
-                                    defaultValue={dayjs(goal.targetDate).format('YYYY-MM-DD')}
-                                    required
-                                    fullWidth
-                                    id='newTargetDate'
-                                    name='newTargetDate'
-                                    label='Target Date'
-                                    InputLabelProps={{ shrink: true}}
-                                    shouldControlSelection={false}
-                                    inputProps={{
-                                        min: new Date().toISOString().slice(0, 10),
-                                    }}
-                                    {...register('newTargetDate')}
-                                    error={!!errors.newTargetDate}
-                                    helperText={errors.newTargetDate?.message}
-                                />
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <Controller
+                                        control={control}
+                                        name='newTargetDate'
+                                        defaultValue={dayjs(goal.targetDate)}
+                                        render={({ field }) => (
+                                            <DatePicker
+                                                {...field}
+                                                format='DD/MM/YYYY'
+                                                required
+                                                disablePast
+                                                id='newTargetDate'
+                                                label='Target Date'
+                                                sx={{ width: '100%' }}
+                                                error={!!errors.newTargetDate}
+                                                helperText={errors.newTargetDate?.message}
+                                            />
+                                        )}
+                                    />
+                                </LocalizationProvider>
                             </Grid>
                         </Grid>
                         <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
