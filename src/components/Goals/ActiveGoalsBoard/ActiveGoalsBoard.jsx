@@ -59,7 +59,7 @@ const ActiveGoalsBoard = ({ username }) => {
                     <SingleActiveGoalCard
                         onDeleteGoal={handleDeleteGoal}
                         onEditGoal={handleEditGoal}
-                        key={goal.id}
+                        key={goal.goalId}
                         goal={goal}
                     />
                 ))}
@@ -69,7 +69,7 @@ const ActiveGoalsBoard = ({ username }) => {
 };
 
 ActiveGoalsBoard.propTypes = {
-    username: PropTypes.string.isRequired,
+    username: PropTypes.string,
 };
 
 export default ActiveGoalsBoard;

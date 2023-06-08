@@ -8,7 +8,6 @@ const SingleActiveGoalCard = ({ goal, onDeleteGoal, onEditGoal }) => {
         <Paper
             variant='elevation'
             elevation={5}
-            borderRadius={'5px'}
             border={'solid 1px #e4e4e4'}
             sx={{ m: 2, p: 2 }}
         >
