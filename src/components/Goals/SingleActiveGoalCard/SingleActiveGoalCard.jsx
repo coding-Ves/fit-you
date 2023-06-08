@@ -1,12 +1,10 @@
-import { Box, Typography, Paper } from '@mui/material';
+import { Box, Paper, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { DAY_TO_MILLISECONDS } from '../../../common/constants';
-import ProgressPieChart from './ProgressPieChart/ProgressPieChart';
 import SingleGoalMenu from '../SingleGoalMenu/SingleGoalMenu';
+import ProgressPieChart from './ProgressPieChart/ProgressPieChart';
 
-// TODO - move the PieChart to a separate component
-
-const SingleActiveGoalCard = ({ goal }) => {
+const SingleActiveGoalCard = ({ goal, onDeleteGoal }) => {
     return (
         <Paper
             variant='elevation'
@@ -15,7 +13,12 @@ const SingleActiveGoalCard = ({ goal }) => {
             border={'solid 1px #e4e4e4'}
             sx={{ m: 2, p: 2 }}
         >
-            <SingleGoalMenu sx={{ position: 'absolute'}}/>
+            <SingleGoalMenu
+                onDeleteGoal={onDeleteGoal}
+                goalId={goal.goalId}
+                username={goal.username}
+                sx={{ position: 'absolute' }}
+            />
             <Typography
                 fontWeight={500}
                 sx={{
@@ -49,7 +52,7 @@ const SingleActiveGoalCard = ({ goal }) => {
                 }}
             >
                 <Typography>
-                    Started on: <br />{' '}
+                    Started on: <br />
                     {new Date(goal.createdOn).toLocaleDateString('en-GB')}
                 </Typography>
                 <Typography>
@@ -65,6 +68,7 @@ const SingleActiveGoalCard = ({ goal }) => {
 
 SingleActiveGoalCard.propTypes = {
     goal: PropTypes.object.isRequired,
+    onDeleteGoal: PropTypes.func.isRequired,
 };
 
 export default SingleActiveGoalCard;
