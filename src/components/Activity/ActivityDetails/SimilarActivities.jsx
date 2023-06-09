@@ -12,15 +12,14 @@ const SimilarActivities = ({ targetMuscleFitnessExercises, equipmentFitnessExerc
                 <Typography sx={{ fontSize: { lg: '30px', xs: '25px' }, ml: '20px' }} fontWeight={700} mb='33px'>
                     Similar Target Muscle exercises
                 </Typography>
-                <Carousel data={targetMuscleFitnessExercises} />
-
+                {targetMuscleFitnessExercises && equipmentFitnessExercises && <Carousel data={targetMuscleFitnessExercises} /> }
             </Box>
 
             <Box sx={{ mt: { lg: '100px', xs: '0px' } }}>
                 <Typography sx={{ fontSize: { lg: '30px', xs: '25px' }, ml: '20px' }} fontWeight={700} mb='33px'>
                     Similar Equipment exercises
                 </Typography>
-                <Carousel data={equipmentFitnessExercises} />
+                {targetMuscleFitnessExercises && equipmentFitnessExercises && <Carousel data={equipmentFitnessExercises} />}
 
             </Box>
 
