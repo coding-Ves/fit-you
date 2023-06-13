@@ -10,7 +10,6 @@ import { DRAWER_WIDTH_OPEN, DRAWER_WIDTH_CLOSED } from '../../common/constants';
 import {
     mainListItems,
     physicalListItems,
-    mentalListItems,
     wellnessListItems,
     socialListItems,
 } from './ListItems';
@@ -75,8 +74,6 @@ const SideBarDrawer = () => {
                 {mainListItems}
                 <Divider sx={{ my: 1 }} />
                 {physicalListItems}
-                <Divider sx={{ my: 1 }} />
-                {mentalListItems}
                 <Divider sx={{ my: 1 }} />
                 {wellnessListItems}
                 <Divider sx={{ my: 1 }} />

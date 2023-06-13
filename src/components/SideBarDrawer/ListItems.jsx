@@ -92,29 +92,17 @@ export const wellnessListItems = (
             </ListItemIcon>
             <ListItemText primary='BMI' />
         </ListItemButton>
-        <ListItemButton component={Link} to='/water'>
+        {/* <ListItemButton component={Link} to='/water'>
             <ListItemIcon>
                 <WaterDrop />
             </ListItemIcon>
             <ListItemText primary='Water' />
-        </ListItemButton>
-        <ListItemButton component={Link} to='/diet'>
+        </ListItemButton> */}
+        {/* <ListItemButton component={Link} to='/diet'>
             <ListItemIcon>
                 <LocalDining />
             </ListItemIcon>
             <ListItemText primary='Diet' />
-        </ListItemButton>
-    </>
-);
-
-export const mentalListItems = (
-    <>
-        {/* <ListSubheader>Mental Health</ListSubheader> */}
-        <ListItemButton component={Link} to='/meditation'>
-            <ListItemIcon>
-                <SelfImprovement />
-            </ListItemIcon>
-            <ListItemText primary='Meditation' />
-        </ListItemButton>
+        </ListItemButton> */}
     </>
 );
