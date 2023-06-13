@@ -88,11 +88,13 @@ export const SPORTS_CATEGORIES = {
 
 export const GOAL_TYPES = ['Fitness', 'Cardio', 'Sports', 'Yoga', 'Other'];
 
-export const  GOAL_STATUS = {
+export const GOAL_STATUS = {
     ACTIVE: 'Active',
     COMPLETED: 'Completed',
     EXPIRED: 'Expired',
-}
+};
+
+export const MAXIMUM_ACTIVE_GOALS = 10;
 
 export const GOAL_TARGET_TYPES = {
     TOTAL_SESSIONS: 'Total sessions',
