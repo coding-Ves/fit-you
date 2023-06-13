@@ -13,7 +13,7 @@ const Search = () => {
             <Paper
                 variant='elevation'
                 elevation={2}
-                sx={{ display: 'flex', height: '100vh', width: '100vw' }}
+                sx={{ display: 'flex', height: '93vh', width: '100vw' }}
             >
                 <SideBarDrawer />
                 <Box
