@@ -4,11 +4,14 @@ import SingleGoalMenu from '../SingleGoalMenu/SingleGoalMenu';
 import ProgressPieChart from './ProgressPieChart/ProgressPieChart';
 import { useEffect } from 'react';
 import { checkGoalExpired } from '../../../firebase/services/goals.service';
+import { useLocation } from 'react-router-dom';
 
 const SingleActiveGoalCard = ({ goal, onDeleteGoal, onEditGoal }) => {
     useEffect(() => {
         checkGoalExpired(goal.goalId, goal.targetDate);
     }, [goal]);
+
+    const location = useLocation();
 
     return (
         <Paper variant='elevation' elevation={5} border={'solid 1px #e4e4e4'} sx={{ m: 1, p: 1 }}>
@@ -30,14 +33,16 @@ const SingleActiveGoalCard = ({ goal, onDeleteGoal, onEditGoal }) => {
                 >
                     {goal.goalName}
                 </Typography>
-                <SingleGoalMenu
-                    onDeleteGoal={onDeleteGoal}
-                    onEditGoal={onEditGoal}
-                    goal={goal}
-                    goalId={goal.goalId}
-                    username={goal.username}
-                    sx={{ position: 'absolute' }}
-                />
+                {location.pathname !== '/dashboard' && (
+                    <SingleGoalMenu
+                        onDeleteGoal={onDeleteGoal}
+                        onEditGoal={onEditGoal}
+                        goal={goal}
+                        goalId={goal.goalId}
+                        username={goal.username}
+                        sx={{ position: 'absolute' }}
+                    />
+                )}
             </Box>
             <ProgressPieChart currentProgress={goal.goalProgress} goalTarget={goal.targetValue} />
             <Typography
