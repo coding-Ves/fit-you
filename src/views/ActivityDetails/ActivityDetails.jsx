@@ -6,6 +6,8 @@ import FitnessExerciseDetail from '../../components/Activity/ActivityDetails/Fit
 // import SimilarActivities from '../../components/Activity/ActivityDetails/SimilarActivities';
 import { fitnessExerciseDetailData } from '../../components/Activity/ActivityDetails/helpers/activityDetailsHelpers';
 import SideBarDrawer from '../../components/SideBarDrawer/SideBarDrawer';
+import YogaDetail from '../../components/Activity/ActivityDetails/YogaDetail';
+import { fetchYogaPoseByID } from '../../services/yoga.service';
 
 const ActivityDetails = () => {
     const [activityDetail, setActivityDetail] = useState({});
@@ -17,20 +19,29 @@ const ActivityDetails = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
 
         if (category === 'fitness') {
-            fitnessExerciseDetailData(id)
-                .then((detailData) => {
-                    setActivityDetail(detailData);
-                    // targetMuscleFitnessExercisesData(detailData)
-                    //     .then((targetData) => setTargetMuscleFitnessExercises(targetData));
-                    // equipmentFitnessExercisesData(detailData)
-                    //     .then((equipmentData) => setEquipmentFitnessExercises(equipmentData));
-                });
+            fitnessExerciseDetailData(id).then((detailData) => {
+                setActivityDetail(detailData);
+                // targetMuscleFitnessExercisesData(detailData)
+                //     .then((targetData) => setTargetMuscleFitnessExercises(targetData));
+                // equipmentFitnessExercisesData(detailData)
+                //     .then((equipmentData) => setEquipmentFitnessExercises(equipmentData));
+            });
+        }
+
+        if (category === 'yoga') {
+            fetchYogaPoseByID(id).then((detailData) => {
+                setActivityDetail(detailData);
+
+                // targetMuscleFitnessExercisesData(detailData)
+                //     .then((targetData) => setTargetMuscleFitnessExercises(targetData));
+                // equipmentFitnessExercisesData(detailData)
+                //     .then((equipmentData) => setEquipmentFitnessExercises(equipmentData));
+            });
         }
 
         // sports detail data
 
         // cardio detail data
-
     }, [category, id]);
 
     if (!activityDetail) return <Typography>No Data</Typography>;
@@ -39,7 +50,7 @@ const ActivityDetails = () => {
         <Box sx={{ display: 'flex' }}>
             <SideBarDrawer />
             <Box
-                component="main"
+                component='main'
                 sx={{
                     flex: '1',
                     display: 'flex',
@@ -48,12 +59,19 @@ const ActivityDetails = () => {
                 <Box sx={{ mt: { lg: '96px', xs: '60px' } }}>
                     {category === 'fitness' && (
                         <>
-                            <FitnessExerciseDetail activityDetail={activityDetail} />
+                            <FitnessExerciseDetail
+                                activityDetail={activityDetail}
+                            />
                             {/* <ActivityVideos /> */}
-
                         </>
                     )}
-
+                    {category === 'yoga' && (
+                        <>
+                            {console.log(activityDetail)}
+                            <YogaDetail activityDetail={activityDetail} />
+                            {/* <ActivityVideos /> */}
+                        </>
+                    )}
                 </Box>
             </Box>
         </Box>
@@ -62,6 +80,7 @@ const ActivityDetails = () => {
 
 export default ActivityDetails;
 
-
-{/* <SimilarActivities targetMuscleFitnessExercises={targetMuscleFitnessExercises} equipmentFitnessExercises={equipmentFitnessExercises} /> */ }
-// не работи ако navigate-неш от сърч резултс към това вю. ако обаче се откоментира докато вече е на това вю, работи... 
+{
+    /* <SimilarActivities targetMuscleFitnessExercises={targetMuscleFitnessExercises} equipmentFitnessExercises={equipmentFitnessExercises} /> */
+}
+// не работи ако navigate-неш от сърч резултс към това вю. ако обаче се откоментира докато вече е на това вю, работи...

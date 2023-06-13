@@ -5,7 +5,6 @@ import EquipmentIcon from '../../../assets/icons/equipment.png';
 import TargetIcon from '../../../assets/icons/target.png';
 
 const FitnessExerciseDetail = ({ activityDetail }) => {
-
     const { bodyPart, gifUrl, name, target, equipment } = activityDetail;
 
     const extraDetail = [
@@ -24,19 +23,41 @@ const FitnessExerciseDetail = ({ activityDetail }) => {
     ];
 
     return (
-        <Stack gap='60px' sx={{ flexDirection: { lg: 'row' }, p: '20px', alignItems: 'center' }}>
-            <img src={gifUrl} alt={name} loading='lazy' />
+        <Stack
+            gap='60px'
+            sx={{
+                flexDirection: { lg: 'row' },
+                p: '20px',
+                alignItems: 'center',
+            }}
+        >
+            <Avatar
+                src={gifUrl}
+                alt={name}
+                loading='lazy'
+                sx={{
+                    width: { lg: '400px', xs: '200px' },
+                    height: { lg: '400px', xs: '200px' },
+                }}
+            />
             <Stack sx={{ gap: { lg: '35px', xs: '20px' } }}>
-                <Typography sx={{ fontSize: { lg: '45px', xs: '20px' } }} fontWeight={600} textTransform='capitalize'>
+                <Typography variant='h4' textTransform='capitalize'>
                     {name}
                 </Typography>
-                <Typography sx={{ fontSize: { lg: '20px', xs: '15px' } }} color="#4F4C4C">
-                    Wanna feel like an idiot idol on the beach? This is an exercise that will help you get the {target} everybody wants! Rawr!
-                </Typography>
+
                 {extraDetail?.map((item, index) => (
-                    <Stack key={index} direction="row" gap="24px" alignItems="center">
-                        <Avatar src={item.icon} alt={bodyPart} sx={{ width: '50px', height: '50px' }} />
-                        <Typography textTransform="capitalize" sx={{ fontSize: { lg: '30px', xs: '20px' } }}>
+                    <Stack
+                        key={index}
+                        direction='row'
+                        gap='24px'
+                        alignItems='center'
+                    >
+                        <Avatar
+                            src={item.icon}
+                            alt={bodyPart}
+                            sx={{ width: '50px', height: '50px' }}
+                        />
+                        <Typography variant='h6' textTransform='capitalize'>
                             {item.name}
                         </Typography>
                     </Stack>
