@@ -14,7 +14,7 @@ const ProfileInformation = ({ userData }) => {
                 mb: 2,
             }}
         >
-            <Box container spacing={2}>
+            <Box spacing={2} component='div'>
                 <Grid item xs={6} sm={4}>
                     <ProfileAvatar userData={userData} />
                 </Grid>

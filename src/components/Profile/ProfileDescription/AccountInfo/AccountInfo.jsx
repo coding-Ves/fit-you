@@ -73,104 +73,109 @@ export const AccountInfo = ({ userData: userProfileData }) => {
     };
 
     return (
-        <Box
-            component='form'
-            sx={{ mt: 3 }}
-            noValidate
-            onSubmit={handleSubmit(onSubmit)}
-        >
-            <Snackbar
-                open={snackbarOpen}
-                autoHideDuration={3000}
-                onClose={handleSnackbarClose}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        <>
+            <Box
+                component='form'
+                sx={{ mt: 3 }}
+                noValidate
+                onSubmit={handleSubmit(onSubmit)}
             >
-                <Alert
+                <Snackbar
+                    open={snackbarOpen}
+                    autoHideDuration={3000}
                     onClose={handleSnackbarClose}
-                    severity={snackbarSeverity}
-                    sx={{ width: '100%' }}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
                 >
-                    {snackbarMessage}
-                </Alert>
-            </Snackbar>
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <TextField
-                        fullWidth
-                        id='username'
-                        label='Username'
-                        {...register('username')}
-                        error={!!errors.username}
-                        helperText={errors.username?.message}
-                        defaultValue={userProfileData.username}
-                        InputProps={{
-                            readOnly: true,
-                        }}
-                    />
-                </Grid>
-
-                <Grid item xs={12}>
-                    <TextField
-                        fullWidth
-                        id='phoneNumber'
-                        label='Phone Number'
-                        defaultValue={userProfileData.phoneNumber}
-                        {...register('phoneNumber')}
-                        error={!!errors.phoneNumber}
-                        helperText={errors.phoneNumber?.message}
-                        InputProps={{
-                            readOnly: !editable,
-                            endAdornment: editable && (
-                                <InputAdornment position='end'>
-                                    <Icon>
-                                        <Edit />
-                                    </Icon>
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        fullWidth
-                        id='registrationDate'
-                        label='Registered on:'
-                        defaultValue={displayDate}
-                        {...register('registrationDate')}
-                        error={!!errors.registrationDate}
-                        helperText={errors.registrationDate?.message}
-                        InputProps={{
-                            readOnly: true,
-                        }}
-                    />
-                </Grid>
-                {userData?.username === userProfileData?.username ? (
-                    <Grid item xs={12}>
-                        {!editable ? (
-                            <Button variant='outlined' onClick={handleEdit}>
-                                Edit
-                            </Button>
-                        ) : (
-                            <Box>
-                                <Button
-                                    sx={{ mr: 2 }}
-                                    variant='contained'
-                                    type='submit'
-                                >
-                                    Save
-                                </Button>
-                                <Button
-                                    variant='outlined'
-                                    onClick={handleCancel}
-                                >
-                                    Cancel
-                                </Button>
-                            </Box>
-                        )}
+                    <Alert
+                        onClose={handleSnackbarClose}
+                        severity={snackbarSeverity}
+                        sx={{ width: '100%' }}
+                    >
+                        {snackbarMessage}
+                    </Alert>
+                </Snackbar>
+                <Grid container component='div' spacing={2}>
+                    <Grid item xs={12} component='div'>
+                        <TextField
+                            component='div'
+                            fullWidth
+                            id='username'
+                            label='Username'
+                            {...register('username')}
+                            error={!!errors.username}
+                            helperText={errors.username?.message}
+                            defaultValue={userProfileData.username}
+                            InputProps={{
+                                readOnly: true,
+                            }}
+                        />
                     </Grid>
-                ) : null}
-            </Grid>
-        </Box>
+
+                    <Grid item xs={12} component='div'>
+                        <TextField
+                            component='div'
+                            fullWidth
+                            id='phoneNumber'
+                            label='Phone Number'
+                            defaultValue={userProfileData.phoneNumber}
+                            {...register('phoneNumber')}
+                            error={!!errors.phoneNumber}
+                            helperText={errors.phoneNumber?.message}
+                            InputProps={{
+                                readOnly: !editable,
+                                endAdornment: editable && (
+                                    <InputAdornment position='end'>
+                                        <Icon>
+                                            <Edit />
+                                        </Icon>
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    </Grid>
+                    <Grid item xs={12} component='div'>
+                        <TextField
+                            component='div'
+                            fullWidth
+                            id='registrationDate'
+                            label='Registered on:'
+                            defaultValue={displayDate}
+                            {...register('registrationDate')}
+                            error={!!errors.registrationDate}
+                            helperText={errors.registrationDate?.message}
+                            InputProps={{
+                                readOnly: true,
+                            }}
+                        />
+                    </Grid>
+                    {userData?.username === userProfileData?.username ? (
+                        <Grid item xs={12} component='div'>
+                            {!editable ? (
+                                <Button variant='outlined' onClick={handleEdit}>
+                                    Edit
+                                </Button>
+                            ) : (
+                                <Box component='div'>
+                                    <Button
+                                        sx={{ mr: 2 }}
+                                        variant='contained'
+                                        type='submit'
+                                    >
+                                        Save
+                                    </Button>
+                                    <Button
+                                        variant='outlined'
+                                        onClick={handleCancel}
+                                    >
+                                        Cancel
+                                    </Button>
+                                </Box>
+                            )}
+                        </Grid>
+                    ) : null}
+                </Grid>
+            </Box>
+        </>
     );
 };
 

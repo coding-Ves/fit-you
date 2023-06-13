@@ -39,7 +39,7 @@ const Profile = () => {
             {isLoading ? (
                 <Loader />
             ) : (
-                <Grid align='center' spacing={2}>
+                <Grid align='center'>
                     <ProfileInformation userData={userData} />
                     <ProfileActivity userData={userData} />
                 </Grid>

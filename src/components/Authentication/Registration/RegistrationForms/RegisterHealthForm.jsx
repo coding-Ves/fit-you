@@ -16,6 +16,7 @@ import {
 
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import { registrationHealthValidationSchema } from './registrationHealthValidationSchema';
 
@@ -28,7 +29,7 @@ export const RegistrationHealthForm = () => {
     const [isLoading, setIsLoading] = useState(false);
     const { userData } = useContext(AuthContext);
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     // Responsible for Snackbar and Alert - Showing error  and success messages
     const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -65,6 +66,11 @@ export const RegistrationHealthForm = () => {
             .then(() => {
                 setIsLoading(false);
                 // navigate('/dashboard');
+            })
+            .then(() => {
+                setTimeout(() => {
+                    navigate('/dashboard');
+                }, 1500);
             })
             .catch((e) => {
                 setIsLoading(false);

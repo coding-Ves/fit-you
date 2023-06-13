@@ -5,7 +5,3 @@ const RegisterHealth = () => {
 };
 
 export default RegisterHealth;
-
-// <Card sx={{ m: 25, mt: 10, p: 10 }}>
-// <RegistrationForm />
-// </Card>

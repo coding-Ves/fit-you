@@ -6,10 +6,8 @@ import {
     Avatar,
     Box,
     Button,
-    Checkbox,
     Container,
     CssBaseline,
-    FormControlLabel,
     Grid,
     IconButton,
     InputAdornment,
@@ -29,11 +27,11 @@ import AuthContext from './../../../../contexts/AuthContext';
 
 import { registerUser } from './../../../../firebase/services/auth.service';
 
-import errorHandler from './../../ErrorHandling/errors.services';
 import {
     createUsername,
     getUserByUsername,
 } from './../../../../firebase/services/users.service';
+import errorHandler from './../../ErrorHandling/errors.services';
 
 export const RegistrationForm = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -86,13 +84,18 @@ export const RegistrationForm = () => {
                 });
             })
             .then(() => {
-                setSnackbarMessage('Registration successful!');
+                setSnackbarMessage('Account info registered!');
                 setSnackbarSeverity('success');
                 setSnackbarOpen(true);
             })
             .then(() => {
                 setIsLoading(false);
-                // navigate('/dashboard');
+            })
+            .then(() => {
+                setTimeout(() => {
+                    navigate('/health-info');
+                }, 2000);
+                setIsLoading(false);
             })
             .catch((e) => {
                 setIsLoading(false);
@@ -262,17 +265,12 @@ export const RegistrationForm = () => {
                             variant='contained'
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            Register
+                            Complete Step 1
                         </Button>
                         <Grid container justifyContent='flex-end'>
                             <Grid item>
                                 <Link href='/login' variant='body2'>
                                     Already have an account? Sign in
-                                </Link>
-                            </Grid>
-                            <Grid item>
-                                <Link href='/health-info' variant='body2'>
-                                    Set up your Health Info by clicking here.
                                 </Link>
                             </Grid>
                         </Grid>

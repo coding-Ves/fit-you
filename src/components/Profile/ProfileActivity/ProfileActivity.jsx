@@ -66,20 +66,14 @@ export const ProfileActivity = ({ userData: userProfileData }) => {
                     scrollButtons
                     allowScrollButtonsMobile
                 >
-                    <Tab label='Goals' {...a11yProps(0)} />
-                    <Tab label='Activity' {...a11yProps(1)} />
-                    <Tab label='Achievements' {...a11yProps(2)} />
-                    <Tab label='Friends' {...a11yProps(3)} />
+                    <Tab label='Achievements' {...a11yProps(0)} />
+                    <Tab label='Friends' {...a11yProps(1)} />
                 </Tabs>
             </Box>
-            <TabPanel value={value} index={0}></TabPanel>
-            <TabPanel value={value} index={1}>
-                <ActivitiesTable userData={userProfileData} />
-            </TabPanel>
-            <TabPanel value={value} index={2}>
+            <TabPanel value={value} index={0}>
                 <Achievements userData={userProfileData} />
             </TabPanel>
-            <TabPanel value={value} index={3}>
+            <TabPanel value={value} index={1}>
                 <FollowMain userData={userProfileData} />
             </TabPanel>
         </Paper>

@@ -54,10 +54,10 @@ export const ProfileDescription = ({ userData }) => {
                     {/* <Tab label='Item Three' {...a11yProps(2)} /> */}
                 </Tabs>
             </Box>
-            <TabPanel value={value} index={0}>
+            <TabPanel component='div' value={value} index={0}>
                 <AccountInfo userData={userData} />
             </TabPanel>
-            <TabPanel value={value} index={1}>
+            <TabPanel component='div' value={value} index={1}>
                 <HealthInfo userData={userData} />
             </TabPanel>
             {/* <TabPanel value={value} index={2}>

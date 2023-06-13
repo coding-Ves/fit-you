@@ -21,19 +21,31 @@ export const Achievements = ({ userData }) => {
 
     return (
         <Box sx={{ p: 2 }} align='center'>
-            <Typography mb={3} variant='h4'>
+            <Typography component='div' mb={3} variant='h4'>
                 Achievements
             </Typography>
-            <Grid container spacing={2} align='center' fullWidth>
+            <Grid container spacing={2} align='center'>
                 {achievements.map((card, index) => (
-                    <Grid item xs={6} sm={6} md={3} lg={2} key={index}>
-                        <Card variant='elevation' elevation={3}>
+                    <Grid item xs={12} sm={6} md={5} lg={4} key={index}>
+                        <Card
+                            variant='elevation'
+                            elevation={3}
+                            sx={{ minHeight: '15px' }}
+                        >
                             <CardContent>
                                 {card.icon}
-                                <Typography variant='h6' color={card.color}>
+                                <Typography
+                                    component='div'
+                                    variant='h6'
+                                    color={card.color}
+                                >
                                     {card.title}
                                 </Typography>
-                                <Typography variant='body1' color={card.color}>
+                                <Typography
+                                    component='div'
+                                    variant='body1'
+                                    color={card.color}
+                                >
                                     {card.description}
                                 </Typography>
                             </CardContent>

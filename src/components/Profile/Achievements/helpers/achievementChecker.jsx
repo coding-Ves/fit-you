@@ -156,7 +156,6 @@ export const achievementChecker = (userData) => {
 
     // Has a year passed since the user created their account?
 
-    console.log(userData.createdOn, Date.now() - 31556952000);
     if (userData.createdOn < Date.now() - 31556952000) {
         achievements.push({
             title: 'The First Year',
@@ -434,7 +433,7 @@ export const achievementChecker = (userData) => {
     if (following.includes('Gandalf')) {
         achievements.push({
             title: 'Follow The Wizard!',
-            description: 'You found an easter egg, good job!',
+            description: 'He knows the way',
             icon: (
                 <EmojiEvents
                     size={50}

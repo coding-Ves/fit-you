@@ -20,19 +20,19 @@ import { Link } from 'react-router-dom';
 
 export const mainListItems = (
     <>
-        <ListItemButton component={Link} to='/dashboard'>
+        <ListItemButton component={Link} href='/dashboard'>
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary='Dashboard' />
         </ListItemButton>
-        <ListItemButton component={Link} to='/my-activity'>
+        <ListItemButton component={Link} href='/my-activity'>
             <ListItemIcon>
                 <QueryStatsRoundedIcon />
             </ListItemIcon>
             <ListItemText primary='My Activity' />
         </ListItemButton>
-        <ListItemButton component={Link} to='/my-goals'>
+        <ListItemButton component={Link} href='/my-goals'>
             <ListItemIcon>
                 <TrackChangesRoundedIcon />
             </ListItemIcon>
@@ -44,25 +44,25 @@ export const mainListItems = (
 export const physicalListItems = (
     <>
         {/* <ListSubheader>Physical</ListSubheader> */}
-        <ListItemButton component={Link} to='/search/fitness'>
+        <ListItemButton component={Link} href='/search/fitness'>
             <ListItemIcon>
                 <FitnessCenter />
             </ListItemIcon>
             <ListItemText primary='Fitness' />
         </ListItemButton>
-        <ListItemButton component={Link} to='/search/sports'>
+        <ListItemButton component={Link} href='/search/sports'>
             <ListItemIcon>
                 <SportsBasketball />
             </ListItemIcon>
             <ListItemText primary='Sports' />
         </ListItemButton>
-        <ListItemButton component={Link} to='/search/cardio'>
+        <ListItemButton component={Link} href='/search/cardio'>
             <ListItemIcon>
                 <DirectionsRun />
             </ListItemIcon>
             <ListItemText primary='Cardio' />
         </ListItemButton>
-        <ListItemButton component={Link} to='/search/yoga'>
+        <ListItemButton component={Link} href='/search/yoga'>
             <ListItemIcon>
                 <Spa />
             </ListItemIcon>

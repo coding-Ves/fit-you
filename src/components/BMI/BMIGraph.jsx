@@ -58,7 +58,7 @@ export const BMIGraph = ({ userData }) => {
                 stroke='none'
             >
                 {BMIData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
+                    <Cell id={index} key={`cell-${index}`} fill={entry.color} />
                 ))}
             </Pie>
             {needle(userData?.bmi, BMIData, cx, cy, iR, oR, '#5f95ed')}

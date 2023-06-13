@@ -29,7 +29,7 @@ const NavBar = ({ onThemeChange }) => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <ElevationScroll>
-                <AppBar sx={{ background: '#284A67' }}>
+                <AppBar sx={{ background: '#3a6b94' }}>
                     <Toolbar>
                         <Avatar as={ReactRouterLink} to={`/`} sx={{ mr: 2 }}>
                             <Home />
@@ -49,22 +49,23 @@ const NavBar = ({ onThemeChange }) => {
                         />
 
                         {user ? (
-                            <Box>
+                            <Box sx={{ ml: 2 }}>
                                 <MyAccountMenu />
                             </Box>
                         ) : (
-                            <Box>
+                            <Box sx={{ ml: 2 }}>
                                 <Button
-                                    as={ReactRouterLink}
-                                    to={`/login`}
+                                    // as={Link}
+                                    href={`/login`}
                                     sx={{ mr: 1, textDecoration: 'none' }}
                                     variant='contained'
                                 >
                                     Login
                                 </Button>
                                 <Button
-                                    as={ReactRouterLink}
-                                    to={`/register`}
+                                    // as={Link}
+                                    // to={`/register`}
+                                    href={`/register`}
                                     sx={{ mr: 1, textDecoration: 'none' }}
                                     variant='contained'
                                 >
