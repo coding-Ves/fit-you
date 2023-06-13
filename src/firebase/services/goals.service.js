@@ -1,6 +1,6 @@
 import { get, push, ref, update } from 'firebase/database';
 import { db } from '../firebase-config';
-import { GOAL_TARGET_TYPES } from '../../common/constants';
+import { GOAL_STATUS, GOAL_TARGET_TYPES } from '../../common/constants';
 
 export const addGoal = (username, goalName, goalType, goalTargetType, targetValue, targetDate) => {
     return push(ref(db, 'goals'), {
@@ -12,6 +12,7 @@ export const addGoal = (username, goalName, goalType, goalTargetType, targetValu
         targetDate,
         createdOn: Date.now(),
         goalProgress: 0,
+        goalStatus: GOAL_STATUS.ACTIVE,
     }).then((result) => {
         // add the goal id to the goal and user goals objects
         const goalId = result.key;
