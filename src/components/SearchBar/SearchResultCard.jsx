@@ -62,21 +62,12 @@ const SearchResultCard = ({ activity }) => {
 
                 {/* extra fields for yoga cards  */}
 
-                {category === 'yoga' && (
+                {/* {category === 'yoga' && (
                     <Typography
                         level='body3'
                         sx={{ fontWeight: 'md', color: 'text.secondary' }}
                     >
                         Sanskrit Name: {activity.sanskrit_name}
-                    </Typography>
-                )}
-                {/* 
-                {category === 'yoga' && (
-                    <Typography
-                        level='body3'
-                        sx={{ fontWeight: 'md', color: 'text.secondary' }}
-                    >
-                        Translation: {activity.translation_name}
                     </Typography>
                 )} */}
 
