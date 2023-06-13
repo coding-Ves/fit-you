@@ -6,6 +6,7 @@ import {
     Box,
     Button,
     FormControl,
+    FormHelperText,
     Grid,
     InputLabel,
     MenuItem,
@@ -29,6 +30,7 @@ import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 
 const NewGoalForm = ({ onAddGoal, handleClose }) => {
     const { userData } = useContext(AuthContext);
+        
     const [isLoading, setIsLoading] = useState(false);
     const [goalType, setGoalType] = useState('');
     const [goalTargetType, setGoalTargetType] = useState('');
@@ -69,7 +71,7 @@ const NewGoalForm = ({ onAddGoal, handleClose }) => {
             data.goalType,
             data.goalTargetType,
             +data.targetValue,
-            dayjs(data.targetDate).valueOf()
+            dayjs(data.targetDate).endOf('day').valueOf()
         )
             .then(() => {
                 setSnackbarMessage('Goal added successfully!');
@@ -134,7 +136,7 @@ const NewGoalForm = ({ onAddGoal, handleClose }) => {
                     >
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
-                                <FormControl fullWidth>
+                                <FormControl fullWidth error={!!errors.goalType}>
                                     <InputLabel>Goal Type</InputLabel>
                                     <Select
                                         name='goalType'
@@ -144,6 +146,8 @@ const NewGoalForm = ({ onAddGoal, handleClose }) => {
                                         {...register('goalType')}
                                         value={goalType}
                                         onChange={handleGoalTypeChange}
+                                        error={!!errors.goalType}
+                                        helperText={errors.goalType?.message}
                                     >
                                         {GOAL_TYPES.map((type) => {
                                             return (
@@ -153,11 +157,14 @@ const NewGoalForm = ({ onAddGoal, handleClose }) => {
                                             );
                                         })}
                                     </Select>
+                                    {errors.goalType && (
+                                        <FormHelperText>{errors.goalType.message}</FormHelperText>
+                                    )}
                                 </FormControl>
                             </Grid>
                             {goalType !== 'Other' && goalType && (
                                 <Grid item xs={12}>
-                                    <FormControl fullWidth>
+                                    <FormControl fullWidth error={!!errors.goalTargetType}>
                                         <InputLabel>Goal Target Type</InputLabel>
                                         <Select
                                             name='goalTargetType'
@@ -166,6 +173,8 @@ const NewGoalForm = ({ onAddGoal, handleClose }) => {
                                             {...register('goalTargetType')}
                                             value={goalTargetType}
                                             onChange={handleGoalTargetTypeChange}
+                                            error={!!errors.goalTargetType}
+                                            helperText={errors.goalTargetType?.message}
                                         >
                                             {GOAL_TYPES_TARGETS[goalType]?.map((type) => {
                                                 return (
@@ -175,6 +184,11 @@ const NewGoalForm = ({ onAddGoal, handleClose }) => {
                                                 );
                                             })}
                                         </Select>
+                                        {errors.goalTargetType && (
+                                            <FormHelperText>
+                                                {errors.goalTargetType.message}
+                                            </FormHelperText>
+                                        )}
                                     </FormControl>
                                 </Grid>
                             )}
