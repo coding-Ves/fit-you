@@ -10,6 +10,7 @@ import {
     Snackbar,
     Stack,
     TextField,
+    FormLabel,
 } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -20,7 +21,7 @@ import {
     getGoalsByUsername,
 } from '../../../firebase/services/goals.service';
 import { addSportSession } from '../../../firebase/services/sportSessions.service';
-import { addYogaSession } from './../../../firebase/services/yogaSessions.service';
+import { addYogaSession } from '../../../firebase/services/yogaSessions.service';
 
 const CreateSportsOrCardioSessionForm = ({
     activity,
@@ -251,7 +252,7 @@ const CreateSportsOrCardioSessionForm = ({
 
                 <Box>
                     <FormControl fullWidth margin='normal'>
-                        <InputLabel>Add to goals?</InputLabel>
+                        <FormLabel>Add to goals?</FormLabel>
                         <Select
                             {...register('selectedGoal')}
                             defaultValue=''

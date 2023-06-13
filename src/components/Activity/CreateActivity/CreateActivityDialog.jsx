@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import CreateFitnessExerciseForm from './CreateFitnessExerciseForm';
-import CreateSportsOrCardioSessionForm from './CreateSportsOrCardioSessionForm';
+import CreateSportsOrCardioSessionForm from './CreateSportsOrCardioSessionOrYogaForm';
 
 const CreateActivityDialog = ({ open, handleClose, activity }) => {
     const { category } = useParams();
