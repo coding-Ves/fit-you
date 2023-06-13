@@ -5,7 +5,6 @@ import NewGoalForm from './NewGoalForm';
 
 const CreateGoalDialog = ({ onAddGoal, hasReachedMaximumGoals }) => {
     const [open, setOpen] = useState(false);
-    console.log(hasReachedMaximumGoals);
     const handleClose = () => {
         setOpen(false);
     };
