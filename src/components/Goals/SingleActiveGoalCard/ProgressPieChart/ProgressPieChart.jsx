@@ -8,7 +8,7 @@ const ProgressPieChart = ({ currentProgress, goalTarget }) => {
         { name: 'Remaining', value: goalTarget - currentProgress },
     ];
     return (
-        <PieChart width={250} height={230}>
+        <PieChart width={230} height={200}>
             <Pie
                 data={data}
                 dataKey='value'

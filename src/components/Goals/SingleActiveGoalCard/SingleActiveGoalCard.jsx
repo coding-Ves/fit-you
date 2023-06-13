@@ -6,13 +6,12 @@ import { useEffect } from 'react';
 import { checkGoalExpired } from '../../../firebase/services/goals.service';
 
 const SingleActiveGoalCard = ({ goal, onDeleteGoal, onEditGoal }) => {
-    
     useEffect(() => {
         checkGoalExpired(goal.goalId, goal.targetDate);
     }, [goal]);
 
     return (
-        <Paper variant='elevation' elevation={5} border={'solid 1px #e4e4e4'} sx={{ m: 2, p: 2 }}>
+        <Paper variant='elevation' elevation={5} border={'solid 1px #e4e4e4'} sx={{ m: 1, p: 1 }}>
             <Box
                 sx={{
                     display: 'flex',

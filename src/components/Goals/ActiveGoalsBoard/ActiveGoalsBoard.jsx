@@ -4,10 +4,14 @@ import { useEffect, useState } from 'react';
 import { deleteGoal, getGoalsByUsername } from '../../../firebase/services/goals.service';
 import CreateGoalDialog from '../CreateGoal/CreateGoalDialog';
 import SingleActiveGoalCard from '../SingleActiveGoalCard/SingleActiveGoalCard';
-import { GOAL_STATUS } from '../../../common/constants';
+import { GOAL_STATUS, MAXIMUM_ACTIVE_GOALS } from '../../../common/constants';
+import Title from '../../Dashboard/Title/Title';
+import Loader from '../../Loader/Loader';
 
 const ActiveGoalsBoard = ({ username }) => {
     const [goals, setGoals] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [hasReachedMaximumGoals, setHasReachedMaximumGoals] = useState(false);
     const [goalDeleted, setGoalDeleted] = useState(false);
     const [goalEdited, setGoalEdited] = useState(false);
     const [goalAdded, setGoalAdded] = useState(false);
@@ -18,6 +22,10 @@ const ActiveGoalsBoard = ({ username }) => {
                 (goal) => goal.goalStatus === GOAL_STATUS.ACTIVE
             );
             setGoals(filteredActiveGoals);
+            setIsLoading(false);
+            if (filteredActiveGoals.length >= MAXIMUM_ACTIVE_GOALS) {
+                setHasReachedMaximumGoals(true);
+            }
         });
         setGoalDeleted(false);
         setGoalEdited(false);
@@ -45,27 +53,34 @@ const ActiveGoalsBoard = ({ username }) => {
                     justifyContent: 'space-between',
                 }}
             >
-                <Typography
-                    sx={{
-                        fontSize: '40px',
-                        '@media (max-width: 600px)': { fontSize: '30px' },
-                    }}
-                    textAlign='center'
-                >
+                <Title variant='h4' textAlign='center'>
                     Currently active goals:
-                </Typography>
-                <CreateGoalDialog onAddGoal={handleAddGoal} />
+                </Title>
+                <CreateGoalDialog
+                    hasReachedMaximumGoals={hasReachedMaximumGoals}
+                    onAddGoal={handleAddGoal}
+                />
             </Box>
-            <Grid container spacing={1} justifyContent='center'>
-                {goals.map((goal) => (
-                    <SingleActiveGoalCard
-                        onDeleteGoal={handleDeleteGoal}
-                        onEditGoal={handleEditGoal}
-                        key={goal.goalId}
-                        goal={goal}
-                    />
-                ))}
-            </Grid>
+            {isLoading ? (
+                <Loader />
+            ) : (
+                <Grid container justifyContent='center' paddingBottom={2} paddingTop={2}>
+                    {goals.length > 0 ? (
+                        goals.map((goal) => (
+                            <SingleActiveGoalCard
+                                onDeleteGoal={handleDeleteGoal}
+                                onEditGoal={handleEditGoal}
+                                key={goal.goalId}
+                                goal={goal}
+                            />
+                        ))
+                    ) : (
+                        <Typography variant='h6'>
+                            You have no active goals. Click the + button to add one.
+                        </Typography>
+                    )}
+                </Grid>
+            )}
         </>
     );
 };
