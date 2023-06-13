@@ -4,10 +4,9 @@ import { useContext, useEffect, useState } from 'react';
 import { EXERCISES_UNITS, WEIGHT_UNIT } from '../../../common/constants';
 import AuthContext from '../../../contexts/AuthContext';
 import { addFitnessExercise } from '../../../firebase/services/fitnessExercises.service';
-import { addActivityToGoal, getGoalsByUsername } from '../../../firebase/services/goals.service';
+import { addActivityToGoal, checkGoalProgress, getGoalsByUsername } from '../../../firebase/services/goals.service';
 
 const CreateFitnessExerciseForm = ({ exercise, category }) => {
-
     const { userData } = useContext(AuthContext);
 
     // eslint-disable-next-line no-unused-vars
@@ -27,6 +26,7 @@ const CreateFitnessExerciseForm = ({ exercise, category }) => {
 
     const [goals, setGoals] = useState({});
     const [selectedGoal, setSelectedGoal] = useState('');
+    const [selectedGoalObject, setSelectedGoalObject] = useState('');
     const [addedExerciseToGoal, setAddedExerciseToGoal] = useState(false);
 
     useEffect(() => {
@@ -84,20 +84,17 @@ const CreateFitnessExerciseForm = ({ exercise, category }) => {
     const handleSnackbarClose = () => {
         setSnackbarOpen(false);
         setSelectedGoal('');
+        setSelectedGoalObject('');
     };
 
     const handleSubmit = () => {
         setIsLoading(true);
-
 
         addFitnessExercise(userData.username, exercise.name, formInputs)
             .then((id) => {
                 setIsLoading(false);
 
                 if (selectedGoal) {
-                    const { goalProgress, goalTargetType } = goals.find(
-                        (goal) => goal.goalId === selectedGoal
-                    );
                     const repetitions = formInputs.reduce((acc, curr) => {
                         return acc + Number(curr.reps);
                     }, 0);
@@ -106,11 +103,14 @@ const CreateFitnessExerciseForm = ({ exercise, category }) => {
                         selectedGoal,
                         id,
                         category,
-                        goalProgress,
-                        goalTargetType,
+                        selectedGoalObject.goalProgress,
+                        selectedGoalObject.goalTargetType,
                         repetitions
                     );
                 }
+            })
+            .then(() => {
+                return checkGoalProgress(selectedGoal, selectedGoalObject.goalProgress, selectedGoalObject.targetValue);
             })
             .then(() => {
                 setSnackbarMessage('Activity added successfully!');
@@ -205,7 +205,12 @@ const CreateFitnessExerciseForm = ({ exercise, category }) => {
                     <InputLabel>Add to goals?</InputLabel>
                     <Select
                         value={selectedGoal}
-                        onChange={(e) => setSelectedGoal(e.target.value)}
+                        onChange={(e) => {
+                            setSelectedGoal(e.target.value);
+                            setSelectedGoalObject(
+                                goals.find((goal) => goal.goalId === e.target.value)
+                            );
+                        }}
                     >
                         <MenuItem value=''>
                             <em>No, thanks</em>

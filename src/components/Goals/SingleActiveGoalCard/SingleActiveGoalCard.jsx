@@ -2,15 +2,17 @@ import { Box, Paper, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import SingleGoalMenu from '../SingleGoalMenu/SingleGoalMenu';
 import ProgressPieChart from './ProgressPieChart/ProgressPieChart';
+import { useEffect } from 'react';
+import { checkGoalExpired } from '../../../firebase/services/goals.service';
 
 const SingleActiveGoalCard = ({ goal, onDeleteGoal, onEditGoal }) => {
+    
+    useEffect(() => {
+        checkGoalExpired(goal.goalId, goal.targetDate);
+    }, [goal]);
+
     return (
-        <Paper
-            variant='elevation'
-            elevation={5}
-            border={'solid 1px #e4e4e4'}
-            sx={{ m: 2, p: 2 }}
-        >
+        <Paper variant='elevation' elevation={5} border={'solid 1px #e4e4e4'} sx={{ m: 2, p: 2 }}>
             <Box
                 sx={{
                     display: 'flex',
@@ -38,10 +40,7 @@ const SingleActiveGoalCard = ({ goal, onDeleteGoal, onEditGoal }) => {
                     sx={{ position: 'absolute' }}
                 />
             </Box>
-            <ProgressPieChart
-                currentProgress={goal.goalProgress}
-                goalTarget={goal.targetValue}
-            />
+            <ProgressPieChart currentProgress={goal.goalProgress} goalTarget={goal.targetValue} />
             <Typography
                 fontWeight={500}
                 sx={{

@@ -91,7 +91,7 @@ export const GOAL_TYPES = ['Fitness', 'Cardio', 'Sports', 'Yoga', 'Other'];
 export const  GOAL_STATUS = {
     ACTIVE: 'Active',
     COMPLETED: 'Completed',
-    FAILED: 'Expired',
+    EXPIRED: 'Expired',
 }
 
 export const GOAL_TARGET_TYPES = {

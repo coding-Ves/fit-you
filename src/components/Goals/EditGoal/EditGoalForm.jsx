@@ -14,7 +14,7 @@ import {
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { editGoal } from '../../../firebase/services/goals.service';
+import { checkGoalProgress, editGoal } from '../../../firebase/services/goals.service';
 import editGoalValidationSchema from './editGoalValidationSchema';
 import dayjs from 'dayjs';
 import Loader from '../../Loader/Loader';
@@ -44,6 +44,9 @@ const EditGoalForm = ({ goal, onEditGoal, onClose }) => {
     const onSubmit = (data) => {
         setIsLoading(true);
         editGoal(goal.goalId, data.newGoalName, data.newTargetValue, data.newTargetDate.getTime())
+            .then(() => {
+                return checkGoalProgress(goal.goalId, goal.goalProgress, data.newTargetValue);
+            })
             .then(() => {
                 setSnackbarMessage('Goal edited successfully');
                 setSnackbarSeverity('success');

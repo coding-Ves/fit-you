@@ -1,6 +1,7 @@
 import { get, push, ref, update } from 'firebase/database';
 import { db } from '../firebase-config';
 import { GOAL_STATUS, GOAL_TARGET_TYPES } from '../../common/constants';
+import dayjs from 'dayjs';
 
 export const addGoal = (username, goalName, goalType, goalTargetType, targetValue, targetDate) => {
     return push(ref(db, 'goals'), {
@@ -38,14 +39,13 @@ export const getGoalById = (goalId) => {
 };
 
 export const getGoalsByUsername = (username) => {
-    return get(ref(db, 'goals'))
-        .then((result) => {
-            if (!result.exists()) return [];
+    return get(ref(db, 'goals')).then((result) => {
+        if (!result.exists()) return [];
 
-            const goals = Object.values(result.val());
-            const filteredGoals = goals.filter((goal) => goal.username === username);
-            return filteredGoals;
-        });
+        const goals = Object.values(result.val());
+        const filteredGoals = goals.filter((goal) => goal.username === username);
+        return filteredGoals;
+    });
 };
 
 export const addActivityToGoal = (
@@ -88,24 +88,40 @@ export const addActivityToGoal = (
     return update(ref(db), updateData);
 };
 
-
-
 export const deleteGoal = (goalId, username) => {
     const deleteGoal = {};
     deleteGoal[`/goals/${goalId}`] = null;
     deleteGoal[`/users/${username}/goals/${goalId}`] = null;
 
     return update(ref(db), deleteGoal);
-}
-
+};
 
 export const editGoal = (goalId, newGoalName, newGoalTargetValue, newGoalDateTarget) => {
-
     const updateGoal = {};
     updateGoal[`/goals/${goalId}/goalName`] = newGoalName;
     updateGoal[`/goals/${goalId}/targetValue`] = newGoalTargetValue;
     updateGoal[`/goals/${goalId}/targetDate`] = newGoalDateTarget;
 
     return update(ref(db), updateGoal);
+};
 
-}
+export const checkGoalProgress = (goalId, goalProgress, goalTargetValue) => {
+    if (goalProgress >= goalTargetValue) {
+        return updateGoalStatus(goalId, GOAL_STATUS.COMPLETED);
+    } else {
+        return updateGoalStatus(goalId, GOAL_STATUS.ACTIVE);
+    }
+};
+
+export const checkGoalExpired = (goalId, goalDateTarget) => {
+    if (dayjs().valueOf() > goalDateTarget) {
+        return updateGoalStatus(goalId, GOAL_STATUS.EXPIRED);
+    }
+};
+
+export const updateGoalStatus = (goalId, newGoalStatus) => {
+    const updateGoal = {};
+    updateGoal[`/goals/${goalId}/goalStatus`] = newGoalStatus;
+
+    return update(ref(db), updateGoal);
+};
