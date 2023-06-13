@@ -9,7 +9,7 @@ import {
     Typography,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { ACTIVITY_NAME_MAX_LENGTH } from '../../common/constants';
 import CreateActivityDialog from '../Activity/CreateActivity/CreateActivityDialog';
 
@@ -98,11 +98,9 @@ const SearchResultCard = ({ activity }) => {
                 </>
 
                 {(category === 'fitness' || category === 'yoga') && (
-                    <>
-                        <Button href={`/search/${category}/${activity.id}`}>
-                            Details
-                        </Button>
-                    </>
+                    <Link to={`/search/${category}/${activity.id}`}>
+                        <Button >Details</Button>
+                    </Link>
                 )}
                 <CreateActivityDialog
                     open={open}
