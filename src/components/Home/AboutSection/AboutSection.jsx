@@ -11,6 +11,10 @@ import {
 } from '@mui/material';
 import { BatteryCharging20TwoTone } from '@mui/icons-material';
 
+import puzzlePiece1 from '../../../img//Puzzle-Piece-1.png';
+import puzzlePiece2 from '../../../img//Puzzle-Piece-2.png';
+import puzzlePiece3 from '../../../img//Puzzle-Piece-3.png';
+
 const item = {
     display: 'flex',
     flexDirection: 'column',
@@ -27,7 +31,21 @@ const avatars = {
 
 const AboutSection = () => {
     return (
-        <Box>
+        <Box
+            sx={{
+                width: '90%',
+                backgroundColor: 'primary.main',
+                backgroundImage: `url(${puzzlePiece3})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: '200px',
+                backgroundPosition: 'right 80% bottom 90%',
+                backgroundBlendMode: 'overlay',
+                borderRadius: '10px',
+                pt: 5,
+                mt: 15,
+                mt: 10,
+            }}
+        >
             <Typography variant='h4'>Meet the team</Typography>
 
             <Box
