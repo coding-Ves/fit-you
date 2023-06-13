@@ -106,12 +106,13 @@ const SearchResultCard = ({ activity }) => {
                     </Button>
                 </>
 
-                <>
-                    <Button href={`/search/${category}/${activity.id}`}>
-                        Details
-                    </Button>
-                </>
-
+                {(category === 'fitness' || category === 'yoga') && (
+                    <>
+                        <Button href={`/search/${category}/${activity.id}`}>
+                            Details
+                        </Button>
+                    </>
+                )}
                 <CreateActivityDialog
                     open={open}
                     handleClose={handleClose}
