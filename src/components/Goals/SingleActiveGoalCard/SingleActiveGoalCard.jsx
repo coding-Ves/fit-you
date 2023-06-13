@@ -73,8 +73,8 @@ const SingleActiveGoalCard = ({ goal, onDeleteGoal, onEditGoal }) => {
 
 SingleActiveGoalCard.propTypes = {
     goal: PropTypes.object.isRequired,
-    onDeleteGoal: PropTypes.func.isRequired,
-    onEditGoal: PropTypes.func.isRequired,
+    onDeleteGoal: PropTypes.func,
+    onEditGoal: PropTypes.func,
 };
 
 export default SingleActiveGoalCard;
