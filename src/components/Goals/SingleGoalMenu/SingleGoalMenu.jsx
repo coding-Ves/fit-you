@@ -1,15 +1,9 @@
-import { Delete, Edit, MoreVert } from '@mui/icons-material';
-import {
-    Box,
-    IconButton,
-    ListItemIcon,
-    Menu,
-    MenuItem,
-    Tooltip,
-} from '@mui/material';
+import { Delete, Edit, Favorite, MoreVert } from '@mui/icons-material';
+import { Box, IconButton, ListItemIcon, Menu, MenuItem, Tooltip } from '@mui/material';
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import DeleteGoalDialog from '../DeleteGoalDialog/DeleteGoalDialog';
-import PropTypes from 'prop-types';
+import { setFavoriteGoal } from '../../../firebase/services/goals.service';
 import EditGoalDialog from '../EditGoal/EditGoalDialog';
 
 const SingleGoalMenu = ({ goal, onDeleteGoal, onEditGoal }) => {
@@ -43,6 +37,10 @@ const SingleGoalMenu = ({ goal, onDeleteGoal, onEditGoal }) => {
         setIsEditDialogOpen(false);
     };
 
+    const handleFavoriteClick = () => {
+        setFavoriteGoal(goal.username, goal.goalId);
+    };
+
     return (
         <Box>
             <Tooltip title='Goal menu'>
@@ -58,12 +56,12 @@ const SingleGoalMenu = ({ goal, onDeleteGoal, onEditGoal }) => {
                 onClose={handleClose}
                 onClick={handleClose}
             >
-                {/* <MenuItem>
+                <MenuItem onClick={() => handleFavoriteClick()}>
                     <ListItemIcon>
-                        <RemoveRedEyeSharp fontSize='small' />
+                        <Favorite fontSize='small' />
                     </ListItemIcon>
-                    View activities
-                </MenuItem> */}
+                    Make favorite
+                </MenuItem>
                 <MenuItem onClick={() => handleEditClick(true)}>
                     <ListItemIcon>
                         <Edit fontSize='small' />

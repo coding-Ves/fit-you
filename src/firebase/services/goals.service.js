@@ -125,3 +125,10 @@ export const updateGoalStatus = (goalId, newGoalStatus) => {
 
     return update(ref(db), updateGoal);
 };
+
+export const setFavoriteGoal = (username, goalId) => {
+    const updateGoal = {};
+    updateGoal[`/users/${username}/favoriteGoal`] = goalId;
+
+    return update(ref(db), updateGoal);
+};
