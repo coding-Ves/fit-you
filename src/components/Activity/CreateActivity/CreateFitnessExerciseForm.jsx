@@ -1,10 +1,27 @@
 /* eslint-disable react/prop-types */
-import { Alert, Box, Button, FormControl, InputLabel, MenuItem, Select, Slider, Snackbar, Stack, TextField, Typography } from '@mui/material';
+import {
+    Alert,
+    Box,
+    Button,
+    FormControl,
+    InputLabel,
+    MenuItem,
+    Select,
+    Slider,
+    Snackbar,
+    Stack,
+    TextField,
+    Typography,
+} from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
-import { EXERCISES_UNITS, WEIGHT_UNIT } from '../../../common/constants';
+import { EXERCISES_UNITS, GOAL_STATUS, WEIGHT_UNIT } from '../../../common/constants';
 import AuthContext from '../../../contexts/AuthContext';
 import { addFitnessExercise } from '../../../firebase/services/fitnessExercises.service';
-import { addActivityToGoal, checkGoalProgress, getGoalsByUsername } from '../../../firebase/services/goals.service';
+import {
+    addActivityToGoal,
+    checkGoalProgress,
+    getGoalsByUsername,
+} from '../../../firebase/services/goals.service';
 
 const CreateFitnessExerciseForm = ({ exercise, category }) => {
     const { userData } = useContext(AuthContext);
@@ -13,12 +30,14 @@ const CreateFitnessExerciseForm = ({ exercise, category }) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const [numOfSets, setNumOfSets] = useState(3);
-    const [formInputs, setFormInputs] = useState(Array(numOfSets).fill({
-        reps: '',
-        exercisesUnits: '',
-        weight: '',
-        weightUnit: '',
-    }));
+    const [formInputs, setFormInputs] = useState(
+        Array(numOfSets).fill({
+            reps: '',
+            exercisesUnits: '',
+            weight: '',
+            weightUnit: '',
+        })
+    );
 
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
@@ -30,11 +49,14 @@ const CreateFitnessExerciseForm = ({ exercise, category }) => {
     const [addedExerciseToGoal, setAddedExerciseToGoal] = useState(false);
 
     useEffect(() => {
-        getGoalsByUsername(userData.username)
-            .then((snapshot) => {
-                const filteredByCategory = snapshot.filter(goal => goal?.goalType?.toLowerCase() === category);
-                setGoals(filteredByCategory);
-            });
+        getGoalsByUsername(userData.username).then((snapshot) => {
+            const filteredByCategory = snapshot.filter(
+                (goal) =>
+                    goal?.goalType?.toLowerCase() === category &&
+                    goal?.goalStatus === GOAL_STATUS.ACTIVE
+            );
+            setGoals(filteredByCategory);
+        });
         setAddedExerciseToGoal(false);
     }, [userData.username, category, addedExerciseToGoal]);
 
@@ -110,7 +132,11 @@ const CreateFitnessExerciseForm = ({ exercise, category }) => {
                 }
             })
             .then(() => {
-                return checkGoalProgress(selectedGoal, selectedGoalObject.goalProgress, selectedGoalObject.targetValue);
+                return checkGoalProgress(
+                    selectedGoal,
+                    selectedGoalObject.goalProgress,
+                    selectedGoalObject.targetValue
+                );
             })
             .then(() => {
                 setSnackbarMessage('Activity added successfully!');
