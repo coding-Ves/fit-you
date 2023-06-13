@@ -5,6 +5,14 @@ export const YOGA_DB_URL = 'https://yoga-api-nzy4.onrender.com/v1/poses';
 
 export const TODAY = new Date().getTime();
 
+export const DATE_OPTIONS = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+};
+
 export const USER_ROLES = {
     user: 1,
     admin: 2,

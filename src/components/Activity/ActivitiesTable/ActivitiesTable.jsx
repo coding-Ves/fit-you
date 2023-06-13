@@ -12,6 +12,7 @@ import { ACTIVITIES_PER_PAGE } from '../../../common/constants';
 import AuthContext from '../../../contexts/AuthContext';
 import { getUserActivities } from '../../../firebase/services/users.service';
 import Title from '../../Dashboard/Title/Title';
+import { DATE_OPTIONS } from '../../../common/constants';
 
 const ActivitiesTable = () => {
     const { userData } = useContext(AuthContext);
@@ -36,8 +37,6 @@ const ActivitiesTable = () => {
         }
     }, [userData]);
 
-    // console.log(activities);
-
     return (
         <>
             <Title>Activities</Title>
@@ -53,7 +52,13 @@ const ActivitiesTable = () => {
                 <TableBody>
                     {currentActivitiesOnPage.map((activity) => (
                         <TableRow key={activity.id}>
-                            <TableCell>{activity.createdOn}</TableCell>
+                            <TableCell>
+                                {/* {activity.createdOn}{' '} */}
+                                {new Date(activity.createdOn).toLocaleString(
+                                    'en-US',
+                                    DATE_OPTIONS
+                                )}
+                            </TableCell>
 
                             <TableCell>
                                 {activity?.fitnessExerciseName}
