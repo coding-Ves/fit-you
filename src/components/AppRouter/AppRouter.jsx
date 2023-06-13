@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import ActivityDetails from '../../views/ActivityDetails/ActivityDetails';
 import Dashboard from '../../views/Dashboard/Dashboard';
 import Home from '../../views/Home/Home';
@@ -13,14 +13,19 @@ import Search from '../../views/Search/Search';
 import FindFriends from '../../views/FindFriends/FindFriends';
 import BMI from '../../views/BMI/BMI';
 import AuthenticatedRoute from './AuthenticatedRoute/AuthenticatedRoute';
+import { auth } from '../../firebase/firebase-config';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 export const AppRouter = () => {
+    const [user] = useAuthState(auth);
+
     return (
         <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
-            <Route path='/health-info' element={<RegisterHealth />} />
+            <Route path='/login' element={!user ? <Login /> : <Navigate to='/dashboard' />} />
+            <Route path='/register' element={!user ? <Register /> : <Navigate to='/dashboard' />} />
+            <Route path='/health-info' element={<RegisterHealth />} />{' '}
+            {/* TODO: handle this route */}
             {/* <Route path='/register/:step' element={<Register />} />  */}
             <Route
                 path='/profile/:username'
