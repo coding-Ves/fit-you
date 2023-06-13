@@ -12,6 +12,7 @@ import RegisterHealth from '../../views/Register/RegisterHealth';
 import Search from '../../views/Search/Search';
 import FindFriends from '../../views/FindFriends/FindFriends';
 import BMI from '../../views/BMI/BMI';
+import AuthenticatedRoute from './AuthenticatedRoute/AuthenticatedRoute';
 
 export const AppRouter = () => {
     return (
@@ -21,14 +22,70 @@ export const AppRouter = () => {
             <Route path='/register' element={<Register />} />
             <Route path='/health-info' element={<RegisterHealth />} />
             {/* <Route path='/register/:step' element={<Register />} />  */}
-            <Route path='/profile/:username' element={<Profile />} />
-            <Route path='/dashboard' element={<Dashboard />} />
-            <Route path='/friends' element={<FindFriends />} />
-            <Route path='/bmi' element={<BMI />} />
-            <Route path='/my-activity' element={<MyActivity />} />
-            <Route path='/my-goals' element={<MyGoals />} />
-            <Route path='/search/:category' element={<Search />} />
-            <Route path='/search/:category/:id' element={<ActivityDetails />} />
+            <Route
+                path='/profile/:username'
+                element={
+                    <AuthenticatedRoute>
+                        <Profile />
+                    </AuthenticatedRoute>
+                }
+            />
+            <Route
+                path='/dashboard'
+                element={
+                    <AuthenticatedRoute>
+                        <Dashboard />
+                    </AuthenticatedRoute>
+                }
+            />
+            <Route
+                path='/friends'
+                element={
+                    <AuthenticatedRoute>
+                        <FindFriends />
+                    </AuthenticatedRoute>
+                }
+            />
+            <Route
+                path='/bmi'
+                element={
+                    <AuthenticatedRoute>
+                        <BMI />
+                    </AuthenticatedRoute>
+                }
+            />
+            <Route
+                path='/my-activity'
+                element={
+                    <AuthenticatedRoute>
+                        <MyActivity />
+                    </AuthenticatedRoute>
+                }
+            />
+            <Route
+                path='/my-goals'
+                element={
+                    <AuthenticatedRoute>
+                        <MyGoals />
+                    </AuthenticatedRoute>
+                }
+            />
+            <Route
+                path='/search/:category'
+                element={
+                    <AuthenticatedRoute>
+                        <Search />
+                    </AuthenticatedRoute>
+                }
+            />
+            <Route
+                path='/search/:category/:id'
+                element={
+                    <AuthenticatedRoute>
+                        <ActivityDetails />
+                    </AuthenticatedRoute>
+                }
+            />
             <Route path='*' element={<NotFound />} />
         </Routes>
     );
