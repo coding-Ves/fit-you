@@ -1,22 +1,55 @@
-import { Button, Dialog, DialogActions, DialogContent } from '@mui/material';
+import { Alert, Button, Dialog, DialogActions, DialogContent, Snackbar } from '@mui/material';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import NewGoalForm from './NewGoalForm';
 
-const CreateGoalDialog = ({ onAddGoal }) => {
+const CreateGoalDialog = ({ onAddGoal, hasReachedMaximumGoals }) => {
     const [open, setOpen] = useState(false);
-
+    console.log(hasReachedMaximumGoals);
     const handleClose = () => {
         setOpen(false);
+    };
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
+    };
+
+    const handleOpen = () => {
+        if (!hasReachedMaximumGoals) {
+            setOpen(true);
+        } else {
+            setSnackbarMessage('You have reached the maximum number of active goals');
+            setSnackbarSeverity('warning');
+            setSnackbarOpen(true);
+            onAddGoal();
+            handleClose();
+        }
     };
 
     return (
         <>
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={3000}
+                onClose={handleSnackbarClose}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            >
+                <Alert
+                    onClose={handleSnackbarClose}
+                    severity={snackbarSeverity}
+                    sx={{ width: '100%' }}
+                >
+                    {snackbarMessage}
+                </Alert>
+            </Snackbar>
             <Button
                 sx={{
                     borderRadius: '2rem',
                 }}
-                onClick={() => setOpen(true)}
+                onClick={() => handleOpen()}
                 color='primary'
                 variant='contained'
             >
@@ -36,6 +69,7 @@ const CreateGoalDialog = ({ onAddGoal }) => {
 
 CreateGoalDialog.propTypes = {
     onAddGoal: PropTypes.func.isRequired,
+    hasReachedMaximumGoals: PropTypes.bool.isRequired,
 };
 
 export default CreateGoalDialog;
