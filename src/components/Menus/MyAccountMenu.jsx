@@ -9,15 +9,14 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Tooltip from '@mui/material/Tooltip';
-import * as React from 'react';
-import { Link as ReactRouterLink, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { logoutUser } from '../../firebase/services/auth.service';
 import { TrackChangesOutlined } from '@mui/icons-material';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 
 const MyAccountMenu = () => {
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
     const { userData } = useContext(AuthContext);
 
     const open = Boolean(anchorEl);
@@ -35,7 +34,7 @@ const MyAccountMenu = () => {
         setAnchorEl(null);
     };
     return (
-        <React.Fragment>
+        <>
             <Box
                 sx={{
                     display: 'flex',
@@ -95,20 +94,16 @@ const MyAccountMenu = () => {
             >
                 <MenuItem
                     onClick={handleClose}
-                    as={ReactRouterLink}
+                    component={Link}
                     to={`/profile/${userData?.username}`}
                     style={{ color: 'inherit' }}
                 >
-                    <Avatar
-                        src={userData?.avatarURL}
-                        alt={userData?.username}
-                    />{' '}
-                    My account
+                    <Avatar src={userData?.avatarURL} alt={userData?.username} /> My account
                 </MenuItem>
                 <Divider />
                 <MenuItem
+                    component={Link}
                     onClick={handleClose}
-                    as={ReactRouterLink}
                     to={'/dashboard'}
                     style={{ color: 'inherit' }}
                 >
@@ -119,7 +114,7 @@ const MyAccountMenu = () => {
                 </MenuItem>
                 <MenuItem
                     onClick={handleClose}
-                    as={ReactRouterLink}
+                    component={Link}
                     to={'/my-activity'}
                     style={{ color: 'inherit' }}
                 >
@@ -130,7 +125,7 @@ const MyAccountMenu = () => {
                 </MenuItem>
                 <MenuItem
                     onClick={handleClose}
-                    as={ReactRouterLink}
+                    component={Link}
                     to={'/my-goals'}
                     style={{ color: 'inherit' }}
                 >
@@ -142,7 +137,7 @@ const MyAccountMenu = () => {
                 <Divider />
                 <MenuItem
                     onClick={handleClose}
-                    as={ReactRouterLink}
+                    component={Link}
                     to={'/friends'}
                     style={{ color: 'inherit' }}
                 >
@@ -160,7 +155,7 @@ const MyAccountMenu = () => {
                     Logout
                 </MenuItem>
             </Menu>
-        </React.Fragment>
+        </>
     );
 };
 

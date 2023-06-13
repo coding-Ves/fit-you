@@ -13,6 +13,7 @@ import { useContext, useState } from 'react';
 import { USER_NAME_MAX_LENGTH } from '../../common/constants';
 import AuthContext from '../../contexts/AuthContext';
 import FollowButton from '../Profile/FollowButton/FollowButton';
+import { Link } from 'react-router-dom';
 
 const UserSearchCard = ({ user: singleUser }) => {
     const { userData } = useContext(AuthContext);
@@ -72,7 +73,7 @@ const UserSearchCard = ({ user: singleUser }) => {
                     {userData && singleUser.username !== userData.username && (
                         <FollowButton userToFollow={singleUser.username} />
                     )}
-                    <Button href={`/profile/${singleUser.username}`}>
+                    <Button component={Link} to={`/profile/${singleUser.username}`}>
                         Details
                     </Button>
                 </CardActions>

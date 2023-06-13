@@ -1,15 +1,8 @@
 /* eslint-disable react/prop-types */
 import AddIcon from '@mui/icons-material/Add';
-import {
-    Box,
-    Card,
-    CardContent,
-    CardMedia,
-    Fab,
-    Typography,
-    Paper,
-} from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Fab, Typography, Paper } from '@mui/material';
 import { UNSPLASH_RANDOM_URL } from '../../../common/constants';
+import { Link } from 'react-router-dom';
 
 const ActivityCategoryCard = ({ categoryName }) => {
     return (
@@ -26,9 +19,7 @@ const ActivityCategoryCard = ({ categoryName }) => {
             }}
         >
             <CardContent>
-                <Typography variant='h6'>
-                    {categoryName.toUpperCase()}
-                </Typography>
+                <Typography variant='h6'>{categoryName.toUpperCase()}</Typography>
             </CardContent>
 
             <Box
@@ -65,21 +56,22 @@ const ActivityCategoryCard = ({ categoryName }) => {
                     mt: 'auto',
                 }}
             >
-                <Fab
-                    href={`/search/${categoryName}`}
-                    // Add a white glow around the button
-                    variant='circular'
-                    elevation={4}
-                    size='sm'
-                    sx={{
-                        fontWeight: 600,
-                        mb: 1,
-                    }}
-                    color='primary'
-                    aria-label='add'
-                >
-                    <AddIcon />
-                </Fab>
+                <Link to={`/search/${categoryName}`}>
+                    <Fab
+                        // Add a white glow around the button
+                        variant='circular'
+                        elevation={4}
+                        size='sm'
+                        sx={{
+                            fontWeight: 600,
+                            mb: 1,
+                        }}
+                        color='primary'
+                        aria-label='add'
+                    >
+                        <AddIcon />
+                    </Fab>
+                </Link>
             </Box>
         </Card>
     );

@@ -1,5 +1,5 @@
 import { DarkMode, Home, WbSunny } from '@mui/icons-material';
-import { Link, Switch, Avatar } from '@mui/material';
+import { Switch, Avatar } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link as ReactRouterLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { auth } from '../../firebase/firebase-config';
 import MyAccountMenu from './../Menus/MyAccountMenu';
 
@@ -31,7 +31,7 @@ const NavBar = ({ onThemeChange }) => {
             <ElevationScroll>
                 <AppBar sx={{ background: '#3a6b94' }}>
                     <Toolbar>
-                        <Avatar as={ReactRouterLink} to={`/`} sx={{ mr: 2 }}>
+                        <Avatar component={Link} to={'/'} sx={{ mr: 2 }}>
                             <Home />
                         </Avatar>
                         <Typography variant='h6' sx={{ flexGrow: 1 }}>
@@ -55,17 +55,16 @@ const NavBar = ({ onThemeChange }) => {
                         ) : (
                             <Box sx={{ ml: 2 }}>
                                 <Button
-                                    // as={Link}
-                                    href={`/login`}
+                                    component={Link}
+                                    to={'/login'}
                                     sx={{ mr: 1, textDecoration: 'none' }}
                                     variant='contained'
                                 >
                                     Login
                                 </Button>
                                 <Button
-                                    // as={Link}
-                                    // to={`/register`}
-                                    href={`/register`}
+                                    component={Link}
+                                    to={'/register'}
                                     sx={{ mr: 1, textDecoration: 'none' }}
                                     variant='contained'
                                 >

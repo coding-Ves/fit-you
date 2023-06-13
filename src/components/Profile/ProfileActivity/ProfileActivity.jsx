@@ -1,9 +1,8 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { Tabs, Tab, Typography, Box, Card, Paper } from '@mui/material';
+import { Tabs, Tab,  Box, Paper } from '@mui/material';
 
 import Achievements from '../Achievements/Achievements';
-import ActivitiesTable from '../../Activity/ActivitiesTable/ActivitiesTable';
 import { useContext } from 'react';
 
 import AuthContext from './../../../contexts/AuthContext';
@@ -22,7 +21,7 @@ function TabPanel(props) {
         >
             {value === index && (
                 <Box sx={{ p: 3 }}>
-                    <Typography>{children}</Typography>
+                    {children}
                 </Box>
             )}
         </div>

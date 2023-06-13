@@ -11,27 +11,19 @@ import {
     Grid,
     IconButton,
     InputAdornment,
-    Link,
+    Link as MuiLink,
     Snackbar,
     TextField,
     Typography,
 } from '@mui/material';
-
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-
-import { registrationValidationSchema } from './registrationValidationSchema';
-
+import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from './../../../../contexts/AuthContext';
-
 import { registerUser } from './../../../../firebase/services/auth.service';
-
-import {
-    createUsername,
-    getUserByUsername,
-} from './../../../../firebase/services/users.service';
+import { createUsername, getUserByUsername } from './../../../../firebase/services/users.service';
 import errorHandler from './../../ErrorHandling/errors.services';
+import { registrationValidationSchema } from './registrationValidationSchema';
 
 export const RegistrationForm = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -65,7 +57,7 @@ export const RegistrationForm = () => {
         getUserByUsername(data.username)
             .then((snapshot) => {
                 if (snapshot.exists()) {
-                    const error = new Error(`Username has already been taken!`);
+                    const error = new Error('Username has already been taken!');
                     error.code = 'auth/username-already-exists';
                     throw error;
                 }
@@ -269,9 +261,9 @@ export const RegistrationForm = () => {
                         </Button>
                         <Grid container justifyContent='flex-end'>
                             <Grid item>
-                                <Link href='/login' variant='body2'>
+                                <MuiLink component={Link} to='/login' variant='body2'>
                                     Already have an account? Sign in
-                                </Link>
+                                </MuiLink>
                             </Grid>
                         </Grid>
                     </Box>

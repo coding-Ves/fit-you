@@ -2,11 +2,8 @@ import {
     Calculate,
     DirectionsRun,
     FitnessCenter,
-    LocalDining,
-    SelfImprovement,
     Spa,
     SportsBasketball,
-    WaterDrop,
 } from '@mui/icons-material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
@@ -15,24 +12,23 @@ import TrackChangesRoundedIcon from '@mui/icons-material/TrackChangesRounded';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 export const mainListItems = (
     <>
-        <ListItemButton component={Link} href='/dashboard'>
+        <ListItemButton component={Link} to='/dashboard'>
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary='Dashboard' />
         </ListItemButton>
-        <ListItemButton component={Link} href='/my-activity'>
+        <ListItemButton component={Link} to='/my-activity'>
             <ListItemIcon>
                 <QueryStatsRoundedIcon />
             </ListItemIcon>
             <ListItemText primary='My Activity' />
         </ListItemButton>
-        <ListItemButton component={Link} href='/my-goals'>
+        <ListItemButton component={Link} to='/my-goals'>
             <ListItemIcon>
                 <TrackChangesRoundedIcon />
             </ListItemIcon>
@@ -44,25 +40,25 @@ export const mainListItems = (
 export const physicalListItems = (
     <>
         {/* <ListSubheader>Physical</ListSubheader> */}
-        <ListItemButton component={Link} href='/search/fitness'>
+        <ListItemButton component={Link} to='/search/fitness'>
             <ListItemIcon>
                 <FitnessCenter />
             </ListItemIcon>
             <ListItemText primary='Fitness' />
         </ListItemButton>
-        <ListItemButton component={Link} href='/search/sports'>
+        <ListItemButton component={Link} to='/search/sports'>
             <ListItemIcon>
                 <SportsBasketball />
             </ListItemIcon>
             <ListItemText primary='Sports' />
         </ListItemButton>
-        <ListItemButton component={Link} href='/search/cardio'>
+        <ListItemButton component={Link} to='/search/cardio'>
             <ListItemIcon>
                 <DirectionsRun />
             </ListItemIcon>
             <ListItemText primary='Cardio' />
         </ListItemButton>
-        <ListItemButton component={Link} href='/search/yoga'>
+        <ListItemButton component={Link} to='/search/yoga'>
             <ListItemIcon>
                 <Spa />
             </ListItemIcon>

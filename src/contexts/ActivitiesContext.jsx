@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { createContext, useState } from 'react';
-import { set } from 'firebase/database';
 
 export const ActivitiesContext = createContext();
 

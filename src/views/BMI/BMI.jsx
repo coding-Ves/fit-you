@@ -1,5 +1,5 @@
 import { Box, Paper } from '@mui/material';
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { BMIGraphSection } from '../../components/BMI/BMIGraphSection';
 import HealthInfo from '../../components/Profile/ProfileDescription/HealthInfo/HealthInfo';

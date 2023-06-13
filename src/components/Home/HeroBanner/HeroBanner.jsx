@@ -2,6 +2,7 @@ import { Box, Typography, Button, IconButton } from '@mui/material';
 import React from 'react';
 import { HOME_HERO_IMAGE } from '../../../common/constants';
 import { ArrowDownward } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 
 const HeroBanner = () => {
     return (
@@ -40,8 +41,8 @@ const HeroBanner = () => {
                 color='secondary'
                 variant='contained'
                 size='large'
-                component='a'
-                href='/register'
+                component={Link}
+                to='/register'
                 sx={{ minWidth: 200 }}
             >
                 Register
