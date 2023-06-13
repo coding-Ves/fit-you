@@ -1,10 +1,10 @@
 import Box from '@mui/material/Box';
 import SideBarDrawer from '../../components/SideBarDrawer/SideBarDrawer';
-import NewGoalForm from './../../components/Goals/CreateGoal/NewGoalForm';
 import ActiveGoalsBoard from '../../components/Goals/ActiveGoalsBoard/ActiveGoalsBoard';
-import { Container, Grid, Paper } from '@mui/material';
+import { Container, Paper } from '@mui/material';
 import { useContext } from 'react';
 import AuthContext from '../../contexts/AuthContext';
+import GoalsHistoryTable from '../../components/Goals/GoalsHistoryTable/GoalsHistoryTable';
 
 const MyGoals = () => {
     const { userData } = useContext(AuthContext);
@@ -17,20 +17,34 @@ const MyGoals = () => {
                 sx={{
                     flex: '1',
                     display: 'flex',
+                    padding: '20px',
+                    justifyContent: 'center',                    
                 }}
             >
-                <Container maxWidth='xl' sx={{ mt: 4, mb: 4 }}>
+                <Container maxWidth='xl' sx={{ m: 4 }}>
                     <Paper
                         variant='elevation'
                         elevation={4}
                         sx={{
                             p: 2,
+                            m: 2,
                             display: 'flex',
                             flexDirection: 'column',
-                            height: '100%',
                         }}
                     >
                         <ActiveGoalsBoard username={userData?.username} />
+                    </Paper>
+                    <Paper
+                        variant='elevation'
+                        elevation={4}
+                        sx={{
+                            p: 2,
+                            m: 2,
+                            display: 'flex',
+                            flexDirection: 'column',
+                        }}
+                    >
+                        <GoalsHistoryTable username={userData?.username} />
                     </Paper>
                 </Container>
             </Box>
