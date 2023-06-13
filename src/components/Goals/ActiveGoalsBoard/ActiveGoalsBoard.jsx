@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { deleteGoal, getGoalsByUsername } from '../../../firebase/services/goals.service';
 import CreateGoalDialog from '../CreateGoal/CreateGoalDialog';
 import SingleActiveGoalCard from '../SingleActiveGoalCard/SingleActiveGoalCard';
+import { GOAL_STATUS } from '../../../common/constants';
 
 const ActiveGoalsBoard = ({ username }) => {
     const [goals, setGoals] = useState([]);
@@ -13,7 +14,10 @@ const ActiveGoalsBoard = ({ username }) => {
 
     useEffect(() => {
         getGoalsByUsername(username).then((goals) => {
-            setGoals(goals);
+            const filteredActiveGoals = goals.filter(
+                (goal) => goal.goalStatus === GOAL_STATUS.ACTIVE
+            );
+            setGoals(filteredActiveGoals);
         });
         setGoalDeleted(false);
         setGoalEdited(false);
@@ -32,8 +36,6 @@ const ActiveGoalsBoard = ({ username }) => {
     const handleAddGoal = () => {
         setGoalEdited(true);
     };
-
-    // TODO - currently, all goals are displayed, regardless if they are active or not
 
     return (
         <>
