@@ -4,6 +4,7 @@ import SearchBar from '../../components/SearchBar/SearchBar';
 import SideBarDrawer from '../../components/SideBarDrawer/SideBarDrawer';
 // import { ActivitiesProvider } from '../../contexts/ActivitiesContext';
 import { Box, Paper } from '@mui/material';
+import puzzlePatternImageSearch2 from '../../img/Puzzle-Top-Bar-1.png';
 
 const Search = () => {
     const { category } = useParams();
