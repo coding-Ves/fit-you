@@ -8,20 +8,32 @@ import {
     Select,
     Snackbar,
     Stack,
-    TextField
+    TextField,
+    Grid,
 } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import AuthContext from '../../../contexts/AuthContext';
 import { addCardioSession } from '../../../firebase/services/cardioSessions.service';
-import { addActivityToGoal, checkGoalProgress, getGoalsByUsername, } from '../../../firebase/services/goals.service';
+import {
+    addActivityToGoal,
+    checkGoalProgress,
+    getGoalsByUsername,
+} from '../../../firebase/services/goals.service';
 import { addSportSession } from '../../../firebase/services/sportSessions.service';
 import { addYogaSession } from '../../../firebase/services/yogaSessions.service';
 import PropTypes from 'prop-types';
 
 const CreateSportsCardioYogaForm = ({ activity, category, handleClose }) => {
     const { userData } = useContext(AuthContext);
-    const { register, handleSubmit, reset } = useForm();
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+        setError,
+        clearErrors,
+    } = useForm();
 
     // eslint-disable-next-line no-unused-vars
     const [isLoading, setIsLoading] = useState(false);
@@ -74,7 +86,11 @@ const CreateSportsCardioYogaForm = ({ activity, category, handleClose }) => {
         };
 
         if (category === 'sports') {
-            addSportSession(userData.username, activity.name, data.durationInMinutes)
+            addSportSession(
+                userData.username,
+                activity.name,
+                data.durationInMinutes
+            )
                 .then((id) => {
                     setIsLoading(false);
 
@@ -103,13 +119,12 @@ const CreateSportsCardioYogaForm = ({ activity, category, handleClose }) => {
                 })
                 .then(handleSuccess)
                 .catch(handleError);
-
         } else if (category === 'cardio') {
             addCardioSession(
                 userData.username,
                 activity.name,
-                data.distance,
-                data.durationInMinutes
+                data?.distance,
+                data?.durationInMinutes
             )
                 .then((id) => {
                     setIsLoading(false);
@@ -146,9 +161,12 @@ const CreateSportsCardioYogaForm = ({ activity, category, handleClose }) => {
                 })
                 .then(handleSuccess)
                 .catch(handleError);
-
         } else if (category === 'yoga') {
-            addYogaSession(userData.username, activity.english_name, data.durationInMinutes)
+            addYogaSession(
+                userData.username,
+                activity.english_name,
+                data.durationInMinutes
+            )
                 .then((id) => {
                     setIsLoading(false);
 
@@ -204,12 +222,117 @@ const CreateSportsCardioYogaForm = ({ activity, category, handleClose }) => {
             </Snackbar>
 
             <Stack>
-                <Box>
+                <Box
+                    component='form'
+                    noValidate
+                    onSubmit={handleSubmit(onSubmit)}
+                    sx={{ mt: 3 }}
+                >
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <TextField
+                                name='durationInMinutes'
+                                fullWidth
+                                id='durationInMinutes'
+                                label='Minutes'
+                                autoFocus
+                                required
+                                {...register('durationInMinutes', {
+                                    max: {
+                                        value: 720,
+                                        message:
+                                            'Please provide a value lower than 720 minutes',
+                                    },
+                                    min: {
+                                        value: 1,
+                                        message:
+                                            'Please provide a value larger than 1 minute',
+                                    },
+                                    required: 'Duration is required',
+                                })}
+                                error={!!errors.durationInMinutes}
+                                helperText={errors.durationInMinutes?.message}
+                            />
+                        </Grid>
+                        {category === 'cardio' && (
+                            <Grid item xs={12}>
+                                <TextField
+                                    required
+                                    fullWidth
+                                    id='distance'
+                                    label='Distance'
+                                    placeholder='Distance in km'
+                                    name='distance'
+                                    autoComplete='distance'
+                                    {...register('distance', {
+                                        max: {
+                                            value: 1000,
+                                            message:
+                                                'Please provide a value lower than 1,000 km',
+                                        },
+                                        min: {
+                                            value: 1,
+                                            message:
+                                                'Please provide a value larger than 1 minute',
+                                        },
+                                        required: 'Distance is required',
+                                    })}
+                                    error={!!errors?.distance}
+                                    helperText={errors.distance?.message}
+                                />
+                            </Grid>
+                        )}
+                        <Grid item xs={12}>
+                            <Select
+                                fullWidth
+                                {...register('selectedGoal')}
+                                defaultValue=''
+                                onChange={(e) => {
+                                    setSelectedGoal(e.target.value);
+                                    setSelectedGoalObject(
+                                        goals.find(
+                                            (goal) =>
+                                                goal.goalId === e.target.value
+                                        )
+                                    );
+                                }}
+                            >
+                                <MenuItem value=''>
+                                    <em>No, thanks</em>
+                                </MenuItem>
+                                {Object.values(goals).map((goal) => (
+                                    <MenuItem
+                                        key={goal.goalId}
+                                        value={goal.goalId}
+                                    >
+                                        {goal.goalName} ({goal.goalTargetType})
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </Grid>
+                    </Grid>
+                    <Button
+                        type='submit'
+                        fullWidth
+                        variant='contained'
+                        sx={{ mt: 3, mb: 2 }}
+                    >
+                        Add Activity
+                    </Button>
+                </Box>
+
+                {/* <Box>
                     <TextField
+                        id='minutes'
                         label='Minutes'
-                        {...register('durationInMinutes')}
+                        {...register('durationInMinutes', {
+                            min: 1,
+                            max: 1440,
+                        })}
                         fullWidth
                         margin='normal'
+                        error={!!errors.minutes}
+                        helperText={errors.minutes?.message}
                     />
                 </Box>
 
@@ -244,7 +367,9 @@ const CreateSportsCardioYogaForm = ({ activity, category, handleClose }) => {
                             onChange={(e) => {
                                 setSelectedGoal(e.target.value);
                                 setSelectedGoalObject(
-                                    goals.find((goal) => goal.goalId === e.target.value)
+                                    goals.find(
+                                        (goal) => goal.goalId === e.target.value
+                                    )
                                 );
                             }}
                         >
@@ -258,8 +383,8 @@ const CreateSportsCardioYogaForm = ({ activity, category, handleClose }) => {
                             ))}
                         </Select>
                     </FormControl>
-                    <Button onClick={handleSubmit(onSubmit)}>Submit</Button>
-                </Box>
+                    <Button type='submit'>Submit</Button>
+                </Box> */}
             </Stack>
         </>
     );
@@ -270,6 +395,5 @@ CreateSportsCardioYogaForm.propTypes = {
     category: PropTypes.string.isRequired,
     handleClose: PropTypes.func.isRequired,
 };
-
 
 export default CreateSportsCardioYogaForm;
