@@ -37,7 +37,7 @@ const ListOfUsers = () => {
                 >
                     <Grid container spacing={2} ml={0}>
                         {currentUsersOnPage.map((user) => (
-                            <Grid item xs={12} sm={6} md={4} key={users.uid}>
+                            <Grid item xs={12} sm={6} md={4} key={user.uid}>
                                 <UserSearchCard user={user} />
                             </Grid>
                         ))}

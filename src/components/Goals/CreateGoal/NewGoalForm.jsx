@@ -30,7 +30,6 @@ import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 
 const NewGoalForm = ({ onAddGoal, handleClose }) => {
     const { userData } = useContext(AuthContext);
-        
     const [isLoading, setIsLoading] = useState(false);
     const [goalType, setGoalType] = useState('');
     const [goalTargetType, setGoalTargetType] = useState('');
@@ -147,7 +146,6 @@ const NewGoalForm = ({ onAddGoal, handleClose }) => {
                                         value={goalType}
                                         onChange={handleGoalTypeChange}
                                         error={!!errors.goalType}
-                                        helperText={errors.goalType?.message}
                                     >
                                         {GOAL_TYPES.map((type) => {
                                             return (
@@ -157,10 +155,12 @@ const NewGoalForm = ({ onAddGoal, handleClose }) => {
                                             );
                                         })}
                                     </Select>
-                                    {errors.goalType && (
-                                        <FormHelperText>{errors.goalType.message}</FormHelperText>
-                                    )}
                                 </FormControl>
+                                {errors.goalType && (
+                                    <FormHelperText sx={{ color: '#d32f2f' }}>
+                                        {errors.goalType.message}
+                                    </FormHelperText>
+                                )}
                             </Grid>
                             {goalType !== 'Other' && goalType && (
                                 <Grid item xs={12}>
@@ -174,7 +174,6 @@ const NewGoalForm = ({ onAddGoal, handleClose }) => {
                                             value={goalTargetType}
                                             onChange={handleGoalTargetTypeChange}
                                             error={!!errors.goalTargetType}
-                                            helperText={errors.goalTargetType?.message}
                                         >
                                             {GOAL_TYPES_TARGETS[goalType]?.map((type) => {
                                                 return (
@@ -184,12 +183,12 @@ const NewGoalForm = ({ onAddGoal, handleClose }) => {
                                                 );
                                             })}
                                         </Select>
-                                        {errors.goalTargetType && (
-                                            <FormHelperText>
-                                                {errors.goalTargetType.message}
-                                            </FormHelperText>
-                                        )}
                                     </FormControl>
+                                    {errors.goalTargetType && (
+                                        <FormHelperText sx={{ color: '#d32f2f' }}>
+                                            {errors.goalTargetType.message}
+                                        </FormHelperText>
+                                    )}
                                 </Grid>
                             )}
                             <Grid item xs={12}>
@@ -202,9 +201,14 @@ const NewGoalForm = ({ onAddGoal, handleClose }) => {
                                     label='Goal Name'
                                     {...register('goalName')}
                                     error={!!errors.goalName}
-                                    helperText={errors.goalName?.message}
                                 />
+                                {errors.goalName && (
+                                    <FormHelperText sx={{ color: '#d32f2f' }}>
+                                        {errors.goalName.message}
+                                    </FormHelperText>
+                                )}
                             </Grid>
+
                             <Grid item xs={12}>
                                 <TextField
                                     required
@@ -215,8 +219,12 @@ const NewGoalForm = ({ onAddGoal, handleClose }) => {
                                     name='targetValue'
                                     {...register('targetValue')}
                                     error={!!errors.targetValue}
-                                    helperText={errors.targetValue?.message}
                                 />
+                                {errors.targetValue && (
+                                    <FormHelperText sx={{ color: '#d32f2f' }}>
+                                        {errors.targetValue.message}
+                                    </FormHelperText>
+                                )}
                             </Grid>
                             <Grid item xs={12}>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -231,14 +239,19 @@ const NewGoalForm = ({ onAddGoal, handleClose }) => {
                                                 required
                                                 disablePast
                                                 id='targetDate'
+                                                name='targetDate'
                                                 label='Target Date'
                                                 sx={{ width: '100%' }}
-                                                error={!!errors.newTargetDate}
-                                                helperText={errors.newTargetDate?.message}
+                                                error={!!errors.targetDate}
                                             />
                                         )}
                                     />
                                 </LocalizationProvider>
+                                {errors.targetDate && (
+                                    <FormHelperText sx={{ color: '#d32f2f' }}>
+                                        {errors.targetDate.message}
+                                    </FormHelperText>
+                                )}
                             </Grid>
                         </Grid>
                         <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>

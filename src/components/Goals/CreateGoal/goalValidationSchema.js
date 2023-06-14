@@ -17,15 +17,21 @@ export const goalValidationSchema = yup.object({
         .required('Selection is required'),
     goalName: yup
         .string()
-        .min(3, 'Your goal\'s name must be at least 3 characters long.')
-        .max(20, 'Your goal\'s name cannot exceed 20 characters.')
+        .min(3, "Your goal's name must be at least 3 characters long.")
+        .max(20, "Your goal's name cannot exceed 20 characters.")
         .required('You must enter a goal name.'),
     targetValue: yup
         .number()
         .typeError('Please enter a target for your goal.')
         .positive('Your target must be higher than 0.')
-        .max(100000, 'Please enter a reasonable target value (maximum 100,000). Realistic targets are more likely to be achieved.'),
-    targetDate: yup.date().required(),
+        .max(
+            100000,
+            'Please enter a reasonable target value (maximum 100,000). Realistic targets are more likely to be achieved.'
+        ),
+    targetDate: yup
+        .date()
+        .required('date is required')
+        .min(new Date(), 'Please select a date in the future.'),
 });
 
 export default goalValidationSchema;
