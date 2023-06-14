@@ -45,3 +45,19 @@ export const getCardioSessionsByUsername = (username) => {
         }
     );
 };
+
+export const editCardioSession = (cardioId, newDurationInMinutes, newDistance) => {
+    const updateCardioSession = {};
+    updateCardioSession[`/cardioSessions/${cardioId}/durationInMinutes`] = newDurationInMinutes;
+    updateCardioSession[`/cardioSessions/${cardioId}/distance`] = newDistance;
+
+    return update(ref(db), updateCardioSession);
+};
+
+export const deleteCardioSession = (cardioId, username) => {
+    const deleteCardioSession = {};
+    deleteCardioSession[`/cardioSessions/${cardioId}`] = null;
+    deleteCardioSession[`/users/${username}/cardioSessions/${cardioId}`] = null;
+
+    return update(ref(db), deleteCardioSession);
+};

@@ -57,3 +57,18 @@ export const getYogaSessionsByUsername = (username) => {
         return yogaSessions;
     });
 };
+
+export const editYogaSession = (yogaId, newDurationInMinutes) => {
+    const updateYogaSession = {};
+    updateYogaSession[`/yogaSessions/${yogaId}/durationInMinutes`] = newDurationInMinutes;
+
+    return update(ref(db), updateYogaSession);
+};
+
+export const deleteYogaSession = (yogaId, username) => {
+    const deleteYogaSession = {};
+    deleteYogaSession[`/yogaSessions/${yogaId}`] = null;
+    deleteYogaSession[`/users/${username}/yogaSessions/${yogaId}`] = null;
+
+    return update(ref(db), deleteYogaSession);
+};

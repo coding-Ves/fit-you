@@ -45,10 +45,17 @@ export const getSportSessionsByUsername = (username) => {
     );
 };
 
-// export const addSportSessionToGoal = (goalId, id) => {
-//     const updateData = {};
-//     updateData[`/goals/${goalId}/activities/${id}`] = true;
-//     updateData[`/sportSessions/${id}/goals/${goalId}`] = true;
+export const editSportSession = (sportId, newDurationInMinutes) => {
+    const updateSportSession = {};
+    updateSportSession[`/sportSessions/${sportId}/durationInMinutes`] = newDurationInMinutes;
 
-//     return update(ref(db), updateData);
-// };
+    return update(ref(db), updateSportSession);
+};
+
+export const deleteSportSession = (sportId, username) => {
+    const deleteSportSession = {};
+    deleteSportSession[`/sportSessions/${sportId}`] = null;
+    deleteSportSession[`/users/${username}/sportSessions/${sportId}`] = null;
+
+    return update(ref(db), deleteSportSession);
+};

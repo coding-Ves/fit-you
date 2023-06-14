@@ -52,3 +52,18 @@ export const getFitnessExercisesByUsername = (username) => {
         return fitnessExercises;
     });
 };
+
+export const editFitnessExercise = (exerciseId, newSets) => {
+    const updateFitnessExercise = {};
+    updateFitnessExercise[`/fitnessExercises/${exerciseId}/sets`] = newSets;
+
+    return update(ref(db), updateFitnessExercise);
+};
+
+export const deleteFitnessExercise = (exerciseId, username) => {
+    const deleteFitnessExercise = {};
+    deleteFitnessExercise[`/fitnessExercises/${exerciseId}`] = null;
+    deleteFitnessExercise[`/users/${username}/fitnessExercises/${exerciseId}`] = null;
+
+    return update(ref(db), deleteFitnessExercise);
+};
