@@ -41,7 +41,7 @@ const GoalsHistoryTable = ({ username, itemsPerPage }) => {
                     {goals.length > 0 ? (
                         currentGoalsOnPage.length > 0 &&
                         currentGoalsOnPage.map((goal) => (
-                            <TableRow key={goal?.goalId}>
+                            <TableRow key={goal.goalId}>
                                 <TableCell>
                                     {new Date(goal.createdOn).toLocaleString('en-US', DATE_OPTIONS)}
                                 </TableCell>

@@ -18,15 +18,17 @@ const Dashboard = () => {
     const [hasFavoriteGoal, setHasFavoriteGoal] = useState(false);
 
     useEffect(() => {
-        if (userData?.favoriteGoal) {
-            setIsLoading(false);
-            getGoalById(userData?.favoriteGoal).then((goal) => {
-                setGoal(goal);
-                setHasFavoriteGoal(true);
-            });
+        if (userData?.favoriteGoal && userData?.goals) {
+            if (Object.keys(userData.goals).includes(userData.favoriteGoal)) {
+                setIsLoading(false);
+                getGoalById(userData?.favoriteGoal).then((goal) => {
+                    setGoal(goal);
+                    setHasFavoriteGoal(true);
+                });
+            }
         }
         setIsLoading(false);
-    }, [userData?.favoriteGoal]);
+    }, [userData?.favoriteGoal, userData?.goals]);
 
     return (
         <>
