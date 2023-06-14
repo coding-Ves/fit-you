@@ -8,6 +8,7 @@ import {
     Snackbar,
     Stack,
     TextField,
+    InputLabel,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useContext, useEffect, useState } from 'react';
@@ -284,11 +285,12 @@ const CreateSportsCardioYogaForm = ({ activity, category, handleClose }) => {
                                 />
                             </Grid>
                         )}
+
                         <Grid item xs={12}>
+                            <InputLabel>Choose a Goal</InputLabel>
                             <Select
                                 fullWidth
                                 {...register('selectedGoal')}
-                                defaultValue=''
                                 onChange={(e) => {
                                     setSelectedGoal(e.target.value);
                                     setSelectedGoalObject(
