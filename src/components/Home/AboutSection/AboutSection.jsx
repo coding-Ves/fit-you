@@ -1,16 +1,11 @@
-import * as React from 'react';
-
 import {
+    Avatar,
     Box,
-    Button,
-    Typography,
+    Card,
     Container,
     Grid,
-    Card,
-    Avatar,
+    Typography
 } from '@mui/material';
-import { BatteryCharging20TwoTone } from '@mui/icons-material';
-
 import puzzlePiece3 from '../../..//assets/images/Puzzle-Piece-3.png';
 
 const item = {

@@ -1,12 +1,9 @@
-import { Box, Typography, Button, IconButton, Paper } from '@mui/material';
-import React from 'react';
-import { HOME_HERO_IMAGE } from '../../../common/constants';
 import { ArrowDownward } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
-import { auth } from '../../../firebase/firebase-config';
-
-import puzzleHero from '../../../assets/images/Puzzle-Pattern-Hero.png';
+import { Box, Button, Paper, Typography } from '@mui/material';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { Link } from 'react-router-dom';
+import puzzleHero from '../../../assets/images/Puzzle-Pattern-Hero.png';
+import { auth } from '../../../firebase/firebase-config';
 
 const HeroBanner = () => {
     const [user] = useAuthState(auth);
