@@ -25,6 +25,7 @@ const Dashboard = () => {
                 setHasFavoriteGoal(true);
             });
         }
+        setIsLoading(false);
     }, [userData?.favoriteGoal]);
 
     return (
@@ -61,7 +62,6 @@ const Dashboard = () => {
                                 {hasFavoriteGoal && <SingleActiveGoalCard goal={goal} />}
                                 {/* Activities Table */}
                                 <Grid item xs={12}>
-                                    
                                     <Paper
                                         sx={{
                                             p: 2,
