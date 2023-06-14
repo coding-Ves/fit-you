@@ -132,11 +132,13 @@ const CreateFitnessExerciseForm = ({ exercise, category, handleClose }) => {
                 }
             })
             .then(() => {
-                return checkGoalProgress(
-                    selectedGoal,
-                    selectedGoalObject.goalProgress,
-                    selectedGoalObject.targetValue
-                );
+                if (selectedGoal) {
+                    return checkGoalProgress(
+                        selectedGoal,
+                        selectedGoalObject.goalProgress,
+                        selectedGoalObject.targetValue
+                    );
+                }
             })
             .then(() => {
                 setSnackbarMessage('Activity added successfully!');

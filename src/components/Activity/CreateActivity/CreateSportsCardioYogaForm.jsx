@@ -111,11 +111,13 @@ const CreateSportsCardioYogaForm = ({ activity, category, handleClose }) => {
                     }
                 })
                 .then(() => {
-                    return checkGoalProgress(
-                        selectedGoal,
-                        selectedGoalObject.goalProgress,
-                        selectedGoalObject.targetValue
-                    );
+                    if (selectedGoal) {
+                        return checkGoalProgress(
+                            selectedGoal,
+                            selectedGoalObject.goalProgress,
+                            selectedGoalObject.targetValue
+                        );
+                    }
                 })
                 .then(handleSuccess)
                 .catch(handleError);
@@ -153,11 +155,13 @@ const CreateSportsCardioYogaForm = ({ activity, category, handleClose }) => {
                     }
                 })
                 .then(() => {
-                    return checkGoalProgress(
-                        selectedGoal,
-                        selectedGoalObject.goalProgress,
-                        selectedGoalObject.targetValue
-                    );
+                    if (selectedGoal) {
+                        return checkGoalProgress(
+                            selectedGoal,
+                            selectedGoalObject.goalProgress,
+                            selectedGoalObject.targetValue
+                        );
+                    }
                 })
                 .then(handleSuccess)
                 .catch(handleError);
@@ -191,11 +195,13 @@ const CreateSportsCardioYogaForm = ({ activity, category, handleClose }) => {
                             goalTargetType,
                             Number(data.durationInMinutes)
                         ).then(() => {
-                            return checkGoalProgress(
-                                selectedGoal,
-                                selectedGoalObject.goalProgress,
-                                selectedGoalObject.targetValue
-                            );
+                            if (selectedGoal) {
+                                return checkGoalProgress(
+                                    selectedGoal,
+                                    selectedGoalObject.goalProgress,
+                                    selectedGoalObject.targetValue
+                                );
+                            }
                         });
                     }
                 })
