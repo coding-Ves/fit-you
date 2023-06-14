@@ -10,18 +10,17 @@ import {
     Snackbar,
     TextField,
 } from '@mui/material';
+import { PropTypes } from 'prop-types';
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import AuthContext from '../../../../contexts/AuthContext';
 import { updateUserHealthInfo } from './../../../../firebase/services/users.service';
 import healthValidationSchema from './healthValidationSchema';
 
-import { PropTypes } from 'prop-types';
-
 export const HealthInfo = ({ userData: userProfileData }) => {
     const { userData } = useContext(AuthContext);
     const [isLoading, setIsLoading] = useState(false);
-    const [editable, setEditable] = useState(false); // State to track if fields are editable or not
+    const [editable, setEditable] = useState(false); 
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
     const [snackbarSeverity, setSnackbarSeverity] = useState('success');
@@ -58,7 +57,6 @@ export const HealthInfo = ({ userData: userProfileData }) => {
             })
             .then(() => {
                 setIsLoading(false);
-                // navigate('/dashboard');
             })
             .then(() => setEditable(false))
             .catch((e) => {
@@ -72,7 +70,6 @@ export const HealthInfo = ({ userData: userProfileData }) => {
 
     const handleCancel = () => {
         setEditable(false);
-        // Perform cancel action here if needed
     };
 
     return (
@@ -106,9 +103,8 @@ export const HealthInfo = ({ userData: userProfileData }) => {
                         {...register('height')}
                         error={!!errors.height}
                         helperText={errors.height?.message}
-                        // variant={editable ? 'outlined' : 'standard'}
                         InputProps={{
-                            readOnly: !editable, // Set readOnly based on editable state
+                            readOnly: !editable, 
                             endAdornment: editable && (
                                 <InputAdornment position='end'>
                                     <Icon>
@@ -129,9 +125,8 @@ export const HealthInfo = ({ userData: userProfileData }) => {
                         {...register('weight')}
                         error={!!errors.weight}
                         helperText={errors.weight?.message}
-                        // variant={editable ? 'outlined' : 'standard'}
                         InputProps={{
-                            readOnly: !editable, // Set readOnly based on editable state
+                            readOnly: !editable, 
                             endAdornment: editable && (
                                 <InputAdornment position='end'>
                                     <Icon>
@@ -151,9 +146,8 @@ export const HealthInfo = ({ userData: userProfileData }) => {
                         {...register('age')}
                         error={!!errors.age}
                         helperText={errors.age?.message}
-                        // variant={editable ? 'outlined' : 'standard'}
                         InputProps={{
-                            readOnly: !editable, // Set readOnly based on editable state
+                            readOnly: !editable, 
                             endAdornment: editable && (
                                 <InputAdornment position='end'>
                                     <Icon>

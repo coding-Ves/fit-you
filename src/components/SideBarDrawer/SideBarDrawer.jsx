@@ -6,15 +6,13 @@ import List from '@mui/material/List';
 import Toolbar from '@mui/material/Toolbar';
 import { styled } from '@mui/material/styles';
 import { useState } from 'react';
-import { DRAWER_WIDTH_OPEN, DRAWER_WIDTH_CLOSED } from '../../common/constants';
+import { DRAWER_WIDTH_CLOSED, DRAWER_WIDTH_OPEN } from '../../common/constants';
 import {
     mainListItems,
     physicalListItems,
-    wellnessListItems,
     socialListItems,
+    wellnessListItems,
 } from './ListItems';
-import { Box } from '@mui/material';
-
 import PuzzlePatternSideBar from '../../assets/images/Puzzle-SideBar-1.png';
 
 const StyledDrawer = styled(MuiDrawer, {
@@ -64,9 +62,6 @@ const SideBarDrawer = () => {
             sx={{
                 ml: { marginLeft },
             }}
-
-            // if the sidebar is open, then the main content should have a margin
-            // if the sidebar is closed, then the main content should not have a margin
         >
             <Toolbar
                 sx={{
