@@ -76,7 +76,7 @@ export const AccountInfo = ({ userData: userProfileData }) => {
         <>
             <Box
                 component='form'
-                sx={{ mt: 3 }}
+                sx={{ mt: 3, maxWidth: 500, margin: 'auto' }}
                 noValidate
                 onSubmit={handleSubmit(onSubmit)}
             >

@@ -3,6 +3,8 @@ import React from 'react';
 import ProfileAvatar from '../ProfileAvatar/ProfileAvatar';
 import ProfileDescription from '../ProfileDescription/ProfileDescription';
 
+import puzzlePatternImage from '../../../img/Puzzle-Pattern-Hero.png';
+
 const ProfileInformation = ({ userData }) => {
     return (
         <Box
@@ -12,6 +14,12 @@ const ProfileInformation = ({ userData }) => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 mb: 2,
+                backgroundImage: `url(${puzzlePatternImage})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundBlendMode: 'overlay',
+                // backgroundColor: 'primary.main',
             }}
         >
             <Box spacing={2} component='div'>

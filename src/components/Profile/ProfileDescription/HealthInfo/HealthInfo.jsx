@@ -81,7 +81,7 @@ export const HealthInfo = ({ userData: userProfileData }) => {
         <Box
             component='form'
             noValidate
-            sx={{ mt: 3 }}
+            sx={{ mt: 3, maxWidth: 500, margin: 'auto' }}
             onSubmit={handleSubmit(handleSave)}
         >
             <Snackbar
