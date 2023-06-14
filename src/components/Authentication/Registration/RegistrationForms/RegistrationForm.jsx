@@ -21,7 +21,10 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from './../../../../contexts/AuthContext';
 import { registerUser } from './../../../../firebase/services/auth.service';
-import { createUsername, getUserByUsername } from './../../../../firebase/services/users.service';
+import {
+    createUsername,
+    getUserByUsername,
+} from './../../../../firebase/services/users.service';
 import errorHandler from './../../ErrorHandling/errors.services';
 import { registrationValidationSchema } from './registrationValidationSchema';
 
@@ -100,7 +103,7 @@ export const RegistrationForm = () => {
 
     return (
         <>
-            <Container component='main' maxWidth='xs'>
+            <Container component='main' maxWidth='sm'>
                 <CssBaseline />
                 <Snackbar
                     open={snackbarOpen}
@@ -119,10 +122,13 @@ export const RegistrationForm = () => {
 
                 <Box
                     sx={{
-                        marginTop: 8,
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
+                        bgcolor: 'background.paper',
+                        p: 5,
+                        m: 3,
+                        borderRadius: '12px',
                     }}
                 >
                     <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -261,7 +267,11 @@ export const RegistrationForm = () => {
                         </Button>
                         <Grid container justifyContent='flex-end'>
                             <Grid item>
-                                <MuiLink component={Link} to='/login' variant='body2'>
+                                <MuiLink
+                                    component={Link}
+                                    to='/login'
+                                    variant='body2'
+                                >
                                     Already have an account? Sign in
                                 </MuiLink>
                             </Grid>
