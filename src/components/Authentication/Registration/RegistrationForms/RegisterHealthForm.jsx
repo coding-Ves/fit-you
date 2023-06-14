@@ -1,6 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Favorite } from '@mui/icons-material';
-
 import {
     Alert,
     Avatar,
@@ -13,15 +12,11 @@ import {
     TextField,
     Typography,
 } from '@mui/material';
-
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-
 import { registrationHealthValidationSchema } from './registrationHealthValidationSchema';
-
 import AuthContext from './../../../../contexts/AuthContext';
-
 import { updateUserHealthInfo } from './../../../../firebase/services/users.service';
 import errorHandler from './../../ErrorHandling/errors.services';
 
@@ -31,7 +26,6 @@ export const RegistrationHealthForm = () => {
 
     const navigate = useNavigate();
 
-    // Responsible for Snackbar and Alert - Showing error  and success messages
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
     const [snackbarSeverity, setSnackbarSeverity] = useState('success');
@@ -40,7 +34,6 @@ export const RegistrationHealthForm = () => {
         setSnackbarOpen(false);
     };
 
-    // Use React Hook Form with Yup for validation
     const {
         register,
         handleSubmit,
@@ -185,5 +178,3 @@ export const RegistrationHealthForm = () => {
 };
 
 export default RegistrationHealthForm;
-
-// add prop types

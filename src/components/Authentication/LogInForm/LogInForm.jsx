@@ -23,7 +23,6 @@ const LoginForm = () => {
     const { handleSubmit, register } = useForm();
     const { setContext } = useContext(AuthContext);
     const navigate = useNavigate();
-    // eslint-disable-next-line no-unused-vars
     const [user] = useAuthState(auth);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -48,7 +47,7 @@ const LoginForm = () => {
                 setIsLoading('false');
             })
             .then(() => {
-                setSnackbarMessage(`Login successful!`);
+                setSnackbarMessage('Login successful!');
                 setSnackbarSeverity('success');
                 setSnackbarOpen(true);
             })

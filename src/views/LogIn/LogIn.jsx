@@ -1,8 +1,6 @@
 import { CssBaseline, Grid, Paper } from '@mui/material';
-import { LOGIN_IMAGE } from '../../common/constants';
-
-import LoginForm from '../../components/Authentication/LogInForm/LogInForm.jsx';
 import PuzzlePattern from '../..//assets/images/Puzzle-Pattern-Hero.png';
+import LoginForm from '../../components/Authentication/LogInForm/LogInForm.jsx';
 
 const LogIn = () => {
     return (
