@@ -30,6 +30,7 @@ import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 
 const NewGoalForm = ({ onAddGoal, handleClose }) => {
     const { userData } = useContext(AuthContext);
+    // eslint-disable-next-line no-unused-vars
     const [isLoading, setIsLoading] = useState(false);
     const [goalType, setGoalType] = useState('');
     const [goalTargetType, setGoalTargetType] = useState('');

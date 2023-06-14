@@ -1,147 +1,17 @@
 import {
-    EmojiEvents,
-    Flag,
-    SportsHandball,
-    CheckCircle,
-    ImportContacts,
-    Face2,
-    DirectionsRun,
-    FollowTheSigns,
-    WavingHand,
-    AutoFixHigh,
     AutoAwesome,
-    DonutLargeTwoTone,
+    DirectionsRun,
+    EmojiEvents,
+    Face2,
     FitnessCenter,
-    SportsGymnastics,
-    Pool,
+    Flag,
     GolfCourse,
+    ImportContacts,
+    Pool,
+    SportsGymnastics,
+    SportsHandball
 } from '@mui/icons-material';
 import { RANDOM_AVATAR_STYLE } from '../../../../common/constants';
-
-// const cardsData = [
-//     {
-//         title: 'Start Your Journey',
-//         description: 'You created your account!',
-//         icon: <Flag size={50} sx={{ color: 'green', fontSize: '50px' }} />,
-//         status: 'earned',
-//         color: 'primary.main',
-//     },
-//     {
-//         title: 'The First Year',
-//         description: '...you made it!',
-//         icon: (
-//             <EmojiEvents
-//                 size={50}
-//                 sx={{ color: 'lightGray', fontSize: '50px' }}
-//             />
-//         ),
-//         status: 'locked',
-//         color: 'lightGray',
-//     },
-//     {
-//         title: 'GOOOOOAAAAL!!!',
-//         description: 'You created your first goal!',
-//         icon: (
-//             <SportsHandball
-//                 size={50}
-//                 sx={{ color: 'lightGray', fontSize: '50px' }}
-//             />
-//         ),
-//         status: 'locked',
-//         color: 'lightGray',
-//     },
-//     {
-//         title: 'Activity Log: Day 1',
-//         description: 'You logged an activity!',
-//         icon: (
-//             <ImportContacts
-//                 size={50}
-//                 sx={{ color: 'lightGray', fontSize: '50px' }}
-//             />
-//         ),
-//         status: 'locked',
-//         color: 'lightGray',
-//     },
-//     {
-//         title: 'SWAG',
-//         description: 'You changed your profile avatar!',
-//         icon: <Face2 size={50} sx={{ color: 'lightGray', fontSize: '50px' }} />,
-//         status: 'locked',
-//         color: 'lightGray',
-//     },
-//     {
-//         title: 'Find Inspiration',
-//         description: 'Followed a user!',
-//         icon: (
-//             <FollowTheSigns
-//                 size={50}
-//                 sx={{ color: 'lightGray', fontSize: '50px' }}
-//             />
-//         ),
-//         status: 'locked',
-//         color: 'lightGray',
-//     },
-//     {
-//         title: 'Follow the wizard',
-//         description: 'You found an easter egg, good job!',
-//         icon: (
-//             <AutoFixHigh
-//                 size={50}
-//                 sx={{ color: 'lightGray', fontSize: '50px' }}
-//             />
-//         ),
-//         status: 'locked',
-//         color: 'lightGray',
-//     },
-//     {
-//         title: 'Achievement',
-//         description: 'Achievement description',
-//         icon: (
-//             <DonutLargeTwoTone
-//                 size={50}
-//                 sx={{ color: 'lightGray', fontSize: '50px' }}
-//             />
-//         ),
-//         status: 'locked',
-//         color: 'lightGray',
-//     },
-//     {
-//         title: 'Achievement',
-//         description: 'Achievement description',
-//         icon: (
-//             <DonutLargeTwoTone
-//                 size={50}
-//                 sx={{ color: 'lightGray', fontSize: '50px' }}
-//             />
-//         ),
-//         status: 'locked',
-//         color: 'lightGray',
-//     },
-//     {
-//         title: 'Achievement',
-//         description: 'Achievement description',
-//         icon: (
-//             <DonutLargeTwoTone
-//                 size={50}
-//                 sx={{ color: 'lightGray', fontSize: '50px' }}
-//             />
-//         ),
-//         status: 'locked',
-//         color: 'lightGray',
-//     },
-//     {
-//         title: 'Invited us to an Interview',
-//         description: 'Thank you!',
-//         icon: (
-//             <AutoAwesome
-//                 size={50}
-//                 sx={{ color: 'lightGray', fontSize: '50px' }}
-//             />
-//         ),
-//         status: 'locked',
-//         color: 'lightGray',
-//     },
-// ];
 
 export const achievementChecker = (userData) => {
     const achievements = [
@@ -155,7 +25,6 @@ export const achievementChecker = (userData) => {
     ];
 
     // Has a year passed since the user created their account?
-
     if (userData.createdOn < Date.now() - 31556952000) {
         achievements.push({
             title: 'The First Year',
@@ -214,7 +83,6 @@ export const achievementChecker = (userData) => {
     }
 
     // Check if the user has a property called activities (Which means they have logged an activity)
-
     if (
         userData.fitnessExercises ||
         userData.sportSessions ||
@@ -248,7 +116,6 @@ export const achievementChecker = (userData) => {
     }
 
     // find the total number of activities the user has
-
     let totalActivities = 0;
     if (userData.fitnessExercises) {
         totalActivities += Object.keys(userData.fitnessExercises).length;
@@ -261,7 +128,6 @@ export const achievementChecker = (userData) => {
     }
 
     // If there's more than 10 activities, award the achievement
-
     if (totalActivities >= 10) {
         achievements.push({
             title: 'Keep Up The Tempo',
@@ -349,7 +215,6 @@ export const achievementChecker = (userData) => {
     }
 
     // Check if the user has a property called cardioSessions (Which means they have logged a cardio session)
-
     if (userData.cardioSessions) {
         achievements.push({
             title: 'Get the Blood Pumping',
@@ -424,7 +289,6 @@ export const achievementChecker = (userData) => {
     }
 
     // Check if the user has a user called Gandalf in their following object
-
     let following = [];
     if (userData.following) {
         following = Object.keys(userData.following);

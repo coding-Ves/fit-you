@@ -6,14 +6,13 @@ import Button from '@mui/material/Button';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
+import Logo1 from '../../assets/Logo-v1.png';
 import { auth } from '../../firebase/firebase-config';
 import MyAccountMenu from './../Menus/MyAccountMenu';
-
-import { PropTypes } from 'prop-types';
-import Logo1 from '../../assets/Logo-v1.png';
 
 // attribution for logo: <a href="https://www.flaticon.com/free-icons/heart" title="heart icons">Heart icons created by Freepik - Flaticon</a>
 // <a href="https://www.flaticon.com/free-icons/autism" title="autism icons">Autism icons created by Freepik - Flaticon</a>
@@ -102,6 +101,10 @@ const NavBar = ({ onThemeChange }) => {
             <Toolbar />
         </Box>
     );
+};
+
+NavBar.propTypes = {
+    onThemeChange: PropTypes.func.isRequired,
 };
 
 export default NavBar;

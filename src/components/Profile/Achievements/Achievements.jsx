@@ -1,8 +1,7 @@
-import {} from '@mui/icons-material';
+import { } from '@mui/icons-material';
 import { Box, Card, CardContent, Grid, Typography } from '@mui/material';
-import achievementChecker from './helpers/achievementChecker';
-
 import { PropTypes } from 'prop-types';
+import achievementChecker from './helpers/achievementChecker';
 
 export const Achievements = ({ userData }) => {
     const achievements = achievementChecker(userData);
@@ -45,8 +44,8 @@ export const Achievements = ({ userData }) => {
     );
 };
 
-export default Achievements;
-
 Achievements.propTypes = {
     userData: PropTypes.object,
 };
+
+export default Achievements;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import UserList from '../../UserList/UserList';
 import getFollowDetails from '../../UserList/helpers/getFollowDetails';
 
@@ -24,8 +24,8 @@ const FollowUser = ({ followUsers }) => {
     return <UserList followUserList={allUserInfo} />;
 };
 
-export default FollowUser;
-
 FollowUser.propTypes = {
     followUsers: PropTypes.object,
 };
+
+export default FollowUser;

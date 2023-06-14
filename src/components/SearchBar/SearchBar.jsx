@@ -18,8 +18,6 @@ import {
     searchSports,
     searchYoga,
 } from './helpers/searchBarHelpers';
-
-import puzzlePatternImageSearch1 from '../../assets/images/Puzzle-Top-Bar-1.png';
 import puzzlePatternImageSearch2 from '../../assets/images/Puzzle-Top-Bar-2.png';
 
 const SearchBar = ({ category }) => {

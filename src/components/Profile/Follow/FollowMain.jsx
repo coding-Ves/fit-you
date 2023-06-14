@@ -1,8 +1,6 @@
-import React from 'react';
-import { Card, CardContent, Grid, Typography, Paper } from '@mui/material';
-import FollowUser from './FollowUsers';
-import { useState } from 'react';
+import { Grid, Paper, Typography } from '@mui/material';
 import { PropTypes } from 'prop-types';
+import FollowUser from './FollowUsers';
 
 const FollowMain = ({ userData }) => {
     const hasFollowers =
@@ -41,8 +39,8 @@ const FollowMain = ({ userData }) => {
     );
 };
 
-export default FollowMain;
-
 FollowMain.propTypes = {
     userData: PropTypes.object,
 };
+
+export default FollowMain;

@@ -38,6 +38,7 @@ function a11yProps(index) {
 }
 
 export const ProfileActivity = ({ userData: userProfileData }) => {
+    // eslint-disable-next-line no-unused-vars
     const { userData } = useContext(AuthContext);
     const [value, setValue] = React.useState(0);
 
@@ -75,8 +76,8 @@ export const ProfileActivity = ({ userData: userProfileData }) => {
     );
 };
 
-export default ProfileActivity;
-
 ProfileActivity.propTypes = {
     userData: PropTypes.object,
 };
+
+export default ProfileActivity;

@@ -26,6 +26,7 @@ import { PropTypes } from 'prop-types';
 
 export const ProfileAvatar = ({ userData }) => {
     // Context and State
+    // eslint-disable-next-line no-unused-vars
     const [isLoading, setIsLoading] = useState(false);
     const { setContext } = useContext(AuthContext);
     const [editAvatar, setEditAvatar] = useState(false);

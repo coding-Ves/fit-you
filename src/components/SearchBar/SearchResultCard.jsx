@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import {
     Button,
     Card,
@@ -8,6 +7,7 @@ import {
     Divider,
     Typography,
 } from '@mui/material';
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ACTIVITY_NAME_MAX_LENGTH } from '../../common/constants';
@@ -26,7 +26,7 @@ const SearchResultCard = ({ activity }) => {
         } else if (category === 'yoga') {
             setImage(activity.url_png);
         }
-    }, [activity.gifUrl, activity.imgUrl, category]);
+    }, [activity.gifUrl, activity.imgUrl, activity.url_png, category]);
 
     const handleClose = () => {
         setOpen(false);
@@ -42,7 +42,7 @@ const SearchResultCard = ({ activity }) => {
         shortenedActivityName =
             activity.english_name.length > ACTIVITY_NAME_MAX_LENGTH
                 ? activity.english_name.substring(0, ACTIVITY_NAME_MAX_LENGTH) +
-                  '...'
+                '...'
                 : activity.english_name;
     }
 
@@ -59,17 +59,6 @@ const SearchResultCard = ({ activity }) => {
                 <Typography gutterBottom variant='h5' component='div'>
                     {shortenedActivityName}
                 </Typography>
-
-                {/* extra fields for yoga cards  */}
-
-                {/* {category === 'yoga' && (
-                    <Typography
-                        level='body3'
-                        sx={{ fontWeight: 'md', color: 'text.secondary' }}
-                    >
-                        Sanskrit Name: {activity.sanskrit_name}
-                    </Typography>
-                )} */}
 
                 {/* extra fields for fitness cards */}
                 {category === 'fitness' && (
@@ -110,6 +99,10 @@ const SearchResultCard = ({ activity }) => {
             </CardActions>
         </Card>
     );
+};
+
+SearchResultCard.propTypes = {
+    activity: PropTypes.object.isRequired,
 };
 
 export default SearchResultCard;

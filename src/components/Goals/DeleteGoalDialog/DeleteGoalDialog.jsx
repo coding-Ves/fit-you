@@ -6,7 +6,7 @@ const DeleteGoalDialog = ({ goalId, username, isOpen, onClose, onDeleteGoal }) =
     const handleDelete = () => {
         onDeleteGoal(goalId, username);
         onClose();
-    }
+    };
 
     return (
         <Dialog open={isOpen} onClose={onClose}>

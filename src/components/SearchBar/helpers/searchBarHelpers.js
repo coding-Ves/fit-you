@@ -57,11 +57,6 @@ export const searchYoga = (searchQuery) => {
                     yogaPose.sanskrit_name_adapted
                         .toLowerCase()
                         .includes(searchQuery)
-                    // ||
-                    // yogaPose.pose_description
-                    //     .toLowerCase()
-                    //     .includes(searchQuery) ||
-                    // yogaPose.pose_benefits.toLowerCase().includes(searchQuery)
                 );
             });
             console.log(searchedYogaPoses);

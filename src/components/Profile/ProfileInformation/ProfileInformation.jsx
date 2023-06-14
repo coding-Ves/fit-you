@@ -1,10 +1,8 @@
 import { Box, Grid } from '@mui/material';
-import React from 'react';
-import ProfileAvatar from '../ProfileAvatar/ProfileAvatar';
-import ProfileDescription from '../ProfileDescription/ProfileDescription';
-
 import { PropTypes } from 'prop-types';
 import puzzlePatternImage from '../../../assets/images/Puzzle-Pattern-Hero.png';
+import ProfileAvatar from '../ProfileAvatar/ProfileAvatar';
+import ProfileDescription from '../ProfileDescription/ProfileDescription';
 
 const ProfileInformation = ({ userData }) => {
     return (
@@ -20,7 +18,6 @@ const ProfileInformation = ({ userData }) => {
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundBlendMode: 'overlay',
-                // backgroundColor: 'primary.main',
             }}
         >
             <Box spacing={2} component='div'>
@@ -35,8 +32,8 @@ const ProfileInformation = ({ userData }) => {
     );
 };
 
-export default ProfileInformation;
-
 ProfileInformation.propTypes = {
     userData: PropTypes.object,
 };
+
+export default ProfileInformation;
