@@ -9,11 +9,12 @@ import {
     Grid,
     Typography,
 } from '@mui/material';
+import { PropTypes } from 'prop-types';
 import { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { USER_NAME_MAX_LENGTH } from '../../common/constants';
 import AuthContext from '../../contexts/AuthContext';
 import FollowButton from '../Profile/FollowButton/FollowButton';
-import { Link } from 'react-router-dom';
 
 const UserSearchCard = ({ user: singleUser }) => {
     const { userData } = useContext(AuthContext);
@@ -86,3 +87,7 @@ const UserSearchCard = ({ user: singleUser }) => {
 };
 
 export default UserSearchCard;
+
+UserSearchCard.propTypes = {
+    user: PropTypes.object.isRequired,
+};

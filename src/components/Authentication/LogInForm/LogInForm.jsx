@@ -5,19 +5,19 @@ import {
     Box,
     Button,
     Grid,
+    Link as MuiLink,
     Snackbar,
     TextField,
     Typography,
-    Link as MuiLink,
 } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../../firebase/firebase-config';
 import { loginUser } from '../../../firebase/services/auth.service';
-import AuthContext from './../../../contexts/AuthContext';
 import errorHandler from '../ErrorHandling/errors.services';
+import AuthContext from './../../../contexts/AuthContext';
 
 const LoginForm = () => {
     const { handleSubmit, register } = useForm();
@@ -145,7 +145,11 @@ const LoginForm = () => {
                             </Link>
                         </Grid> */}
                         <Grid item>
-                            <MuiLink component={Link} to='/register' variant='body2'>
+                            <MuiLink
+                                component={Link}
+                                to='/register'
+                                variant='body2'
+                            >
                                 Don&apos;t have an account? Register
                             </MuiLink>
                         </Grid>

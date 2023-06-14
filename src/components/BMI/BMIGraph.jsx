@@ -1,5 +1,5 @@
-import { Box, Paper } from '@mui/material';
 import { PieChart, Pie, Cell } from 'recharts';
+import PropTypes from 'prop-types';
 
 const RADIAN = Math.PI / 180;
 const BMIData = [
@@ -59,12 +59,21 @@ export const BMIGraph = ({ userData }) => {
                 stroke='none'
             >
                 {BMIData.map((entry, index) => (
-                    <Cell id={index} key={`cell-${index}`} fill={entry.color} />
+                    <Cell
+                        id={index}
+                        style={{ outline: 'none' }}
+                        key={`cell-${index}`}
+                        fill={entry.color}
+                    />
                 ))}
             </Pie>
             {needle(userData?.bmi, BMIData, cx, cy, iR, oR, '#5f95ed')}
         </PieChart>
     );
+};
+
+BMIGraph.propTypes = {
+    userData: PropTypes.object,
 };
 
 export default BMIGraph;

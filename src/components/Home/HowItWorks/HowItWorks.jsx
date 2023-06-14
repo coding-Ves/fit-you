@@ -22,7 +22,7 @@ import {
 } from '@mui/icons-material';
 
 import { HOME_HERO_IMAGE } from './../../../common/constants';
-import puzzlePiece1 from '../../../img/Puzzle-Piece-1.png';
+import puzzlePiece1 from '../../../assets/images/Puzzle-Piece-1.png';
 
 const item = {
     display: 'flex',

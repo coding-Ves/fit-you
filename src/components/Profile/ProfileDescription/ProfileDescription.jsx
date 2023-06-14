@@ -1,6 +1,7 @@
-import { Box, Paper, Tab, Tabs, Typography } from '@mui/material';
+import { Box, Paper, Tab, Tabs } from '@mui/material';
 import { useState } from 'react';
 
+import { PropTypes } from 'prop-types';
 import AccountInfo from './AccountInfo/AccountInfo';
 import HealthInfo from './HealthInfo/HealthInfo';
 
@@ -64,4 +65,7 @@ export const ProfileDescription = ({ userData }) => {
 };
 
 export default ProfileDescription;
-//  <AccountInfo userData={userData} />
+
+ProfileDescription.propTypes = {
+    userData: PropTypes.object,
+};

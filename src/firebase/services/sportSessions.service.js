@@ -38,6 +38,7 @@ export const getSportSessionsByUsername = (username) => {
 
             sportSessions.forEach((sportSession) => {
                 sportSession.createdOn = new Date(sportSession.createdOn).toLocaleString();
+                sportSession.activityType = 'sport';
             });
 
             return sportSessions;

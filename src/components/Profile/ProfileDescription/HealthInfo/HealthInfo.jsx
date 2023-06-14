@@ -1,24 +1,22 @@
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Edit } from '@mui/icons-material';
 import {
+    Alert,
     Box,
-    Card,
-    CardContent,
-    Grid,
-    TextField,
-    Paper,
     Button,
+    Grid,
     Icon,
     InputAdornment,
     Snackbar,
-    Alert,
+    TextField,
 } from '@mui/material';
-import { useState, useContext } from 'react';
-import { Edit } from '@mui/icons-material';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import healthValidationSchema from './healthValidationSchema';
-import { updateUserHealthInfo } from './../../../../firebase/services/users.service';
 import AuthContext from '../../../../contexts/AuthContext';
+import { updateUserHealthInfo } from './../../../../firebase/services/users.service';
+import healthValidationSchema from './healthValidationSchema';
+
+import { PropTypes } from 'prop-types';
 
 export const HealthInfo = ({ userData: userProfileData }) => {
     const { userData } = useContext(AuthContext);
@@ -197,3 +195,7 @@ export const HealthInfo = ({ userData: userProfileData }) => {
 };
 
 export default HealthInfo;
+
+HealthInfo.propTypes = {
+    userData: PropTypes.object,
+};

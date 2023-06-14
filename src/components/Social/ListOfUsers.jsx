@@ -1,9 +1,10 @@
 import { Box, Grid, Pagination, Stack } from '@mui/material';
 import { useContext, useState } from 'react';
 import { RESULTS_PER_PAGE } from '../../common/constants';
-import UserSearchCard from './UserSearchCard';
 
+import { PropTypes } from 'prop-types';
 import { UsersContext } from '../../contexts/UsersContext';
+import UserSearchCard from './UserSearchCard';
 
 const ListOfUsers = () => {
     const { users } = useContext(UsersContext);
@@ -67,3 +68,7 @@ const ListOfUsers = () => {
 };
 
 export default ListOfUsers;
+
+ListOfUsers.propTypes = {
+    users: PropTypes.array,
+};

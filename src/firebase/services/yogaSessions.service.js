@@ -52,6 +52,7 @@ export const getYogaSessionsByUsername = (username) => {
             yogaSession.createdOn = new Date(
                 yogaSession.createdOn
             ).toLocaleString();
+            yogaSession.activityType = 'yoga';
         });
 
         return yogaSessions;

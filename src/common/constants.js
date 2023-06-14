@@ -86,7 +86,7 @@ export const SPORTS_CATEGORIES = {
     OTHER: 'other',
 };
 
-export const GOAL_TYPES = ['Fitness', 'Cardio', 'Sports', 'Yoga', 'Other'];
+export const GOAL_TYPES = ['Fitness', 'Cardio', 'Sports', 'Yoga'];
 
 export const GOAL_STATUS = {
     ACTIVE: 'Active',
@@ -95,6 +95,10 @@ export const GOAL_STATUS = {
 };
 
 export const MAXIMUM_ACTIVE_GOALS = 10;
+
+export const PREVIOUS_GOALS_PER_PAGE_DASHBOARD = 5;
+
+export const PREVIOUS_GOALS_PER_PAGE_MYGOALS = 10;
 
 export const GOAL_TARGET_TYPES = {
     TOTAL_SESSIONS: 'Total sessions',

@@ -5,7 +5,7 @@ import { DATE_OPTIONS, GOAL_STATUS, MAXIMUM_ACTIVE_GOALS } from '../../../common
 import { Pagination, Stack, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import Title from '../../Dashboard/Title/Title';
 
-const GoalsHistoryTable = ({ username }) => {
+const GoalsHistoryTable = ({ username, itemsPerPage }) => {
     const [goals, setGoals] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -18,8 +18,8 @@ const GoalsHistoryTable = ({ username }) => {
         });
     }, [username]);
 
-    const indexOfLastGoalOnPage = currentPage * MAXIMUM_ACTIVE_GOALS;
-    const indexOfFirstGoalOnPage = indexOfLastGoalOnPage - MAXIMUM_ACTIVE_GOALS;
+    const indexOfLastGoalOnPage = currentPage * itemsPerPage;
+    const indexOfFirstGoalOnPage = indexOfLastGoalOnPage - itemsPerPage;
     const currentGoalsOnPage = goals.slice(indexOfFirstGoalOnPage, indexOfLastGoalOnPage);
 
     return (
@@ -38,22 +38,29 @@ const GoalsHistoryTable = ({ username }) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {currentGoalsOnPage.map((goal) => (
-                        <TableRow key={goal.goalId}>
-                            <TableCell>
-                                {new Date(goal.createdOn).toLocaleString('en-US', DATE_OPTIONS)}
-                            </TableCell>
-                            <TableCell>{goal.goalName}</TableCell>
-                            <TableCell>{goal.goalType}</TableCell>
-                            <TableCell>{goal.goalTargetType}</TableCell>
-                            <TableCell>
-                                {goal.goalProgress} (
-                                {((goal.goalProgress / goal.targetValue) * 100).toFixed(0)}%)
-                            </TableCell>
-                            <TableCell>{goal.targetValue}</TableCell>
-                            <TableCell>{goal.goalStatus}</TableCell>
+                    {goals.length > 0 ? (
+                        currentGoalsOnPage.length > 0 &&
+                        currentGoalsOnPage.map((goal) => (
+                            <TableRow key={goal.goalId}>
+                                <TableCell>
+                                    {new Date(goal.createdOn).toLocaleString('en-US', DATE_OPTIONS)}
+                                </TableCell>
+                                <TableCell>{goal.goalName}</TableCell>
+                                <TableCell>{goal.goalType}</TableCell>
+                                <TableCell>{goal.goalTargetType}</TableCell>
+                                <TableCell>
+                                    {goal.goalProgress} (
+                                    {((goal.goalProgress / goal.targetValue) * 100).toFixed(0)}%)
+                                </TableCell>
+                                <TableCell>{goal.targetValue}</TableCell>
+                                <TableCell>{goal.goalStatus}</TableCell>
+                            </TableRow>
+                        ))
+                    ) : (
+                        <TableRow>
+                            <TableCell align='center' colSpan={7}>No goals found</TableCell>
                         </TableRow>
-                    ))}
+                    )}
                 </TableBody>
             </Table>
             <Stack sx={{ mt: { lg: '25px', xs: '5px' } }} alignItems='center'>
@@ -62,7 +69,7 @@ const GoalsHistoryTable = ({ username }) => {
                         color='secondary'
                         shape='rounded'
                         size='small'
-                        count={Math.ceil(goals.length / MAXIMUM_ACTIVE_GOALS)}
+                        count={Math.ceil(goals.length / itemsPerPage)}
                         page={currentPage}
                         onChange={(_, value) => setCurrentPage(value)}
                     />
@@ -74,6 +81,7 @@ const GoalsHistoryTable = ({ username }) => {
 
 GoalsHistoryTable.propTypes = {
     username: PropTypes.string,
+    itemsPerPage: PropTypes.number,
 };
 
 export default GoalsHistoryTable;

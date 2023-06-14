@@ -19,8 +19,8 @@ import {
     searchYoga,
 } from './helpers/searchBarHelpers';
 
-import puzzlePatternImageSearch1 from '../../img/Puzzle-Top-Bar-1.png';
-import puzzlePatternImageSearch2 from '../../img/Puzzle-Top-Bar-2.png';
+import puzzlePatternImageSearch1 from '../../assets/images/Puzzle-Top-Bar-1.png';
+import puzzlePatternImageSearch2 from '../../assets/images/Puzzle-Top-Bar-2.png';
 
 const SearchBar = ({ category }) => {
     const { handleSubmit, register, reset } = useForm();
@@ -132,6 +132,7 @@ const SearchBar = ({ category }) => {
                     sx={{
                         width: '100%',
                         maxWidth: '600px',
+                        backgroundColor: 'background.paper',
                     }}
                     InputProps={{
                         endAdornment: (

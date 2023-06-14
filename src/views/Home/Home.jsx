@@ -4,7 +4,7 @@ import HowItWorks from '../../components/Home/HowItWorks/HowItWorks';
 import AboutSection from '../../components/Home/AboutSection/AboutSection';
 import ProductFeatures from '../../components/Home/ProductFeatures/ProductFeatures';
 
-import puzzleHero from '../../../src/img/Puzzle-Pattern-Hero.png';
+import puzzleHero from '../../../src/assets/images/Puzzle-Pattern-Hero.png';
 
 const Home = () => {
     return (

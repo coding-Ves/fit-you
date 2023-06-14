@@ -1,7 +1,9 @@
-import { Box, Grid, Pagination, Paper, Stack } from '@mui/material';
-import { useContext, useState } from 'react';
+import { Box, Grid, Pagination, Stack } from '@mui/material';
+import { useState } from 'react';
 import { RESULTS_PER_PAGE } from '../../common/constants';
-import UserSearchCard from './../Friends/UserSearchCard';
+import UserSearchCard from './../Social/UserSearchCard';
+
+import { PropTypes } from 'prop-types';
 
 const UserList = ({ followUserList }) => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -54,3 +56,7 @@ const UserList = ({ followUserList }) => {
 };
 
 export default UserList;
+
+UserList.propTypes = {
+    followUserList: PropTypes.array.isRequired,
+};

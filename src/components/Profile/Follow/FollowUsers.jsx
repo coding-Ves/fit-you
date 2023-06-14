@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import getFollowDetails from '../../UserList/helpers/getFollowDetails';
 import UserList from '../../UserList/UserList';
+import getFollowDetails from '../../UserList/helpers/getFollowDetails';
+
+import { PropTypes } from 'prop-types';
 
 const FollowUser = ({ followUsers }) => {
     const [allUserInfo, setAllUserInfo] = useState([]);
@@ -23,3 +25,7 @@ const FollowUser = ({ followUsers }) => {
 };
 
 export default FollowUser;
+
+FollowUser.propTypes = {
+    followUsers: PropTypes.object,
+};

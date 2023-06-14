@@ -16,9 +16,9 @@ import { BatteryCharging20TwoTone } from '@mui/icons-material';
 
 import { HOME_HERO_IMAGE } from './../../../common/constants';
 
-import puzzlePiece1 from '../../../img//Puzzle-Piece-1.png';
-import puzzlePiece2 from '../../../img//Puzzle-Piece-2.png';
-import puzzlePiece3 from '../../../img//Puzzle-Piece-3.png';
+import puzzlePiece1 from '../../../assets/images/Puzzle-Piece-1.png';
+import puzzlePiece2 from '../../../assets/images/Puzzle-Piece-2.png';
+import puzzlePiece3 from '../../../assets/images/Puzzle-Piece-3.png';
 
 const item = {
     display: 'flex',
@@ -160,7 +160,7 @@ const ProductFeatures = () => {
                                     }}
                                 >
                                     <Avatar
-                                        src='https://images.unsplash.com/photo-1563705883268-eb58ab6f505d'
+                                        src='https://images.unsplash.com/photo-1635702961175-f6949dded992'
                                         variant='rounded'
                                         sx={{
                                             width: '100%',
@@ -200,7 +200,7 @@ const ProductFeatures = () => {
                                     }}
                                 >
                                     <Avatar
-                                        src='https://images.unsplash.com/photo-1563705883268-eb58ab6f505d'
+                                        src='https://plus.unsplash.com/premium_photo-1685125884082-c27a68df25df'
                                         variant='rounded'
                                         sx={{
                                             width: '100%',

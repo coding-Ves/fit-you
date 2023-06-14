@@ -70,11 +70,11 @@ export const physicalListItems = (
 export const socialListItems = (
     <>
         {/* <ListSubheader>Connect</ListSubheader> */}
-        <ListItemButton component={Link} to='/friends'>
+        <ListItemButton component={Link} to='/social'>
             <ListItemIcon>
                 <GroupsRoundedIcon />
             </ListItemIcon>
-            <ListItemText primary='Find Friends' />
+            <ListItemText primary='Social' />
         </ListItemButton>
     </>
 );

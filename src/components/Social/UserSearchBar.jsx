@@ -11,10 +11,9 @@ import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import searchFriends from './helpers/FriendSearchHelpers';
-
 import { UsersContext } from '../../contexts/UsersContext';
 
-const FriendSearchBar = () => {
+const UserSearchBar = () => {
     const { handleSubmit, register, reset } = useForm();
     const navigate = useNavigate();
     const { setUsers } = useContext(UsersContext);
@@ -67,6 +66,9 @@ const FriendSearchBar = () => {
                         onKeyDown={handleKeyDown}
                         placeholder='Search for new friends'
                         type='text'
+                        sx={{
+                            backgroundColor: 'background.paper',
+                        }}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position='end'>
@@ -83,4 +85,4 @@ const FriendSearchBar = () => {
     );
 };
 
-export default FriendSearchBar;
+export default UserSearchBar;

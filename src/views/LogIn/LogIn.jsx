@@ -2,7 +2,7 @@ import { CssBaseline, Grid, Paper } from '@mui/material';
 import { LOGIN_IMAGE } from '../../common/constants';
 
 import LoginForm from '../../components/Authentication/LogInForm/LogInForm.jsx';
-import PuzzlePattern from '../../img/Puzzle-Pattern-Hero.png';
+import PuzzlePattern from '../..//assets/images/Puzzle-Pattern-Hero.png';
 
 const LogIn = () => {
     return (

@@ -1,20 +1,8 @@
-import { Grid, Card, CardContent, Typography, Paper, Box } from '@mui/material';
 import {} from '@mui/icons-material';
-import {
-    EmojiEvents,
-    Flag,
-    SportsHandball,
-    CheckCircle,
-    ImportContacts,
-    Face2,
-    DirectionsRun,
-    FollowTheSigns,
-    WavingHand,
-    AutoFixHigh,
-    AutoAwesome,
-    DonutLargeTwoTone,
-} from '@mui/icons-material';
+import { Box, Card, CardContent, Grid, Typography } from '@mui/material';
 import achievementChecker from './helpers/achievementChecker';
+
+import { PropTypes } from 'prop-types';
 
 export const Achievements = ({ userData }) => {
     const achievements = achievementChecker(userData);
@@ -58,3 +46,7 @@ export const Achievements = ({ userData }) => {
 };
 
 export default Achievements;
+
+Achievements.propTypes = {
+    userData: PropTypes.object,
+};
