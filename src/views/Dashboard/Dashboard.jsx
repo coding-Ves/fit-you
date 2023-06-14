@@ -48,6 +48,8 @@ const Dashboard = () => {
                             <Grid container spacing={3}>
                                 <Grid item xs={12} md={8} lg={9}>
                                     <Paper
+                                        variant='elevation'
+                                        elevation={5}
                                         sx={{
                                             p: 2,
                                             display: 'flex',
@@ -67,6 +69,8 @@ const Dashboard = () => {
 
                                 <Grid item xs={12}>
                                     <Paper
+                                        variant='elevation'
+                                        elevation={5}
                                         sx={{
                                             p: 2,
                                             display: 'flex',
@@ -78,6 +82,8 @@ const Dashboard = () => {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Paper
+                                        variant='elevation'
+                                        elevation={5}
                                         sx={{
                                             p: 2,
                                             display: 'flex',
