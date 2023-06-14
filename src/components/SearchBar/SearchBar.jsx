@@ -94,7 +94,7 @@ const SearchBar = ({ category }) => {
             sx={{
                 backgroundImage: `url(${puzzlePatternImageSearch2})`,
                 backgroundRepeat: 'no-repeat',
-                backgroundSize: 'fit',
+                backgroundSize: '100%',
                 backgroundPosition: 'center',
                 backgroundBlendMode: 'multiply',
                 boxSizing: 'border-box',
