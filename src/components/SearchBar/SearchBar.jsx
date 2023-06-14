@@ -132,6 +132,7 @@ const SearchBar = ({ category }) => {
                     sx={{
                         width: '100%',
                         maxWidth: '600px',
+                        backgroundColor: 'background.paper',
                     }}
                     InputProps={{
                         endAdornment: (
