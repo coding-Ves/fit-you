@@ -86,7 +86,7 @@ export const SPORTS_CATEGORIES = {
     OTHER: 'other',
 };
 
-export const GOAL_TYPES = ['Fitness', 'Cardio', 'Sports', 'Yoga', 'Other'];
+export const GOAL_TYPES = ['Fitness', 'Cardio', 'Sports', 'Yoga'];
 
 export const GOAL_STATUS = {
     ACTIVE: 'Active',
