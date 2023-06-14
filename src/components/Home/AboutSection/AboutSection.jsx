@@ -12,8 +12,8 @@ const item = {
 };
 
 const avatars = {
-    height: '100px',
-    width: '100px',
+    height: '200px',
+    width: '200px',
 };
 
 const AboutSection = () => {
@@ -55,7 +55,10 @@ const AboutSection = () => {
                     <Grid container spacing={5}>
                         <Grid item xs={12} md={4}>
                             <Card sx={item}>
-                                <Avatar sx={avatars}>Bibi</Avatar>
+                                <Avatar
+                                    sx={avatars}
+                                    src='/src/assets/authors/Bibi.jpg'
+                                />
                                 <Typography variant='h5' sx={{ my: 5 }}>
                                     Bilyana
                                 </Typography>
@@ -64,7 +67,10 @@ const AboutSection = () => {
                         </Grid>
                         <Grid item xs={12} md={4}>
                             <Card sx={item}>
-                                <Avatar sx={avatars}>Imad</Avatar>
+                                <Avatar
+                                    sx={avatars}
+                                    src='/src/assets/authors/Imad.jpg'
+                                />
                                 <Typography variant='h5' sx={{ my: 5 }}>
                                     Imad
                                 </Typography>
@@ -73,9 +79,11 @@ const AboutSection = () => {
                         </Grid>
                         <Grid item xs={12} md={4}>
                             <Card sx={item}>
-                                <Avatar sx={avatars} src={VesImage}>
-                                    Ves
-                                </Avatar>
+                                <Avatar
+                                    sx={avatars}
+                                    src='/src/assets/authors/Ves.jpg'
+                                />
+
                                 <Typography variant='h5' sx={{ my: 5 }}>
                                     Ves
                                 </Typography>
