@@ -1,12 +1,15 @@
 import { Cell, Pie, PieChart } from 'recharts';
 import { PROGRESS_PIE_COLORS } from '../../../../common/constants';
 import PropTypes from 'prop-types';
+import { useTheme } from '@emotion/react';
 
 const ProgressPieChart = ({ currentProgress, goalTarget }) => {
     const data = [
         { name: 'Progress', value: currentProgress },
         { name: 'Remaining', value: goalTarget - currentProgress },
     ];
+    const textColor = useTheme().palette.mode === 'dark' ? '#fff' : '#000';
+
     return (
         <PieChart width={230} height={200}>
             <Pie
@@ -30,7 +33,7 @@ const ProgressPieChart = ({ currentProgress, goalTarget }) => {
                 dominantBaseline='central'
                 textAnchor='middle'
                 fontSize={24}
-                fill='#black'
+                fill={textColor}
             >
                 {((currentProgress / goalTarget) * 100).toFixed(0)}%
             </text>
