@@ -15,11 +15,7 @@ function TabPanel(props) {
             aria-labelledby={`simple-tab-${index}`}
             {...other}
         >
-            {value === index && (
-                <Box sx={{ p: 3 }}>
-                    {children}
-                </Box>
-            )}
+            {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
         </Box>
     );
 }
@@ -39,7 +35,7 @@ export const ProfileDescription = ({ userData }) => {
     };
 
     return (
-        <Paper variant='elevation' elevation={3} sx={{ p: 2, width: '100%' }}>
+        <Paper variant='elevation' elevation={3} sx={{ p: 2 }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs
                     value={value}

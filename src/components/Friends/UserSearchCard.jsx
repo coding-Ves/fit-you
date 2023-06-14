@@ -29,8 +29,8 @@ const UserSearchCard = ({ user: singleUser }) => {
             : singleUser.username;
 
     return (
-        <Card sx={{ maxWidth: 345 }} variant='elevation' elevation={5}>
-            <Grid>
+        <Card sx={{ maxWidth: 250 }} variant='elevation' elevation={5}>
+            <Grid align='center'>
                 <Avatar
                     variant='rounded'
                     sx={{
@@ -73,7 +73,10 @@ const UserSearchCard = ({ user: singleUser }) => {
                     {userData && singleUser.username !== userData.username && (
                         <FollowButton userToFollow={singleUser.username} />
                     )}
-                    <Button component={Link} to={`/profile/${singleUser.username}`}>
+                    <Button
+                        component={Link}
+                        to={`/profile/${singleUser.username}`}
+                    >
                         Details
                     </Button>
                 </CardActions>

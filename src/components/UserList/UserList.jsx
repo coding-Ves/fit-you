@@ -22,7 +22,14 @@ const UserList = ({ followUserList }) => {
         <Box id='users'>
             <Grid container spacing={2}>
                 {currentUsersOnPage.map((user) => (
-                    <Grid item xs={12} sm={6} md={4} key={user.uid}>
+                    <Grid
+                        item
+                        xs={12}
+                        sm={3}
+                        md={5}
+                        key={user.uid}
+                        sx={{ minWidth: '300px' }}
+                    >
                         <UserSearchCard user={user} />
                     </Grid>
                 ))}
