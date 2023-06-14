@@ -11,7 +11,7 @@ const ProgressPieChart = ({ currentProgress, goalTarget }) => {
     const textColor = useTheme().palette.mode === 'dark' ? '#fff' : '#000';
 
     return (
-        <PieChart width={230} height={200}>
+        <PieChart width={280} height={197}>
             <Pie
                 data={data}
                 dataKey='value'

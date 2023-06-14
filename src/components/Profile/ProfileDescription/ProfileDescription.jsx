@@ -48,7 +48,6 @@ export const ProfileDescription = ({ userData }) => {
                 >
                     <Tab label='Account' {...a11yProps(0)} />
                     <Tab label='Health' {...a11yProps(1)} />
-                    {/* <Tab label='Item Three' {...a11yProps(2)} /> */}
                 </Tabs>
             </Box>
             <TabPanel component='div' value={value} index={0}>
@@ -57,9 +56,6 @@ export const ProfileDescription = ({ userData }) => {
             <TabPanel component='div' value={value} index={1}>
                 <HealthInfo userData={userData} />
             </TabPanel>
-            {/* <TabPanel value={value} index={2}>
-                Item Three
-            </TabPanel> */}
         </Paper>
     );
 };

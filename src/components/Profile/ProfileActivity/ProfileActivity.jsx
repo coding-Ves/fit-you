@@ -63,7 +63,7 @@ export const ProfileActivity = ({ userData: userProfileData }) => {
                     allowScrollButtonsMobile
                 >
                     <Tab label='Achievements' {...a11yProps(0)} />
-                    <Tab label='Friends' {...a11yProps(1)} />
+                    <Tab label='Social' {...a11yProps(1)} />
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>

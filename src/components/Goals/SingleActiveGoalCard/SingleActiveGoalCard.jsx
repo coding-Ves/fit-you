@@ -5,6 +5,7 @@ import ProgressPieChart from './ProgressPieChart/ProgressPieChart';
 import { useEffect } from 'react';
 import { checkGoalExpired } from '../../../firebase/services/goals.service';
 import { useLocation } from 'react-router-dom';
+import { Favorite, Grade, GradeOutlined } from '@mui/icons-material';
 
 const SingleActiveGoalCard = ({ goal, onDeleteGoal, onEditGoal }) => {
     useEffect(() => {
@@ -14,42 +15,68 @@ const SingleActiveGoalCard = ({ goal, onDeleteGoal, onEditGoal }) => {
     const location = useLocation();
 
     return (
-        <Paper variant='elevation' elevation={5} border={'solid 1px #e4e4e4'} sx={{ m: 2, p: 2 }}>
+        <Paper
+            variant='elevation'
+            elevation={5}
+            border={'solid 1px #e4e4e4'}
+            sx={{
+                m: '0px 10px 0px 10px',
+                p: '0px 0px 25px 0px',
+            }}
+        >
             <Box
                 sx={{
                     display: 'flex',
-                    justifyContent: 'space-between',
                     width: '100%',
                     direction: 'column',
                 }}
             >
-                <Typography fontWeight={500} textAlign='center' m={'10px 10px 0px 10px'}>
+                <Typography
+                    fontWeight={500}
+                    textAlign='center'
+                    m={'10px auto 10px 10px'}
+                    p={'15px 0px 0px 10px'}
+                >
                     {goal.goalName}
                 </Typography>
-                {location.pathname !== '/dashboard' && (
-                    <SingleGoalMenu
-                        onDeleteGoal={onDeleteGoal}
-                        onEditGoal={onEditGoal}
-                        goal={goal}
-                        goalId={goal.goalId}
-                        username={goal.username}
-                        sx={{ position: 'absolute' }}
-                    />
+                {location.pathname !== '/dashboard' ? (
+                    <Box paddingTop={'15px'}>
+                        <SingleGoalMenu
+                            onDeleteGoal={onDeleteGoal}
+                            onEditGoal={onEditGoal}
+                            goal={goal}
+                            goalId={goal.goalId}
+                            username={goal.username}
+                        />
+                    </Box>
+                ) : (
+                    <Box padding={'15px 10px 0px 0px'}>
+                        <GradeOutlined fontSize="large"  />
+                    </Box>
                 )}
             </Box>
-
-            <ProgressPieChart currentProgress={goal.goalProgress} goalTarget={goal.targetValue} />
-            <Typography fontWeight={500} pt={1} textAlign='center'>
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                }}
+            >
+                <ProgressPieChart
+                    currentProgress={goal.goalProgress}
+                    goalTarget={goal.targetValue}
+                />
+            </Box>
+            <Typography fontWeight={500} textAlign='center'>
                 {goal.goalProgress} / {goal.targetValue} {goal.goalTargetType}
             </Typography>
-            <Typography fontWeight={500} pb={1} textAlign='center'>
+            <Typography fontWeight={500} textAlign='center'>
                 {goal.goalType}
             </Typography>
             <Box
                 sx={{
                     display: 'flex',
                     justifyContent: 'space-between',
-                    m: '0px 10px 5px 10px',
+                    m: '0px 10px 0px 10px',
                 }}
             >
                 <Typography>

@@ -74,7 +74,7 @@ const ActivitiesChart = () => {
     return (
         <>
             <Title>Activities chart</Title>
-            <ResponsiveContainer>
+            <ResponsiveContainer width='100%' height='100%'>
                 <BarChart
                     data={data}
                     margin={{

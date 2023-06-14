@@ -62,7 +62,7 @@ const GoalsHistoryTable = ({ username, itemsPerPage }) => {
                         ))
                     ) : (
                         <TableRow>
-                            <TableCell align='center' colSpan={7}>No goals found</TableCell>
+                            <TableCell align='center' colSpan={5}>No goals found</TableCell>
                         </TableRow>
                     )}
                 </TableBody>

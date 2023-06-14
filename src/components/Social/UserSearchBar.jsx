@@ -21,7 +21,7 @@ const UserSearchBar = () => {
     const handleSearch = (data) => {
         searchFriends(data.search.toLowerCase()).then((result) => {
             setUsers(result);
-            navigate('/friends');
+            navigate('/social');
         });
         window.scrollTo({ top: 2500, left: 100, behavior: 'smooth' });
         reset();

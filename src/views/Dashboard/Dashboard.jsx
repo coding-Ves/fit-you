@@ -46,7 +46,7 @@ const Dashboard = () => {
                     >
                         <Container maxWidth='lg' sx={{ mt: 4, mb: 4 }}>
                             <Grid container spacing={3}>
-                                <Grid item xs={12} md={8} lg={9}>
+                                <Grid item xs={12} md={8} lg={8}>
                                     <Paper
                                         variant='elevation'
                                         elevation={5}
@@ -55,16 +55,15 @@ const Dashboard = () => {
                                             display: 'flex',
                                             flexDirection: 'column',
                                             height: '380px',
-                                            width: '100%',
                                         }}
                                     >
                                         <ActivitiesChart />
                                     </Paper>
                                 </Grid>
                                 {hasFavoriteGoal && (
-                                    <Box mt={1}>
-                                        <SingleActiveGoalCard goal={goal} />{' '}
-                                    </Box>
+                                    <Grid item lg={4}>
+                                        <SingleActiveGoalCard goal={goal} />
+                                    </Grid>
                                 )}
 
                                 <Grid item xs={12}>

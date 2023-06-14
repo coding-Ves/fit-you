@@ -3,8 +3,8 @@ import * as yup from 'yup';
 export const editGoalValidationSchema = yup.object({
     newGoalName: yup
         .string()
-        .min(3, 'Your goal\'s name must be at least 3 characters long.')
-        .max(20, 'Your goal\'s name cannot exceed 20 characters.')
+        .min(4, 'Your goal\'s name must be at least 4 characters long.')
+        .max(30, 'Your goal\'s name cannot exceed 30 characters.')
         .required('You must enter a goal name.'),
     newTargetValue: yup
         .number()
