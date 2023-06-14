@@ -52,7 +52,7 @@ const Dashboard = () => {
                                             p: 2,
                                             display: 'flex',
                                             flexDirection: 'column',
-                                            height: '100%',
+                                            height: '380px',
                                             width: '100%',
                                         }}
                                     >
