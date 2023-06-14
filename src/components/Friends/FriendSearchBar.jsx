@@ -67,6 +67,9 @@ const FriendSearchBar = () => {
                         onKeyDown={handleKeyDown}
                         placeholder='Search for new friends'
                         type='text'
+                        sx={{
+                            backgroundColor: 'background.paper',
+                        }}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position='end'>
