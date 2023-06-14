@@ -23,14 +23,7 @@ const SingleActiveGoalCard = ({ goal, onDeleteGoal, onEditGoal }) => {
                     direction: 'column',
                 }}
             >
-                <Typography
-                    fontWeight={500}
-                    sx={{
-                        '@media (max-width: 600px)': { fontSize: '30px' },
-                    }}
-                    textAlign='center'
-                    m={'10px 10px 0px 10px'}
-                >
+                <Typography fontWeight={500} textAlign='center' m={'10px 10px 0px 10px'}>
                     {goal.goalName}
                 </Typography>
                 {location.pathname !== '/dashboard' && (
@@ -44,17 +37,13 @@ const SingleActiveGoalCard = ({ goal, onDeleteGoal, onEditGoal }) => {
                     />
                 )}
             </Box>
-            <ProgressPieChart currentProgress={goal.goalProgress} goalTarget={goal.targetValue} />
-            <Typography
-                fontWeight={500}
-                sx={{
-                    '@media (max-width: 600px)': { fontSize: '30px' },
 
-                    p: 2,
-                }}
-                textAlign='center'
-            >
+            <ProgressPieChart currentProgress={goal.goalProgress} goalTarget={goal.targetValue} />
+            <Typography fontWeight={500} pt={1} textAlign='center'>
                 {goal.goalProgress} / {goal.targetValue} {goal.goalTargetType}
+            </Typography>
+            <Typography fontWeight={500} pb={1} textAlign='center'>
+                {goal.goalType}
             </Typography>
             <Box
                 sx={{
