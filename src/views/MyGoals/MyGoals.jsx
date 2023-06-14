@@ -5,7 +5,7 @@ import { Container, Paper } from '@mui/material';
 import { useContext } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import GoalsHistoryTable from '../../components/Goals/GoalsHistoryTable/GoalsHistoryTable';
-import { GOALS_PER_PAGE_MYGOALS } from '../../common/constants';
+import { PREVIOUS_GOALS_PER_PAGE_MYGOALS } from '../../common/constants';
 
 const MyGoals = () => {
     const { userData } = useContext(AuthContext);
@@ -19,7 +19,7 @@ const MyGoals = () => {
                     flex: '1',
                     display: 'flex',
                     padding: '20px',
-                    justifyContent: 'center',                    
+                    justifyContent: 'center',
                 }}
             >
                 <Container maxWidth='xl' sx={{ m: 4 }}>
@@ -45,7 +45,10 @@ const MyGoals = () => {
                             flexDirection: 'column',
                         }}
                     >
-                        <GoalsHistoryTable itemsPerPage={GOALS_PER_PAGE_MYGOALS} username={userData?.username} />
+                        <GoalsHistoryTable
+                            itemsPerPage={PREVIOUS_GOALS_PER_PAGE_MYGOALS}
+                            username={userData?.username}
+                        />
                     </Paper>
                 </Container>
             </Box>

@@ -47,6 +47,7 @@ export const getFitnessExercisesByUsername = (username) => {
 
         fitnessExercises.forEach((fitnessExercise) => {
             fitnessExercise.createdOn = new Date(fitnessExercise.createdOn).toLocaleString();
+            fitnessExercise.activityType = 'fitness';
         });
 
         return fitnessExercises;

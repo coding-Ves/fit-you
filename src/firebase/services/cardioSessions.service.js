@@ -39,6 +39,7 @@ export const getCardioSessionsByUsername = (username) => {
 
             cardioSessions.forEach((cardioSession) => {
                 cardioSession.createdOn = new Date(cardioSession.createdOn).toLocaleString();
+                cardioSession.activityType = 'cardio';
             });
 
             return cardioSessions;

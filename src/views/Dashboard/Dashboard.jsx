@@ -1,19 +1,19 @@
-import { Grid, Paper, Box } from '@mui/material';
+import { Box, Grid, Paper } from '@mui/material';
 import Container from '@mui/material/Container';
-import Chart from '../../components/Dashboard/Chart/Chart';
-import ActivitiesTable from '../../components/Activity/ActivitiesTable/ActivitiesTable';
-import SideBarDrawer from '../../components/SideBarDrawer/SideBarDrawer';
 import { useContext, useEffect, useState } from 'react';
-import AuthContext from '../../contexts/AuthContext';
+import { PREVIOUS_GOALS_PER_PAGE_DASHBOARD } from '../../common/constants';
+import ActivitiesTable from '../../components/Activity/ActivitiesTable/ActivitiesTable';
+import ActivitiesChart from '../../components/Dashboard/ActivitiesChart/ActivitiesChart';
+import GoalsHistoryTable from '../../components/Goals/GoalsHistoryTable/GoalsHistoryTable';
 import SingleActiveGoalCard from '../../components/Goals/SingleActiveGoalCard/SingleActiveGoalCard';
-import { getGoalById } from '../../firebase/services/goals.service';
 import Loader from '../../components/Loader/Loader';
+import SideBarDrawer from '../../components/SideBarDrawer/SideBarDrawer';
+import AuthContext from '../../contexts/AuthContext';
+import { getGoalById } from '../../firebase/services/goals.service';
 
 const Dashboard = () => {
     const { userData } = useContext(AuthContext);
-
     const [goal, setGoal] = useState({});
-
     const [isLoading, setIsLoading] = useState(true);
     const [hasFavoriteGoal, setHasFavoriteGoal] = useState(false);
 
@@ -42,25 +42,21 @@ const Dashboard = () => {
                             overflow: 'auto',
                         }}
                     >
-                        {/* <Toolbar /> */}
                         <Container maxWidth='lg' sx={{ mt: 4, mb: 4 }}>
                             <Grid container spacing={3}>
-                                {/* Chart */}
                                 <Grid item xs={12} md={8} lg={9}>
                                     <Paper
                                         sx={{
                                             p: 2,
                                             display: 'flex',
                                             flexDirection: 'column',
-                                            height: 240,
+                                            height: '100%',
                                         }}
                                     >
-                                        <Chart />
+                                        <ActivitiesChart />
                                     </Paper>
                                 </Grid>
-                                {/* Placement o favorite to be decided */}
                                 {hasFavoriteGoal && <SingleActiveGoalCard goal={goal} />}
-                                {/* Activities Table */}
                                 <Grid item xs={12}>
                                     <Paper
                                         sx={{
@@ -70,6 +66,20 @@ const Dashboard = () => {
                                         }}
                                     >
                                         <ActivitiesTable />
+                                    </Paper>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Paper
+                                        sx={{
+                                            p: 2,
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                        }}
+                                    >
+                                        <GoalsHistoryTable
+                                            itemsPerPage={PREVIOUS_GOALS_PER_PAGE_DASHBOARD}
+                                            username={userData?.username}
+                                        />
                                     </Paper>
                                 </Grid>
                             </Grid>
