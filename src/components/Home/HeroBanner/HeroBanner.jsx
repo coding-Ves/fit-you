@@ -3,10 +3,13 @@ import React from 'react';
 import { HOME_HERO_IMAGE } from '../../../common/constants';
 import { ArrowDownward } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import { auth } from '../../../firebase/firebase-config';
 
 import puzzleHero from '../../../img/Puzzle-Pattern-Hero.png';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const HeroBanner = () => {
+    const [user] = useAuthState(auth);
     return (
         <Box
             sx={{
@@ -46,19 +49,34 @@ const HeroBanner = () => {
                     The app to fit your needs and help you get fit.
                 </Typography>
             </Paper>
-            <Button
-                color='secondary'
-                variant='contained'
-                size='large'
-                component={Link}
-                to='/register'
-                sx={{ minWidth: 200 }}
-            >
-                Register
-            </Button>
-            <Typography variant='body2' color='inherit' sx={{ mt: 2 }}>
-                to start your journey...
-            </Typography>
+            {!user ? (
+                <>
+                    <Button
+                        color='secondary'
+                        variant='contained'
+                        size='large'
+                        component={Link}
+                        to='/register'
+                        sx={{ minWidth: 200 }}
+                    >
+                        Register
+                    </Button>
+                    <Typography variant='body2' color='inherit' sx={{ mt: 2 }}>
+                        to start your journey...
+                    </Typography>
+                </>
+            ) : (
+                <Button
+                    color='secondary'
+                    variant='contained'
+                    size='large'
+                    component={Link}
+                    to='/dashboard'
+                    sx={{ minWidth: 200 }}
+                >
+                    Dashboard
+                </Button>
+            )}
 
             <ArrowDownward
                 sx={{

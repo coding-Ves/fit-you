@@ -160,7 +160,7 @@ const ProductFeatures = () => {
                                     }}
                                 >
                                     <Avatar
-                                        src='https://images.unsplash.com/photo-1563705883268-eb58ab6f505d'
+                                        src='https://images.unsplash.com/photo-1635702961175-f6949dded992'
                                         variant='rounded'
                                         sx={{
                                             width: '100%',
@@ -200,7 +200,7 @@ const ProductFeatures = () => {
                                     }}
                                 >
                                     <Avatar
-                                        src='https://images.unsplash.com/photo-1563705883268-eb58ab6f505d'
+                                        src='https://plus.unsplash.com/premium_photo-1685125884082-c27a68df25df'
                                         variant='rounded'
                                         sx={{
                                             width: '100%',

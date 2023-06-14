@@ -46,7 +46,7 @@ const AboutSection = () => {
                 mt: 10,
             }}
         >
-            <Typography variant='h4'>Meet the team</Typography>
+            <Typography variant='h4'>Meet Studio Lucky 13</Typography>
 
             <Box
                 component='section'
@@ -70,33 +70,27 @@ const AboutSection = () => {
                             <Card sx={item}>
                                 <Avatar sx={avatars}>Bibi</Avatar>
                                 <Typography variant='h5' sx={{ my: 5 }}>
-                                    Person
+                                    Bilyana
                                 </Typography>
-                                <Typography variant='h6'>
-                                    Description
-                                </Typography>
+                                <Typography variant='h6'>CEO</Typography>
                             </Card>
                         </Grid>
                         <Grid item xs={12} md={4}>
                             <Card sx={item}>
                                 <Avatar sx={avatars}>Imad</Avatar>
                                 <Typography variant='h5' sx={{ my: 5 }}>
-                                    Person
+                                    Imad
                                 </Typography>
-                                <Typography variant='h6'>
-                                    Description
-                                </Typography>
+                                <Typography variant='h6'>CTO</Typography>
                             </Card>
                         </Grid>
                         <Grid item xs={12} md={4}>
                             <Card sx={item}>
                                 <Avatar sx={avatars}>Ves</Avatar>
                                 <Typography variant='h5' sx={{ my: 5 }}>
-                                    Person
+                                    Veselin
                                 </Typography>
-                                <Typography variant='h6'>
-                                    Description
-                                </Typography>
+                                <Typography variant='h6'>Janitor</Typography>
                             </Card>
                         </Grid>
                     </Grid>
