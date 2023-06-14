@@ -19,11 +19,11 @@ const CreateActivityDialog = ({ open, handleClose, activity }) => {
                 {(category === 'fitness' ||
                     category === 'sports' ||
                     category === 'cardio') && (
-                    <DialogTitle>{activity.name.toUpperCase()}</DialogTitle>
+                    <DialogTitle>{activity?.name?.toUpperCase()}</DialogTitle>
                 )}
                 {category === 'yoga' && (
                     <DialogTitle>
-                        {activity.english_name.toUpperCase()}
+                        {activity?.english_name?.toUpperCase()}
                     </DialogTitle>
                 )}
                 <DialogContent>
