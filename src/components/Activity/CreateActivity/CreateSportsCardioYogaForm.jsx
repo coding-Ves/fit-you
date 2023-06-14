@@ -1,30 +1,25 @@
-/* eslint-disable react/prop-types */
 import {
     Alert,
     Box,
     Button,
     FormControl,
-    InputLabel,
+    FormLabel,
     MenuItem,
     Select,
     Snackbar,
     Stack,
-    TextField,
-    FormLabel,
+    TextField
 } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import AuthContext from '../../../contexts/AuthContext';
 import { addCardioSession } from '../../../firebase/services/cardioSessions.service';
-import {
-    addActivityToGoal,
-    checkGoalProgress,
-    getGoalsByUsername,
-} from '../../../firebase/services/goals.service';
+import { addActivityToGoal, checkGoalProgress, getGoalsByUsername, } from '../../../firebase/services/goals.service';
 import { addSportSession } from '../../../firebase/services/sportSessions.service';
 import { addYogaSession } from '../../../firebase/services/yogaSessions.service';
+import PropTypes from 'prop-types';
 
-const CreateSportsOrCardioSessionForm = ({ activity, category, handleClose }) => {
+const CreateSportsCardioYogaForm = ({ activity, category, handleClose }) => {
     const { userData } = useContext(AuthContext);
     const { register, handleSubmit, reset } = useForm();
 
@@ -60,6 +55,24 @@ const CreateSportsOrCardioSessionForm = ({ activity, category, handleClose }) =>
     const onSubmit = (data) => {
         setIsLoading(true);
 
+        const handleSuccess = () => {
+            setSnackbarMessage('Activity added successfully!');
+            setSnackbarSeverity('success');
+            setSnackbarOpen(true);
+            reset();
+
+            setTimeout(() => {
+                handleClose();
+            }, 1500);
+        };
+
+        const handleError = (error) => {
+            setIsLoading(false);
+            setSnackbarMessage(error.message);
+            setSnackbarSeverity('error');
+            setSnackbarOpen(true);
+        };
+
         if (category === 'sports') {
             addSportSession(userData.username, activity.name, data.durationInMinutes)
                 .then((id) => {
@@ -88,22 +101,9 @@ const CreateSportsOrCardioSessionForm = ({ activity, category, handleClose }) =>
                         selectedGoalObject.targetValue
                     );
                 })
-                .then(() => {
-                    setSnackbarMessage('Activity added successfully!');
-                    setSnackbarSeverity('success');
-                    setSnackbarOpen(true);
-                    reset();
+                .then(handleSuccess)
+                .catch(handleError);
 
-                    setTimeout(() => {
-                        handleClose();
-                    }, 1500);
-                })
-                .catch((error) => {
-                    setIsLoading(false);
-                    setSnackbarMessage(error.message);
-                    setSnackbarSeverity('error');
-                    setSnackbarOpen(true);
-                });
         } else if (category === 'cardio') {
             addCardioSession(
                 userData.username,
@@ -144,22 +144,9 @@ const CreateSportsOrCardioSessionForm = ({ activity, category, handleClose }) =>
                         selectedGoalObject.targetValue
                     );
                 })
-                .then(() => {
-                    setSnackbarMessage('Activity added successfully!');
-                    setSnackbarSeverity('success');
-                    setSnackbarOpen(true);
-                    reset();
+                .then(handleSuccess)
+                .catch(handleError);
 
-                    setTimeout(() => {
-                        handleClose();
-                    }, 1500);
-                })
-                .catch((error) => {
-                    setIsLoading(false);
-                    setSnackbarMessage(error.message);
-                    setSnackbarSeverity('error');
-                    setSnackbarOpen(true);
-                });
         } else if (category === 'yoga') {
             addYogaSession(userData.username, activity.english_name, data.durationInMinutes)
                 .then((id) => {
@@ -194,22 +181,8 @@ const CreateSportsOrCardioSessionForm = ({ activity, category, handleClose }) =>
                         });
                     }
                 })
-                .then(() => {
-                    setSnackbarMessage('Activity added successfully!');
-                    setSnackbarSeverity('success');
-                    setSnackbarOpen(true);
-                    reset();
-
-                    setTimeout(() => {
-                        handleClose();
-                    }, 1500);
-                })
-                .catch((error) => {
-                    setIsLoading(false);
-                    setSnackbarMessage(error.message);
-                    setSnackbarSeverity('error');
-                    setSnackbarOpen(true);
-                });
+                .then(handleSuccess)
+                .catch(handleError);
         }
     };
 
@@ -243,7 +216,7 @@ const CreateSportsOrCardioSessionForm = ({ activity, category, handleClose }) =>
                 {category === 'cardio' && (
                     <Box>
                         <TextField
-                            label='Distance'
+                            label='Distance in km'
                             {...register('distance')}
                             fullWidth
                             margin='normal'
@@ -292,4 +265,11 @@ const CreateSportsOrCardioSessionForm = ({ activity, category, handleClose }) =>
     );
 };
 
-export default CreateSportsOrCardioSessionForm;
+CreateSportsCardioYogaForm.propTypes = {
+    activity: PropTypes.object.isRequired,
+    category: PropTypes.string.isRequired,
+    handleClose: PropTypes.func.isRequired,
+};
+
+
+export default CreateSportsCardioYogaForm;

@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import CreateFitnessExerciseForm from './CreateFitnessExerciseForm';
-import CreateSportsOrCardioSessionForm from './CreateSportsOrCardioSessionOrYogaForm';
+import CreateSportsCardioYogaForm from './CreateSportsCardioYogaForm';
 
 const CreateActivityDialog = ({ open, handleClose, activity }) => {
     const { category } = useParams();
@@ -37,7 +37,7 @@ const CreateActivityDialog = ({ open, handleClose, activity }) => {
                     {(category === 'sports' ||
                         category === 'cardio' ||
                         category === 'yoga') && (
-                        <CreateSportsOrCardioSessionForm
+                        <CreateSportsCardioYogaForm
                             activity={activity}
                             category={category}
                             handleClose={handleClose}
