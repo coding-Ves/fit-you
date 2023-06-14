@@ -51,12 +51,15 @@ const ActivitiesTableMenu = ({ activity, onDeleteActivity, onEditActivity }) => 
                 onClose={handleClose}
                 onClick={handleClose}
             >
-                <MenuItem onClick={() => handleEditClick(true)}>
-                    <ListItemIcon>
-                        <Edit fontSize='small' />
-                    </ListItemIcon>
-                    Edit
-                </MenuItem>
+                {!activity.fitnessExerciseName && (
+                    <MenuItem onClick={() => handleEditClick(true)}>
+                        <ListItemIcon>
+                            <Edit fontSize='small' />
+                        </ListItemIcon>
+                        Edit
+                    </MenuItem>
+                )}
+
 
                 <MenuItem onClick={() => handleDeleteClick(true)}>
                     <ListItemIcon>
