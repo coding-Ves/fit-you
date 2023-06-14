@@ -61,7 +61,7 @@ const ProductFeatures = () => {
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: '250px',
                 backgroundPosition: 'right',
-                backgroundBlendMode: 'multiply',
+                backgroundBlendMode: 'overlay',
                 borderRadius: '10px',
             }}
         >

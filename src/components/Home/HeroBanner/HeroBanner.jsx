@@ -1,16 +1,22 @@
-import { Box, Typography, Button, IconButton } from '@mui/material';
+import { Box, Typography, Button, IconButton, Paper } from '@mui/material';
 import React from 'react';
 import { HOME_HERO_IMAGE } from '../../../common/constants';
 import { ArrowDownward } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
+import puzzleHero from '../../../img/Puzzle-Pattern-Hero.png';
+
 const HeroBanner = () => {
     return (
         <Box
             sx={{
-                backgroundImage: `url(${HOME_HERO_IMAGE})`,
-                backgroundPosition: 'center',
+                backgroundImage: `url(${puzzleHero})`,
+                backgroundRepeat: 'no-repeat',
                 backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundBlendMode: 'overlay',
+                backgroundColor: 'primary.main',
+
                 width: '100%',
                 height: '90vh',
                 display: 'flex',
@@ -20,23 +26,26 @@ const HeroBanner = () => {
                 backgroundAttachment: 'fixed',
             }}
         >
-            <Typography
-                color='inherit'
-                align='center'
-                variant='h2'
-                marked='center'
-                fontWeight='bold'
-            >
-                Fit You
-            </Typography>
-            <Typography
-                color='inherit'
-                align='center'
-                variant='h5'
-                sx={{ mb: 4, mt: { xs: 2, sm: 5 } }}
-            >
-                The app to fit all your needs and help you get fit.
-            </Typography>
+            <Paper sx={{ p: 2, m: 4, borderRadius: '15px' }}>
+                <Typography
+                    color='inherit'
+                    align='center'
+                    variant='h2'
+                    marked='center'
+                    fontWeight='bold'
+                >
+                    Fit You
+                </Typography>
+
+                <Typography
+                    color='inherit'
+                    align='center'
+                    variant='h5'
+                    sx={{ mb: 4, mt: { xs: 2, sm: 5 } }}
+                >
+                    The app to fit your needs and help you get fit.
+                </Typography>
+            </Paper>
             <Button
                 color='secondary'
                 variant='contained'
