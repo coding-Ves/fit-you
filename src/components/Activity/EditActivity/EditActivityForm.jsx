@@ -26,7 +26,6 @@ const EditActivityForm = ({ onClose, onEditActivity, activity }) => {
 
     const {
         register,
-        control,
         handleSubmit,
         formState: { errors },
     } = useForm({

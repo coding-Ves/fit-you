@@ -2,15 +2,14 @@ import {
     Alert,
     Box,
     Button,
-    FormControl,
-    FormLabel,
+    Grid,
     MenuItem,
     Select,
     Snackbar,
     Stack,
     TextField,
-    Grid,
 } from '@mui/material';
+import PropTypes from 'prop-types';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import AuthContext from '../../../contexts/AuthContext';
@@ -22,7 +21,6 @@ import {
 } from '../../../firebase/services/goals.service';
 import { addSportSession } from '../../../firebase/services/sportSessions.service';
 import { addYogaSession } from '../../../firebase/services/yogaSessions.service';
-import PropTypes from 'prop-types';
 
 const CreateSportsCardioYogaForm = ({ activity, category, handleClose }) => {
     const { userData } = useContext(AuthContext);
@@ -31,8 +29,6 @@ const CreateSportsCardioYogaForm = ({ activity, category, handleClose }) => {
         handleSubmit,
         reset,
         formState: { errors },
-        setError,
-        clearErrors,
     } = useForm();
 
     // eslint-disable-next-line no-unused-vars
@@ -193,7 +189,7 @@ const CreateSportsCardioYogaForm = ({ activity, category, handleClose }) => {
                             category,
                             goalProgress,
                             goalTargetType,
-                            Number(data.durationInMinutes)
+                            newProgress
                         ).then(() => {
                             if (selectedGoal) {
                                 return checkGoalProgress(
