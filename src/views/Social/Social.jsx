@@ -1,11 +1,12 @@
 import Box from '@mui/material/Box';
-import ListOfUsers from '../../components/Friends/ListOfUsers';
+
 import SideBarDrawer from '../../components/SideBarDrawer/SideBarDrawer';
 import { UsersProvider } from '../../contexts/UsersContext';
-import FriendSearchBar from './../../components/Friends/FriendSearchBar';
-import puzzlePatternImageSearch2 from '../../img/Puzzle-Top-Bar-1.png';
+import UserSearchBar from './../../components/Social/UserSearchBar';
+import puzzlePatternImageSearch2 from '../../assets/images/Puzzle-Top-Bar-1.png';
+import ListOfUsers from './../../components/Social/ListOfUsers';
 
-const FindFriends = () => {
+const Social = () => {
     return (
         <UsersProvider>
             <Box
@@ -33,7 +34,7 @@ const FindFriends = () => {
                         // margin={ lg: '80px', xs: '40px' }
                     }}
                 >
-                    <FriendSearchBar />
+                    <UserSearchBar />
 
                     <ListOfUsers />
                 </Box>
@@ -42,4 +43,4 @@ const FindFriends = () => {
     );
 };
 
-export default FindFriends;
+export default Social;

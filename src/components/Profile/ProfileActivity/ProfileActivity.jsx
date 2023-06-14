@@ -1,12 +1,12 @@
-import * as React from 'react';
+import { Box, Paper, Tab, Tabs } from '@mui/material';
 import PropTypes from 'prop-types';
-import { Tabs, Tab,  Box, Paper } from '@mui/material';
+import * as React from 'react';
 
-import Achievements from '../Achievements/Achievements';
 import { useContext } from 'react';
+import Achievements from '../Achievements/Achievements';
 
-import AuthContext from './../../../contexts/AuthContext';
 import FollowMain from '../Follow/FollowMain';
+import AuthContext from './../../../contexts/AuthContext';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -19,11 +19,7 @@ function TabPanel(props) {
             aria-labelledby={`simple-tab-${index}`}
             {...other}
         >
-            {value === index && (
-                <Box sx={{ p: 3 }}>
-                    {children}
-                </Box>
-            )}
+            {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
         </div>
     );
 }
@@ -80,3 +76,7 @@ export const ProfileActivity = ({ userData: userProfileData }) => {
 };
 
 export default ProfileActivity;
+
+ProfileActivity.propTypes = {
+    userData: PropTypes.object,
+};

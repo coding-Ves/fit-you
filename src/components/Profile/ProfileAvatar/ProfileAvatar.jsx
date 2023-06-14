@@ -22,6 +22,8 @@ import { updateUserAvatar } from '../../../firebase/services/users.service';
 import FollowButton from '../FollowButton/FollowButton';
 import errorHandler from './../../Authentication/ErrorHandling/errors.services';
 
+import { PropTypes } from 'prop-types';
+
 export const ProfileAvatar = ({ userData }) => {
     // Context and State
     const [isLoading, setIsLoading] = useState(false);
@@ -245,3 +247,7 @@ export const ProfileAvatar = ({ userData }) => {
 };
 
 export default ProfileAvatar;
+
+ProfileAvatar.propTypes = {
+    userData: PropTypes.object,
+};

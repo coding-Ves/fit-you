@@ -1,5 +1,5 @@
 import { DarkMode, Home, WbSunny } from '@mui/icons-material';
-import { Switch, Avatar } from '@mui/material';
+import { Avatar, Switch } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -12,12 +12,17 @@ import { Link } from 'react-router-dom';
 import { auth } from '../../firebase/firebase-config';
 import MyAccountMenu from './../Menus/MyAccountMenu';
 
-import Logo1 from '../../img/Logo-v1.png';
+import { PropTypes } from 'prop-types';
+import Logo1 from '../../assets/Logo-v1.png';
 
 // attribution for logo: <a href="https://www.flaticon.com/free-icons/heart" title="heart icons">Heart icons created by Freepik - Flaticon</a>
 // <a href="https://www.flaticon.com/free-icons/autism" title="autism icons">Autism icons created by Freepik - Flaticon</a>
 //<a href="https://www.flaticon.com/free-icons/hobbies-and-free-time" title="hobbies and free time icons">Hobbies and free time icons created by Erix - Flaticon</a>
 // <a href="https://www.flaticon.com/free-icons/puzzle-piece" title="puzzle piece icons">Puzzle piece icons created by kerismaker - Flaticon</a>
+
+ElevationScroll.propTypes = {
+    children: PropTypes.element.isRequired,
+};
 
 function ElevationScroll({ children }) {
     const trigger = useScrollTrigger({

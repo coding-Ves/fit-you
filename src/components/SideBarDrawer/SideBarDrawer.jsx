@@ -15,7 +15,7 @@ import {
 } from './ListItems';
 import { Box } from '@mui/material';
 
-import PuzzlePatternSideBar from '../../img/Puzzle-SideBar-1.png';
+import PuzzlePatternSideBar from '../../assets/images/Puzzle-SideBar-1.png';
 
 const StyledDrawer = styled(MuiDrawer, {
     shouldForwardProp: (prop) => prop !== 'open',

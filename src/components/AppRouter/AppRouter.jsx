@@ -10,7 +10,7 @@ import Profile from '../../views/Profile/Profile';
 import Register from '../../views/Register/Register';
 import RegisterHealth from '../../views/Register/RegisterHealth';
 import Search from '../../views/Search/Search';
-import FindFriends from '../../views/FindFriends/FindFriends';
+import Social from '../../views/Social/Social';
 import BMI from '../../views/BMI/BMI';
 import AuthenticatedRoute from './AuthenticatedRoute/AuthenticatedRoute';
 import { auth } from '../../firebase/firebase-config';
@@ -54,10 +54,10 @@ export const AppRouter = () => {
                 }
             />
             <Route
-                path='/friends'
+                path='/social'
                 element={
                     <AuthenticatedRoute>
-                        <FindFriends />
+                        <Social />
                     </AuthenticatedRoute>
                 }
             />

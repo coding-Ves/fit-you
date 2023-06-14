@@ -5,7 +5,7 @@ import { ArrowDownward } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { auth } from '../../../firebase/firebase-config';
 
-import puzzleHero from '../../../img/Puzzle-Pattern-Hero.png';
+import puzzleHero from '../../../assets/images/Puzzle-Pattern-Hero.png';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 const HeroBanner = () => {

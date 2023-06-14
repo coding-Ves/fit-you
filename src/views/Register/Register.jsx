@@ -1,7 +1,7 @@
 import RegistrationForm from './../../components/Authentication/Registration/RegistrationForms/RegistrationForm';
 import { Box } from '@mui/material';
 
-import PuzzlePattern from '../../img/Puzzle-Pattern-Hero.png';
+import PuzzlePattern from '../../assets/images/Puzzle-Pattern-Hero.png';
 
 const Register = () => {
     return (

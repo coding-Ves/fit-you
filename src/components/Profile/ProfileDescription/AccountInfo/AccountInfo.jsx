@@ -1,21 +1,22 @@
-import {
-    Box,
-    Grid,
-    TextField,
-    Button,
-    InputAdornment,
-    Icon,
-    Snackbar,
-    Alert,
-} from '@mui/material';
-import { useState, useContext } from 'react';
-import Edit from '@mui/icons-material/Edit';
-import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import phoneValidationSchema from './registrationValidationSchema';
-import { updateUserDetails } from '../../../../firebase/services/users.service';
+import Edit from '@mui/icons-material/Edit';
+import {
+    Alert,
+    Box,
+    Button,
+    Grid,
+    Icon,
+    InputAdornment,
+    Snackbar,
+    TextField,
+} from '@mui/material';
+import { useContext, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import AuthContext from '../../../../contexts/AuthContext';
+import { updateUserDetails } from '../../../../firebase/services/users.service';
+import phoneValidationSchema from './registrationValidationSchema';
+
+import { PropTypes } from 'prop-types';
 
 export const AccountInfo = ({ userData: userProfileData }) => {
     const formattedDate = new Date(userProfileData.createdOn);
@@ -180,3 +181,7 @@ export const AccountInfo = ({ userData: userProfileData }) => {
 };
 
 export default AccountInfo;
+
+AccountInfo.propTypes = {
+    userData: PropTypes.object,
+};

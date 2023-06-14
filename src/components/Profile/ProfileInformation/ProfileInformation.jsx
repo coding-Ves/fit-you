@@ -3,7 +3,8 @@ import React from 'react';
 import ProfileAvatar from '../ProfileAvatar/ProfileAvatar';
 import ProfileDescription from '../ProfileDescription/ProfileDescription';
 
-import puzzlePatternImage from '../../../img/Puzzle-Pattern-Hero.png';
+import { PropTypes } from 'prop-types';
+import puzzlePatternImage from '../../../assets/images/Puzzle-Pattern-Hero.png';
 
 const ProfileInformation = ({ userData }) => {
     return (
@@ -35,3 +36,7 @@ const ProfileInformation = ({ userData }) => {
 };
 
 export default ProfileInformation;
+
+ProfileInformation.propTypes = {
+    userData: PropTypes.object,
+};

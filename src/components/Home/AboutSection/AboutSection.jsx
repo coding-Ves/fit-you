@@ -11,9 +11,7 @@ import {
 } from '@mui/material';
 import { BatteryCharging20TwoTone } from '@mui/icons-material';
 
-import puzzlePiece1 from '../../../img//Puzzle-Piece-1.png';
-import puzzlePiece2 from '../../../img//Puzzle-Piece-2.png';
-import puzzlePiece3 from '../../../img//Puzzle-Piece-3.png';
+import puzzlePiece3 from '../../..//assets/images/Puzzle-Piece-3.png';
 
 const item = {
     display: 'flex',

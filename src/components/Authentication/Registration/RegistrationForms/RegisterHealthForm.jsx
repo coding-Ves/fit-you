@@ -185,3 +185,5 @@ export const RegistrationHealthForm = () => {
 };
 
 export default RegistrationHealthForm;
+
+// add prop types

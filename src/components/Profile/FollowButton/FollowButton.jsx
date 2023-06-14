@@ -6,6 +6,7 @@ import {
     followUser,
     unfollowUser,
 } from '../../../firebase/services/users.service';
+import { PropTypes } from 'prop-types';
 
 const FollowButton = ({ userToFollow }) => {
     const { userData } = useContext(AuthContext);
@@ -69,3 +70,7 @@ const FollowButton = ({ userToFollow }) => {
 };
 
 export default FollowButton;
+
+FollowButton.propTypes = {
+    userToFollow: PropTypes.string,
+};
