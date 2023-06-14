@@ -19,6 +19,9 @@ import {
     searchYoga,
 } from './helpers/searchBarHelpers';
 
+import puzzlePatternImageSearch1 from '../../img/Puzzle-Top-Bar-1.png';
+import puzzlePatternImageSearch2 from '../../img/Puzzle-Top-Bar-2.png';
+
 const SearchBar = ({ category }) => {
     const { handleSubmit, register, reset } = useForm();
     // const [search, setSearch] = useState('');
@@ -84,15 +87,30 @@ const SearchBar = ({ category }) => {
     };
 
     return (
-        <Stack alignItems='center' mt='70px' justifyContent='center' p='20px'>
+        <Stack
+            alignItems='center'
+            justifyContent='center'
+            p='20px'
+            sx={{
+                backgroundImage: `url(${puzzlePatternImageSearch2})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'fit',
+                backgroundPosition: 'center',
+                backgroundBlendMode: 'multiply',
+                boxSizing: 'border-box',
+            }}
+        >
             <Typography
                 fontWeight={700}
                 sx={{
                     fontSize: '44px',
-                    '@media (max-width: 600px)': { fontSize: '30px' },
+                    '@media (max-width: 600px)': {
+                        fontSize: '30px',
+                    },
                 }}
                 mb='49px'
                 textAlign='center'
+                color='text.primary'
             >
                 {`Pick a ${category}-related activity!`}
             </Typography>

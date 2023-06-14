@@ -12,6 +12,13 @@ import { Link } from 'react-router-dom';
 import { auth } from '../../firebase/firebase-config';
 import MyAccountMenu from './../Menus/MyAccountMenu';
 
+import Logo1 from '../../img/Logo-v1.png';
+
+// attribution for logo: <a href="https://www.flaticon.com/free-icons/heart" title="heart icons">Heart icons created by Freepik - Flaticon</a>
+// <a href="https://www.flaticon.com/free-icons/autism" title="autism icons">Autism icons created by Freepik - Flaticon</a>
+//<a href="https://www.flaticon.com/free-icons/hobbies-and-free-time" title="hobbies and free time icons">Hobbies and free time icons created by Erix - Flaticon</a>
+// <a href="https://www.flaticon.com/free-icons/puzzle-piece" title="puzzle piece icons">Puzzle piece icons created by kerismaker - Flaticon</a>
+
 function ElevationScroll({ children }) {
     const trigger = useScrollTrigger({
         disableHysteresis: true,
@@ -29,12 +36,24 @@ const NavBar = ({ onThemeChange }) => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <ElevationScroll>
-                <AppBar sx={{ background: '#3a6b94' }}>
+                <AppBar sx={{ backgroundColor: '#175084' }}>
                     <Toolbar>
-                        <Avatar component={Link} to={'/'} sx={{ mr: 2 }}>
+                        <Avatar
+                            variant='rounded'
+                            src={Logo1}
+                            component={Link}
+                            to={'/'}
+                            sx={{
+                                mr: 2,
+                                backgroundColor: 'white',
+
+                                height: '40px',
+                                width: '40px',
+                            }}
+                        >
                             <Home />
                         </Avatar>
-                        <Typography variant='h6' sx={{ flexGrow: 1 }}>
+                        <Typography variant='h4' sx={{ flexGrow: 1 }}>
                             Fit You
                         </Typography>
                         <Switch

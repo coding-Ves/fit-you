@@ -15,6 +15,8 @@ import {
 } from './ListItems';
 import { Box } from '@mui/material';
 
+import PuzzlePatternSideBar from '../../img/Puzzle-SideBar-1.png';
+
 const StyledDrawer = styled(MuiDrawer, {
     shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
@@ -27,6 +29,11 @@ const StyledDrawer = styled(MuiDrawer, {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
         }),
+        backgroundImage: `url(${PuzzlePatternSideBar})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundBlendMode: 'normal',
         boxSizing: 'border-box',
         ...(!open && {
             overflowX: 'hidden',
@@ -54,7 +61,10 @@ const SideBarDrawer = () => {
         <StyledDrawer
             variant='permanent'
             open={open}
-            sx={{ ml: { marginLeft } }}
+            sx={{
+                ml: { marginLeft },
+            }}
+
             // if the sidebar is open, then the main content should have a margin
             // if the sidebar is closed, then the main content should not have a margin
         >
