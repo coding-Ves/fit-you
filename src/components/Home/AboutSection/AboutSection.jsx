@@ -1,12 +1,6 @@
-import {
-    Avatar,
-    Box,
-    Card,
-    Container,
-    Grid,
-    Typography
-} from '@mui/material';
+import { Avatar, Box, Card, Container, Grid, Typography } from '@mui/material';
 import puzzlePiece3 from '../../..//assets/images/Puzzle-Piece-3.png';
+import VesImage from '../../../assets//authors//Ves.jpg';
 
 const item = {
     display: 'flex',
@@ -79,9 +73,11 @@ const AboutSection = () => {
                         </Grid>
                         <Grid item xs={12} md={4}>
                             <Card sx={item}>
-                                <Avatar sx={avatars}>Ves</Avatar>
+                                <Avatar sx={avatars} src={VesImage}>
+                                    Ves
+                                </Avatar>
                                 <Typography variant='h5' sx={{ my: 5 }}>
-                                    Veselin
+                                    Ves
                                 </Typography>
                                 <Typography variant='h6'>Janitor</Typography>
                             </Card>
