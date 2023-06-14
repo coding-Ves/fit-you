@@ -31,6 +31,7 @@ const CreateActivityDialog = ({ open, handleClose, activity }) => {
                         <CreateFitnessExerciseForm
                             exercise={activity}
                             category={category}
+                            handleClose={handleClose}
                         />
                     )}
                     {(category === 'sports' ||

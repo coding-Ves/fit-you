@@ -23,7 +23,7 @@ import {
     getGoalsByUsername,
 } from '../../../firebase/services/goals.service';
 
-const CreateFitnessExerciseForm = ({ exercise, category }) => {
+const CreateFitnessExerciseForm = ({ exercise, category, handleClose }) => {
     const { userData } = useContext(AuthContext);
 
     // eslint-disable-next-line no-unused-vars
@@ -142,6 +142,10 @@ const CreateFitnessExerciseForm = ({ exercise, category }) => {
                 setSnackbarMessage('Activity added successfully!');
                 setSnackbarSeverity('success');
                 setSnackbarOpen(true);
+
+                setTimeout(() => {
+                    handleClose();
+                }, 1500);
             })
             .catch((error) => {
                 setIsLoading(false);
@@ -171,7 +175,7 @@ const CreateFitnessExerciseForm = ({ exercise, category }) => {
                 <Typography>{`Number of sets: ${numOfSets}`}</Typography>
                 <Slider
                     value={numOfSets}
-                    min={0}
+                    min={1}
                     max={10}
                     defaultValue={3}
                     onChange={handleNumOfSetsChange}
