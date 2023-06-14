@@ -1,21 +1,13 @@
-import * as React from 'react';
 import {
+    Avatar,
     Box,
-    Button,
-    Typography,
+    Card,
     Container,
     Grid,
-    Card,
-    Avatar,
-    Zoom,
     Slide,
-    Grow,
-    Paper,
+    Typography
 } from '@mui/material';
-import { BatteryCharging20TwoTone } from '@mui/icons-material';
-
-import { HOME_HERO_IMAGE } from './../../../common/constants';
-
+import * as React from 'react';
 import puzzlePiece1 from '../../../assets/images/Puzzle-Piece-1.png';
 import puzzlePiece2 from '../../../assets/images/Puzzle-Piece-2.png';
 import puzzlePiece3 from '../../../assets/images/Puzzle-Piece-3.png';
@@ -81,7 +73,7 @@ const ProductFeatures = () => {
                 </Typography>
                 <Typography sx={{ p: 2, mt: 2 }} variant='h6'>
                     Fit me is a Fitness Tracking Application designed to fit
-                    your specific needs. It's a toolbox that helps you keep all
+                    your specific needs. It&apos;s a toolbox that helps you keep all
                     of your health information in one place, neat and organized.
                 </Typography>
             </Box>

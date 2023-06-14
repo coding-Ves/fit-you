@@ -1,6 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LockOutlined, Visibility, VisibilityOff } from '@mui/icons-material';
-
 import {
     Alert,
     Avatar,
@@ -21,16 +20,14 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from './../../../../contexts/AuthContext';
 import { registerUser } from './../../../../firebase/services/auth.service';
-import {
-    createUsername,
-    getUserByUsername,
-} from './../../../../firebase/services/users.service';
+import { createUsername, getUserByUsername, } from './../../../../firebase/services/users.service';
 import errorHandler from './../../ErrorHandling/errors.services';
 import { registrationValidationSchema } from './registrationValidationSchema';
 
 export const RegistrationForm = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    // eslint-disable-next-line no-unused-vars
     const [isLoading, setIsLoading] = useState(false);
     const { setContext } = useContext(AuthContext);
 

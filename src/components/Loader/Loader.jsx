@@ -1,5 +1,4 @@
-import { Backdrop } from '@mui/material';
-import { CircularProgress, LinearProgress } from '@mui/material';
+import { Backdrop, CircularProgress } from '@mui/material';
 
 export const Loader = () => {
     return (

@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import { Avatar, Stack, Typography } from '@mui/material';
+import PropTypes from 'prop-types';
 import BodyPartIcon from '../../../assets/icons/body-part.png';
 import EquipmentIcon from '../../../assets/icons/equipment.png';
 import TargetIcon from '../../../assets/icons/target.png';
@@ -67,4 +67,7 @@ const FitnessExerciseDetail = ({ activityDetail }) => {
     );
 };
 
+FitnessExerciseDetail.propTypes = {
+    activityDetail: PropTypes.object.isRequired,
+};
 export default FitnessExerciseDetail;

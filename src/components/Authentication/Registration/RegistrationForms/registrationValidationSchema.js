@@ -28,6 +28,8 @@ export const registrationValidationSchema = yup.object({
         .max(10),
 });
 
+export default registrationValidationSchema;
+
 // Validations for each separate field
 const validatePassword = (value) => {
     if (value === undefined) return false;
@@ -36,26 +38,6 @@ const validatePassword = (value) => {
         value
     );
 };
-
-export default registrationValidationSchema;
-
-// If we want username to be only letters
-
-// const validateOnlyLetters = (value) => {
-//     if (value === undefined) return false;
-
-//     return /[\D]{3}/.test(value);
-// };
-
-// Manual email validation via a fn, yup has a built in email validation.
-
-// const validateInputEmail = (value) => {
-//     if (value === undefined) return false;
-
-//     return /^[a-zA-Z0-9.-/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(
-//         value
-//     );
-// };
 
 const validateInputPhone = (value) => {
     if (value === undefined) return false;

@@ -73,51 +73,44 @@ const ActivitiesChart = () => {
 
     return (
         <>
-            {userData?.activities ? (
-                <>
-                    <ResponsiveContainer>
-                        <BarChart
-                            data={data}
-                            margin={{
-                                top: 20,
-                                right: 30,
-                                left: 20,
-                                bottom: 5,
-                            }}
-                        >
-                            <CartesianGrid strokeDasharray='3 3' />
-                            <XAxis dataKey='date' />
-                            <YAxis />
-                            <Tooltip />
-                            <Legend />
-                            <Bar dataKey='Exercises' stackId='a' fill='#8884d8' />
-                            <Bar dataKey='Sport' stackId='a' fill='#82ca9d' />
-                            <Bar dataKey='Cardio' stackId='a' fill='#ffc658' />
-                            <Bar dataKey='Yoga' stackId='a' fill='#3fa3c0' />
-                        </BarChart>
-                    </ResponsiveContainer>
-                    <ToggleButtonGroup
-                        color='primary'
-                        value={alignment}
-                        exclusive
-                        required
-                        onChange={handleChange}
-                        aria-label='Platform'
-                        sx={{
-                            justifyContent: 'center',
-                        }}
-                    >
-                        Date
-                        <ToggleButton value={7}>7 days</ToggleButton>
-                        <ToggleButton value={30}>30 days</ToggleButton>
-                        <ToggleButton value={90}>90 days</ToggleButton>
-                    </ToggleButtonGroup>
-                </>
-            ) : (
-                <Title>
-                    Log some activities to see your activity during one of the predefined periods
-                </Title>
-            )}
+            <Title>Activities chart</Title>
+            <ResponsiveContainer>
+                <BarChart
+                    data={data}
+                    margin={{
+                        top: 20,
+                        right: 30,
+                        left: 20,
+                        bottom: 5,
+                    }}
+                >
+                    <CartesianGrid strokeDasharray='3 3' />
+                    <XAxis dataKey='date' />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey='Exercises' stackId='a' fill='#8884d8' />
+                    <Bar dataKey='Sport' stackId='a' fill='#82ca9d' />
+                    <Bar dataKey='Cardio' stackId='a' fill='#ffc658' />
+                    <Bar dataKey='Yoga' stackId='a' fill='#3fa3c0' />
+                </BarChart>
+            </ResponsiveContainer>
+            <ToggleButtonGroup
+                color='primary'
+                value={alignment}
+                exclusive
+                required
+                onChange={handleChange}
+                aria-label='Platform'
+                sx={{
+                    justifyContent: 'center',
+                }}
+            >
+                Date
+                <ToggleButton value={7}>7 days</ToggleButton>
+                <ToggleButton value={30}>30 days</ToggleButton>
+                <ToggleButton value={90}>90 days</ToggleButton>
+            </ToggleButtonGroup>
         </>
     );
 };

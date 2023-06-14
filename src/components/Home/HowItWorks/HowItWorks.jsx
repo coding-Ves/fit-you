@@ -1,27 +1,11 @@
-import * as React from 'react';
+import { Login, RocketLaunch, Search, TagRounded } from '@mui/icons-material';
 import {
     Box,
-    Button,
-    Typography,
     Container,
     Grid,
-    Card,
-    Avatar,
-    Zoom,
-    Slide,
-    Grow,
     Paper,
+    Typography
 } from '@mui/material';
-import {
-    BatteryCharging20TwoTone,
-    ChairAlt,
-    Login,
-    RocketLaunch,
-    Search,
-    TagRounded,
-} from '@mui/icons-material';
-
-import { HOME_HERO_IMAGE } from './../../../common/constants';
 import puzzlePiece1 from '../../../assets/images/Puzzle-Piece-1.png';
 
 const item = {
@@ -50,10 +34,10 @@ export const HowItWorks = () => {
             }}
         >
             <Typography sx={{ p: 2, mt: 2 }} variant='h4'>
-                Here's how it works
+                Here&apos;s how it works
             </Typography>
             <Typography sx={{ p: 2, mt: 2 }} variant='h6'>
-                Don't worry if you need a refresh, just click help once you're
+                Don&apos;t worry if you need a refresh, just click help once you&apos;re
                 in the app.
             </Typography>
             <Box

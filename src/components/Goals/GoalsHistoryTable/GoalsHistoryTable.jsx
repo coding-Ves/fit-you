@@ -1,7 +1,11 @@
 import PropTypes from 'prop-types';
 import { getGoalsByUsername } from '../../../firebase/services/goals.service';
 import { useEffect, useState } from 'react';
-import { DATE_OPTIONS, GOAL_STATUS, MAXIMUM_ACTIVE_GOALS } from '../../../common/constants';
+import {
+    DATE_OPTIONS,
+    GOAL_STATUS,
+    MAXIMUM_ACTIVE_GOALS,
+} from '../../../common/constants';
 import { Pagination, Stack, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import Title from '../../Dashboard/Title/Title';
 
