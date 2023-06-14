@@ -20,7 +20,10 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from './../../../../contexts/AuthContext';
 import { registerUser } from './../../../../firebase/services/auth.service';
-import { createUsername, getUserByUsername, } from './../../../../firebase/services/users.service';
+import {
+    createUsername,
+    getUserByUsername,
+} from './../../../../firebase/services/users.service';
 import errorHandler from './../../ErrorHandling/errors.services';
 import { registrationValidationSchema } from './registrationValidationSchema';
 

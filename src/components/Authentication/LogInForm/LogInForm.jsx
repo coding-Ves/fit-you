@@ -11,10 +11,8 @@ import {
     Typography,
 } from '@mui/material';
 import { useContext, useState } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
-import { auth } from '../../../firebase/firebase-config';
+import { Link } from 'react-router-dom';
 import { loginUser } from '../../../firebase/services/auth.service';
 import errorHandler from '../ErrorHandling/errors.services';
 import AuthContext from './../../../contexts/AuthContext';
@@ -22,10 +20,7 @@ import AuthContext from './../../../contexts/AuthContext';
 const LoginForm = () => {
     const { handleSubmit, register } = useForm();
     const { setContext } = useContext(AuthContext);
-    const navigate = useNavigate();
-    const [user] = useAuthState(auth);
     const [isLoading, setIsLoading] = useState(false);
-
     // Responsible for Snackbar and Alert - Showing error  and success messages
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
@@ -124,10 +119,6 @@ const LoginForm = () => {
                         autoComplete='current-password'
                         {...register('password')}
                     />
-                    {/* <FormControlLabel
-                        control={<Checkbox value='remember' color='primary' />}
-                        label='Remember me'
-                    /> */}
                     <Button
                         type='submit'
                         variant='contained'
@@ -138,11 +129,6 @@ const LoginForm = () => {
                         Sign In
                     </Button>
                     <Grid container>
-                        {/* <Grid item xs>
-                            <Link href='#' variant='body2'>
-                                Forgot password?
-                            </Link>
-                        </Grid> */}
                         <Grid item>
                             <MuiLink
                                 component={Link}
