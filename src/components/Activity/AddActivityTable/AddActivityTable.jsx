@@ -4,8 +4,7 @@ import {
     AccordionDetails,
     AccordionSummary,
     Grid,
-    Typography,
-    Paper,
+    Typography
 } from '@mui/material';
 import { ACTIVITY_CATEGORIES } from '../../../common/constants';
 import ActivityCategoryCard from './ActivityCategoryCard';

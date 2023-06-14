@@ -10,23 +10,3 @@ export const fitnessExerciseDetailData = (activityId) => {
             console.log(error);
         });
 };
-
-export const targetMuscleFitnessExercisesData = (fitnessExerciseDetailData) => {
-    return fetchDataFromExerciseDB(`${EXERCISE_DB_URL}target/${fitnessExerciseDetailData.target}`, exerciseOptions)
-        .then((targetData) => {
-            return targetData;
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-};
-
-export const equipmentFitnessExercisesData = (fitnessExerciseDetailData) => {
-    return fetchDataFromExerciseDB(`${EXERCISE_DB_URL}equipment/${fitnessExerciseDetailData.equipment}`, exerciseOptions)
-        .then((equipmentData) => {
-            return equipmentData;
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-};

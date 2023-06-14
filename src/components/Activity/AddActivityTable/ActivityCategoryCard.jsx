@@ -1,8 +1,8 @@
-/* eslint-disable react/prop-types */
 import AddIcon from '@mui/icons-material/Add';
-import { Box, Card, CardContent, CardMedia, Fab, Typography, Paper } from '@mui/material';
-import { UNSPLASH_RANDOM_URL } from '../../../common/constants';
+import { Box, Card, CardContent, CardMedia, Fab, Typography } from '@mui/material';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { UNSPLASH_RANDOM_URL } from '../../../common/constants';
 
 const ActivityCategoryCard = ({ categoryName }) => {
     return (
@@ -58,7 +58,6 @@ const ActivityCategoryCard = ({ categoryName }) => {
             >
                 <Link to={`/search/${categoryName}`}>
                     <Fab
-                        // Add a white glow around the button
                         variant='circular'
                         elevation={4}
                         size='sm'
@@ -75,6 +74,10 @@ const ActivityCategoryCard = ({ categoryName }) => {
             </Box>
         </Card>
     );
+};
+
+ActivityCategoryCard.propTypes = {
+    categoryName: PropTypes.string.isRequired,
 };
 
 export default ActivityCategoryCard;

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import {
     Button,
     Dialog,
@@ -9,6 +8,7 @@ import {
 import { useParams } from 'react-router-dom';
 import CreateFitnessExerciseForm from './CreateFitnessExerciseForm';
 import CreateSportsCardioYogaForm from './CreateSportsCardioYogaForm';
+import PropTypes from 'prop-types';
 
 const CreateActivityDialog = ({ open, handleClose, activity }) => {
     const { category } = useParams();
@@ -50,6 +50,12 @@ const CreateActivityDialog = ({ open, handleClose, activity }) => {
             </Dialog>
         </>
     );
+};
+
+CreateActivityDialog.propTypes = {
+    open: PropTypes.bool.isRequired,
+    handleClose: PropTypes.func.isRequired,
+    activity: PropTypes.object.isRequired,
 };
 
 export default CreateActivityDialog;

@@ -1,6 +1,6 @@
 import { Alert, Button, Dialog, DialogActions, DialogContent, Snackbar } from '@mui/material';
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import NewGoalForm from './NewGoalForm';
 
 const CreateGoalDialog = ({ onAddGoal, hasReachedMaximumGoals }) => {
