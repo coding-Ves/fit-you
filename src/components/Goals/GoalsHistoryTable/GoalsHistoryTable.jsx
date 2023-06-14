@@ -38,22 +38,29 @@ const GoalsHistoryTable = ({ username, itemsPerPage }) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {currentGoalsOnPage.map((goal) => (
-                        <TableRow key={goal.goalId}>
-                            <TableCell>
-                                {new Date(goal.createdOn).toLocaleString('en-US', DATE_OPTIONS)}
-                            </TableCell>
-                            <TableCell>{goal.goalName}</TableCell>
-                            <TableCell>{goal.goalType}</TableCell>
-                            <TableCell>{goal.goalTargetType}</TableCell>
-                            <TableCell>
-                                {goal.goalProgress} (
-                                {((goal.goalProgress / goal.targetValue) * 100).toFixed(0)}%)
-                            </TableCell>
-                            <TableCell>{goal.targetValue}</TableCell>
-                            <TableCell>{goal.goalStatus}</TableCell>
+                    {goals.length > 0 ? (
+                        currentGoalsOnPage.length > 0 &&
+                        currentGoalsOnPage.map((goal) => (
+                            <TableRow key={goal?.goalId}>
+                                <TableCell>
+                                    {new Date(goal.createdOn).toLocaleString('en-US', DATE_OPTIONS)}
+                                </TableCell>
+                                <TableCell>{goal.goalName}</TableCell>
+                                <TableCell>{goal.goalType}</TableCell>
+                                <TableCell>{goal.goalTargetType}</TableCell>
+                                <TableCell>
+                                    {goal.goalProgress} (
+                                    {((goal.goalProgress / goal.targetValue) * 100).toFixed(0)}%)
+                                </TableCell>
+                                <TableCell>{goal.targetValue}</TableCell>
+                                <TableCell>{goal.goalStatus}</TableCell>
+                            </TableRow>
+                        ))
+                    ) : (
+                        <TableRow>
+                            <TableCell align='center' colSpan={7}>No goals found</TableCell>
                         </TableRow>
-                    ))}
+                    )}
                 </TableBody>
             </Table>
             <Stack sx={{ mt: { lg: '25px', xs: '5px' } }} alignItems='center'>

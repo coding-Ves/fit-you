@@ -1,12 +1,4 @@
-import {
-    Pagination,
-    Stack,
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableRow,
-} from '@mui/material';
+import { Pagination, Stack, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { ACTIVITIES_PER_PAGE, DATE_OPTIONS } from '../../../common/constants';
 import AuthContext from '../../../contexts/AuthContext';
@@ -29,8 +21,7 @@ const ActivitiesTable = () => {
     const [activityEdited, setActivityEdited] = useState(false);
 
     const indexOfLastActivityOnPage = currentPage * ACTIVITIES_PER_PAGE;
-    const indexOfFirstActivityOnPage =
-        indexOfLastActivityOnPage - ACTIVITIES_PER_PAGE;
+    const indexOfFirstActivityOnPage = indexOfLastActivityOnPage - ACTIVITIES_PER_PAGE;
     const currentActivitiesOnPage = activities.slice(
         indexOfFirstActivityOnPage,
         indexOfLastActivityOnPage
@@ -52,7 +43,6 @@ const ActivitiesTable = () => {
     }, [userData, activityDeleted, activityEdited]);
 
     const handleDeleteActivity = (activity, username) => {
-
         if (activity?.poseName) {
             deleteYogaSession(activity.id, username);
         }
@@ -91,77 +81,85 @@ const ActivitiesTable = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {currentActivitiesOnPage.map((activity) => (
-                                <TableRow key={activity.id}>
-                                    <TableCell align='left'>
-                                        {new Date(activity.createdOn).toLocaleString(
-                                            'en-US',
-                                            DATE_OPTIONS
-                                        )}
-                                    </TableCell>
-
-                                    <TableCell>
-                                        {activity?.fitnessExerciseName}
-                                        {activity?.sportName}
-                                        {activity?.cardioName}
-                                        {activity?.poseName}
-                                    </TableCell>
-
-                                    {activity?.fitnessExerciseName && <TableCell>Fitness</TableCell>}
-                                    {activity?.sportName && <TableCell>Sports</TableCell>}
-                                    {activity?.cardioName && <TableCell>Cardio</TableCell>}
-                                    {activity?.poseName && <TableCell>Yoga</TableCell>}
-
-                                    {/* Measurements */}
-                                    {activity?.fitnessExerciseName && (
-                                        <TableCell align='right'>
-                                            {activity.sets.length} sets
+                            {activities.length > 0 ? (
+                                currentActivitiesOnPage.map((activity) => (
+                                    <TableRow key={activity.id}>
+                                        <TableCell align='left'>
+                                            {new Date(activity.createdOn).toLocaleString(
+                                                'en-US',
+                                                DATE_OPTIONS
+                                            )}
                                         </TableCell>
-                                    )}
 
-                                    {activity?.sportName &&
-                                        (activity.durationInMinutes ? (
-                                            <TableCell align='right'>
-                                                {activity.durationInMinutes} mins
-                                            </TableCell>
-                                        ) : (
-                                            <TableCell align='right'>
-                                                A session
-                                            </TableCell>
-                                        ))}
+                                        <TableCell>
+                                            {activity?.fitnessExerciseName}
+                                            {activity?.sportName}
+                                            {activity?.cardioName}
+                                            {activity?.poseName}
+                                        </TableCell>
 
-                                    {activity?.cardioName &&
-                                        (activity.durationInMinutes ? (
-                                            <TableCell align='right'>
-                                                {activity.durationInMinutes} mins
-                                            </TableCell>
-                                        ) : (
-                                            <TableCell align='right'>
-                                                {activity.distance} km
-                                            </TableCell>
-                                        ))}
+                                        {activity?.fitnessExerciseName && (
+                                            <TableCell>Fitness</TableCell>
+                                        )}
+                                        {activity?.sportName && <TableCell>Sports</TableCell>}
+                                        {activity?.cardioName && <TableCell>Cardio</TableCell>}
+                                        {activity?.poseName && <TableCell>Yoga</TableCell>}
 
-                                    {activity?.poseName &&
-                                        (activity.durationInMinutes ? (
+                                        {/* Measurements */}
+                                        {activity?.fitnessExerciseName && (
                                             <TableCell align='right'>
-                                                {activity.durationInMinutes} mins
+                                                {activity.sets.length} sets
                                             </TableCell>
-                                        ) : (
-                                            <TableCell align='right'>
-                                                {activity.sessions} session
-                                            </TableCell>
-                                        ))}
+                                        )}
 
-                                    {/* Edit/Delete */}
-                                    <TableCell align='right'>
-                                        <ActivitiesTableMenu
-                                            onDeleteActivity={handleDeleteActivity}
-                                            onEditActivity={handleEditActivity}
-                                            activity={activity}
-                                        />
+                                        {activity?.sportName &&
+                                            (activity.durationInMinutes ? (
+                                                <TableCell align='right'>
+                                                    {activity.durationInMinutes} mins
+                                                </TableCell>
+                                            ) : (
+                                                <TableCell align='right'>A session</TableCell>
+                                            ))}
+
+                                        {activity?.cardioName &&
+                                            (activity.durationInMinutes ? (
+                                                <TableCell align='right'>
+                                                    {activity.durationInMinutes} mins
+                                                </TableCell>
+                                            ) : (
+                                                <TableCell align='right'>
+                                                    {activity.distance} km
+                                                </TableCell>
+                                            ))}
+
+                                        {activity?.poseName &&
+                                            (activity.durationInMinutes ? (
+                                                <TableCell align='right'>
+                                                    {activity.durationInMinutes} mins
+                                                </TableCell>
+                                            ) : (
+                                                <TableCell align='right'>
+                                                    {activity.sessions} session
+                                                </TableCell>
+                                            ))}
+
+                                        {/* Edit/Delete */}
+                                        <TableCell align='right'>
+                                            <ActivitiesTableMenu
+                                                onDeleteActivity={handleDeleteActivity}
+                                                onEditActivity={handleEditActivity}
+                                                activity={activity}
+                                            />
+                                        </TableCell>
+                                    </TableRow>
+                                ))
+                            ) : (
+                                <TableRow>
+                                    <TableCell align='center' colSpan={5}>
+                                        No activities found
                                     </TableCell>
                                 </TableRow>
-                            ))}
+                            )}
                         </TableBody>
                     </Table>
 
@@ -171,9 +169,7 @@ const ActivitiesTable = () => {
                                 color='secondary'
                                 shape='rounded'
                                 size='small'
-                                count={Math.ceil(
-                                    activities.length / ACTIVITIES_PER_PAGE
-                                )}
+                                count={Math.ceil(activities.length / ACTIVITIES_PER_PAGE)}
                                 page={currentPage}
                                 onChange={(event, value) => setCurrentPage(value)}
                             />
