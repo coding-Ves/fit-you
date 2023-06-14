@@ -18,16 +18,13 @@ import AuthContext from '../../../contexts/AuthContext';
 import { addCardioSession } from '../../../firebase/services/cardioSessions.service';
 import {
     addActivityToGoal,
+    checkGoalProgress,
     getGoalsByUsername,
 } from '../../../firebase/services/goals.service';
 import { addSportSession } from '../../../firebase/services/sportSessions.service';
 import { addYogaSession } from '../../../firebase/services/yogaSessions.service';
 
-const CreateSportsOrCardioSessionForm = ({
-    activity,
-    category,
-    handleClose,
-}) => {
+const CreateSportsOrCardioSessionForm = ({ activity, category, handleClose }) => {
     const { userData } = useContext(AuthContext);
     const { register, handleSubmit, reset } = useForm();
 
@@ -40,6 +37,8 @@ const CreateSportsOrCardioSessionForm = ({
 
     const [goals, setGoals] = useState({});
     const [selectedGoal, setSelectedGoal] = useState('');
+    const [selectedGoalObject, setSelectedGoalObject] = useState('');
+
     const [addedExerciseToGoal, setAddedExerciseToGoal] = useState(false);
 
     useEffect(() => {
@@ -55,17 +54,14 @@ const CreateSportsOrCardioSessionForm = ({
     const handleSnackbarClose = () => {
         setSnackbarOpen(false);
         setSelectedGoal('');
+        setSelectedGoalObject('');
     };
 
     const onSubmit = (data) => {
         setIsLoading(true);
 
         if (category === 'sports') {
-            addSportSession(
-                userData.username,
-                activity.name,
-                data.durationInMinutes
-            )
+            addSportSession(userData.username, activity.name, data.durationInMinutes)
                 .then((id) => {
                     setIsLoading(false);
 
@@ -84,6 +80,13 @@ const CreateSportsOrCardioSessionForm = ({
                             Number(data.durationInMinutes)
                         );
                     }
+                })
+                .then(() => {
+                    return checkGoalProgress(
+                        selectedGoal,
+                        selectedGoalObject.goalProgress,
+                        selectedGoalObject.targetValue
+                    );
                 })
                 .then(() => {
                     setSnackbarMessage('Activity added successfully!');
@@ -135,6 +138,13 @@ const CreateSportsOrCardioSessionForm = ({
                     }
                 })
                 .then(() => {
+                    return checkGoalProgress(
+                        selectedGoal,
+                        selectedGoalObject.goalProgress,
+                        selectedGoalObject.targetValue
+                    );
+                })
+                .then(() => {
                     setSnackbarMessage('Activity added successfully!');
                     setSnackbarSeverity('success');
                     setSnackbarOpen(true);
@@ -151,11 +161,7 @@ const CreateSportsOrCardioSessionForm = ({
                     setSnackbarOpen(true);
                 });
         } else if (category === 'yoga') {
-            addYogaSession(
-                userData.username,
-                activity.english_name,
-                data.durationInMinutes
-            )
+            addYogaSession(userData.username, activity.english_name, data.durationInMinutes)
                 .then((id) => {
                     setIsLoading(false);
 
@@ -179,7 +185,13 @@ const CreateSportsOrCardioSessionForm = ({
                             goalProgress,
                             goalTargetType,
                             Number(data.durationInMinutes)
-                        );
+                        ).then(() => {
+                            return checkGoalProgress(
+                                selectedGoal,
+                                selectedGoalObject.goalProgress,
+                                selectedGoalObject.targetValue
+                            );
+                        });
                     }
                 })
                 .then(() => {
@@ -256,7 +268,12 @@ const CreateSportsOrCardioSessionForm = ({
                         <Select
                             {...register('selectedGoal')}
                             defaultValue=''
-                            onChange={(e) => setSelectedGoal(e.target.value)}
+                            onChange={(e) => {
+                                setSelectedGoal(e.target.value);
+                                setSelectedGoalObject(
+                                    goals.find((goal) => goal.goalId === e.target.value)
+                                );
+                            }}
                         >
                             <MenuItem value=''>
                                 <em>No, thanks</em>
