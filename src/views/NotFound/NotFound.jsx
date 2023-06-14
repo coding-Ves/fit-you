@@ -47,8 +47,8 @@ const NotFound = () => {
                             color='text.secondary'
                             variant='body1'
                         >
-                            This isn't where we wanted to go, are we lost? Let's
-                            go back to safety.
+                            We searched for the missing puzzle piece far and
+                            wide, but we couldn't find it.
                         </Typography>
                         <Button
                             as={Link}
@@ -56,7 +56,7 @@ const NotFound = () => {
                             sx={{ mt: 3 }}
                             variant='contained'
                         >
-                            Go back to dashboard
+                            Back to dashboard
                         </Button>
                     </Box>
                 </Container>
