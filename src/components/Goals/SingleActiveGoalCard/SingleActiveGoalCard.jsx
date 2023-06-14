@@ -14,7 +14,7 @@ const SingleActiveGoalCard = ({ goal, onDeleteGoal, onEditGoal }) => {
     const location = useLocation();
 
     return (
-        <Paper variant='elevation' elevation={5} border={'solid 1px #e4e4e4'} sx={{ m: 1, p: 1 }}>
+        <Paper variant='elevation' elevation={5} border={'solid 1px #e4e4e4'} sx={{ m: 2, p: 2 }}>
             <Box
                 sx={{
                     display: 'flex',

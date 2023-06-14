@@ -51,12 +51,18 @@ const Dashboard = () => {
                                             display: 'flex',
                                             flexDirection: 'column',
                                             height: '100%',
+                                            width: '100%',
                                         }}
                                     >
                                         <ActivitiesChart />
                                     </Paper>
                                 </Grid>
-                                {hasFavoriteGoal && <SingleActiveGoalCard goal={goal} />}
+                                {hasFavoriteGoal && (
+                                    <Box mt={1}>
+                                        <SingleActiveGoalCard goal={goal} />{' '}
+                                    </Box>
+                                )}
+
                                 <Grid item xs={12}>
                                     <Paper
                                         sx={{
