@@ -57,12 +57,12 @@ Install dependencies
 Start the server
 
 ```bash
-  npm run start
+  npm run dev
 ```
 
 ## Tech Stack
 
-**Client** React, Material UI, Material UI Icons, React Router DOM
+**Client** React, Material UI, Material UI Icons, Recharts, React Router DOM, React hook form, Yup, 
 **Server** Firebase
 
 ## Acknoledgements

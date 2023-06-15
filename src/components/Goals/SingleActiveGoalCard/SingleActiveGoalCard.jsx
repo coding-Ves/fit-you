@@ -51,7 +51,7 @@ const SingleActiveGoalCard = ({ goal, onDeleteGoal, onEditGoal }) => {
                     </Box>
                 ) : (
                     <Box padding={'15px 10px 0px 0px'}>
-                        <GradeOutlined fontSize="large"  />
+                        <Grade sx={{color:'primary.main'}} fontSize="large"  />
                     </Box>
                 )}
             </Box>
