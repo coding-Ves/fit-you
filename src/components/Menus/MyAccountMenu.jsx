@@ -142,7 +142,7 @@ const MyAccountMenu = () => {
                 <MenuItem
                     onClick={handleClose}
                     component={Link}
-                    to={'/friends'}
+                    to={'/social'}
                     style={{ color: 'inherit' }}
                 >
                     <ListItemIcon>
