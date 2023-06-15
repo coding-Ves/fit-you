@@ -22,6 +22,7 @@ import {
 } from '../../../firebase/services/goals.service';
 import { addSportSession } from '../../../firebase/services/sportSessions.service';
 import { addYogaSession } from '../../../firebase/services/yogaSessions.service';
+import { GOAL_STATUS } from '../../../common/constants';
 
 const CreateSportsCardioYogaForm = ({ activity, category, handleClose }) => {
     const { userData } = useContext(AuthContext);
@@ -48,7 +49,9 @@ const CreateSportsCardioYogaForm = ({ activity, category, handleClose }) => {
     useEffect(() => {
         getGoalsByUsername(userData.username).then((snapshot) => {
             const filteredByCategory = snapshot.filter(
-                (goal) => goal?.goalType?.toLowerCase() === category
+                (goal) => goal?.goalType?.toLowerCase() === category && 
+                goal?.goalStatus === GOAL_STATUS.ACTIVE
+
             );
             setGoals(filteredByCategory);
         });
