@@ -92,8 +92,8 @@ export const HowItWorks = () => {
                                         Set up your first goal
                                     </Typography>
                                     <Typography variant='h7'>
-                                        Pick from Cardio, Fitness, Sports and
-                                        other goals.
+                                        Pick a Cardio, Fitness, Sports
+                                        or Yoga goal.
                                     </Typography>
                                 </Box>
                             </Paper>
@@ -113,9 +113,9 @@ export const HowItWorks = () => {
                                         Find and add activities
                                     </Typography>
                                     <Typography variant='h7'>
-                                        Search for the activity you complete it
+                                        Search for an activity 
                                         and add it to your account, tying it to
-                                        a goal
+                                        a goal.
                                     </Typography>
                                 </Box>
                             </Paper>

@@ -72,7 +72,7 @@ const ProductFeatures = () => {
                     Product Features
                 </Typography>
                 <Typography sx={{ p: 2, mt: 2 }} variant='h6'>
-                    Fit me is a Fitness Tracking Application designed to fit
+                    Fit You is a Fitness Tracking Application designed to fit
                     your specific needs. It&apos;s a toolbox that helps you keep all
                     of your health information in one place, neat and organized.
                 </Typography>

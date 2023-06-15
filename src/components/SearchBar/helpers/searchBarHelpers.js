@@ -59,7 +59,6 @@ export const searchYoga = (searchQuery) => {
                         .includes(searchQuery)
                 );
             });
-            console.log(searchedYogaPoses);
             return searchedYogaPoses;
         })
         .catch((error) => {
